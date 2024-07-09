@@ -37,3 +37,4 @@ next-env.d.ts
 
 #scriptPush
 pushgit.sh
+pullgit.sh
