@@ -36,5 +36,5 @@ yarn-error.log*
 next-env.d.ts
 
 #scriptPush
-pushgit.sh
-pullgit.sh
+mandarCambios.sh
+traerUltimosCambios.sh

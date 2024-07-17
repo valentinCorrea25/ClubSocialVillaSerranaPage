@@ -5,7 +5,7 @@ contrasenia="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"
 repo="ClubSocialVillaSerranaPage/develop.git"
 
 # Configurar las credenciales para la URL del repositorio remoto
-url="https://$usuario:$contrasenia@github.com/$usuario/$repo"
+#url="https://$usuario:$contrasenia@github.com/$usuario/$repo"
 
 #cd HotecheUruguayMarchShopsUpdate
 
