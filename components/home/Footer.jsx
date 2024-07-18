@@ -21,15 +21,15 @@ const Footer = () => {
             backgroundPosition: "center",
           }}
         ></div>
-        <div className="relative container mx-auto flex flex-col md:flex-row md:justify-between md:items-start space-y-4 md:space-y-0">
+        <div className="relative container mx-auto flex flex-col md:flex-row md:justify-between md:items-start space-y-4 md:space-y-0 px-4">
           <div className="flex flex-col items-center md:items-start relative w-full md:w-auto">
-            <div className="flex items-center mb-4">
+            <div className="flex flex-col items-center md:flex-row md:items-center mb-4">
               <img
                 src="/images/logo.png"
                 alt="Club Social y Deportivo Villa Serrana"
-                className="w-32 mr-2"
+                className="w-32 mr-2 mb-4 md:mb-0"
               />
-              <div className="ml-4">
+              <div className="text-center md:text-left">
                 <h2 className="text-2xl font-bold mb-2">
                   <span className="underline-text">TU DESTINO PERFECTO</span>
                 </h2>
@@ -51,7 +51,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="mt-8 md:mt-0 md:text-left md:ml-12">
+          <div className="mt-8 md:mt-0 md:text-left md:ml-12 text-center md:text-left">
             <h2 className="text-2xl font-bold">
               <span className="underline-text">DESTACADOS</span>
             </h2>
@@ -66,15 +66,14 @@ const Footer = () => {
         </div>
       </footer>
 
-    {/* Estilo para el subrayado */}
-    <style jsx>{`
+      {/* Estilo para el subrayado */}
+      <style jsx>{`
         .underline-text {
           position: relative;
           display: inline-block;
           padding-bottom: 0.2em;
           border-bottom: 1px solid white;
-          width: 100%; /* Ajustar el ancho según sea necesario */
-          line-height: 1.5em; /* Ajustar la altura de línea según sea necesario */
+          line-height: 1.5em;
         }
       `}</style>
     </div>
