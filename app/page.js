@@ -1,13 +1,15 @@
 import Image from "next/image";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex justify-center items-center text-5xl p-20">
-<<<<<<< HEAD
-      Work in Progress...
-=======
-      Work in Progress....
->>>>>>> 5ab2beef202a3b8c2cbc43085baaceb9eca30050
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 flex justify-center items-center text-5xl p-20">
+
+        Work in Progress...
+        
+      </main>
+      <Footer />
     </div>
   );
 }
