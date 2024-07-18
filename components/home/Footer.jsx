@@ -5,7 +5,7 @@ import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
-    <div>
+    <div className='bg-[#F9F6EE]'>
       {/* Imagen superior del footer */}
       <img
         src="/images/footersuperior.png"
