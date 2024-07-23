@@ -5,6 +5,7 @@ import { FaHouse } from "react-icons/fa6";
 import { FaRegNewspaper } from "react-icons/fa";
 import { FaRegFutbol } from "react-icons/fa";
 import { FaPeopleCarry } from "react-icons/fa";
+import { GiKnifeFork } from "react-icons/gi";
 import ListaItems from './ListaItems';
 
 
@@ -13,22 +14,27 @@ const items = [
     {
       key: '1',
       label:(<div className='flex items-center gap-2 font-extrabold'><FaHouse/> Alojamientos</div>),
-      children: (<ListaItems/>),
+      children: (<ListaItems type={1}/>),
     },
     {
       key: '2',
-      label:(<div className='flex items-center gap-2 font-extrabold'><FaRegNewspaper/> Noticias y Eventos </div>),
-      children: 'Content of Tab Pane 2',
+      label:(<div className='flex items-center gap-2 font-extrabold'><GiKnifeFork/> Restaurantes </div>),
+      children: (<ListaItems type={2}/>),
     },
     {
       key: '3',
-      label:(<div className='flex items-center gap-2 font-extrabold'><FaRegFutbol/> Actividades</div>),
-      children: 'Content of Tab Pane 3',
+      label:(<div className='flex items-center gap-2 font-extrabold'><FaRegNewspaper/> Noticias y Eventos </div>),
+      children: (<ListaItems type={3}/>),
     },
     {
       key: '4',
+      label:(<div className='flex items-center gap-2 font-extrabold'><FaRegFutbol/> Actividades</div>),
+      children: (<ListaItems type={4}/>),
+    },
+    {
+      key: '5',
       label:(<div className='flex items-center gap-2 font-extrabold'><FaPeopleCarry/> Servicios</div>),
-      children: 'Content of Tab Pane 3',
+      children: (<ListaItems type={5}/>),
     },
   ];
 
