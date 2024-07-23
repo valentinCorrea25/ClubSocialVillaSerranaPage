@@ -38,7 +38,7 @@ export default function ListaCatHome() {
         <h1 className='text-[--azul] font-bold text-center'>Información Turistica Villa Serrana</h1>
         <h2 className='text-[--verde-oscuro] font-bold text-center text-xl'>Encuentra las mejores opciones para disfrutar en Villa Serrana.</h2>
         <div className=''>
-            <Tabs centered defaultActiveKey="1" items={items} itemSelectedColor='#09A603' />
+            <Tabs centered defaultActiveKey="1" items={items} itemselectedcolor='#09A603' />
         </div>
     </div>
   )
