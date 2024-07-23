@@ -31,7 +31,7 @@ export default function Item({informacion, type}) {
           <>
             <h1 className='font-extrabold text-lg cursor-pointer'> {informacion.titulo.length > 26 ? informacion.titulo.substring(0,24)+"..." : informacion.titulo}</h1>
             <p className='font-normal leading-5 text-justify w-[220px]'>{informacion.contenido.length > 120 ? informacion.contenido.substring(0,110)+"... " : informacion.contenido}
-              <a className='text-[--verde] font-semibold'>Ver mas</a>
+              <a className='text-[--verde] font-semibold'>Ver más</a>
             </p>
             <h3 className='font-semibold text-xs text-[--verde-oscuro]'>{informacion.fecha}</h3>
           </>) :
