@@ -6,7 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Item({informacion, type}) {
   return (
-    <div className='flex flex-col items-start justify-center'>
+    <div className='flex flex-col items-start justify-center montserrat'>
         {type != 5 ? (
           <div className='mb-4 w-[230px] h-[110px]'>
             <img src={informacion.foto} className='w-full shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer'/>

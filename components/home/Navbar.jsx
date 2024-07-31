@@ -4,7 +4,7 @@ import logo from '@/public/images/logo.png'
 
 export default function Navbar() {
   return (
-    <nav className="bg-[--blanco] border-b-4 border-[--verder-super-oscuro]">
+    <nav className="bg-[--blanco] border-b-4 border-[--verder-super-oscuro] montserrat">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 h-20 relative">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse absolute top-[30%]">
             <Image src={logo} width={0} height={0} className="w-[25%]" alt="Logo Villa Serrana Club Social y Deportivo"  />
