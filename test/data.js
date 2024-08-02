@@ -290,3 +290,103 @@ export const Alquileres = [
       
     },
   ]
+
+  export const CaracteristicasAloj = {
+    comodidades: [
+      'Aire acondicionado',
+      'Calefacción',
+      'Jacuzzi',
+      'Internet Wi-Fi',
+    ],
+    serviciosBasicos: [
+      'Sábanas y toallas',
+      'Agua caliente',
+      'Electricidad',
+    ],
+
+    adicionales: [
+      'Servicio de limpieza',
+      'Desayuno incluido',
+    ],
+    equipamiento: [
+      'Cocina equipada',
+      'Lavadora',
+      'Microondas',
+    ],
+    entretenimiento: [
+      'Televisión por cable',
+      'Juegos de mesa',
+    ],
+    exterior: [
+      'Parrillero',
+      'Jardín',
+      'Piscina',
+    ],
+  };
+  
+  export const CarouselImages = [
+    {
+      id: 1,
+      url: 'https://picsum.photos/id/1018/600/400',
+      alt: 'Imagen 1',
+    },
+    {
+      id: 2,
+      url: 'https://picsum.photos/id/1015/600/400',
+      alt: 'Imagen 2',
+    },
+    {
+      id: 3,
+      url: 'https://picsum.photos/id/1024/600/400',
+      alt: 'Imagen 3',
+    },
+    {
+      id: 4,
+      url: 'https://picsum.photos/id/1031/600/400',
+      alt: 'Imagen 4',
+    },
+  ];
+
+  export const InfoAloj = {
+    title: 'Mainimbú',
+    location: 'Villa Serrana - El Atalaya',
+    capacity: 5,  
+};
+
+export const DescripcionAloj = {
+  text: 'Cómoda cabaña con jacuzzi climatizado en zona privilegiada de Villa Serrana con amplio deck y terreno.'
+};
+
+export const contactInfo = {
+  name: 'José Loma',
+  phone: '+598 99 123 456',
+  email: 'reservas@villaloma.com',
+  whatsapp: 'https://wa.me/59899123456', 
+};
+
+export const PubSimimilares = [
+  {
+    categoria: 'Alquiler',
+    ubicacion: 'Villa Serrana',
+    cantidad_personas: 3,
+    foto:'https://picsum.photos/id/239/220/110',
+  },
+  {
+    categoria: 'Alquiler',
+    ubicacion: 'Montevideo Centro',
+    cantidad_personas: 2,
+    foto:'https://picsum.photos/id/232/220/110',
+  },
+  {
+    categoria: 'Alquiler',
+    ubicacion: 'Punta del Este',
+    cantidad_personas: 5,
+    foto:'https://picsum.photos/id/231/220/110',
+  },
+  {
+    categoria: 'Alquiler',
+    ubicacion: 'Colonia del Sacramento',
+    cantidad_personas: 4,
+    foto:'https://picsum.photos/id/236/220/110',
+  },
+];
