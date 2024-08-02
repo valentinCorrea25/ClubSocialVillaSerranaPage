@@ -41,10 +41,10 @@ const items = [
 export default function ListaCatHome() {
   return (
     <div>
-        <h1 className='text-[--azul] font-bold text-center'>Información Turistica Villa Serrana</h1>
-        <h2 className='text-[--verde-oscuro] font-bold text-center text-xl'>Encuentra las mejores opciones para disfrutar en Villa Serrana.</h2>
-        <div className=''>
-            <Tabs centered defaultActiveKey="1" items={items} itemselectedcolor='#09A603' />
+        <h1 className='text-[--azul] font-bold text-center md:text-5xl text-2xl'>Información Turistica Villa Serrana</h1>
+        <h2 className='text-[--verde-oscuro] font-bold text-center md:text-xl text-sm'>Encuentra las mejores opciones para disfrutar en Villa Serrana.</h2>
+        <div>
+            <Tabs centered defaultActiveKey="1" items={items} itemselectedcolor='#09A603' size='large' type='card' />
         </div>
     </div>
   )

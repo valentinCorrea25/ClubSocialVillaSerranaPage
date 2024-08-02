@@ -1,12 +1,12 @@
 import React from 'react'
 import Item from './Item'
 import { Button } from 'antd';
-import {Alquileres, NoticiasYEventos, Restaurantes, Actividades, Servicios} from '@/test/data';
+import { Alquileres, NoticiasYEventos, Restaurantes, Actividades, Servicios } from '@/test/data';
 
-export default function ListaItems({type}) {
+export default function ListaItems({ type }) {
 
-  function seleccionarTipo(type){
-    switch(type){
+  function seleccionarTipo(type) {
+    switch (type) {
       case 1:
         return Alquileres;
       case 2:
@@ -23,7 +23,7 @@ export default function ListaItems({type}) {
 
   return (
     <div className='flex flex-col gap-8 justify-center items-center'>
-      <div className='grid grid-cols-3 grid-rows-3 gap-x-8 gap-y-4'>
+      <div className='flex gap-y-4 flex-col md:grid md:grid-cols-3 md:grid-rows-3 md:gap-x-8 md:gap-y-4'>
         {seleccionarTipo(type).map((item, index) => (
           <Item key={index} type={type} informacion={item} />
         ))}

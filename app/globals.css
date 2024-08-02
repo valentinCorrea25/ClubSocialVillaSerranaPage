@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -11,8 +13,29 @@
   --verde: #09A603;
   --verde-oscuro: #055902;
   --verder-super-oscuro: #034001;
+  --verde-oscuro-alternativo:#004900;
   --celeste: #77DCF2;
   --blanco: #F9F6EE;
+  --verde-menu: #8bae83;
+  --verde-menu-claro: #82C274;
+}
+
+.menuControlPanelOpcion {
+  padding: 0.25rem 4rem; /* Esto equivale a px-16 p-1 */
+  width: 100%;
+  transition: all 0.2s ease-in-out; /* Añade una transición suave para todos los cambios */
+}
+
+.menuControlPanelOpcion:hover {
+  background-color: var(--verde-menu-claro);
+  cursor: pointer;
+}
+
+.montserrat{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,13 +47,7 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #F9F6EE;
 }
 
 @layer utilities {
