@@ -63,6 +63,7 @@ const Alquileres = () => {
         defaultOpenKeys={['sub1']}
         selectedKeys={[current]}
         mode="vertical"
+        
         items={items}
       />
     </>
