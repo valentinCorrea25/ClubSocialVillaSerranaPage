@@ -9,7 +9,7 @@ const Admin = () => {
   };
   return (
     <>
-      <div className='flex  gap-5 justify-between items-center'>
+      <div className='flex gap-5 justify-between items-center'>
         
         <Form
         name="login"
@@ -60,7 +60,7 @@ const Admin = () => {
         </Form.Item>
         </Form>
 
-        <div className="w-4/6 h-[95vh] overflow-hidden">
+        <div className="w-3/4 h-[100vh] overflow-hidden">
           <img 
             src="https://www.dronestagr.am/wp-content/uploads/2017/08/DJI_0029-4-scaled.jpg"
             className="w-full h-full object-cover"
