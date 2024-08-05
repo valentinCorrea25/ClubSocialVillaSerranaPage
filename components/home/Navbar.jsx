@@ -7,8 +7,8 @@ export default function Navbar() {
   return (
     <nav className="bg-[--blanco] border-b-4 border-[--verder-super-oscuro] montserrat">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 h-20 relative">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse absolute top-[30%]">
-            <Image src={logo} width={0} height={0} className="w-[25%]" alt="Logo Villa Serrana Club Social y Deportivo"  />
+      <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+      <Image src={logo} width={0} height={0} className="w-[12%] absolute top-3 left-10 z-50" alt="Logo Villa Serrana Club Social y Deportivo" />
         </a>
         <div className='h-8'/>
         <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -26,7 +26,7 @@ export default function Navbar() {
               <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent hover:text-[--verde] transition-all md:border-0">Que encuentras</a>
               <ul className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
                 <li>
-                  <a href="/Alojamientos" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 transition-all">Alojamientos</a>
+                  <a href="/ListaAlojamiento" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 transition-all">Alojamientos</a>
                 </li>
               </ul>
             </li>

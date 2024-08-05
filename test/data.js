@@ -291,105 +291,6 @@ export const Servicios = [
   },
 ]
 
-  export const CaracteristicasAloj = {
-    comodidades: [
-      'Aire acondicionado',
-      'Calefacción',
-      'Jacuzzi',
-      'Internet Wi-Fi',
-    ],
-    serviciosBasicos: [
-      'Sábanas y toallas',
-      'Agua caliente',
-      'Electricidad',
-    ],
-
-    adicionales: [
-      'Servicio de limpieza',
-      'Desayuno incluido',
-    ],
-    equipamiento: [
-      'Cocina equipada',
-      'Lavadora',
-      'Microondas',
-    ],
-    entretenimiento: [
-      'Televisión por cable',
-      'Juegos de mesa',
-    ],
-    exterior: [
-      'Parrillero',
-      'Jardín',
-      'Piscina',
-    ],
-  };
-  
-  export const CarouselImages = [
-    {
-      id: 1,
-      url: 'https://picsum.photos/id/1018/600/400',
-      alt: 'Imagen 1',
-    },
-    {
-      id: 2,
-      url: 'https://picsum.photos/id/1015/600/400',
-      alt: 'Imagen 2',
-    },
-    {
-      id: 3,
-      url: 'https://picsum.photos/id/1024/600/400',
-      alt: 'Imagen 3',
-    },
-    {
-      id: 4,
-      url: 'https://picsum.photos/id/1031/600/400',
-      alt: 'Imagen 4',
-    },
-  ];
-
-  export const InfoAloj = {
-    title: 'Mainimbú',
-    location: 'Villa Serrana - El Atalaya',
-    capacity: 5,  
-};
-
-export const DescripcionAloj = {
-  text: 'Cómoda cabaña con jacuzzi climatizado en zona privilegiada de Villa Serrana con amplio deck y terreno.'
-};
-
-export const contactInfo = {
-  name: 'José Loma',
-  phone: '+598 99 123 456',
-  email: 'reservas@villaloma.com',
-  whatsapp: 'https://wa.me/59899123456', 
-};
-
-export const PubSimimilares = [
-  {
-    categoria: 'Alquiler',
-    ubicacion: 'Villa Serrana',
-    cantidad_personas: 3,
-    foto:'https://picsum.photos/id/239/220/110',
-  },
-  {
-    categoria: 'Alquiler',
-    ubicacion: 'Montevideo Centro',
-    cantidad_personas: 2,
-    foto:'https://picsum.photos/id/232/220/110',
-  },
-  {
-    categoria: 'Alquiler',
-    ubicacion: 'Punta del Este',
-    cantidad_personas: 5,
-    foto:'https://picsum.photos/id/231/220/110',
-  },
-  {
-    categoria: 'Alquiler',
-    ubicacion: 'Colonia del Sacramento',
-    cantidad_personas: 4,
-    foto:'https://picsum.photos/id/236/220/110',
-  },
-];
 export const PostsData = [
   { "id": 1, "title": "Post 1", "description": "Descripción del post 1", "image": "/images/post1.jpg" },
   { "id": 2, "title": "Post 2", "description": "Descripción del post 2", "image": "/images/post2.jpg" },
@@ -400,3 +301,156 @@ export const PostsData = [
   { "id": 8, "title": "¿Qué es Lorem Ipsum?", "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", "image": "https://picsum.photos/200/300?random=9" },
   { "id": 9, "title": "¿Qué es Lorem Ipsum?", "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", "image": "https://picsum.photos/200/300?random=10" }
 ]
+
+export const alojamientos = [
+  {
+    id: 1,
+    categoria: 'Alquiler',
+    title: 'Mainimbú',
+    location: 'Villa Serrana - El Atalaya',
+    capacity: 5,
+    description: 'Cómoda cabaña con jacuzzi climatizado en zona privilegiada de Villa Serrana con amplio deck y terreno.',
+    disponibilidad: 'De lunes a miércoles',
+    price: 3000,
+    caracteristicas: {
+      comodidades: ['Aire acondicionado', 'Calefacción', 'Jacuzzi', 'Internet Wi-Fi'],
+      serviciosBasicos: ['Sábanas y toallas', 'Agua caliente', 'Electricidad'],
+      adicionales: ['Servicio de limpieza', 'Desayuno incluido'],
+      equipamiento: ['Cocina equipada', 'Lavadora', 'Microondas'],
+      entretenimiento: ['Televisión por cable', 'Juegos de mesa'],
+      exterior: ['Parrillero', 'Jardín', 'Piscina'],
+    },
+    images: [
+      { id: 1, url: 'https://picsum.photos/id/1018/600/400', alt: 'Imagen 1' },
+      { id: 2, url: 'https://picsum.photos/id/1015/600/400', alt: 'Imagen 2' },
+      { id: 3, url: 'https://picsum.photos/id/1024/600/400', alt: 'Imagen 3' },
+      { id: 4, url: 'https://picsum.photos/id/1031/600/400', alt: 'Imagen 4' },
+    ],
+    contacto: {
+      name: 'José Loma',
+      phone: '+598 99 123 456',
+      email: 'reservas@villaloma.com',
+      whatsapp: 'https://wa.me/59899123456',
+    },
+  },
+  {
+    id: 2,
+    categoria: 'Alquiler',
+    title: 'La Cumbre',
+    location: 'Punta del Este - Playa Mansa',
+    description: 'Lujosa casa con vista al mar, piscina privada y amplias terrazas en Playa Mansa.',
+    capacity: 8,
+    price: 7500,
+    disponibilidad: 'Viernes a domingo',
+    caracteristicas: {
+      comodidades: ['Aire acondicionado', 'Jacuzzi', 'Internet Wi-Fi', 'Calefacción'],
+      serviciosBasicos: ['Sábanas y toallas', 'Electricidad', 'Agua caliente'],
+      adicionales: ['Desayuno incluido', 'Servicio de limpieza'],
+      equipamiento: ['Cocina equipada', 'Lavavajillas', 'Microondas'],
+      entretenimiento: ['Televisión por cable', 'Netflix', 'Juegos de mesa'],
+      exterior: ['Piscina', 'Jardín', 'Barbacoa'],
+    },
+    images: [
+      { id: 1, url: 'https://picsum.photos/id/1025/600/400', alt: 'Imagen 1' },
+      { id: 2, url: 'https://picsum.photos/id/1045/600/400', alt: 'Imagen 2' },
+      { id: 3, url: 'https://picsum.photos/id/1055/600/400', alt: 'Imagen 3' },
+      { id: 4, url: 'https://picsum.photos/id/1065/600/400', alt: 'Imagen 4' },
+    ],
+    contacto: {
+      name: 'María González',
+      phone: '+598 98 765 432',
+      email: 'contacto@lacumbre.com',
+      whatsapp: 'https://wa.me/59898765432',
+    },
+  },
+  {
+    id: 3,
+    categoria: 'Alquiler',
+    title: 'Casa Piriápolis',
+    location: 'Piriápolis - Cerro San Antonio',
+    description: 'Hermosa casa de playa con vistas espectaculares al mar y acceso directo a la playa.',
+    capacity: 6,
+    price: 5000,
+    disponibilidad: 'Todos los días',
+    caracteristicas: {
+      comodidades: ['Internet Wi-Fi', 'Calefacción', 'Aire acondicionado'],
+      serviciosBasicos: ['Electricidad', 'Agua caliente', 'Sábanas y toallas'],
+      adicionales: ['Desayuno incluido', 'Servicio de limpieza'],
+      equipamiento: ['Cocina equipada', 'Microondas', 'Lavadora'],
+      entretenimiento: ['Televisión por cable', 'Juegos de mesa'],
+      exterior: ['Parrillero', 'Piscina', 'Terraza'],
+    },
+    images: [
+      { id: 1, url: 'https://picsum.photos/id/223/600/400', alt: 'Imagen 1' },
+      { id: 2, url: 'https://picsum.photos/id/233/600/400', alt: 'Imagen 2' },
+      { id: 3, url: 'https://picsum.photos/id/243/600/400', alt: 'Imagen 3' },
+      { id: 4, url: 'https://picsum.photos/id/253/600/400', alt: 'Imagen 4' },
+    ],
+    contacto: {
+      name: 'Carlos Méndez',
+      phone: '+598 95 654 321',
+      email: 'info@casapiriapolis.com',
+      whatsapp: 'https://wa.me/59895654321',
+    },
+  },
+  {
+    id: 4,
+    categoria: 'Alquiler',
+    title: 'Rancho Serrano',
+    location: 'Minas - Sierra de las Ánimas',
+    description: 'Casa de campo en la Sierra de las Ánimas con vistas panorámicas y entorno natural.',
+    capacity: 10,
+    price: 9000,
+    disponibilidad: 'Fines de semana',
+    caracteristicas: {
+      comodidades: ['Chimenea', 'Internet Wi-Fi', 'Jacuzzi', 'Calefacción'],
+      serviciosBasicos: ['Electricidad', 'Agua caliente', 'Sábanas y toallas'],
+      adicionales: ['Desayuno incluido', 'Servicio de limpieza'],
+      equipamiento: ['Cocina equipada', 'Microondas', 'Lavavajillas'],
+      entretenimiento: ['Televisión por cable', 'Juegos de mesa'],
+      exterior: ['Parrillero', 'Piscina', 'Jardín'],
+    },
+    images: [
+      { id: 1, url: 'https://picsum.photos/id/1056/600/400', alt: 'Imagen 1' },
+      { id: 2, url: 'https://picsum.photos/id/1057/600/400', alt: 'Imagen 2' },
+      { id: 3, url: 'https://picsum.photos/id/1058/600/400', alt: 'Imagen 3' },
+      { id: 4, url: 'https://picsum.photos/id/1059/600/400', alt: 'Imagen 4' },
+    ],
+    contacto: {
+      name: 'Ana Rodríguez',
+      phone: '+598 93 876 543',
+      email: 'reservas@ranchoserrano.com',
+      whatsapp: 'https://wa.me/59893876543',
+    },
+  },
+  {
+    id: 5,
+    categoria: 'Alquiler',
+    title: 'Villa del Mar',
+    location: 'Colonia del Sacramento',
+    description: 'Residencia de lujo con acceso privado a la playa y todas las comodidades modernas.',
+    capacity: 12,
+    price: 12000,
+    disponibilidad: 'Toda la semana',
+    caracteristicas: {
+      comodidades: ['Aire acondicionado', 'Jacuzzi', 'Internet Wi-Fi', 'Calefacción'],
+      serviciosBasicos: ['Electricidad', 'Agua caliente', 'Sábanas y toallas'],
+      adicionales: ['Servicio de limpieza', 'Desayuno incluido'],
+      equipamiento: ['Cocina equipada', 'Microondas', 'Lavadora', 'Lavavajillas'],
+      entretenimiento: ['Televisión por cable', 'Netflix', 'Juegos de mesa'],
+      exterior: ['Piscina', 'Parrillero', 'Jardín', 'Terraza'],
+    },
+    images: [
+      { id: 1, url: 'https://picsum.photos/id/1061/600/400', alt: 'Imagen 1' },
+      { id: 2, url: 'https://picsum.photos/id/1062/600/400', alt: 'Imagen 2' },
+      { id: 3, url: 'https://picsum.photos/id/1063/600/400', alt: 'Imagen 3' },
+      { id: 4, url: 'https://picsum.photos/id/1064/600/400', alt: 'Imagen 4' },
+    ],
+    contacto: {
+      name: 'Luis Pérez',
+      phone: '+598 94 321 654',
+      email: 'contacto@villadelmar.com',
+      whatsapp: 'https://wa.me/59894321654',
+    },
+  },
+];

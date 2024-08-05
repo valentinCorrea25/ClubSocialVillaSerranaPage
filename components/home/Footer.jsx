@@ -16,7 +16,7 @@ const EnlacesDestacados = () => (
     <h2 className="text-2xl font-bold mb-4"><span>DESTACADOS</span></h2>
     <ul className="mt-2 space-y-2">
       <li><a href="/guia-visual" className="hover:underline transition-colors duration-300 hover:text-blue-300">GUÍA VISUAL DE VILLA SERRANA</a></li>
-      <li><a href="/Alojamientos" className="hover:underline transition-colors duration-300 hover:text-blue-300">ALOJAMIENTOS</a></li>
+      <li><a href="/ListaAlojamiento" className="hover:underline transition-colors duration-300 hover:text-blue-300">ALOJAMIENTOS</a></li>
       <li><a href="/noticias-eventos" className="hover:underline transition-colors duration-300 hover:text-blue-300">NOTICIAS Y EVENTOS</a></li>
       <li><a href="/actividades" className="hover:underline transition-colors duration-300 hover:text-blue-300">ACTIVIDADES</a></li>
       <li><a href="/servicios" className="hover:underline transition-colors duration-300 hover:text-blue-300">SERVICIOS</a></li>
