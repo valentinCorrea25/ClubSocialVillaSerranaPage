@@ -18,7 +18,7 @@ const EnlacesDestacados = () => (
       <li><a href="/guia-visual" className="hover:underline transition-colors duration-300 hover:text-blue-300">GUÍA VISUAL DE VILLA SERRANA</a></li>
       <li><a href="/ListaAlojamiento" className="hover:underline transition-colors duration-300 hover:text-blue-300">ALOJAMIENTOS</a></li>
       <li><a href="/noticias-eventos" className="hover:underline transition-colors duration-300 hover:text-blue-300">NOTICIAS Y EVENTOS</a></li>
-      <li><a href="/actividades" className="hover:underline transition-colors duration-300 hover:text-blue-300">ACTIVIDADES</a></li>
+      <li><a href="/ListaActividades" className="hover:underline transition-colors duration-300 hover:text-blue-300">ACTIVIDADES</a></li>
       <li><a href="/servicios" className="hover:underline transition-colors duration-300 hover:text-blue-300">SERVICIOS</a></li>
     </ul>
   </div>

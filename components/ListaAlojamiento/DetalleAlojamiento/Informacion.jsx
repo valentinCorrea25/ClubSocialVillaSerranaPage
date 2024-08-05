@@ -5,7 +5,7 @@ const Informacion = ({ alojamiento }) => (
   <Card
     title={
       <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '8px', width: '100%' }}>
-        <div className="text-2xl font-bold text-center"> {alojamiento.title} </div>
+      <div className="text-2xl font-bold text-center"> {alojamiento.title} </div>
       </div>
     }
     style={{ backgroundColor: '#FFFFFF', borderRadius: '23px', border: '2px solid #ddd' }}

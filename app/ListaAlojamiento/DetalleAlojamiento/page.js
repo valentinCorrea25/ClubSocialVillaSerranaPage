@@ -31,38 +31,25 @@ const DetalleAlojamientos = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-32"> {/* Aumentado padding y px */}
-      <div className="mb-14"> {/* Aumentado margen inferior */}
-        <Banner 
-          title="Alojamientos" 
-          subtitle="Descubre nuestras opciones" 
-          backgroundImage="/images/alojamiento.jpg" 
-        />
-      </div>
+    <div className="flex flex-col min-h-screen bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-32"> 
+      <div className="mb-14"><Banner title="Alojamientos" subtitle="Descubre nuestras opciones" 
+      backgroundImage="/images/alojamiento.jpg" /></div>
 
-      <main className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10"> {/* Aumentado gap */}
-        {/* Main Content Area */}
-        <div className="lg:col-span-2 flex flex-col gap-8"> {/* Aumentado gap */}
-          <Informacion alojamiento={alojamientoSeleccionado} />
-          <Carousel alojamiento={alojamientoSeleccionado} />
-          <Descripcion alojamiento={alojamientoSeleccionado} />
-          <Caracteristicas caracteristicas={alojamientoSeleccionado.caracteristicas} />
+    <main className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10"> 
+      <div className="lg:col-span-2 flex flex-col gap-8"> 
+        <Informacion alojamiento={alojamientoSeleccionado} />
+        <Carousel alojamiento={alojamientoSeleccionado} />
+        <Descripcion alojamiento={alojamientoSeleccionado} />
+        <Caracteristicas caracteristicas={alojamientoSeleccionado.caracteristicas} />
         </div>
-        
-        {/* Sidebar Area */}
-        <div className="lg:col-span-1 flex flex-col gap-8"> {/* Aumentado gap */}
-          <div className="flex-1 flex flex-col gap-8"> {/* Aumentado gap */}
-            <div className="w-full">
-              <Contacto contacto={alojamientoSeleccionado.contacto} />
-            </div>
-            <UbicacionMap ubicacion={alojamientoSeleccionado.location} /> 
-          </div>
-          <div className="flex-1">
-            <PublicacionesSimilares onSelect={setAlojamientoSeleccionado} />
-          </div>
-        </div>
-      </main>
-    </div>
+
+    <div className="lg:col-span-1 flex flex-col gap-8"><div className="flex-1 flex flex-col gap-8"> 
+        <div className="w-full"><Contacto contacto={alojamientoSeleccionado.contacto} /></div>
+        <UbicacionMap ubicacion={alojamientoSeleccionado.location} /></div>
+        <div className="flex-1"><PublicacionesSimilares onSelect={setAlojamientoSeleccionado} /></div>
+      </div>
+    </main>
+  </div>
   );
 };
 

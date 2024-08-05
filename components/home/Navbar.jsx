@@ -28,6 +28,9 @@ export default function Navbar() {
                 <li>
                   <a href="/ListaAlojamiento" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 transition-all">Alojamientos</a>
                 </li>
+                <li>
+                  <a href="/ListaActividades" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 transition-all">Actividades</a>
+                </li>
               </ul>
             </li>
             <li>
