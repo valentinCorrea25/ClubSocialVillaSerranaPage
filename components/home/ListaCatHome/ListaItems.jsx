@@ -1,12 +1,12 @@
 import React from 'react'
 import Item from './Item'
 import { Button } from 'antd';
-import {Alquileres, NoticiasYEventos, Restaurantes, Actividades, Servicios} from '@/test/data';
+import { Alquileres, NoticiasYEventos, Restaurantes, Actividades, Servicios } from '@/test/data';
 
-export default function ListaItems({type}) {
+export default function ListaItems({ type }) {
 
-  function seleccionarTipo(type){
-    switch(type){
+  function seleccionarTipo(type) {
+    switch (type) {
       case 1:
         return Alquileres;
       case 2:

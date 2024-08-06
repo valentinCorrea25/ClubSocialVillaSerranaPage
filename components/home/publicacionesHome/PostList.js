@@ -12,7 +12,7 @@ function PostList() {
   }, []);
 
   return (
-    <div className='grid grid-cols-3 gap-3 px-20 py-3'>
+    <div className=' grid gap-3 px-20 py-10 md:grid md:grid-cols-3  '>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
@@ -21,7 +21,7 @@ function PostList() {
 };
 export function Mostrar() {
   return (
-    <div className="grid place-items-center py-10">
+    <div className="grid place-items-center ">
       <h1 className="text-3xl font-semibold">ULTIMAS PUBLICACIONES</h1>
       <PostList />
     </div>
