@@ -9,102 +9,105 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
 model Servicios {
-  ID_Publicacion  Int            @id @default(autoincrement())
-  Id_categoria    Int
+  id_Publicacion  Int            @id @default(autoincrement())
   nombre_titular  String
-  Titulo          String
-  Descripcion     String
-  Mail            String
-  Celular         String
-  Horario         String
-  Dia_Semana      String[]
+  titulo          String
+  descripcion     String
+  mail            String
+  celular         String
+  horario         String
+  dia_Semana      String[]
   titulo_Servicio ServicioTitulo
 
-  @@map("Servicios")
+  categoriaId  Int
+  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
 }
 
 model Actividad {
-  ID_Publicacion    Int      @id @default(autoincrement())
-  Id_categoria      Int
+  id_Publicacion    Int      @id @default(autoincrement())
   fecha_publicacion DateTime
-  Titulo            String
-  Contenido         String
-  Foto              String
-  Horario           String
-  Dia_Semana        String[]
+  titulo            String
+  contenido         String
+  foto              String[]
+  horario           String
+  dia_Semana        String[]
 
-  @@map("Actividad")
+  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId  Int
 }
 
 model EventosNoticia {
-  ID_Publicacion    Int      @id @default(autoincrement())
-  Id_categoria      Int
+  id_Publicacion    Int      @id @default(autoincrement())
   fecha_publicacion DateTime
-  Titulo            String
-  Contenido         String
-  Foto              String
+  titulo            String
+  contenido         String
+  foto              String
   fecha_evento      DateTime
 
-  @@map("Eventos/Noticia")
+  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId  Int
 }
 
 model Categoria {
-  ID               Int    @id @default(autoincrement())
+  id               Int    @id @default(autoincrement())
   nombre_categoria String
 
-  @@map("CATEGORIA")
+  Servicios      Servicios[]
+  Actividad      Actividad[]
+  EventosNoticia EventosNoticia[]
+  Alquiler       Alquiler[]
+  Restaurant     Restaurant[]
 }
 
 model Alquiler {
-  ID_Publicacion     Int      @id @default(autoincrement())
-  Id_categoria       Int
+  id_Publicacion     Int      @id @default(autoincrement())
   nombre_titular     String
-  Celular            String
-  Mail               String
-  Titulo             String
-  Descripcion        String
+  celular            String
+  mail               String
+  titulo             String
+  descripcion        String
   ubicacion          String
   coordenadas        String
   capacidad          Int
   camas_dobles       Int
   camas_singles      Int
-  Agua_caliente      Boolean
-  Toallas            Boolean
-  Sabanas            Boolean
-  TV                 Boolean
-  WIFI               Boolean
-  Piscina            Boolean
-  Parrilla           Boolean
-  Bano               Boolean
-  Cocina             Boolean
-  Heladera           Boolean
-  Horno              Boolean
-  Microondas         Boolean
-  Alacena            Boolean
-  Tostadora          Boolean
+  agua_caliente      Boolean
+  toallas            Boolean
+  sabanas            Boolean
+  tv                 Boolean
+  wifi               Boolean
+  piscina            Boolean
+  parrilla           Boolean
+  bano               Boolean
+  cocina             Boolean
+  heladera           Boolean
+  horno              Boolean
+  microondas         Boolean
+  alacena            Boolean
+  tostadora          Boolean
   aire_acondicionado Boolean
   estufa             Boolean
-  Frezzer            Boolean
-  Freeza_Sabanas     Boolean
+  frezzer            Boolean
+  freeza_Sabanas     Boolean
   mascotas           Boolean
-  Fotos              String[]
+  fotos              String[]
 
-  @@map("ALQUILER")
+  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId  Int
 }
 
 model Restaurant {
-  ID_Publicacion  Int      @id @default(autoincrement())
-  Id_categoria    Int
+  id_Publicacion  Int      @id @default(autoincrement())
   nombre_titular  String
-  Celular         String
-  Mail            String
-  Descripcion     String
+  celular         String
+  mail            String
+  descripcion     String
   coordenadas     String
   ubicacion       String
   tipo_pago       String[]
@@ -112,15 +115,16 @@ model Restaurant {
   horario_semanal String
   horario_finde   String
   domingo         Boolean
-  Instagram       String
-  Facebook        String
-  Web             String
+  instagram       String
+  facebook        String
+  web             String
 
-  @@map("Restaurant")
+  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId  Int
 }
 
 enum ServicioTitulo {
-  Titulo1
-  Titulo2
+  Trasporte
+  Cerrajero
   // Add other titles here
 }

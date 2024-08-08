@@ -66,10 +66,10 @@ export default function PanelDeControl() {
 
   return (
     <div className="flex">
-      <div className="h-full min-h-[100vh] bg-[--verde-menu] border-x-4 border-[--verde-oscuro-alternativo] flex flex-col justify-between">
+      <div className="h-full min-h-[100vh] w-[25%] bg-[--verde-menu] border-x-4 border-[--verde-oscuro-alternativo] flex flex-col justify-between">
         
         <div>
-          <div className="w-2/3 m-auto my-16">
+          <div className="w-1/3 m-auto my-16">
             <Image
               src={logo}
               width={0}

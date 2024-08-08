@@ -3,10 +3,15 @@ import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex } from 'antd';
 import image from '@/public/images/loginScreen.jpg';
+import { useRouter } from 'next/navigation';
+
 const Admin = () => {
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
+
+  const router = useRouter();
+
   return (
     <>
       <div className='flex gap-5 justify-between items-center'>
@@ -54,7 +59,7 @@ const Admin = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button block type="primary" htmlType="submit">
+          <Button block type="primary" htmlType="submit" onClick={() => router.push('admin/paneldecontrol')}>
             Log in
           </Button>
         </Form.Item>
