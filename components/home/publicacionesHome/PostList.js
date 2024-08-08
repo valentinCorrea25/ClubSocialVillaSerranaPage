@@ -3,8 +3,6 @@ import PostCard from './PostCard';
 import postsData from '@/test/posts.json';
 import { useState, useEffect } from 'react';
 
-
-
 function PostList() {
   const [posts, setPosts] = useState([]);
 
@@ -22,8 +20,6 @@ function PostList() {
   );
 };
 export function Mostrar() {
-
-
   return (
     <div className="grid place-items-center ">
       <h1 className="text-3xl font-semibold">ULTIMAS PUBLICACIONES</h1>

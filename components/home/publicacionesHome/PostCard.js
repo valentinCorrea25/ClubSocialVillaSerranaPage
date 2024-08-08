@@ -3,7 +3,6 @@ import { CiCalendar } from "react-icons/ci";
 const PostCard = ({ post }) => {
 
   return (
-
     <div className="bg-white p-6 rounded-xl shadow-lg ">
       <img src={post.image} alt={post.title} className=" mx-auto" />
       <h2 className="text-xl font-extrabold mb-2">{post.title}</h2>
