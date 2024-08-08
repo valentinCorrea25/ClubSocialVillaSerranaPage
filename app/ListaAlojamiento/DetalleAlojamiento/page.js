@@ -31,7 +31,7 @@ const DetalleAlojamientos = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-32"> 
+    <div className="container flex flex-col min-h-screen bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-32"> 
       <div className="mb-14"><Banner title="Alojamientos" subtitle="Descubre nuestras opciones" 
       backgroundImage="/images/alojamiento.jpg" /></div>
 

@@ -11,9 +11,116 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model Categoria{
-  id Int @id @default(autoincrement())
+model Servicios {
+  ID_Publicacion  Int            @id @default(autoincrement())
+  Id_categoria    Int
+  nombre_titular  String
+  Titulo          String
+  Descripcion     String
+  Mail            String
+  Celular         String
+  Horario         String
+  Dia_Semana      String[]
+  titulo_Servicio ServicioTitulo
+
+  @@map("Servicios")
+}
+
+model Actividad {
+  ID_Publicacion    Int      @id @default(autoincrement())
+  Id_categoria      Int
+  fecha_publicacion DateTime
+  Titulo            String
+  Contenido         String
+  Foto              String
+  Horario           String
+  Dia_Semana        String[]
+
+  @@map("Actividad")
+}
+
+model EventosNoticia {
+  ID_Publicacion    Int      @id @default(autoincrement())
+  Id_categoria      Int
+  fecha_publicacion DateTime
+  Titulo            String
+  Contenido         String
+  Foto              String
+  fecha_evento      DateTime
+
+  @@map("Eventos/Noticia")
+}
+
+model Categoria {
+  ID               Int    @id @default(autoincrement())
   nombre_categoria String
-} 
+
+  @@map("CATEGORIA")
+}
+
+model Alquiler {
+  ID_Publicacion     Int      @id @default(autoincrement())
+  Id_categoria       Int
+  nombre_titular     String
+  Celular            String
+  Mail               String
+  Titulo             String
+  Descripcion        String
+  ubicacion          String
+  coordenadas        String
+  capacidad          Int
+  camas_dobles       Int
+  camas_singles      Int
+  Agua_caliente      Boolean
+  Toallas            Boolean
+  Sabanas            Boolean
+  TV                 Boolean
+  WIFI               Boolean
+  Piscina            Boolean
+  Parrilla           Boolean
+  Bano               Boolean
+  Cocina             Boolean
+  Heladera           Boolean
+  Horno              Boolean
+  Microondas         Boolean
+  Alacena            Boolean
+  Tostadora          Boolean
+  aire_acondicionado Boolean
+  estufa             Boolean
+  Frezzer            Boolean
+  Freeza_Sabanas     Boolean
+  mascotas           Boolean
+  Fotos              String[]
+
+  @@map("ALQUILER")
+}
+
+model Restaurant {
+  ID_Publicacion  Int      @id @default(autoincrement())
+  Id_categoria    Int
+  nombre_titular  String
+  Celular         String
+  Mail            String
+  Descripcion     String
+  coordenadas     String
+  ubicacion       String
+  tipo_pago       String[]
+  Titulo          String
+  horario_semanal String
+  horario_finde   String
+  domingo         Boolean
+  Instagram       String
+  Facebook        String
+  Web             String
+
+  @@map("Restaurant")
+}
+
+enum ServicioTitulo {
+  Titulo1
+  Titulo2
+  // Add other titles here
+}
