@@ -42,7 +42,7 @@ const Informacion = () => (
 // Componente Principal del Footer
 export default function PieDePagina() {
   return (
-    <div>
+    <div className='text-[--blanco]'>
       <footer className="relative text-blanco py-5">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/footer.jpg')", backgroundSize: 'cover' }}></div>
         <div className="relative container mx-auto flex flex-col md:flex-row md:justify-between md:items-start space-y-7 md:space-y-0 px-7 md:py-6">
