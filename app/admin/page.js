@@ -3,14 +3,27 @@ import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex } from 'antd';
 import image from '@/public/images/loginScreen.jpg';
+import {signIn} from 'next-auth/react'
 import { useRouter } from 'next/navigation';
 
 const Admin = () => {
-  const onFinish = (values) => {
+  const router = useRouter();
+  const  onFinish = async (values) => {
     console.log('Received values of form: ', values);
+    const resp = await signIn('credentials', {
+      userName: values.username,
+      password: values.password,
+      redirect: false
+    })
+    if(resp.error){
+      alert(resp.error);
+    }
+    else{
+      router.push('/admin/paneldecontrol')
+    }
   };
 
-  const router = useRouter();
+
 
   return (
     <>
@@ -49,18 +62,18 @@ const Admin = () => {
         >
           <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
         </Form.Item>
-        <Form.Item>
+        {/* <Form.Item>
           <Flex justify="space-between" align="center">
             <Form.Item name="remember" valuePropName="checked" noStyle>
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
             <a href="">Forgot password</a>
           </Flex>
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item>
-          <Button block type="primary" htmlType="submit" onClick={() => router.push('admin/paneldecontrol')}>
-            Log in
+          <Button block type="primary" htmlType="submit">
+            Entrar
           </Button>
         </Form.Item>
         </Form>

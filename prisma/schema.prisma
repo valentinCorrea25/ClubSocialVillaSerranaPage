@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,7 +9,7 @@ datasource db {
 }
 
 model Servicios {
-  id_Publicacion  Int            @id @default(autoincrement())
+  id_Servicio  Int            @unique
   nombre_titular  String
   titulo          String
   descripcion     String
@@ -24,49 +18,29 @@ model Servicios {
   horario         String
   dia_Semana      String[]
   titulo_Servicio ServicioTitulo
-
-  categoriaId  Int
-  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
 }
 
 model Actividad {
-  id_Publicacion    Int      @id @default(autoincrement())
+  id_Actividad    Int          @unique
   fecha_publicacion DateTime
   titulo            String
   contenido         String
   foto              String[]
   horario           String
   dia_Semana        String[]
-
-  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
-  categoriaId  Int
 }
 
 model EventosNoticia {
-  id_Publicacion    Int      @id @default(autoincrement())
+  id_EventoNoticia    Int          @unique
   fecha_publicacion DateTime
   titulo            String
   contenido         String
   foto              String
   fecha_evento      DateTime
-
-  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
-  categoriaId  Int
-}
-
-model Categoria {
-  id               Int    @id @default(autoincrement())
-  nombre_categoria String
-
-  Servicios      Servicios[]
-  Actividad      Actividad[]
-  EventosNoticia EventosNoticia[]
-  Alquiler       Alquiler[]
-  Restaurant     Restaurant[]
 }
 
 model Alquiler {
-  id_Publicacion     Int      @id @default(autoincrement())
+  id_Alquiler     Int          @unique
   nombre_titular     String
   celular            String
   mail               String
@@ -97,13 +71,10 @@ model Alquiler {
   freeza_Sabanas     Boolean
   mascotas           Boolean
   fotos              String[]
-
-  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
-  categoriaId  Int
 }
 
 model Restaurant {
-  id_Publicacion  Int      @id @default(autoincrement())
+  id_Restaurant  Int          @unique
   nombre_titular  String
   celular         String
   mail            String
@@ -111,20 +82,23 @@ model Restaurant {
   coordenadas     String
   ubicacion       String
   tipo_pago       String[]
-  Titulo          String
+  titulo          String
   horario_semanal String
   horario_finde   String
   domingo         Boolean
   instagram       String
   facebook        String
   web             String
-
-  id_categoria Categoria @relation(fields: [categoriaId], references: [id])
-  categoriaId  Int
 }
 
 enum ServicioTitulo {
   Trasporte
   Cerrajero
   // Add other titles here
+}
+
+model Usuario{
+  id Int @unique @id @default(autoincrement())
+  nombre String
+  hashPass String
 }

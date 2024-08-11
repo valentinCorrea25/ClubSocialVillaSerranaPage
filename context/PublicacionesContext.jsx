@@ -25,7 +25,7 @@ export const PublicacionesProvider = ({ children }) => {
 
   <PublicacionContext.Provider
       value={{
-        
+        crearAlquiler
       }}
     >
       {children}
