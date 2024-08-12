@@ -37,7 +37,7 @@ export default function Navbar() {
               Home
             </li>
             <li>
-              <a href="/queencuentras" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent hover:text-[--verde] transition-all md:border-0">Que encuentras</a>
+              <a href="/QueEncuentras" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent hover:text-[--verde] transition-all md:border-0">Que encuentras</a>
             </li>
             <li>
               <a href="/sobrenosotros" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent hover:text-[--verde] transition-all md:border-0">Sobre Nosotros</a>

@@ -17,33 +17,49 @@ const Buscador = ({ onFilterChange }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px', padding: '16px', 
-    backgroundColor: '#ffffff', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
-    flexWrap: 'wrap', }}>
-     
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1,
-      minWidth: '200px',}}>
+      backgroundColor: '#ffffff', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+      flexWrap: 'wrap', }}>
+      
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px' }}>
         <label style={{ fontWeight: 'bold' }}>Rango de Precio:</label>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap',}}>
-            
-            <InputNumber min={0} max={40000} value={minPrice} onChange={(value) => setMinPrice(value)}
-            placeholder="Precio mínimo"style={{ width: '100%', maxWidth: '120px', borderRadius: '8px', 
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }}/>
-            <span style={{ fontSize: '18px' }}> - </span>
-            
-            <InputNumber min={0}max={40000} value={maxPrice} onChange={(value) => setMaxPrice(value)}
-            placeholder="Precio máximo" style={{ width: '100%', maxWidth: '120px', borderRadius: '8px', 
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',}} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <InputNumber 
+            min={0} 
+            max={40000} 
+            value={minPrice} 
+            onChange={(value) => setMinPrice(value)} 
+            placeholder="Precio mínimo" 
+            style={{ width: '120px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
+          />
+          <span style={{ fontSize: '18px' }}> - </span>
+          <InputNumber 
+            min={0} 
+            max={40000} 
+            value={maxPrice} 
+            onChange={(value) => setMaxPrice(value)} 
+            placeholder="Precio máximo" 
+            style={{ width: '120px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
+          />
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1, minWidth: '200px',}}>
+
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px' }}>
         <label style={{ fontWeight: 'bold' }}>Capacidad:</label>
-        
-        <InputNumber min={0} value={capacity} onChange={(value) => setCapacity(value)} placeholder="Capacidad máxima" style={{ width: '100%', maxWidth: '120px', borderRadius: '8px', 
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} />
+        <InputNumber 
+          min={0} 
+          value={capacity} 
+          onChange={(value) => setCapacity(value)} 
+          placeholder="Capacidad máxima" 
+          style={{ width: '120px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
+        />
       </div>
 
-        <Button type="primary" onClick={handleFilterChange} style={{ borderRadius: '8px', 
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',}}> Aplicar Filtros</Button>
+      <Button 
+        type="primary" 
+        onClick={handleFilterChange} 
+        style={{ borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }}>
+        Aplicar Filtros
+      </Button>
 
       <style jsx>{`
         @media (max-width: 768px) {
@@ -51,7 +67,6 @@ const Buscador = ({ onFilterChange }) => {
             flex-direction: column;
             align-items: stretch;
           }
-
           button {
             align-self: stretch; 
           }

@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { Card, Tag } from 'antd';
-import { CalendarOutlined, EnvironmentOutlined, TagOutlined } from '@ant-design/icons';
+import { CalendarOutlined, TagOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
 
-const ActividadCard = ({ actividad }) => {
-  const { titulo, contenido, foto, fechaPublicacion, categoria, ubicacion, horario, diaSemana } = actividad;
+const EventoCard = ({ evento }) => {
+  const { titulo, contenido, foto, fecha_publicacion, fecha_evento, categoria } = evento;
 
   return (
     <Card hoverable cover={
@@ -23,15 +23,11 @@ const ActividadCard = ({ actividad }) => {
         description={
           <>
             <div style={{ color: '#0367A6' }}>
-              <CalendarOutlined /> {new Date(fechaPublicacion).toLocaleDateString()}
-              <TagOutlined style={{ marginLeft: '8px' }} /> {categoria}
-              <EnvironmentOutlined style={{ marginLeft: '8px' }} /> {ubicacion}
-            </div>
-            <div style={{ marginTop: '8px' }}>
-              {diaSemana.map((dia, index) => (
-                <Tag key={index} style={{ marginRight: '4px' }}>{dia}</Tag>
-              ))}
-              <span>{horario}</span>
+              <CalendarOutlined /> {new Date(fecha_publicacion).toLocaleDateString()}
+              <TagOutlined style={{ marginLeft: '8px' }} /> {categoria?.nombre_categoria || 'Categoría no disponible'}
+              <div style={{ marginTop: '8px' }}>
+                <span>Fecha del Evento: {new Date(fecha_evento).toLocaleDateString()}</span>
+              </div>
             </div>
             <p style={{ marginTop: '16px', height: 'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>{contenido}</p>
           </>
@@ -41,4 +37,4 @@ const ActividadCard = ({ actividad }) => {
   );
 };
 
-export default ActividadCard;
+export default EventoCard;
