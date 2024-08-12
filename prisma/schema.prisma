@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Servicios {
+  id_Servicio  Int            @unique
+  nombre_titular  String
+  titulo          String
+  descripcion     String
+  mail            String
+  celular         String
+  horario         String
+  dia_Semana      String[]
+  titulo_Servicio ServicioTitulo
+}
+
+model Actividad {
+  id_Actividad    Int          @unique
+  fecha_publicacion DateTime
+  titulo            String
+  contenido         String
+  foto              String[]
+  horario           String
+  dia_Semana        String[]
+}
+
+model EventosNoticia {
+  id_EventoNoticia    Int          @unique
+  fecha_publicacion DateTime
+  titulo            String
+  contenido         String
+  foto              String
+  fecha_evento      DateTime
+}
+
+model Alquiler {
+  id_Alquiler     Int          @unique
+  nombre_titular     String
+  celular            String
+  mail               String
+  titulo             String
+  descripcion        String
+  ubicacion          String
+  coordenadas        String
+  capacidad          Int
+  camas_dobles       Int
+  camas_singles      Int
+  agua_caliente      Boolean
+  toallas            Boolean
+  sabanas            Boolean
+  tv                 Boolean
+  wifi               Boolean
+  piscina            Boolean
+  parrilla           Boolean
+  bano               Boolean
+  cocina             Boolean
+  heladera           Boolean
+  horno              Boolean
+  microondas         Boolean
+  alacena            Boolean
+  tostadora          Boolean
+  aire_acondicionado Boolean
+  estufa             Boolean
+  frezzer            Boolean
+  freeza_Sabanas     Boolean
+  mascotas           Boolean
+  fotos              String[]
+}
+
+model Restaurant {
+  id_Restaurant  Int          @unique
+  nombre_titular  String
+  celular         String
+  mail            String
+  descripcion     String
+  coordenadas     String
+  ubicacion       String
+  tipo_pago       String[]
+  titulo          String
+  horario_semanal String
+  horario_finde   String
+  domingo         Boolean
+  instagram       String
+  facebook        String
+  web             String
+}
+
+enum ServicioTitulo {
+  Trasporte
+  Cerrajero
+  // Add other titles here
+}
+
+model Usuario{
+  id Int @unique @id @default(autoincrement())
+  nombre String
+  hashPass String
+}
