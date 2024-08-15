@@ -3,7 +3,7 @@ import fotoClub from '@/public/images/sobreElCLub.jpg';
 import fotoHistoria from '@/public/images/villaserrana.jpg';
 import Image from 'next/image';
 
-export function SobreElCLub() {
+export function SobreElClub() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
