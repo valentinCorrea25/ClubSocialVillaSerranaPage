@@ -1,5 +1,5 @@
 import React from 'react';
-import fotoClub from '@/public/images/sobreElCLub.jpg';
+import fotoClub from '@/public/images/sobreElClub.jpg';
 import fotoHistoria from '@/public/images/villaserrana.jpg';
 import Image from 'next/image';
 
