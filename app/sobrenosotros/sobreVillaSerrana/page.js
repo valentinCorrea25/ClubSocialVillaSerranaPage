@@ -1,8 +1,8 @@
 import React from 'react'
-import {Sobrevillaserrana} from '@/components/SobreNosotros/Sobrenostros'
+import { Sobrevillaserrana} from '@/components/SobreNosotros/SobreCLubyVillaserana'
 
-export default function SobreVilla() {
+export default function SobreNosotros() {
   return (
-    <Sobrevillaserrana/>
+      <Sobrevillaserrana/>
   )
 }
