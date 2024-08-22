@@ -2,7 +2,6 @@ import prisma from "@/libs/prisma";
 import NextAuth from "next-auth";
 const bcrypt = require('bcrypt');
 import CredentialsProviders from "next-auth/providers/credentials";
-import { signIn } from "next-auth/react";
 
 export const authOptions = {
     providers:[
