@@ -30,7 +30,7 @@ export function SobreElCLub() {
 
 export function Sobrevillaserrana() {
   return( 
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div className="flex justify-center items-center pb-10 mb-10 bg-gray-100 p-4" >
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
       <div className="md:float-right md:ml-8 md:mb-4 mb-8 flex justify-center md:block">
         <Image src={fotoHistoria} alt="Club Historia" className="rounded-lg shadow-lg" width={300} height={400} />
