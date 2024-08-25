@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { restaurantesData as allRestaurantes } from '@/test/data';
+import { Suspense } from 'react';
 import Banner from '@/components/ListaRestaurantes/DetalleRestaurante/Banner';
 import Informacion from '@/components/ListaRestaurantes/DetalleRestaurante/Informacion';
 import Carousel from '@/components/ListaRestaurantes/DetalleRestaurante/Carousel';
@@ -31,6 +32,7 @@ const DetalleRestaurantes = () => {
   }
 
   return (
+    <Suspense>
     <div className="flex flex-col min-h-screen bg-[#F9F6EE] px-8 sm:px-12 lg:px-20 py-24">
       <div className="mb-10">
         <Banner 
@@ -69,6 +71,7 @@ const DetalleRestaurantes = () => {
         </div>
       </main>
     </div>
+    </Suspense>
   );
 };
 
