@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import { alojamientos as allAlojamientos } from '@/test/data'; 
 import { Suspense } from 'react';
 import Banner from '@/components/ListaAlojamiento/DetalleAlojamiento/Banner';
