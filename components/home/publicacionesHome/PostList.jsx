@@ -2,6 +2,9 @@
 import PostCard from './PostCard';
 import postsData from '@/test/posts.json';
 import { useState, useEffect } from 'react';
+import { Button } from "antd";
+import { useRouter } from 'next/navigation';
+
 
 function PostList() {
   const [posts, setPosts] = useState([]);
@@ -19,12 +22,16 @@ function PostList() {
     </div>
   );
 };
-export function ListaUltimasPublicaciones() {
+export function ListaDeUltimasPublicaciones() {
+  const router = useRouter();
   return (
-    <div className="grid place-items-center ">
+    <div className="grid place-items-center py-12 ">
       <h1 className="text-3xl font-semibold">ULTIMAS PUBLICACIONES</h1>
       <PostList />
+      <Button  onClick={() => router.push('/ListaActividades')} className="w-32" type="primary"><h1>VER MAS</h1></Button> 
+
     </div>
+        
 
   );
 };

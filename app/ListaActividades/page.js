@@ -10,7 +10,7 @@ const ActividadPage = () => {
 
   return (
     <div style={appStyle}>
-      <Banner title="Actividades" subtitle="Descubre nuestras actividades más recientes" backgroundImage="https://picsum.photos/1200/400"/>
+      <Banner title="Actividades" subtitle="Descubre nuestras actividades más recientes" backgroundImage="/images/actividad.jpg"/>
       <ActividadesList />
     </div>
   );
