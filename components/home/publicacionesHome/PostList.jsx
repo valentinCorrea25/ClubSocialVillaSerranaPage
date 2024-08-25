@@ -22,7 +22,7 @@ function PostList() {
     </div>
   );
 };
-export function Mostrar() {
+export function ListaDeUltimasPublicaciones() {
   const router = useRouter();
   return (
     <div className="grid place-items-center py-12 ">
