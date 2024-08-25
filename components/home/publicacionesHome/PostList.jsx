@@ -22,6 +22,7 @@ function PostList() {
     </div>
   );
 };
+
 export function ListaDeUltimasPublicaciones() {
   const router = useRouter();
   return (
