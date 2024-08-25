@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Footer from "@/components/home/Footer";
 import ListaCatHome from "@/components/home/ListaCatHome/ListaCatHome";
-import { Mostrar } from "@/components/home/publicacionesHome/PostList";
+import { ListaUltimasPublicaciones } from "@/components/home/publicacionesHome/PostList";
 
 export default function Home() {
   return (
@@ -9,7 +9,8 @@ export default function Home() {
       <main className="flex-1 flex justify-center items-center text-5xl p-20">
         {/* <ListaCatHome /> */}
       </main>
-      <Mostrar />
+      <ListaUltimasPublicaciones />
     </div>
   );
 }
+

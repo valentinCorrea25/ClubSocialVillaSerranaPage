@@ -19,7 +19,7 @@ function PostList() {
     </div>
   );
 };
-export function Mostrar() {
+export function ListaUltimasPublicaciones() {
   return (
     <div className="grid place-items-center ">
       <h1 className="text-3xl font-semibold">ULTIMAS PUBLICACIONES</h1>

@@ -23,6 +23,6 @@ export async function POST(req){
     console.log(result);
 
     return NextResponse.json({
-        message: 'recibido!'
+        message: 'El usuario ha sido'
     })
 }
