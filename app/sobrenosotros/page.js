@@ -1,8 +1,10 @@
 import React from 'react'
-import { SobreElClub } from '@/components/SobreNosotros/Sobrenostros'
-
+import { SobreElCLub, Sobrevillaserrana } from '@/components/SobreNosotros/SobreClubyVillaserrana'
 export default function SobreNosotros() {
   return (
-      <SobreElClub/>
+    <div>
+      <SobreElCLub/>
+      <Sobrevillaserrana/>
+      </div>
   )
 }
