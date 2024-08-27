@@ -40,15 +40,15 @@ const items = [
 
 export default function ListaCatHome() {
   return (
-    // <div>
-    //     {/* <h1 className='text-[--azul] font-bold text-center md:text-5xl text-2xl'>Información Turistica Villa Serrana</h1>
-    //     <h2 className='text-[--verde-oscuro] font-bold text-center md:text-xl text-sm'>Encuentra las mejores opciones para disfrutar en Villa Serrana.</h2>
-    //     <div>
+    <div>
+        <h1 className='text-[--azul] font-bold text-center md:text-5xl text-2xl'>Información Turistica Villa Serrana</h1>
+        <h2 className='text-[--verde-oscuro] font-bold text-center md:text-xl text-sm'>Encuentra las mejores opciones para disfrutar en Villa Serrana.</h2>
+        <div>
             
-    //     </div> */}
+        </div>
         
-    // </div>\
-    <Tabs defaultActiveKey="1" items={items} itemselectedcolor='#09A603' size='large' style={{display:'flex', flexWrap:"wrap"}}/>
+    <Tabs defaultActiveKey="1" items={items} itemselectedcolor='#09A603' size='large'/>
+    </div>
   )
 }
 

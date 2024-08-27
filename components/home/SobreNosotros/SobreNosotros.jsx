@@ -3,7 +3,7 @@ import React from "react";
 const SobreNosotros = () => {
     return (
         <div className="flex flex-col items-center p-4 md:p-6 lg:p-8">
-            <h1 className="inset-x-0 top-100 text-center text-4xl font-semibold mb-4">UN POCO DE HISTORIA</h1>
+            <h1 className="inset-x-0 text-center text-4xl font-semibold mb-4">UN POCO DE HISTORIA</h1>
             <div
                 className="bg-[--blanco]-100 p-6 rounded-xl shadow-inner relative flex items-center justify-center"
                 style={{

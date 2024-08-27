@@ -23,7 +23,7 @@ export default function ListaItems({ type }) {
 
   return (
     <div className='flex flex-col gap-8 justify-center items-center'>
-      <div className='flex gap-y-4 flex-col md:grid md:grid-cols-3 md:grid-rows-3 md:gap-x-8 md:gap-y-4'>
+      <div className='w-full flex gap-y-4 flex-col md:grid md:grid-cols-3 md:grid-rows-3 md:gap-x-8 md:gap-y-4'>
         {seleccionarTipo(type).map((item, index) => (
           <Item key={index} type={type} informacion={item} />
         ))}
