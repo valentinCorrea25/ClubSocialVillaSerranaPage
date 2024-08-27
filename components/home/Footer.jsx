@@ -29,7 +29,7 @@ const Informacion = () => (
   <div className="flex flex-col items-center md:items-start w-full md:w-auto mb-8 md:mb-0 pt-14">
     <div className="flex flex-col items-center md:flex-row md:items-start mb-4 md:mb-6">
       <img src="/images/logo.png" alt="Club Social y Deportivo Villa Serrana" className="w-32 mb-4 md:mb-0 md:mr-4" />
-      <div className="text-center md:text-left">
+      <div className="text-center md:text-left max-w-[300px]">
         <h2 className="text-2xl font-bold mb-4"><span>TU DESTINO PERFECTO</span></h2>
         <p className="mb-2">VILLA SERRANA ES TU DESTINO IDEAL PARA UNAS VACACIONES INOLVIDABLES.</p>
         <p className="mb-2">DISFRUTA DE LA NATURALEZA, ACTIVIDADES AL AIRE LIBRE, Y LA MEJOR GASTRONOMÍA LOCAL.</p>
@@ -42,10 +42,10 @@ const Informacion = () => (
 // Componente Principal del Footer
 export default function PieDePagina() {
   return (
-    <div className='text-[--blanco] w-full max-w-[1200px]:'>
+    <div className='text-[--blanco] w-full'>
       <footer className="relative text-blanco py-5">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/footer.jpg')", backgroundSize: 'cover' }}></div>
-        <div className="relative container mx-auto flex flex-col md:flex-row md:justify-between md:items-start space-y-7 md:space-y-0 px-7 md:py-6">
+        <div className="max-w-screen-xl relative container mx-auto flex flex-col md:flex-row md:justify-around md:items-start space-y-7 md:space-y-0 px-7 md:py-6">
           <Informacion />
           <EnlacesDestacados />
         </div>

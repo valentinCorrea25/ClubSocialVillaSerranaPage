@@ -13,7 +13,7 @@ export default function MainVideo() {
       />
       <div className="absolute w-full h-full top-0 flex flex-col justify-center items-center text-white p-10">
         <h1 className="text-center text-5xl">Bienvenido a Villa Serrana</h1>
-        <p className="max-w-[1000px] text-center">
+        <p className="max-w-[1000px] text-xl text-center">
           Villa Serrana es un oasis natural en Uruguay, con paisajes hermosos,
           arquitectura única, y una tranquilidad perfecta para desconectar y
           recargar energías. Un destino ideal para amantes de la naturaleza y la
