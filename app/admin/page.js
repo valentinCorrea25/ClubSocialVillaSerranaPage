@@ -10,7 +10,7 @@ const Admin = () => {
   const router = useRouter();
   const  onFinish = async (values) => {
     console.log('Received values of form: ', values);
-    const resp = await signIn('credentials', {
+    const resp = await signIn('username-login', {
       userName: values.username,
       password: values.password,
       redirect: false
