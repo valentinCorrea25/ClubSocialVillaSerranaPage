@@ -12,24 +12,30 @@ export const authOptions = {
                 password: {label: 'Contrasenia', type: 'password', placeholder: 'Contrasenia'}
             },
             async authorize(credentials, req){
-                const userFound = await prisma.usuario.findFirst(
-                    {where: {
-                        nombre: credentials.userName,
-                }, });
-
-                if(!userFound){
-                    throw new Error('Usuario no encontrado')
+                try{
+                    const userFound = await prisma.usuario.findFirst(
+                        {where: {
+                            nombre: credentials.userName,
+                    }, });
+    
+                    if(!userFound){
+                        throw new Error('Usuario no encontrado')
+                    }
+    
+                    const itHasCorrectPassword = await bcrypt.compare(credentials.password, userFound.hashPass);
+                    if(!itHasCorrectPassword){
+                        console.log(itHasCorrectPassword);
+                        throw new Error('Clave incorrecta')
+                    }
+    
+                    return {id: userFound.id,
+                            name: userFound.nombre,
+                    };
                 }
-
-                const itHasCorrectPassword = await bcrypt.compare(credentials.password, userFound.hashPass);
-                if(!itHasCorrectPassword){
-                    console.log(itHasCorrectPassword);
-                    throw new Error('Clave incorrecta')
+                catch(error){
+                    console.log(error);
+                    return {message: 'Ha ocurrido un error'};
                 }
-
-                return {id: userFound.id,
-                        name: userFound.nombre,
-                };
             }
         })
     ],
