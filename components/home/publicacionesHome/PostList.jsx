@@ -15,7 +15,7 @@ function PostList() {
   }, []);
 
   return (
-    <div className=' grid gap-3 px-20 py-10 md:grid md:grid-cols-3  '>
+    <div className=' grid gap-3 px-10 py-10 md:grid md:grid-cols-3  '>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
@@ -26,10 +26,10 @@ function PostList() {
 export function ListaDeUltimasPublicaciones() {
   const router = useRouter();
   return (
-    <div className="grid place-items-center py-12 ">
+    <div className="grid place-items-center py-12 px-5 max-w-screen-xl m-auto">
       <h1 className="text-3xl font-semibold">ULTIMAS PUBLICACIONES</h1>
       <PostList />
-      <Button  onClick={() => router.push('/ListaActividades')} className="w-32" type="primary"><h1>VER MAS</h1></Button> 
+      <Button  onClick={() => router.push('/ListaActividades')} className="w-32" type="primary"><h1>Ver mas</h1></Button> 
 
     </div>
         

@@ -15,36 +15,36 @@
     "id": 3,
     "title": "Post 3",
     "description": "Descripción del post 3",
-    "image": "https://picsum.photos/200/300?random=4"
+    "image": "https://picsum.photos/350/200?random=4"
   },
   {
     "id": 4,
     "title": "Post 4",
     "description": "Descripción del post 4",
-    "image": "https://picsum.photos/200/300?random=2"
+    "image": "https://picsum.photos/350/200?random=2"
   },
   {
     "id": 6,
     "title": "Post 5",
     "description": "Descripción del post 5",
-    "image": "https://picsum.photos/200/300?random=1"
+    "image": "https://picsum.photos/350/200?random=1"
   },
   {
     "id": 7,
     "title": "¿Qué es Lorem Ipsum?",
     "description": " Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500",
-    "image": "https://picsum.photos/200/300?random=8"
+    "image": "https://picsum.photos/350/200?random=8"
   },
   {
     "id": 8,
     "title": "¿Qué es Lorem Ipsum?",
     "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500",
-    "image": "https://picsum.photos/200/300?random=9"
+    "image": "https://picsum.photos/350/200?random=9"
   },
   {
     "id": 9,
     "title": "¿Qué es Lorem Ipsum?",
     "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500",
-    "image": "https://picsum.photos/200/300?random=10"
+    "image": "https://picsum.photos/350/200?random=10"
   }
 ]

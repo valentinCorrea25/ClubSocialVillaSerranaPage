@@ -5,6 +5,6 @@ export default function SobreNosotros() {
     <div>
       <SobreElCLub/>
       <Sobrevillaserrana/>
-      </div>
+    </div>
   )
 }

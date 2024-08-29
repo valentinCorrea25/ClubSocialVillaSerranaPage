@@ -8,8 +8,8 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Servicios {
-  id_Servicio  Int            @unique
+model Servicio {
+  id_Servicio  Int @default(autoincrement()) @id
   nombre_titular  String
   titulo          String
   descripcion     String
@@ -17,30 +17,31 @@ model Servicios {
   celular         String
   horario         String
   dia_Semana      String[]
+  fecha_publicacion DateTime
   titulo_Servicio ServicioTitulo
 }
 
 model Actividad {
-  id_Actividad    Int          @unique
+  id_Actividad    Int @default(autoincrement()) @id
   fecha_publicacion DateTime
   titulo            String
   contenido         String
-  foto              String[]
+  fotos              String[]
   horario           String
   dia_Semana        String[]
 }
 
 model EventosNoticia {
-  id_EventoNoticia    Int          @unique
+  id_EventoNoticia    Int @default(autoincrement()) @id
   fecha_publicacion DateTime
   titulo            String
   contenido         String
   foto              String
-  fecha_evento      DateTime
+  fecha_evento      DateTime? // Que esto sea un check box que diga 'Es evento?' y que permita llenar este campo
 }
 
 model Alquiler {
-  id_Alquiler     Int          @unique
+  id_Alquiler   Int @default(autoincrement()) @id
   nombre_titular     String
   celular            String
   mail               String
@@ -63,18 +64,17 @@ model Alquiler {
   heladera           Boolean
   horno              Boolean
   microondas         Boolean
-  alacena            Boolean
   tostadora          Boolean
   aire_acondicionado Boolean
   estufa             Boolean
   frezzer            Boolean
-  freeza_Sabanas     Boolean
   mascotas           Boolean
+  fecha_publicacion DateTime
   fotos              String[]
 }
 
 model Restaurant {
-  id_Restaurant  Int          @unique
+  id_Restaurant  Int @default(autoincrement()) @id
   nombre_titular  String
   celular         String
   mail            String
@@ -89,6 +89,8 @@ model Restaurant {
   instagram       String
   facebook        String
   web             String
+  fotos           String[]
+  fecha_publicacion DateTime
 }
 
 enum ServicioTitulo {

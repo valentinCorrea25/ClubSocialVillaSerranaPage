@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Page() {
   return (
-    <div>P</div>
+    <div>Aca va el contacto</div>
   )
 }

@@ -23,6 +23,6 @@ export async function POST(req){
     console.log(result);
 
     return NextResponse.json({
-        message: 'El usuario ha sido'
+        message: `El usuario ha sido creado \nid: ${result.id}`
     })
 }
