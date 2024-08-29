@@ -17,6 +17,7 @@ model Servicio {
   celular         String
   horario         String
   dia_Semana      String[]
+  fecha_publicacion DateTime
   titulo_Servicio ServicioTitulo
 }
 
@@ -25,7 +26,7 @@ model Actividad {
   fecha_publicacion DateTime
   titulo            String
   contenido         String
-  foto              String[]
+  fotos              String[]
   horario           String
   dia_Semana        String[]
 }
@@ -68,6 +69,7 @@ model Alquiler {
   estufa             Boolean
   frezzer            Boolean
   mascotas           Boolean
+  fecha_publicacion DateTime
   fotos              String[]
 }
 
@@ -87,6 +89,8 @@ model Restaurant {
   instagram       String
   facebook        String
   web             String
+  fotos           String[]
+  fecha_publicacion DateTime
 }
 
 enum ServicioTitulo {

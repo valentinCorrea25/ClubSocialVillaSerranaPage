@@ -22,6 +22,7 @@ export async function POST(req){
         })
     } 
     catch (error) {
+        console.log(error);
         return NextResponse.json({
             message: 'Hubo un error al crear el Servicio, contactar con desarollador',
             code: 500
