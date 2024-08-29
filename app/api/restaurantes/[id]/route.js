@@ -16,7 +16,21 @@ export async function GET(request, { params }) {
       });
     }
 
-    return NextResponse.json({restaurant});
+    const count = await prisma.restaurant.count();
+    const skip = Math.floor(Math.random() * count);
+
+    const publicacionesRelacionadas = await prisma.restaurant.findMany({
+      where: {
+        id_Restaurant: {
+          not: restaurant.id_Restaurant,
+        },
+      },
+      take: 5,
+      skip: skip,
+    });
+
+    const respuesta = {publicacion: restaurant, publicacionesRelacionadas: publicacionesRelacionadas ? publicacionesRelacionadas : null}
+    return NextResponse.json({respuesta});
 
   } catch (error) {
     console.log(error);

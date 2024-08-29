@@ -15,8 +15,24 @@ export async function GET(request, { params }) {
         code: 400,
       });
     }
+    
 
-    return NextResponse.json({alquiler});
+    const count = await prisma.alquiler.count();
+    const skip = Math.floor(Math.random() * count);
+
+    const publicacionesRelacionadas = await prisma.alquiler.findMany({
+      where: {
+        id_Alquiler: {
+          not: alquiler.id_Alquiler,
+        },
+      },
+      take: 5,
+      skip: skip,
+    });
+    
+
+    const respuesta = {publicacion: alquiler, publicacionesRelacionadas: publicacionesRelacionadas ? publicacionesRelacionadas : null}
+    return NextResponse.json({respuesta});
 
   } catch (error) {
     console.log(error);

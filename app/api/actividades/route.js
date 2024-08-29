@@ -7,7 +7,7 @@ export async function POST(req) {
 
   try {
     const actividad = await prisma.actividad.create({ data });
-
+    
     return NextResponse.json({
       message: `Actividad creada con exito\nid: ${actividad.id_Actividad}`,
     });
