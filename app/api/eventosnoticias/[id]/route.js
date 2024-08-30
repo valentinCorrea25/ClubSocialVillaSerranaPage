@@ -2,6 +2,7 @@ import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
+
   try {
     const eventosNoticia = await prisma.eventosNoticia.findUnique({
       where: {

@@ -29,3 +29,19 @@ export async function POST(req){
         })
     }
 }
+
+export async function GET(request) {
+    const { searchParams } = new URL(request.url);
+    const limit = parseInt(searchParams.get('limit')) || 9;
+
+    const total = await prisma.servicio.count();
+    const random = Math.floor(Math.random() * (total - 9 < 1 ? 1 : total - 9));
+
+    const publicaciones = await prisma.servicio.findMany({
+        skip: random,
+        take: limit,
+    });
+    if(!publicaciones) return NextResponse.json({message: 'Sin Publicaciones'});
+
+    return NextResponse.json(publicaciones);
+}

@@ -1,37 +1,55 @@
-import React from 'react'
-import Item from './Item'
-import { Button } from 'antd';
-import { Alquileres, NoticiasYEventos, Restaurantes, Actividades, Servicios } from '@/test/data';
+'use client'
+import React, { useContext, useState, useEffect } from 'react';
+import Item from './Item';
+import { Button, Spin } from 'antd';
+import { Restaurantes, NoticiasYEventos, Actividades, Servicios } from '@/test/data';
+import { ClientContext } from '@/context/clientContext';
 
 export default function ListaItems({ type }) {
+  const { alquileresRandom, restaurantesRandom, eventosNoticiasRandom, actividadesRandom, serviciosRandom} = useContext(ClientContext);
+  const [items, setItems] = useState([]);
 
-  function seleccionarTipo(type) {
+  useEffect(() => {
+    async function fetchItems() {
+      const publicacionesSeleccionadas = await seleccionarTipo(type);
+      setItems(publicacionesSeleccionadas);
+    }
+    
+    fetchItems();
+  }, [type]); // Re-run the effect when `type` changes
+
+  async function seleccionarTipo(type) {
     switch (type) {
       case 1:
-        return Alquileres;
+        return await alquileresRandom();
       case 2:
-        return Restaurantes;
+        return await restaurantesRandom();
       case 3:
-        return NoticiasYEventos;
+        return await eventosNoticiasRandom();
       case 4:
-        return Actividades;
+        return await actividadesRandom();
       case 5:
-        return Servicios
+        return await serviciosRandom();
+      default:
+        return [];
     }
   }
-
 
   return (
     <div className='flex flex-col gap-8 justify-center items-center'>
       <div className='w-full flex gap-y-4 flex-col md:grid md:grid-cols-3 md:grid-rows-3 md:gap-x-8 md:gap-y-4'>
-        {seleccionarTipo(type).map((item, index) => (
-          <Item key={index} type={type} informacion={item} />
-        ))}
+        {items.length > 0 ? (
+          items.map((item, index) => (
+            <Item key={index} type={type} informacion={item} />
+          ))
+        ) : (
+          <Spin size='large'/>
+        )}
       </div>
-      <Button type="primary" >
+      <Button type="primary">
         Ver más
         {type == 1 ? ' Alquileres' : type == 2 ? ' Restaurantes' : type == 3 ? ' Noticias y Eventos' : type == 4 ? " Actividades" : type == 5 ? ' Servicios' : null}
       </Button>
     </div>
-  )
+  );
 }

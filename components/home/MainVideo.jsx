@@ -9,6 +9,7 @@ export default function MainVideo() {
         autoPlay
         muted
         loop
+        type="video/mp4"
         className="w-full h-full object-cover"
       />
       <div className="absolute w-full h-full top-0 flex flex-col justify-center items-center text-white p-10">
