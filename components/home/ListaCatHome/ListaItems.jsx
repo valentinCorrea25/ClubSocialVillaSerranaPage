@@ -1,12 +1,19 @@
-'use client'
-import React, { useContext, useState, useEffect } from 'react';
-import Item from './Item';
-import { Button, Spin } from 'antd';
-import { Restaurantes, NoticiasYEventos, Actividades, Servicios } from '@/test/data';
-import { ClientContext } from '@/context/clientContext';
+"use client";
+import React, { useContext, useState, useEffect } from "react";
+import Item from "./Item";
+import { Button, Spin } from "antd";
+import useRouter from "next/navigation";
+import { ClientContext } from "@/context/clientContext";
 
 export default function ListaItems({ type }) {
-  const { alquileresRandom, restaurantesRandom, eventosNoticiasRandom, actividadesRandom, serviciosRandom} = useContext(ClientContext);
+  const {
+    alquileresRandom,
+    restaurantesRandom,
+    eventosNoticiasRandom,
+    actividadesRandom,
+    serviciosRandom,
+  } = useContext(ClientContext);
+  const router = useRouter();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -14,7 +21,7 @@ export default function ListaItems({ type }) {
       const publicacionesSeleccionadas = await seleccionarTipo(type);
       setItems(publicacionesSeleccionadas);
     }
-    
+
     fetchItems();
   }, [type]); // Re-run the effect when `type` changes
 
@@ -36,19 +43,46 @@ export default function ListaItems({ type }) {
   }
 
   return (
-    <div className='flex flex-col gap-8 justify-center items-center'>
-      <div className='w-full flex gap-y-4 flex-col md:grid md:grid-cols-3 md:grid-rows-3 md:gap-x-8 md:gap-y-4'>
+    <div className="flex flex-col gap-8 justify-center items-center">
+      <div className="w-full flex gap-y-4 flex-col md:grid md:grid-cols-3 md:grid-rows-3 md:gap-x-8 md:gap-y-4">
         {items.length > 0 ? (
           items.map((item, index) => (
             <Item key={index} type={type} informacion={item} />
           ))
         ) : (
-          <Spin size='large'/>
+          <Spin size="large" />
         )}
       </div>
-      <Button type="primary">
+      <Button
+        type="primary"
+        onClick={() => {
+          router.push(
+            type == 1
+              ? "/ListaAlojamiento"
+              : type == 2
+              ? "/ListaRestaurantes"
+              : type == 3
+              ? "/ListaEventosNoticias"
+              : type == 4
+              ? "/ListaActividades"
+              : type == 5
+              ? "#"
+              : null
+          );
+        }}
+      >
         Ver más
-        {type == 1 ? ' Alquileres' : type == 2 ? ' Restaurantes' : type == 3 ? ' Noticias y Eventos' : type == 4 ? " Actividades" : type == 5 ? ' Servicios' : null}
+        {type == 1
+          ? " Alquileres"
+          : type == 2
+          ? " Restaurantes"
+          : type == 3
+          ? " Noticias y Eventos"
+          : type == 4
+          ? " Actividades"
+          : type == 5
+          ? " Servicios"
+          : null}
       </Button>
     </div>
   );
