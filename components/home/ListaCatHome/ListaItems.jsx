@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Item from "./Item";
 import { Button, Spin } from "antd";
-import useRouter from "next/navigation";
+import {useRouter} from "next/navigation";
 import { ClientContext } from "@/context/clientContext";
 
 export default function ListaItems({ type }) {
