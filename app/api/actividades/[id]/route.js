@@ -16,7 +16,21 @@ export async function GET(request, { params }) {
       });
     }
 
-    return NextResponse.json({actividad});
+    const count = await prisma.actividad.count();
+    const skip = Math.floor(Math.random() * count);
+
+    const publicacionesRelacionadas = await prisma.actividad.findMany({
+      where: {
+        id_Actividad: {
+          not: actividad.id_Actividad,
+        },
+      },
+      take: 5,
+      skip: skip,
+    });
+
+    const respuesta = {publicacion: actividad, publicacionesRelacionadas: publicacionesRelacionadas ? publicacionesRelacionadas : null}
+    return NextResponse.json({respuesta});
 
   } catch (error) {
     console.log(error);

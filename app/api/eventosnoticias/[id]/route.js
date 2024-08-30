@@ -2,6 +2,7 @@ import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
+
   try {
     const eventosNoticia = await prisma.eventosNoticia.findUnique({
       where: {
@@ -16,7 +17,24 @@ export async function GET(request, { params }) {
       });
     }
     eventosNoticia.fecha_evento ? eventosNoticia.isEvento = true : eventosNoticia.isEvento = false
-    return NextResponse.json({eventosNoticia});
+
+    const count = await prisma.eventosNoticia.count();
+    const skip = Math.floor(Math.random() * count);
+
+    const publicacionesRelacionadas = await prisma.eventosNoticia.findMany({
+      where: {
+        id_EventoNoticia: {
+          not: eventosNoticia.id_EventoNoticia,
+        },
+      },
+      take: 5,
+      skip: skip,
+    });
+
+    const respuesta = {publicacion: eventosNoticia, publicacionesRelacionadas: publicacionesRelacionadas ? publicacionesRelacionadas : null}
+    return NextResponse.json({respuesta});
+
+
 
   } catch (error) {
     console.log(error);

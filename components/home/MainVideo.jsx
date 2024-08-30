@@ -1,14 +1,16 @@
 import React from "react";
 import videoBG from "@/public/Villa.mp4";
 export default function MainVideo() {
+  const video = "https://mvulbmjlvpjujjfvffph.supabase.co/storage/v1/object/public/video/Villa.mp4?t=2024-08-30T20%3A59%3A06.243Z"
   return (
     <div className="w-full h-[100vh] relative">
       <div className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.4)]"></div>
       <video
-        src={videoBG}
+        src={video}
         autoPlay
         muted
         loop
+        type="video/mp4"
         className="w-full h-full object-cover"
       />
       <div className="absolute w-full h-full top-0 flex flex-col justify-center items-center text-white p-10">

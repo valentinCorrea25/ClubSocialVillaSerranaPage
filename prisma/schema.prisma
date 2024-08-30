@@ -9,30 +9,31 @@ datasource db {
 }
 
 model Servicio {
-  id_Servicio  Int @default(autoincrement()) @id
-  nombre_titular  String
-  titulo          String
-  descripcion     String
-  mail            String
-  celular         String
-  horario         String
-  dia_Semana      String[]
+  id_Servicio       Int            @id @default(autoincrement())
+  nombre_titular    String
+  titulo            String
+  descripcion       String
+  mail              String
+  celular           String
+  horario           String
+  dia_Semana        String[]
   fecha_publicacion DateTime
-  titulo_Servicio ServicioTitulo
+  titulo_Servicio   ServicioTitulo
 }
 
 model Actividad {
-  id_Actividad    Int @default(autoincrement()) @id
+  id_Actividad      Int      @id @default(autoincrement())
   fecha_publicacion DateTime
   titulo            String
   contenido         String
-  fotos              String[]
+  fotos             String[]
   horario           String
+  ubicacion         String
   dia_Semana        String[]
 }
 
 model EventosNoticia {
-  id_EventoNoticia    Int @default(autoincrement()) @id
+  id_EventoNoticia  Int       @id @default(autoincrement())
   fecha_publicacion DateTime
   titulo            String
   contenido         String
@@ -41,7 +42,7 @@ model EventosNoticia {
 }
 
 model Alquiler {
-  id_Alquiler   Int @default(autoincrement()) @id
+  id_Alquiler        Int      @id @default(autoincrement())
   nombre_titular     String
   celular            String
   mail               String
@@ -69,27 +70,27 @@ model Alquiler {
   estufa             Boolean
   frezzer            Boolean
   mascotas           Boolean
-  fecha_publicacion DateTime
+  fecha_publicacion  DateTime
   fotos              String[]
 }
 
 model Restaurant {
-  id_Restaurant  Int @default(autoincrement()) @id
-  nombre_titular  String
-  celular         String
-  mail            String
-  descripcion     String
-  coordenadas     String
-  ubicacion       String
-  tipo_pago       String[]
-  titulo          String
-  horario_semanal String
-  horario_finde   String
-  domingo         Boolean
-  instagram       String
-  facebook        String
-  web             String
-  fotos           String[]
+  id_Restaurant     Int      @id @default(autoincrement())
+  nombre_titular    String
+  celular           String
+  mail              String
+  descripcion       String
+  coordenadas       String
+  ubicacion         String
+  tipo_pago         String[]
+  titulo            String
+  horario_semanal   String
+  horario_finde     String
+  domingo           Boolean
+  instagram         String
+  facebook          String
+  web               String
+  fotos             String[]
   fecha_publicacion DateTime
 }
 
@@ -99,8 +100,8 @@ enum ServicioTitulo {
   // Add other titles here
 }
 
-model Usuario{
-  id Int @unique @id @default(autoincrement())
-  nombre String
+model Usuario {
+  id       Int    @id @unique @default(autoincrement())
+  nombre   String
   hashPass String
 }

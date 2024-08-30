@@ -103,7 +103,7 @@ export async function GET(request, { params }) {
     console.log(error);
 
     return NextResponse.json({
-      message: "Hubo un error en Restaurantes, contactar con desarollador",
+      message: "Hubo un error en lista Publicaciones, contactar con desarollador",
       code: 500,
     });
   }

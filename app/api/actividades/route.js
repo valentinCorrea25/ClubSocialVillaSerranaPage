@@ -7,7 +7,7 @@ export async function POST(req) {
 
   try {
     const actividad = await prisma.actividad.create({ data });
-
+    
     return NextResponse.json({
       message: `Actividad creada con exito\nid: ${actividad.id_Actividad}`,
     });
@@ -18,4 +18,20 @@ export async function POST(req) {
       code: 500,
     });
   }
+}
+
+export async function GET(request) {
+    const { searchParams } = new URL(request.url);
+    const limit = parseInt(searchParams.get('limit')) || 9;
+
+    const total = await prisma.actividad.count();
+    const random = Math.floor(Math.random() * (total - 9 < 1 ? 1 : total - 9));
+
+    const publicaciones = await prisma.actividad.findMany({
+        skip: random,
+        take: limit,
+    });
+    if(!publicaciones) return NextResponse.json({message: 'Sin Publicaciones'});
+
+    return NextResponse.json(publicaciones);
 }
