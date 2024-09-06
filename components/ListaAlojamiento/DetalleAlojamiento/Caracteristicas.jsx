@@ -16,7 +16,7 @@ const CaracteristicasAlojamiento = ({ caracteristicas = {} }) => {
     <Card
       style={{
         backgroundColor: '#FFFFFF',
-        borderRadius: '23px',
+        borderRadius: '4px',
         border: '2px solid #ddd',
         height: '100%',
         overflow: 'hidden',

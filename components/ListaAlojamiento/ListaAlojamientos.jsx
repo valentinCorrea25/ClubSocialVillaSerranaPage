@@ -32,7 +32,7 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails }) => {
               width: '100%',
               padding: '16px',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              borderRadius: '8px',
+              borderRadius: '4px',
               display: 'flex',
               alignItems: 'center',
               flexDirection: 'row',

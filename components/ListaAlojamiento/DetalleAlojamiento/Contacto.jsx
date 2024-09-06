@@ -6,11 +6,11 @@ import { UserOutlined, PhoneOutlined, MailOutlined, WhatsAppOutlined } from '@an
 const ContactoInfo = ({ contacto }) => (
   <Card 
     title={
-      <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '8px', width: '100%' }}>
+      <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
         <div className="text-2xl font-bold text-center">Información de Contacto</div>
       </div>
     } 
-    style={{ backgroundColor: '#FFFFFF', borderRadius: '23px', border: '2px solid #ddd', height: '100%', overflow: 'hidden' }}
+    style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd', height: '100%', overflow: 'hidden' }}
     styles={{ header: { padding: 0 } }}
   >
     <p className="text-gray-800 flex items-center mb-2"><UserOutlined style={{ marginRight: 8 }} />{contacto.name}</p>

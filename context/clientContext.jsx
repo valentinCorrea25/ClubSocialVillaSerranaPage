@@ -22,7 +22,8 @@ export const ClientProvider = ({ children }) => {
   async function buscarRestaurant(id) {
     const res = await fetch(`/api/restaurantes/${id}`);
     const data = await res.json();
-    setPublicacion(data.message);
+    
+    return data.respuesta;
   }
 
   async function buscarServicio(id) {
@@ -84,6 +85,15 @@ export const ClientProvider = ({ children }) => {
     return data; 
   }
 
+  async function todosLosRestaurantes() {
+    const res = await fetch(`/api/restaurantes/lista`);
+    const data = await res.json();
+    setPublicacion(data.publicaciones);
+    
+    return data; 
+  }
+  
+
   return (
     <ClientContext.Provider
       value={{
@@ -98,6 +108,7 @@ export const ClientProvider = ({ children }) => {
         eventosNoticiasRandom,
         actividadesRandom,
         serviciosRandom,
+        todosLosRestaurantes,
         publicacion,
       }}
     >

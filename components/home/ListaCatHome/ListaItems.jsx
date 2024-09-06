@@ -55,6 +55,7 @@ export default function ListaItems({ type }) {
       </div>
       <Button
         type="primary"
+        size="large"
         onClick={() => {
           router.push(
             type == 1

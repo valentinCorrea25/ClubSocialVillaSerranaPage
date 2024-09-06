@@ -36,9 +36,9 @@ const ListaAlojamientosPage = () => {
   return (
     <div style={{ padding: '100px 20px', backgroundColor: '#f9f6ee', minHeight: '100vh', maxWidth: '1200px', 
     margin: '0 auto',}}>
-      <div style={{ padding: '40px', borderBottom: '1px solid #ddd', marginBottom: '64px', borderRadius: '8px', backgroundColor: '#fff', }}>
+      <div style={{ padding: '40px', borderBottom: '1px solid #ddd', marginBottom: '64px', borderRadius: '4px', backgroundColor: '#fff', }}>
         <Buscador onFilterChange={handleFilterChange} /></div> {noResults ? (
-        <div style={{ padding: '40px', borderRadius: '8px', backgroundColor: '#fff' }}>
+        <div style={{ padding: '40px', borderRadius: '4px', backgroundColor: '#fff' }}>
           
         <Alert message="No se encontraron resultados" description="No hay alojamientos que coincidan con los filtros aplicados. Intenta ajustar tus criterios de búsqueda." type="warning" showIcon />
         </div>

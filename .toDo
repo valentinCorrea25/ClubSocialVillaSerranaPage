@@ -1,0 +1,7 @@
+--Arreglar que en los contactos tiene que saberse
+  si se trata de un numero que tiene whatsapp o un
+  numero que noo tiene whatsapp en detalles de publicaciones
+
+--Ver los comentarios para actualizar aca components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares.jsx
+
+-- en mapa principal poner un boton que diga ver mas

@@ -2,6 +2,13 @@ import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
+  if(!params.id){
+    return NextResponse.json({
+      message: "Id no entrado",
+      code: 500,
+    });
+  }
+  
   try {
     const restaurant = await prisma.restaurant.findUnique({
       where: {
