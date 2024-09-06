@@ -2,15 +2,13 @@
 import withVideos from "next-videos";
 
 const nextConfig = {
-    /* config options here */
+  /* config options here */
 };
-module.exports = {
-    experimental: {
-      missingSuspenseWithCSRBailout: false,
-    },
-}
 
-export default {
-    ...nextConfig,
-    ...withVideos(),
+module.exports = {
+  ...nextConfig, // fusiona el objeto de configuración de Next.js
+  ...withVideos(), // añade la configuración de "next-videos"
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
