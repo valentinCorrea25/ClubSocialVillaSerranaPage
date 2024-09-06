@@ -5,9 +5,9 @@ const nextConfig = {
   /* config options here */
 };
 
-module.exports = {
-  ...nextConfig, // fusiona el objeto de configuración de Next.js
-  ...withVideos(), // añade la configuración de "next-videos"
+export default {
+  ...nextConfig,
+  ...withVideos(),
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
