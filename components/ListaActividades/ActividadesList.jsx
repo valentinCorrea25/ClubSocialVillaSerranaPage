@@ -3,7 +3,7 @@
 import React from 'react';
 import ActividadCard from './ActividadCard';
 import { ListaActividades } from '@/test/data';
-import { Pagination } from 'antd';
+import { Alert, Pagination } from 'antd';
 
 const ActividadesList = ({ actividades }) => {
   if (!actividades) {
