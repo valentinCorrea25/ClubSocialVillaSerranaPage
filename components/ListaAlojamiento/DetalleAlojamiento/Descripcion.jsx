@@ -24,18 +24,18 @@ const Descriptions = ({ alojamiento }) => (
     </div>
 
     <div className="p-7">
-      {alojamiento.price && (
+      {alojamiento.precio && (
         <div className="mb-2 text-gray-800">
-          <strong>Precio:</strong> ${alojamiento.price}
+          <strong>Precio:</strong> ${alojamiento.precio}
         </div>
       )}
-      {alojamiento.disponibilidad && (
+      {/* {alojamiento.disponibilidad && (
         <div className="mb-2 text-gray-800">
           <strong>Disponibilidad:</strong> {alojamiento.disponibilidad}
         </div>
-      )}
+      )} */}
       <p className="text-gray-600">
-        {alojamiento.description || 'Descripción no disponible'}
+        {alojamiento.descripacion || 'Descripción no disponible'}
       </p>
     </div>
   </Card>

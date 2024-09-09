@@ -1,9 +1,12 @@
 import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
+import convertirAUrlEmbed from "@/libs/googleMapsTranslateURL";
 
 export async function POST(req){
     const data = await req.json();
     console.log(data);
+    data.coordenadas = convertirAUrlEmbed(data.coordenadas);
+    
 
     try {
         const restaurant = await prisma.restaurant.create({data});

@@ -1,16 +1,51 @@
-'use client';
+"use client";
 
-import React from 'react';
-import ActividadesList from '@/components/ListaActividades/ActividadesList';
-import Banner from '@/components/ListaActividades/Banner';
+import React, { useState, useEffect, useContext } from "react";
+import ActividadesList from "@/components/ListaActividades/ActividadesList";
+import Banner from "@/components/ListaActividades/Banner";
+import { ClientContext } from "@/context/clientContext";
+import { Skeleton } from "antd";
 
 const ActividadPage = () => {
-  const appStyle = { padding: '40px', margin: '0 auto', width: '100%',};
+  const { todasLasActividades } = useContext(ClientContext);
+  const [actividades, setActividades] = useState();
+  const [noResults, setNoResults] = useState(false);
+  const appStyle = { padding: "40px", margin: "0 auto", width: "100%" };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await todasLasActividades();
+        if (data) {
+          setActividades(data.publicaciones);
+          setNoResults(true);
+        } else {
+          console.log("publicacion is null after fetch");
+        }
+      } catch (error) {
+        console.error("Error fetching restaurants:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div style={appStyle} className='flex flex-col justify-center'>
-      <Banner title="Actividades" subtitle="Descubre nuestras actividades más recientes" backgroundImage="/images/actividad.jpg"/>
-      <ActividadesList />
+    <div style={appStyle} className="flex flex-col justify-center">
+      <Banner
+        title="Actividades"
+        subtitle="Descubre nuestras actividades más recientes"
+        backgroundImage="/images/actividad.jpg"
+      />
+      {!noResults ? (
+        <div className="flex items-center justify-center gap-10">
+          <Skeleton className="w-72" paragraph title/>
+          <Skeleton className="w-72" paragraph title/>
+          <Skeleton className="w-72" paragraph title/>
+        </div>
+      ) : (
+        <ActividadesList actividades={actividades} />
+      )}
     </div>
   );
 };

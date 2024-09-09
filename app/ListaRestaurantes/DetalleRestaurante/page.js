@@ -20,16 +20,16 @@ const DetalleRestaurantes = () => {
   const { buscarRestaurant } = useContext(ClientContext);
   const [restauranteSeleccionado, setRestauranteSeleccionado] = useState(null);
   const [ restaurantesSimilares, setRestaurantesSimilares ] = useState(null);  
-  const [isLoading, setIsLoading] = useState(true); // Estado para el spinner
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchRestaurant = async () => {
       if (id) {
-        setIsLoading(true);// Mostrar el spinner al iniciar la carga
+        setIsLoading(true);
         const resultado = await buscarRestaurant(id);
         setRestauranteSeleccionado(resultado.publicacion);
         setRestaurantesSimilares(resultado.publicacionesRelacionadas)
-        setIsLoading(false); // Ocultar el spinner cuando termine la carga
+        setIsLoading(false);
       }
     };
     fetchRestaurant();
@@ -79,7 +79,7 @@ const DetalleRestaurantes = () => {
               </div>
               {/* Mapa */}
               <div className="flex-1">
-                <UbicacionMap ubicacion={restauranteSeleccionado.location} />
+                <UbicacionMap ubicacion={restauranteSeleccionado.coordenadas} />
               </div>
             </div>
             {/* Publicaciones Similares */}

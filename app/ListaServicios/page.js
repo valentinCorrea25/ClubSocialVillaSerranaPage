@@ -1,34 +1,54 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Layout } from 'antd';
 import ServiciosList from '@/components/ListaServicios/ServiciosList';
 import Buscador from '@/components/ListaServicios/Buscador';
-import Banner from '@/components/ListaServicios/Banner'; 
-import { serviciosData } from '@/test/data';
-
-const { Content } = Layout;
+import Banner from '@/components/ListaServicios/Banner';
+import { ClientContext } from '@/context/clientContext';
 
 const ServiciosPage = () => {
-  const [filteredServicios, setFilteredServicios] = useState(serviciosData);
+  const { todosLosServicios } = useContext(ClientContext);
+  const [servicios, setServicios] = useState([]);
+  const [filteredServicios, setFilteredServicios] = useState([]);
+  const { Content } = Layout;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await todosLosServicios();
+        if (data) {
+          console.log(data);
+          setServicios(data.publicaciones);
+          setFilteredServicios(data.publicaciones);
+        } else {
+          console.log("publicacion is null after fetch");
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+
+    fetchData();
+  }, [todosLosServicios]);
 
   const handleFilterChange = (selectedCategory) => {
     if (selectedCategory === '') {
       // Mostrar todos los servicios
-      setFilteredServicios(serviciosData);
+      setFilteredServicios(servicios);
     } else {
       // Filtrar por categoría
-      const filtered = serviciosData.filter(servicio => servicio.titulo_Servicio === selectedCategory);
+      const filtered = servicios.filter(servicio => servicio.titulo_Servicio === selectedCategory);
       setFilteredServicios(filtered);
     }
   };
 
   // Extraer categorías únicas para el selector
-  const categories = Array.from(new Set(serviciosData.map(s => s.titulo_Servicio)));
+  const categories = Array.from(new Set(servicios.map(s => s.titulo_Servicio)));
 
   return (
     <Layout>
-      <Content style={{ padding: '40px 24px' }}> 
+      <Content style={{ padding: '40px 24px' }}>
         <Banner 
           title="¡Bienvenido a Nuestros Servicios!" 
           subtitle="Descubre nuestras ofertas y encuentra lo que necesitas." 

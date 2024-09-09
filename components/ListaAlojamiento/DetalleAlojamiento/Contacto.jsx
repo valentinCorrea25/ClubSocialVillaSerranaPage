@@ -1,23 +1,52 @@
-'use client';
-import React from 'react';
-import { Card, Button } from 'antd';
-import { UserOutlined, PhoneOutlined, MailOutlined, WhatsAppOutlined } from '@ant-design/icons';
+import { Button, Input } from "antd"
+// import { Textarea } from "@/components/ui/textarea"
+import { FacebookOutlined, InstagramOutlined, PhoneOutlined } from "@ant-design/icons"
+import Foto from '@/public/images/loginScreen.jpg';
 
-const ContactoInfo = ({ contacto }) => (
-  <Card 
-    title={
-      <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
-        <div className="text-2xl font-bold text-center">Información de Contacto</div>
+export default function ContactoInfo() {
+  return (
+    <div className="min-h-screen bg-[--blanco]">
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center text-green-800 mb-8">Contacto - Club Social y Deportivo Villa Serrana</h1>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4 text-green-700">Información de Contacto</h2>
+            <div className="space-y-4 text-xl">
+              <a href="https://www.instagram.com/villaserrana" className="flex items-center space-x-2 text-gray-600 hover:text-green-600">
+                <InstagramOutlined className="h-5 w-5" />
+                <span>@villaserrana</span>
+              </a>
+              <a href="tel:+59812345678" className="flex items-center space-x-2 text-gray-600 hover:text-green-600">
+                <PhoneOutlined className="h-5 w-5" />
+                <span>+598 1234 5678</span>
+              </a>
+              <a href="https://www.facebook.com/villaserrana" className="flex items-center space-x-2 text-gray-600 hover:text-green-600">
+                <FacebookOutlined className="h-5 w-5" />
+                <span>Villa Serrana Oficial</span>
+              </a>
+            </div>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4 text-green-700">Envíanos un mensaje</h2>
+            <form className="space-y-4">
+              <Input type="text" placeholder="Nombre" />
+              <Input type="email" placeholder="Correo electrónico" />
+              <textarea placeholder="Tu mensaje" className="max-h-16 w-full bg-[#f6ffed] border p-2" />
+              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">Enviar mensaje</Button>
+            </form>
+          </div>
+        </div>
+        
+        <div className="mt-8">
+          <img 
+            src='https://www.dronestagr.am/wp-content/uploads/2017/08/DJI_0029-4-scaled.jpg' 
+            alt="Villa Serrana" 
+            className="w-full h-64 object-cover rounded-lg shadow-lg"
+          />
+        </div>
       </div>
-    } 
-    style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd', height: '100%', overflow: 'hidden' }}
-    styles={{ header: { padding: 0 } }}
-  >
-    <p className="text-gray-800 flex items-center mb-2"><UserOutlined style={{ marginRight: 8 }} />{contacto.name}</p>
-    <p className="text-gray-800 flex items-center mb-2"><PhoneOutlined style={{ marginRight: 8 }} />{contacto.phone}</p>
-    <Button type="primary" icon={<MailOutlined />} href={`mailto:${contacto.email}`} className="w-full mb-2">Consultar vía E-mail</Button>
-    <Button type="primary" icon={<WhatsAppOutlined />} href={contacto.whatsapp} className="w-full">Consultar vía WhatsApp</Button>
-  </Card>
-);
-
-export default ContactoInfo;
+    </div>
+  )
+}

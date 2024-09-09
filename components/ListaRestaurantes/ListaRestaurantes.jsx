@@ -29,6 +29,7 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
       renderItem={(restaurante) => (
         <List.Item>
           <Card
+            onClick={() => onViewDetails(restaurante.id_Restaurant)}
             hoverable
             style={{
               width: '100%',

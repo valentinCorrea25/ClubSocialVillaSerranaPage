@@ -1,15 +1,18 @@
 'use client';
 import React from 'react';
 import { Card, List, Button } from 'antd';
-import { alojamientos } from '@/test/data'; 
 import { EnvironmentOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 
-const PublicacionesSimilares = ({ onSelect }) => {
+const PublicacionesSimilares = ({ similares }) => {
   const router = useRouter();
 
   const handleViewMore = () => {
     router.push('/ListaAlojamiento');
+  };
+
+  const handleViewDetails = (id) => {
+    router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${id}`);
   };
 
   return (
@@ -38,26 +41,25 @@ const PublicacionesSimilares = ({ onSelect }) => {
       <div style={{ flex: 1, overflowY: 'auto', maxHeight: '500px', padding: '16px' }}>
         <List
           itemLayout="vertical"
-          dataSource={alojamientos}
+          dataSource={similares}
           renderItem={item => (
             <List.Item
-              key={item.id}
+              key={item.id_Alquiler}
               style={{ padding: '10px', borderBottom: '1px solid #ddd', cursor: 'pointer' }}
-              onClick={() => onSelect(item)}
+              onClick={() => handleViewDetails(item.id_Alquiler)}
             >
               <div style={{ textAlign: 'center' }}>
                 <img
-                  src={item.images[0].url}
-                  alt={item.images[0].alt}
+                  src={item.fotos[0].url}
+                  alt={item.fotos[0].alt}
                   style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }}
                 />
                 <div style={{ textAlign: 'left' }}>
-                  <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>{item.categoria}</div>
                   <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
                     <EnvironmentOutlined style={{ marginRight: '8px' }} />
-                    {item.location}
+                    {item.ubicacion}
                   </div>
-                  <div>Hasta {item.capacity} personas</div>
+                  <div>Hasta {item.capacidad} personas</div>
                 </div>
               </div>
             </List.Item>

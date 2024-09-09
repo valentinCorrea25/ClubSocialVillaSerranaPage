@@ -12,7 +12,7 @@ import { ClientContext } from '@/context/clientContext';
 const { Content } = Layout;
 
 const ListaRestaurantesPage = () => {
-  const {todosLosRestaurantes, publicacion} = useContext(ClientContext);
+  const {todosLosRestaurantes} = useContext(ClientContext);
   // const [filteredRestaurantes, setFilteredRestaurantes] = useState();
   const [allRestaurantes, setAllRestaurants] = useState(); 
   const [noResults, setNoResults] = useState(true);
@@ -21,14 +21,10 @@ const ListaRestaurantesPage = () => {
   
 
   useEffect(() => {
-    console.log("Component publicacion:", publicacion); 
     const fetchData = async () => {
-      console.log("Fetching data...");
       try {
         const data = await todosLosRestaurantes();
-        console.log("Fetched data:", data);
         if (data) {
-          console.log("Setting all restaurants:", publicacion);
           setAllRestaurants(data.publicaciones);
           setNoResults(false);
         } else {
