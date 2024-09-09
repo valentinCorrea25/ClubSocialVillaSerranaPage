@@ -1,6 +1,5 @@
 import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
-import convertirAUrlEmbed from "@/libs/googleMapsTranslateURL";
 
 export async function POST(req){
     const data = await req.json();
