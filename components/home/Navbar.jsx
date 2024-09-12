@@ -65,7 +65,7 @@ export default function Navbar() {
     ]
 
   return (
-    <nav className="bg-[--blanco] border-b-4 border-[--verder-super-oscuro] montserrat z-[5000]">
+    <nav className="bg-[--blanco] border-b-4 pt-10 border-[--verder-super-oscuro] montserrat z-[5000]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-around mx-auto">
         <a href="/">
           <Image src={logo} width={0} height={0} className="w-1/4 max-w-96 py-1" alt="Logo Villa Serrana Club Social y Deportivo" />
@@ -87,6 +87,7 @@ export default function Navbar() {
               Home
             </li>
             <li>
+<<<<<<< HEAD
               {/* <a href="/QueEncuentras" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">Que encuentras</a> */}
                 <Dropdown
                   overlay={
@@ -124,6 +125,9 @@ export default function Navbar() {
                     </a>
                   </div>
                 </Dropdown>
+=======
+              <a href="/queencuentras" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">Que encuentras</a>
+>>>>>>> a8b86e20cde3420259a669655683ef777646912c
             </li>
             <li>
               <a href="/sobrenosotros" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">Sobre Nosotros</a>

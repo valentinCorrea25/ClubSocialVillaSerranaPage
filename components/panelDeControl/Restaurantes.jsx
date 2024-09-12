@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Input, Upload, Image, Checkbox } from "antd";
+import BuscadorMapa from "./mapaExalmple";
 const { TextArea } = Input;
 
 const diasSemana = [
@@ -178,6 +179,10 @@ export default function NuevoRestaurante() {
             <h2>Ingrese y agregue nuevo método de pago si así lo desea</h2>
             <Input {...register("metodo_pago")} />
           </div>
+        </div>
+
+        <div>
+          <BuscadorMapa/>
         </div>
 
         <Button htmlType="submit" onClick={onSubmit}>

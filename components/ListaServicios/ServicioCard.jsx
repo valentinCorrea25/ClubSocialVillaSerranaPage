@@ -12,7 +12,8 @@ const ServicioCard = ({ servicio }) => {
       hoverable
       style={{
         width: '100%',
-        maxWidth: '700px',
+        maxWidth: '500px',
+        height:'420px',
         margin: '0 auto',
         marginBottom: '24px',
         borderRadius: '12px',
@@ -25,7 +26,7 @@ const ServicioCard = ({ servicio }) => {
       <div style={{ paddingBottom: '12px', borderBottom: '1px solid #f0f0f0' }}>
         <h3 style={{ fontSize: '22px', fontWeight: 'bold', margin: '0' }}>{titulo}</h3>
       </div>
-      <div style={{ marginTop: '12px', color: '#595959' }}>
+      <div className='flex flex-col justify-center' style={{ marginTop: '12px', color: '#595959' }}>
         <p style={{ marginBottom: '8px' }}>
           <TagOutlined style={{ marginRight: '8px', color: '#09A603' }} />
           {titulo_Servicio}

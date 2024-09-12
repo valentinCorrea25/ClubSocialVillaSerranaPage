@@ -3,16 +3,16 @@ import ServicioCard from './ServicioCard';
 
 const ListaServicios = ({ servicios }) => {
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="max-w-7xl mx-auto p-5">
+      <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {servicios.length > 0 ? (
           servicios.map(servicio => (
-            <div key={servicio.id_Publicacion} style={{ marginBottom: '24px', width: '100%', maxWidth: '700px' }}>
+            <div key={servicio.id_Publicacion} className="w-full">
               <ServicioCard servicio={servicio} />
             </div>
           ))
         ) : (
-          <p>No se encontraron servicios.</p>
+          <p className="col-span-full text-center">No se encontraron servicios.</p>
         )}
       </div>
     </div>

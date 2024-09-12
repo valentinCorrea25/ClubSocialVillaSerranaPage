@@ -10,7 +10,8 @@ export const ClientProvider = ({ children }) => {
   async function buscarAlquiler(id) {
     const res = await fetch(`/api/alquileres/${id}`);
     const data = await res.json();
-    setPublicacion(data.message);
+    
+    return data.respuesta;
   }
 
   async function buscarActividad(id) {
@@ -22,7 +23,8 @@ export const ClientProvider = ({ children }) => {
   async function buscarRestaurant(id) {
     const res = await fetch(`/api/restaurantes/${id}`);
     const data = await res.json();
-    setPublicacion(data.message);
+    
+    return data.respuesta;
   }
 
   async function buscarServicio(id) {
@@ -84,6 +86,42 @@ export const ClientProvider = ({ children }) => {
     return data; 
   }
 
+  async function todosLosRestaurantes() {
+    const res = await fetch(`/api/restaurantes/lista`);
+    const data = await res.json();
+    
+    return data; 
+  }
+
+  async function todosLosAlquileres() {
+    const res = await fetch(`/api/alquileres/lista`);
+    const data = await res.json();
+    
+    return data; 
+  }
+
+  async function todasLasActividades() {
+    const res = await fetch(`/api/actividades/lista`);
+    const data = await res.json();
+    
+    return data; 
+  }
+
+  async function todosLosServicios() {
+    const res = await fetch(`/api/servicios/lista`);
+    const data = await res.json();
+    
+    return data; 
+  }
+
+  async function todasLasNoticiasEventos() {
+    const res = await fetch(`/api/eventosnoticias/lista`);
+    const data = await res.json();
+    
+    return data; 
+  }
+  
+
   return (
     <ClientContext.Provider
       value={{
@@ -98,6 +136,11 @@ export const ClientProvider = ({ children }) => {
         eventosNoticiasRandom,
         actividadesRandom,
         serviciosRandom,
+        todosLosRestaurantes,
+        todosLosAlquileres,
+        todasLasActividades,
+        todosLosServicios,
+        todasLasNoticiasEventos,
         publicacion,
       }}
     >

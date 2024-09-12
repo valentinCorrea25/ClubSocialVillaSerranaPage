@@ -1,29 +1,31 @@
 import React from 'react';
-import { Card, Button } from 'antd';
+import { Card, Button, Divider } from 'antd';
 import { PhoneOutlined, MailOutlined, UserOutlined, WhatsAppOutlined } from '@ant-design/icons';
 
 const Contacto = ({ restaurante }) => {
-  const { nombre_titular, celular, mail } = restaurante;
+  const { nombre_titular, celular, mail } = restaurante; // agregar whatsapp // si empieza por 09algo
 
   return (
     <Card
       title={
-        <div className="text-2xl font-bold text-center" style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '8px' }}>
+        <div className="text-2xl font-bold text-center" style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px' }}>
           Contacto
         </div>
       }
-      style={{ backgroundColor: '#FFFFFF', borderRadius: '23px', border: '2px solid #ddd', height: '100%', overflow: 'hidden' }}
+      style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd', height: '100%', overflow: 'hidden' }}
       headStyle={{ padding: 0 }}
     >
       <p><UserOutlined style={{ marginRight: '8px' }} /> <strong>Nombre:</strong> {nombre_titular || 'No disponible'}</p>
       <p><PhoneOutlined style={{ marginRight: '8px' }} /> <strong>Teléfono:</strong> {celular || 'No disponible'}</p>
+      <Divider />
       <Button 
         type="primary" 
         icon={<MailOutlined />} 
         href={`mailto:${mail}`} 
         className="w-full mb-2"
+        disabled = {!mail}
       >
-        Consultar vía E-mail
+        {mail ? 'Consultar vía E-mail' : 'Sin Email Disponible'}
       </Button>
       <Button 
         type="primary" 
@@ -31,7 +33,7 @@ const Contacto = ({ restaurante }) => {
         href={`https://wa.me/${celular}`} 
         className="w-full"
       >
-        Consultar vía WhatsApp
+        {mail ? 'Consultar vía WhatsApp' : 'Sin Whatsapp Disponible'}
       </Button>
     </Card>
   );

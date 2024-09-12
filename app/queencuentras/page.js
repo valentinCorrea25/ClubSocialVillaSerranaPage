@@ -38,7 +38,7 @@ const QueEncuentras = () => {
   ];
 
   return (
-    <div style={{ padding: '40px 20px' }}>
+    <div style={{ padding: '40px 20px' }} className='max-w-screen-xl m-auto'>
       <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '20px', color: 'var(--azul)' }}>
         ¿Qué Encuentras Aquí?
       </h1>

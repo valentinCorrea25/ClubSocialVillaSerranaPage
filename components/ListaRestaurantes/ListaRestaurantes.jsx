@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, List, Button, Alert } from 'antd';
-import { EnvironmentOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, EnvironmentOutlined, InfoCircleOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
 
@@ -19,6 +19,8 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
       </div>
     );
   }
+  console.log(restaurantes[0].fotos[0]);
+  
 
   return (
     <List
@@ -27,12 +29,13 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
       renderItem={(restaurante) => (
         <List.Item>
           <Card
+            onClick={() => onViewDetails(restaurante.id_Restaurant)}
             hoverable
             style={{
               width: '100%',
               padding: '16px',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              borderRadius: '8px',
+              borderRadius: '4px',
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
@@ -42,10 +45,10 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
               flexWrap: 'wrap',
             }}
             cover={
-              restaurante.foto ? (
+              restaurante.fotos ? (
                 <img
-                  alt={restaurante.Titulo || 'Imagen del restaurante'}
-                  src={restaurante.foto}
+                  alt={restaurante.titulo || 'Imagen del restaurante'}
+                  src={restaurante.fotos[0]}
                   style={{
                     width: '100%',
                     maxWidth: 300,
@@ -69,12 +72,14 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
           >
             <div style={{ flex: 1, marginBottom: '16px' }}>
               <Meta
-                title={restaurante.Titulo || 'Título no disponible'}
+                title={restaurante.titulo || 'Título no disponible'}
                 description={
                   <>
                     <div><EnvironmentOutlined /> {restaurante.ubicacion || 'Ubicación no disponible'}</div>
-                    <div>Categoria: {restaurante.categoria?.nombre_categoria || 'No especificado'}</div>
-                    <div>Descripción: {restaurante.descripcion || 'No disponible'}</div>
+                    {/* <div>Categoria: {restaurante.categoria?.nombre_categoria || 'No especificado'}</div> */}
+                    <div><InfoCircleOutlined /> Descripción: {restaurante.descripcion || 'No disponible'}</div>
+                    <div><ClockCircleOutlined /> Horarios: {restaurante.horario_semanal || 'No disponible'}</div>
+                    <div><ClockCircleOutlined /> Contacto: {restaurante.celular || 'No disponible'}</div>
                   </>
                 }
               />
@@ -86,7 +91,7 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
                 marginTop: 'auto',
               }}
             >
-              <Button type="primary" onClick={() => onViewDetails(restaurante.id_Restaurante)}>
+              <Button type="primary" onClick={() => onViewDetails(restaurante.id_Restaurant)}>
                 Ver Detalles
               </Button>
             </div>

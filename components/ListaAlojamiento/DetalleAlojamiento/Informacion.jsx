@@ -5,7 +5,7 @@ const Informacion = ({ alojamiento }) => (
   <Card
     style={{
       backgroundColor: '#FFFFFF',
-      borderRadius: '23px',
+      borderRadius: '4px',
       border: '2px solid #ddd',
     }}
     bodyStyle={{ padding: '16px' }}
@@ -21,13 +21,13 @@ const Informacion = ({ alojamiento }) => (
       }}
     >
       <div className="text-2xl font-bold text-center">
-        {alojamiento.title}
+        {alojamiento.titulo}
       </div>
     </div>
 
     <div className="p-7">
-      <p className="text-gray-800 mb-2">{alojamiento.location}</p>
-      <p className="text-gray-800 mb-2">Hasta {alojamiento.capacity} personas</p>
+      <p className="text-gray-800 mb-2">{alojamiento.ubicacion}</p>
+      <p className="text-gray-800 mb-2">Hasta {alojamiento.capacidad} personas</p>
     </div>
   </Card>
 );
