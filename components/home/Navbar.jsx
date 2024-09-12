@@ -87,7 +87,7 @@ export default function Navbar() {
               Home
             </li>
             <li>
-<<<<<<< HEAD
+
               {/* <a href="/QueEncuentras" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">Que encuentras</a> */}
                 <Dropdown
                   overlay={
@@ -125,9 +125,9 @@ export default function Navbar() {
                     </a>
                   </div>
                 </Dropdown>
-=======
-              <a href="/queencuentras" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">Que encuentras</a>
->>>>>>> a8b86e20cde3420259a669655683ef777646912c
+
+
+
             </li>
             <li>
               <a href="/sobrenosotros" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">Sobre Nosotros</a>
