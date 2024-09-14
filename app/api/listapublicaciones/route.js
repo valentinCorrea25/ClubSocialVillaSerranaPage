@@ -9,6 +9,8 @@ export async function GET(request, { params }) {
   const pageSize = 36;
   const skip = (page - 1) * (pageSize / 6);
   const take = parseInt(pageSize / 6);
+  
+  
   try {
     const data = await prisma.$transaction(async (tx) => {
       const servicios = await tx.servicio.findMany({
@@ -92,10 +94,10 @@ export async function GET(request, { params }) {
 
     return NextResponse.json({
       count: data.total,
-      next: `/api/listaPublicaciones/page?page=${parseInt(page) + 1}`,
+      next: `/api/listapublicaciones?page=${parseInt(page) + 1}`,
       previous:
         page > 1
-          ? `api/listaPublicaciones/page?page=${parseInt(page) - 1}`
+          ? `api/listapublicaciones?page=${parseInt(page) - 1}`
           : null,
       publicaciones: sortedData,
     });

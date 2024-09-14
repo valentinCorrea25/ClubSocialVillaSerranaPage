@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-[--blanco] border-b-4 pt-10 border-[--verder-super-oscuro] montserrat z-[5000]">
+    <nav className="bg-[--blanco] border-b-4  border-[--verder-super-oscuro] montserrat z-[5000]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-around mx-auto">
         <a href="/">
           <Image src={logo} width={0} height={0} className="w-1/4 max-w-96 py-1" alt="Logo Villa Serrana Club Social y Deportivo" />

@@ -98,6 +98,20 @@ export const AdminProvider = ({ children }) => {
     setMensaje(data.message);
   }
 
+  async function modificarPublicaciones(id,datos,tipoPubliacacion) {
+    const res = await fetch(`/api/${tipoPubliacacion}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        datos
+      }),
+    });
+    const data = await res.json();
+    setMensaje(data.message);
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -107,6 +121,7 @@ export const AdminProvider = ({ children }) => {
         crearUsuario,
         crearEventoNoticia,
         crearActividad,
+        modificarPublicaciones,
         mensaje
       }}
     >
