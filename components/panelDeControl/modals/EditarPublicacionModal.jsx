@@ -7,6 +7,8 @@ import {
 } from "antd";
 import { AdminContext } from "@/context/adminContext";
 const { TextArea } = Input;
+import { obtenerIdPublicacion, obtenerTipoSinPrefijo, obtenerTipoDePublicacion } from '@/components/utils/ControlPublicaciones'; // Importa las funciones
+
 
 export default function EditarPublicacionModal({
   isModalOpen,
@@ -22,38 +24,13 @@ export default function EditarPublicacionModal({
     setIsModalOpen(false);
   };
 
-  const idPublicacion = selectedItem
-    ? Object.keys(selectedItem).find((key) => key.startsWith("id_"))
-    : null;
-
-  const tipoSinPrefijo = idPublicacion
-    ? idPublicacion.replace("id_", "")
-    : "Tipo Desconocido";
+  const idPublicacion = obtenerIdPublicacion(selectedItem);
+  const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
     const onFinish = async (values) => {
       setLoading(true); // Mostrar el estado de carga inmediatamente
     
-      let tipoDePublicacion = '';
-    
-      switch (tipoSinPrefijo.toLowerCase()) {
-        case 'restaurant':
-          tipoDePublicacion = 'restaurantes';
-          break;
-        case 'alquiler':
-          tipoDePublicacion = 'alquileres';
-          break;
-        case 'servicio':
-          tipoDePublicacion = 'servicios';
-          break;
-        case 'eventonoticia':
-          tipoDePublicacion = 'eventosnoticias';
-          break;
-        case 'actividad':
-          tipoDePublicacion = 'actividades';
-          break;
-        default:
-          tipoDePublicacion = 'desconocido';
-      }
+      const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
     
       try {
         await modificarPublicaciones(selectedItem[idPublicacion], values, tipoDePublicacion);

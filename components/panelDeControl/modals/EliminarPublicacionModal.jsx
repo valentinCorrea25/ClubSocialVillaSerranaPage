@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Tag } from "antd";
-import {
-  Button,
-  Form,
-  Input,
-} from "antd";
+import { Button } from "antd";
 import { AdminContext } from "@/context/adminContext";
+import {
+  obtenerIdPublicacion,
+  obtenerTipoSinPrefijo,
+  obtenerTipoDePublicacion,
+} from "@/components/utils/ControlPublicaciones"; // Importa las funciones
 
 export default function EliminarPublicacionModal({
   isModalOpen,
   setIsModalOpen,
   selectedItem,
-  updateData
+  updateData,
 }) {
   const { eliminarPublicacion } = useContext(AdminContext);
   const [isLoading, setLoading] = useState(false);
@@ -20,48 +21,19 @@ export default function EliminarPublicacionModal({
     setIsModalOpen(false);
   };
 
-  const idPublicacion = selectedItem
-    ? Object.keys(selectedItem).find((key) => key.startsWith("id_"))
-    : null;
+  const idPublicacion = obtenerIdPublicacion(selectedItem);
+  const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
-  const tipoSinPrefijo = idPublicacion
-    ? idPublicacion.replace("id_", "")
-    : "Tipo Desconocido";
-
-    const onFinish = async (values) => {
-      setLoading(true); // Mostrar el estado de carga inmediatamente
-    
-      let tipoDePublicacion = '';
-    
-      switch (tipoSinPrefijo.toLowerCase()) {
-        case 'restaurant':
-          tipoDePublicacion = 'restaurantes';
-          break;
-        case 'alquiler':
-          tipoDePublicacion = 'alquileres';
-          break;
-        case 'servicio':
-          tipoDePublicacion = 'servicios';
-          break;
-        case 'eventonoticia':
-          tipoDePublicacion = 'eventosnoticias';
-          break;
-        case 'actividad':
-          tipoDePublicacion = 'actividades';
-          break;
-        default:
-          tipoDePublicacion = 'desconocido';
-      }
-    
-      try {
-        await eliminarPublicacion(selectedItem[idPublicacion], tipoDePublicacion);
-        await updateData(); // Actualizar los datos después de modificar
-      } finally {
-        setLoading(false); // Detener el estado de carga, independientemente del resultado
-        handleClose(); // Cerrar el modal
-      }
-    };
-    
+  const onFinish = async (values) => {
+    const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
+    try {
+      await eliminarPublicacion(selectedItem[idPublicacion], tipoDePublicacion);
+      await updateData(); // Actualizar los datos después de modificar
+    } finally {
+      setLoading(false); // Detener el estado de carga, independientemente del resultado
+      handleClose(); // Cerrar el modal
+    }
+  };
 
   return (
     <>
@@ -72,11 +44,7 @@ export default function EliminarPublicacionModal({
         footer={
           <>
             <Button onClick={handleClose}>Cancelar</Button>
-            <Button
-              loading={isLoading}
-              onClick={() => onFinish()}
-              danger
-            >
+            <Button loading={isLoading} onClick={() => onFinish()} danger>
               Eliminar
             </Button>
           </>
@@ -90,7 +58,9 @@ export default function EliminarPublicacionModal({
           "ID no disponible"
         )}
         <>
-          <p className="mb-6">Estas seguro que deseas eliminar esta publicacion?</p>
+          <p className="mb-6">
+            Estas seguro que deseas eliminar esta publicacion?
+          </p>
         </>
       </Modal>
     </>
