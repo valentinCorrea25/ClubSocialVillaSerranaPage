@@ -98,6 +98,25 @@ export const AdminProvider = ({ children }) => {
     setMensaje(data.message);
   }
 
+  async function eliminarPublicacion(id, tipoPublicacion) {
+    try {
+      const res = await fetch(`/api/${tipoPublicacion}/${id}`, {
+        method: "DELETE",
+      });
+  
+      if (!res.ok) {
+        throw new Error(`Error al eliminar la publicación: ${res.statusText}`);
+      }
+  
+      const data = await res.json();
+      setMensaje(data.message);
+    } catch (error) {
+      console.error("Hubo un error al eliminar la publicación:", error);
+      setMensaje("Error al eliminar la publicación. Inténtalo nuevamente.");
+    }
+  }
+  
+
   async function modificarPublicaciones(id,datos,tipoPubliacacion) {
     const res = await fetch(`/api/${tipoPubliacacion}/${id}`, {
       method: "PUT",
@@ -122,6 +141,7 @@ export const AdminProvider = ({ children }) => {
         crearEventoNoticia,
         crearActividad,
         modificarPublicaciones,
+        eliminarPublicacion,
         mensaje
       }}
     >

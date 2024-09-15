@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import { Table, Dropdown, Space } from "antd";
-import useSWR, { mutate } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { MenuOutlined } from "@ant-design/icons";
 import EditarPublicacionModal from "./modals/EditarPublicacionModal";
 import { useRouter } from "next/navigation";
+import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
 
 export default function App() {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const router = useRouter();
+  const { mutate } = useSWRConfig();
 
-  const showModal = (item) => {
+  const showModalEditar = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
+  };
+
+  const showModalEliminar = (item) => {
+    setSelectedItem(item);
+    setIsModalOpenElimininar(true);
   };
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -22,20 +30,9 @@ export default function App() {
   const key = `/api/listapublicaciones?page=${page}`;
   const { data, error, isLoading } = useSWR(key, fetcher);
 
-  // Function to handle mutate
-  const updateData = async (updatedItem) => {
-    // Call your API to update the item
-    await fetch(`/api/updatePublicacion`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedItem),
-    });
-
-    // Update local cache with new data
-    mutate(key);
-  };
+  function updateData() {
+    mutate(key, data);
+  }
 
   const columns = [
     {
@@ -96,8 +93,7 @@ export default function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Ver en Google Maps  
-
+          Ver en Google Maps
         </a>
       ),
     },
@@ -121,14 +117,12 @@ export default function App() {
       render: (text, record) => {
         const items = [
           {
-            label: <div onClick={() => router.push('#')}>Ver Publicacion</div>,
+            label: <div onClick={() => router.push("#")}>Ver Publicacion</div>,
             key: "0",
           },
           {
             label: (
-              <div onClick={() => showModal(record)}>
-                Editar Publicacion
-              </div>
+              <div onClick={() => showModalEditar(record)}>Editar Publicacion</div>
             ),
             key: "1",
           },
@@ -136,17 +130,17 @@ export default function App() {
             type: "divider",
           },
           {
-            label: "3rd menu item",
+            label: (
+              <div onClick={() => showModalEliminar(record)}>Eliminar Publicacion</div>
+            ),
             key: "3",
+            danger: true,
           },
         ];
 
         return (
           <div className="flex justify-center">
-            <Dropdown
-              menu={{ items }}
-              trigger={["click"]}
-            >
+            <Dropdown menu={{ items }} trigger={["click"]}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space align="center">
                   <MenuOutlined size="lg" />
@@ -161,24 +155,36 @@ export default function App() {
 
   return (
     <>
-    <div className="App">
-      <Table
-        style={{ padding: "20px" }}
-        dataSource={data ? data.publicaciones : []}
-        columns={columns}
-        loading={isLoading}
-        rowKey="id"
-        pagination={{
-          current: page,
-          total: data ? data.count : 0, // Asegúrate de que totalCount es el total de registros (160)
-          pageSize: 30, // Establece el tamaño de página actual
-          onChange: (newPage) => {
-            setPage(newPage); // Cambiar la página actual
-          },
-        }}
+      <div className="App">
+        <Table
+          style={{ padding: "20px" }}
+          dataSource={data ? data.publicaciones : []}
+          columns={columns}
+          loading={isLoading}
+          rowKey="id"
+          pagination={{
+            current: page,
+            total: data ? data.count : 0, // Asegúrate de que totalCount es el total de registros (160)
+            pageSize: 30, // Establece el tamaño de página actual
+            onChange: (newPage) => {
+              setPage(newPage); // Cambiar la página actual
+            },
+          }}
+        />
+      </div>
+      <EditarPublicacionModal
+        updateData={updateData}
+        selectedItem={selectedItem}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
       />
-    </div>
-    <EditarPublicacionModal updateData={updateData} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} selectedItem={selectedItem}/>
+      <EliminarPublicacionModal
+        updateData={updateData}
+        selectedItem={selectedItem}
+        isModalOpen={isModalOpenEliminar}
+        setIsModalOpen={setIsModalOpenElimininar}
+      />
+
     </>
   );
 }

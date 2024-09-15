@@ -27,3 +27,5 @@ Sacar el enviar mensaje de contacto o dejarlo pero agregando la funcion de envia
 Del layount ant usar la version responsive
 
 Hacer un formulario estandar que se pueda colocar en el modal tambien, con el fin de que todos los formularios sean modificables y adaptables a los modals
+
+Agregar data.datos en cada ruta para PUT
