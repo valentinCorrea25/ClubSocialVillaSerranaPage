@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-[#F9F6EE]">
       <MainVideo/>
-      <ListaCatHome />
+      <ListaCatHome/>
       <ListaDeUltimasPublicaciones />
       <Mapa />
       {/* <SobreNosotros />  // cambiar a sobre nosotros y aca poner lo que hay actualmente en sobre nosotros*/} 
