@@ -33,10 +33,10 @@ export default function ListaItems({ type }) {
     }
   }
 
-  // Detectar si la pantalla es pequeña (móvil)
-  const isMobile = window.innerWidth < 640; // 640px es el tamaño límite para sm en Tailwind
+  
+  const isMobile = window.innerWidth < 640; 
 
-  // Lógica para limitar a 3 ítems solo en dispositivos móviles
+  
   const displayedItems = isMobile && items.length > 3 ? items.slice(0, 3) : items;
 
   return (
