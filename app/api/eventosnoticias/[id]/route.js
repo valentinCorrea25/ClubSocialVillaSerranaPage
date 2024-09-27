@@ -82,7 +82,7 @@ export async function PUT(request, { params }) {
       where: {
         id_EventoNoticia: Number(params.id),
       },
-      data: data // De esta manera es posible pasar los valores a la claves que coincidan con el schema
+      data: data.datos // De esta manera es posible pasar los valores a la claves que coincidan con el schema
     });
 
     console.log(eventosNoticia);

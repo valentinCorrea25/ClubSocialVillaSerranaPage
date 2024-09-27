@@ -6,7 +6,7 @@ Ver los comentarios para actualizar aca components/ListaRestaurantes/DetalleRest
 
 En mapa principal poner un boton que diga ver mas
 
-OBTUBE LA API DE GOOGLE MAPS Terminar y implementar esto con busqueda por caja de texto, ej Anibal del campo 123
+OBTUvE LA API DE GOOGLE MAPS Terminar y implementar esto con busqueda por caja de texto, ej Anibal del campo 123
 
 En iconsByName de lib, crear un mapa de key (nombre de propiedad de alojanmiento ) y value el icono en question, puede ser usado en todo los relacionado a alquielres
 
@@ -29,3 +29,21 @@ Del layount ant usar la version responsive
 Hacer un formulario estandar que se pueda colocar en el modal tambien, con el fin de que todos los formularios sean modificables y adaptables a los modals
 
 Agregar data.datos en cada ruta para PUT
+
+Arreglar contacto dde alojamientos
+
+Crear la funcion para cuando la publicaCION NO SE CREA CORRECTAMENTE PERO  estan las imagenes ya subidas
+
+Pensar manera de editar las imagenes
+
+Arreglar todas las llamadas del cleiente para que queden clean y pocas y genericas comO en admin
+
+Corroborar que las imagenes se suben de la manera debida
+
+Agregart toast
+
+Funcion de borrado de imagenes
+
+Crear formularios de Modificar pulbicacion
+
+

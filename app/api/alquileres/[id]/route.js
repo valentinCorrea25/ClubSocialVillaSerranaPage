@@ -80,10 +80,8 @@ export async function PUT(request, { params }) {
       where: {
         id_Alquiler: Number(params.id),
       },
-      data: data // De esta manera es posible pasar los valores a la claves que coincidan con el schema
+      data: data.datos // De esta manera es posible pasar los valores a la claves que coincidan con el schema
     });
-
-    console.log(alquiler);
 
     return NextResponse.json({
       message: 'Alquiler modificado con exito'

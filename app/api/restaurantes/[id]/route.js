@@ -89,8 +89,6 @@ export async function PUT(request, { params }) {
       data: data.datos // De esta manera es posible pasar los valores a la claves que coincidan con el schema
     });
 
-    console.log(restaurant);
-
     return NextResponse.json({
       message: 'Restaurant modificado con exito'
     });

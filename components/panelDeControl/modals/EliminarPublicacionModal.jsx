@@ -24,7 +24,7 @@ export default function EliminarPublicacionModal({
   const idPublicacion = obtenerIdPublicacion(selectedItem);
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
     try {
       await eliminarPublicacion(selectedItem[idPublicacion], tipoDePublicacion);

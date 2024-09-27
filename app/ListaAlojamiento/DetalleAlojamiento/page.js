@@ -8,7 +8,7 @@ import Informacion from '@/components/ListaAlojamiento/DetalleAlojamiento/Inform
 import Carousel from '@/components/ListaAlojamiento/DetalleAlojamiento/Carousel';
 import Descripcion from '@/components/ListaAlojamiento/DetalleAlojamiento/Descripcion';
 import Caracteristicas from '@/components/ListaAlojamiento/DetalleAlojamiento/Caracteristicas';
-import Contacto from '@/components/ListaAlojamiento/DetalleAlojamiento/Contacto';
+import Contacto from '@/components/ListaRestaurantes/DetalleRestaurante/Contacto';
 import UbicacionMap from '@/components/ListaAlojamiento/DetalleAlojamiento/UbicacionMap'; 
 import PublicacionesSimilares from '@/components/ListaAlojamiento/DetalleAlojamiento/PublicacionesSimilares';
 import { ClientContext } from '@/context/clientContext';
@@ -64,7 +64,7 @@ const DetalleAlojamientos = () => {
           </div>
 
           <div className="lg:col-span-1 flex flex-col gap-8"><div className="flex-1 flex flex-col gap-8"> 
-            <div className="w-full"><Contacto alquiler={alojamientoSeleccionado} /></div>
+            {/* <div className="w-full"><Contacto alquiler={alojamientoSeleccionado} /></div> */}
             <UbicacionMap ubicacion={alojamientoSeleccionado.ubicacion} /></div>
             <div className="flex-1"><PublicacionesSimilares similares={alojamientoSimilares} /></div>
           </div>

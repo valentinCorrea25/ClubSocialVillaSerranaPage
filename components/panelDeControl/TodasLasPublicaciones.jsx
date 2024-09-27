@@ -5,6 +5,7 @@ import { MenuOutlined } from "@ant-design/icons";
 import EditarPublicacionModal from "./modals/EditarPublicacionModal";
 import { useRouter } from "next/navigation";
 import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
+import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
 
 export default function App() {
   const [page, setPage] = useState(1);
@@ -115,14 +116,38 @@ export default function App() {
       title: "Opciones",
       key: "options",
       render: (text, record) => {
+        const tipoPublicacion = Object.keys(record).find((key) =>
+          key.startsWith("id_")
+        );
+
+        // Recortar el prefijo "id_" para obtener el tipo de publicación
+        const tipoSinPrefijo = tipoPublicacion
+          ? tipoPublicacion.replace("id_", "")
+          : "desconocido";
+
+        // Extraer el ID de la publicación
+        const id = record[tipoPublicacion];
+
         const items = [
           {
-            label: <div onClick={() => router.push("#")}>Ver Publicacion</div>,
+            label: (
+              <a href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)} target="_blank">
+              <div
+                // onClick={() =>
+                //   router.push(obtenerDireccionDePublicacion(tipoSinPrefijo, id))
+                // }
+              >
+                Ver Publicacion
+              </div>
+              </a>
+            ),
             key: "0",
           },
           {
             label: (
-              <div onClick={() => showModalEditar(record)}>Editar Publicacion</div>
+              <div onClick={() => showModalEditar(record)}>
+                Editar Publicacion
+              </div>
             ),
             key: "1",
           },
@@ -131,7 +156,9 @@ export default function App() {
           },
           {
             label: (
-              <div onClick={() => showModalEliminar(record)}>Eliminar Publicacion</div>
+              <div onClick={() => showModalEliminar(record)}>
+                Eliminar Publicacion
+              </div>
             ),
             key: "3",
             danger: true,
@@ -184,7 +211,6 @@ export default function App() {
         isModalOpen={isModalOpenEliminar}
         setIsModalOpen={setIsModalOpenElimininar}
       />
-
     </>
   );
 }
