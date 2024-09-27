@@ -68,7 +68,7 @@ export default function ListaCategorias() {
   );
 }
 
-// Componente para móviles
+
 export function ListaCatHomeMovile() {
   const [activeCategory, setActiveCategory] = useState(0);
 
