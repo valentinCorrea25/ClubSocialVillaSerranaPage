@@ -22,6 +22,10 @@ const DetalleAlojamientos = () => {
   const [alojamientoSeleccionado, setAlojamientoSeleccionado] = useState();
   const [alojamientoSimilares, setAlquileresSimilares] = useState();
 
+  function SearchBarFallback() {
+    return <>placeholder</>
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
@@ -54,7 +58,7 @@ const DetalleAlojamientos = () => {
   }
 
   return (
-    <Suspense>
+    <Suspense fallback={<SearchBarFallback />}>
       <div className="container flex flex-col max-w-screen-xl bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-24 m-auto h-full ">
         <div className="mb-14">
           <Banner
