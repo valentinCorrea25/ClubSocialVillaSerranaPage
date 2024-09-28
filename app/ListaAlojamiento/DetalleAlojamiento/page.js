@@ -15,9 +15,8 @@ import { ClientContext } from '@/context/clientContext';
 import { Spin } from 'antd';
 
 const DetalleAlojamientos = () => {
-  const queryString = window.location.search;
-  const searchParams = new URLSearchParams(queryString);
-  const id = searchParams.get('id');
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');  
   const {buscarAlquiler} = useContext(ClientContext);
   const [isLoading, setIsLoading] = useState(true);
   const [alojamientoSeleccionado, setAlojamientoSeleccionado] = useState();
@@ -27,12 +26,17 @@ const DetalleAlojamientos = () => {
     const fetchData = async () => {
       if (id) {
         setIsLoading(true);
-        const resultado = await buscarAlquiler(id);
-        console.log(resultado);
-        
-        setAlojamientoSeleccionado(resultado.publicacion);
-        setAlquileresSimilares(resultado.publicacionesRelacionadas)
-        setIsLoading(false);
+        try {
+          const resultado = await buscarAlquiler(id);
+          console.log(resultado);
+          setAlojamientoSeleccionado(resultado.publicacion);
+          setAlquileresSimilares(resultado.publicacionesRelacionadas);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          // Optionally set an error state here
+        } finally {
+          setIsLoading(false);
+        }
       }
     };
     fetchData();
