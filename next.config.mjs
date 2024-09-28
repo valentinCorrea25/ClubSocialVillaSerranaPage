@@ -2,10 +2,13 @@
 import withVideos from "next-videos";
 
 const nextConfig = {
-    /* config options here */
+  /* config options here */
 };
 
 export default {
-    ...nextConfig,
-    ...withVideos(),
+  ...nextConfig,
+  ...withVideos(),
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };

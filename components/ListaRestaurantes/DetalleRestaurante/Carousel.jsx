@@ -3,7 +3,11 @@ import { Carousel as AntdCarousel } from 'antd';
 
 const Carousel = ({ restaurante }) => {
   
-  const fotos = [restaurante.foto];
+  const fotos = restaurante.fotos;
+  console.log( fotos + 'fotos');
+  if(!fotos){
+    return null
+  }
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">

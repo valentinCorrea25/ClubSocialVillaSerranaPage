@@ -19,7 +19,7 @@ function PostList() {
   }, []); // Empty dependency array means this runs once on component mount
 
   return (
-    <div className='grid gap-3 px-10 py-10 md:grid md:grid-cols-3'>
+    <div className='grid gap-3 px-3 sm:px-10 py-10 md:grid md:grid-cols-3'>
       {publicaciones.length > 0 ? (
         publicaciones.map((post) => (
           <PostCard key={post.id} post={post} />
@@ -34,8 +34,8 @@ function PostList() {
 export function ListaDeUltimasPublicaciones() {
   const router = useRouter();
   return (
-    <div className="grid place-items-center py-12 px-5 max-w-screen-xl m-auto">
-      <h1 className="text-3xl font-semibold">ÚLTIMAS PUBLICACIONES</h1>
+    <div className="grid place-items-center py-12 max-w-screen-xl m-auto">
+      <h1 className="text-3xl text-center font-semibold">ÚLTIMAS PUBLICACIONES</h1>
       <PostList />
       <Button onClick={() => router.push('/ListaActividades')} className="w-32" type="primary">
         <h1>Ver más</h1>

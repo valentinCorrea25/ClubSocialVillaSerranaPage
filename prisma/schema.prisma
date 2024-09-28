@@ -49,29 +49,31 @@ model Alquiler {
   titulo             String
   descripcion        String
   ubicacion          String
-  coordenadas        String
+  coordenadas        String?
   capacidad          Int
-  camas_dobles       Int
-  camas_singles      Int
-  agua_caliente      Boolean
-  toallas            Boolean
-  sabanas            Boolean
-  tv                 Boolean
-  wifi               Boolean
-  piscina            Boolean
-  parrilla           Boolean
-  bano               Boolean
-  cocina             Boolean
-  heladera           Boolean
-  horno              Boolean
-  microondas         Boolean
-  tostadora          Boolean
-  aire_acondicionado Boolean
-  estufa             Boolean
-  frezzer            Boolean
-  mascotas           Boolean
+  camas_dobles       Int?
+  camas_singles      Int?
+  agua_caliente      Boolean?
+  toallas            Boolean?
+  sabanas            Boolean?
+  frazadas           Boolean?
+  tv                 Boolean?
+  wifi               Boolean?
+  piscina            Boolean?
+  parrilla           Boolean?
+  bano               Boolean?
+  cocina             Boolean?
+  heladera           Boolean?
+  horno              Boolean?
+  microondas         Boolean?
+  tostadora          Boolean?
+  aire_acondicionado Boolean?
+  estufa             Boolean?
+  frezzer            Boolean?
+  mascotas           Boolean?
   fecha_publicacion  DateTime
   fotos              String[]
+  precio             Decimal?
 }
 
 model Restaurant {

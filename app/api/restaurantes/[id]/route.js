@@ -2,7 +2,15 @@ import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
+  if(!params.id){
+    return NextResponse.json({
+      message: "Id no entrado",
+      code: 500,
+    });
+  }
+  
   try {
+
     const restaurant = await prisma.restaurant.findUnique({
       where: {
         id_Restaurant: Number(params.id),
@@ -78,10 +86,8 @@ export async function PUT(request, { params }) {
       where: {
         id_Restaurant: Number(params.id),
       },
-      data: data // De esta manera es posible pasar los valores a la claves que coincidan con el schema
+      data: data.datos // De esta manera es posible pasar los valores a la claves que coincidan con el schema
     });
-
-    console.log(restaurant);
 
     return NextResponse.json({
       message: 'Restaurant modificado con exito'

@@ -11,7 +11,7 @@ const UbicacionMap = ({ ubicacion }) => (
           backgroundColor: 'var(--azul)',
           color: 'var(--blanco)',
           padding: '16px',
-          borderRadius: '8px',
+          borderRadius: '4px',
           width: '100%',
           margin: 0, 
         }}
@@ -21,7 +21,7 @@ const UbicacionMap = ({ ubicacion }) => (
     } 
     style={{
       backgroundColor: '#FFFFFF',
-      borderRadius: '23px',
+      borderRadius: '4px',
       border: '2px solid #ddd',
       height: 'auto',
       overflow: 'hidden',

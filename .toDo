@@ -1,0 +1,49 @@
+Arreglar que en los contactos tiene que saberse
+  si se trata de un numero que tiene whatsapp o un
+  numero que noo tiene whatsapp en detalles de publicaciones
+
+Ver los comentarios para actualizar aca components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares.jsx
+
+En mapa principal poner un boton que diga ver mas
+
+OBTUvE LA API DE GOOGLE MAPS Terminar y implementar esto con busqueda por caja de texto, ej Anibal del campo 123
+
+En iconsByName de lib, crear un mapa de key (nombre de propiedad de alojanmiento ) y value el icono en question, puede ser usado en todo los relacionado a alquielres
+
+Reciclar contacto en alquilker y restaurante
+
+Terminar de llenar los campos en alquiler <-- TERMINAR
+
+La paginacion tiene que estar en todas las listas <-- TERMINAR
+
+Arreglar fondo de footer <-- Arreglar fondo que combine con footer
+
+Probar que funcione filtro de Alquileres <-- CREAR DATOS DE PRUEBA
+
+Arreglar eventos <-- Que se parezca esteticamente a eventos
+
+Sacar el enviar mensaje de contacto o dejarlo pero agregando la funcion de enviar correo
+
+Del layount ant usar la version responsive
+
+Hacer un formulario estandar que se pueda colocar en el modal tambien, con el fin de que todos los formularios sean modificables y adaptables a los modals
+
+Agregar data.datos en cada ruta para PUT
+
+Arreglar contacto dde alojamientos
+
+Crear la funcion para cuando la publicaCION NO SE CREA CORRECTAMENTE PERO  estan las imagenes ya subidas
+
+Pensar manera de editar las imagenes
+
+Arreglar todas las llamadas del cleiente para que queden clean y pocas y genericas comO en admin
+
+Corroborar que las imagenes se suben de la manera debida
+
+Agregart toast
+
+Funcion de borrado de imagenes
+
+Crear formularios de Modificar pulbicacion
+
+

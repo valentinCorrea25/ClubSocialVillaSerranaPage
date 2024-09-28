@@ -9,11 +9,12 @@ export async function GET(request, { params }) {
   const pageSize = 36;
   const skip = (page - 1) * (pageSize / 6);
   const take = parseInt(pageSize / 6);
+
   try {
     const data = await prisma.$transaction(async (tx) => {
       const servicios = await tx.servicio.findMany({
         orderBy: {
-          fecha_publicacion: "asc",
+          fecha_publicacion: "desc",
         },
         skip,
         take,
@@ -21,7 +22,7 @@ export async function GET(request, { params }) {
 
       const actividades = await tx.actividad.findMany({
         orderBy: {
-          fecha_publicacion: "asc",
+          fecha_publicacion: "desc",
         },
         skip,
         take,
@@ -29,7 +30,7 @@ export async function GET(request, { params }) {
 
       const eventosNoticias = await tx.eventosNoticia.findMany({
         orderBy: {
-          fecha_publicacion: "asc",
+          fecha_publicacion: "desc",
         },
         skip,
         take,
@@ -37,7 +38,7 @@ export async function GET(request, { params }) {
 
       const restaurantes = await tx.restaurant.findMany({
         orderBy: {
-          fecha_publicacion: "asc",
+          fecha_publicacion: "desc",
         },
         skip,
         take,
@@ -45,7 +46,7 @@ export async function GET(request, { params }) {
 
       const alquileres = await tx.alquiler.findMany({
         orderBy: {
-          fecha_publicacion: "asc",
+          fecha_publicacion: "desc",
         },
         skip,
         take,
@@ -82,28 +83,27 @@ export async function GET(request, { params }) {
     const sortedData = allData.sort((a, b) => {
       const dateA = a.fecha_publicacion
         ? new Date(a.fecha_publicacion)
-        : new Date(0); // Si no hay fecha, asigna una fecha antigua
+        : new Date(0);
       const dateB = b.fecha_publicacion
         ? new Date(b.fecha_publicacion)
         : new Date(0);
 
-      return dateA.getTime() - dateB.getTime(); // Ordena de más antiguo a más reciente
+      return dateB.getTime() - dateA.getTime(); // Ordena de más reciente a más antiguo
     });
 
     return NextResponse.json({
       count: data.total,
-      next: `/api/listaPublicaciones/page?page=${parseInt(page) + 1}`,
+      next: `/api/listapublicaciones?page=${parseInt(page) + 1}`,
       previous:
-        page > 1
-          ? `api/listaPublicaciones/page?page=${parseInt(page) - 1}`
-          : null,
+        page > 1 ? `api/listapublicaciones?page=${parseInt(page) - 1}` : null,
       publicaciones: sortedData,
     });
   } catch (error) {
     console.log(error);
 
     return NextResponse.json({
-      message: "Hubo un error en lista Publicaciones, contactar con desarollador",
+      message:
+        "Hubo un error en lista Publicaciones, contactar con desarollador",
       code: 500,
     });
   }

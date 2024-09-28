@@ -29,7 +29,7 @@ const Buscador = ({ onFilterChange }) => {
             value={minPrice} 
             onChange={(value) => setMinPrice(value)} 
             placeholder="Precio mínimo" 
-            style={{ width: '120px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
+            style={{ width: '120px', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
           />
           <span style={{ fontSize: '18px' }}> - </span>
           <InputNumber 
@@ -38,7 +38,7 @@ const Buscador = ({ onFilterChange }) => {
             value={maxPrice} 
             onChange={(value) => setMaxPrice(value)} 
             placeholder="Precio máximo" 
-            style={{ width: '120px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
+            style={{ width: '120px', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
           />
         </div>
       </div>
@@ -50,14 +50,14 @@ const Buscador = ({ onFilterChange }) => {
           value={capacity} 
           onChange={(value) => setCapacity(value)} 
           placeholder="Capacidad máxima" 
-          style={{ width: '120px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
+          style={{ width: '120px', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }} 
         />
       </div>
 
       <Button 
         type="primary" 
         onClick={handleFilterChange} 
-        style={{ borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }}>
+        style={{ borderRadius: '4px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', }}>
         Aplicar Filtros
       </Button>
 

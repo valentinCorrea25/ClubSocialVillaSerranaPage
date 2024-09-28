@@ -1,153 +1,216 @@
-import React, { useState } from 'react'
-import { Table } from 'antd';
-import { HiMenu } from "react-icons/hi";
-import { Button } from 'antd/es/radio';
-import { Dropdown, Space } from 'antd';
-import { DownOutlined, SmileOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import { Table, Dropdown, Space } from "antd";
+import useSWR, { useSWRConfig } from "swr";
+import { MenuOutlined } from "@ant-design/icons";
+import EditarPublicacionModal from "./modals/EditarPublicacionModal";
+import { useRouter } from "next/navigation";
+import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
+import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
 
-export default function TodasLasPublicaciones() {
-  const [optionsVisible ,setOptionsVisible] = useState(false);
+export default function App() {
+  const [page, setPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
+  const router = useRouter();
+  const { mutate } = useSWRConfig();
 
-  const items = [
-    {
-      key: '1',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          1st menu item
-        </a>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item (disabled)
-        </a>
-      ),
-      disabled: true,
-    },
-    {
-      key: '3',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          3rd menu item (disabled)
-        </a>
-      ),
-      disabled: true,
-    },
-    {
-      key: '4',
-      danger: true,
-      label: 'a danger item',
-    },
-  ];
+  const showModalEditar = (item) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
 
-  const dataSource = [
-    {
-      key: '1',
-      foto: <img src='https://picsum.photos/id/160/200/110'/>,
-      title: 'Parrila el cania',
-      ubicacion: <a href='https://www.google.com/maps/place/Domingo+P%C3%A9rez+740,+30000+Minas,+Departamento+de+Lavalleja/@-34.3738391,-55.2349163,21z/data=!4m6!3m5!1s0x950aba2fb28ebfb9:0xbac440ceb51919e9!8m2!3d-34.3738226!4d-55.2349413!16s%2Fg%2F11h80370ps?entry=ttu' target='_blank'>Ubicacion a GoogleMaps</a>,
-      tipo_publicacion: 'Restaurant',
-      opt: <Button className='flex justify-center items-center w-5'>
-             <HiMenu />
-          </Button>
-    },
-    {
-      key: '2',
-      foto: <img src='https://picsum.photos/id/163/200/110'/>,
-      title: 'Casita',
-      ubicacion: <a href='https://www.google.com/maps/place/Domingo+P%C3%A9rez+740,+30000+Minas,+Departamento+de+Lavalleja/@-34.3738391,-55.2349163,21z/data=!4m6!3m5!1s0x950aba2fb28ebfb9:0xbac440ceb51919e9!8m2!3d-34.3738226!4d-55.2349413!16s%2Fg%2F11h80370ps?entry=ttu' target='_blank'>Ubicacion a GoogleMaps</a>,
-      tipo_publicacion: 'Alquiler',
-      opt: <Button className='flex justify-center items-center w-5'>
-             <HiMenu />
-          </Button>
-    },
-    {
-      key: '4',
-      foto: <img src='https://picsum.photos/id/162/200/110'/>,
-      title: 'Casa grande',
-      ubicacion: <a href='https://www.google.com/maps/place/Domingo+P%C3%A9rez+740,+30000+Minas,+Departamento+de+Lavalleja/@-34.3738391,-55.2349163,21z/data=!4m6!3m5!1s0x950aba2fb28ebfb9:0xbac440ceb51919e9!8m2!3d-34.3738226!4d-55.2349413!16s%2Fg%2F11h80370ps?entry=ttu' target='_blank'>Ubicacion a GoogleMaps</a>,
-      tipo_publicacion: 'Alquiler',
-      opt: <Button className='flex justify-center items-center w-5'>
-             <HiMenu />
-          </Button>
-    },
-    {
-      key: '5',
-      foto: <img src='https://picsum.photos/id/165/200/110'/>,
-      title: 'el marocoyo',
-      ubicacion: <a href='https://www.google.com/maps/place/Domingo+P%C3%A9rez+740,+30000+Minas,+Departamento+de+Lavalleja/@-34.3738391,-55.2349163,21z/data=!4m6!3m5!1s0x950aba2fb28ebfb9:0xbac440ceb51919e9!8m2!3d-34.3738226!4d-55.2349413!16s%2Fg%2F11h80370ps?entry=ttu' target='_blank'>Ubicacion a GoogleMaps</a>,
-      tipo_publicacion: 'Alquiler',
-      opt: <Button className='flex justify-center items-center w-5'>
-             <HiMenu />
-          </Button>
-    },
-    {
-      key: '6',
-      foto: <img src='https://picsum.photos/id/166/200/110'/>,
-      title: 'la pizzeta',
-      ubicacion: <a href='https://www.google.com/maps/place/Domingo+P%C3%A9rez+740,+30000+Minas,+Departamento+de+Lavalleja/@-34.3738391,-55.2349163,21z/data=!4m6!3m5!1s0x950aba2fb28ebfb9:0xbac440ceb51919e9!8m2!3d-34.3738226!4d-55.2349413!16s%2Fg%2F11h80370ps?entry=ttu' target='_blank'>Ubicacion a GoogleMaps</a>,
-      tipo_publicacion: 'Alquiler',
-      opt: <Button className='flex justify-center items-center w-5'>
-             <HiMenu />
-          </Button>
-    },
-    {
-      key: '7',
-      foto: <img src='https://picsum.photos/id/167/200/110'/>,
-      title: 'natufood',
-      ubicacion: <a href='https://www.google.com/maps/place/Domingo+P%C3%A9rez+740,+30000+Minas,+Departamento+de+Lavalleja/@-34.3738391,-55.2349163,21z/data=!4m6!3m5!1s0x950aba2fb28ebfb9:0xbac440ceb51919e9!8m2!3d-34.3738226!4d-55.2349413!16s%2Fg%2F11h80370ps?entry=ttu' target='_blank'>Ubicacion a GoogleMaps</a>,
-      tipo_publicacion: 'Restaurant',
-      opt: <Button className='flex justify-center items-center w-5'>
-             <HiMenu />
-          </Button>
-    },
-    {
-      key: '8',
-      foto: <img src='https://picsum.photos/id/168/200/110'/>,
-      title: 'michale jackson',
-      ubicacion: <a href='https://www.google.com/maps/place/Domingo+P%C3%A9rez+740,+30000+Minas,+Departamento+de+Lavalleja/@-34.3738391,-55.2349163,21z/data=!4m6!3m5!1s0x950aba2fb28ebfb9:0xbac440ceb51919e9!8m2!3d-34.3738226!4d-55.2349413!16s%2Fg%2F11h80370ps?entry=ttu' target='_blank'>Ubicacion a GoogleMaps</a>,
-      tipo_publicacion: 'Noticia',
-      opt: <Button className='flex justify-center items-center w-5'>
-             <HiMenu />
-          </Button>
-    },
-  ];
-  
+  const showModalEliminar = (item) => {
+    setSelectedItem(item);
+    setIsModalOpenElimininar(true);
+  };
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+  // Key for SWR
+  const key = `/api/listapublicaciones?page=${page}`;
+  const { data, error, isLoading } = useSWR(key, fetcher);
+
+  function updateData() {
+    mutate(key, data);
+  }
+
   const columns = [
     {
-      title: 'foto',
-      dataIndex: 'foto',
-      key: 'foto',
+      title: "Portada",
+      dataIndex: "fotos", // Elige el campo principal que probablemente contenga los datos
+      key: "portada",
+      render: (text, record) => {
+        const fotos = record.fotos || record.foto; // Verifica si existe 'fotos' o 'foto'
+        const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos; // Si es array, usa la primera imagen
+        return fotoSrc ? (
+          <img src={fotoSrc} alt="Portada" style={{ width: "100px" }} />
+        ) : null;
+      },
     },
     {
-      title: 'title',
-      dataIndex: 'title',
-      key: 'title',
+      title: "Titulo",
+      dataIndex: "titulo",
+      key: "titulo",
+      fixed: "left",
+      elipsis: true,
+      render: (text) => (
+        <div
+          style={{
+            maxWidth: "200px", // Tamaño máximo ajustable
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          title={text} // Esto mostrará el título completo al pasar el ratón
+        >
+          {text}
+        </div>
+      ),
+    },
+
+    {
+      title: "Tipo de Publicación",
+      key: "tipoPublicacion",
+      render: (text, record) => {
+        // Busca el campo que empieza por "id_"
+        const tipoPublicacion = Object.keys(record).find((key) =>
+          key.startsWith("id_")
+        );
+
+        // Si se encuentra un campo, recorta el prefijo "id_" para mostrar el tipo de publicación
+        return tipoPublicacion
+          ? tipoPublicacion.replace("id_", "")
+          : "Desconocido";
+      },
     },
     {
-      title: 'ubicacion',
-      dataIndex: 'ubicacion',
-      key: 'ubicacion',
+      title: "Ubicación",
+      dataIndex: "location",
+      key: "location",
+      render: (location) => (
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${location}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver en Google Maps
+        </a>
+      ),
     },
     {
-      title: 'tipo publicacion',
-      dataIndex: 'tipo_publicacion',
-      key: 'tipo_publicacion',
+      title: "Fecha de publicacion",
+      dataIndex: "fecha_publicacion",
+      key: "fecha_publicacion",
+      render: (fechaPublicacion) => {
+        const opciones = {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        };
+        return new Date(fechaPublicacion).toLocaleDateString("es-UY", opciones);
+      },
     },
     {
-      title: 'Opciones',
-      dataIndex: 'opt',
-      key: 'opt',
+      title: "Opciones",
+      key: "options",
+      render: (text, record) => {
+        const tipoPublicacion = Object.keys(record).find((key) =>
+          key.startsWith("id_")
+        );
+
+        // Recortar el prefijo "id_" para obtener el tipo de publicación
+        const tipoSinPrefijo = tipoPublicacion
+          ? tipoPublicacion.replace("id_", "")
+          : "desconocido";
+
+        // Extraer el ID de la publicación
+        const id = record[tipoPublicacion];
+
+        const items = [
+          {
+            label: (
+              <a href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)} target="_blank">
+              <div
+                // onClick={() =>
+                //   router.push(obtenerDireccionDePublicacion(tipoSinPrefijo, id))
+                // }
+              >
+                Ver Publicacion
+              </div>
+              </a>
+            ),
+            key: "0",
+          },
+          {
+            label: (
+              <div onClick={() => showModalEditar(record)}>
+                Editar Publicacion
+              </div>
+            ),
+            key: "1",
+          },
+          {
+            type: "divider",
+          },
+          {
+            label: (
+              <div onClick={() => showModalEliminar(record)}>
+                Eliminar Publicacion
+              </div>
+            ),
+            key: "3",
+            danger: true,
+          },
+        ];
+
+        return (
+          <div className="flex justify-center">
+            <Dropdown menu={{ items }} trigger={["click"]}>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space align="center">
+                  <MenuOutlined size="lg" />
+                </Space>
+              </a>
+            </Dropdown>
+          </div>
+        );
+      },
     },
   ];
-  
-  
+
   return (
-    <div className='p-10'>
-      <h1 className='text-center'>Tabla de todas las publicaciones</h1>
-      <Table dataSource={dataSource} columns={columns} />
-    </div>
-  )
+    <>
+      <div className="App">
+        <Table
+          style={{ padding: "20px" }}
+          dataSource={data ? data.publicaciones : []}
+          columns={columns}
+          loading={isLoading}
+          rowKey="id"
+          pagination={{
+            current: page,
+            total: data ? data.count : 0, // Asegúrate de que totalCount es el total de registros (160)
+            pageSize: 30, // Establece el tamaño de página actual
+            onChange: (newPage) => {
+              setPage(newPage); // Cambiar la página actual
+            },
+          }}
+        />
+      </div>
+      <EditarPublicacionModal
+        updateData={updateData}
+        selectedItem={selectedItem}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
+      <EliminarPublicacionModal
+        updateData={updateData}
+        selectedItem={selectedItem}
+        isModalOpen={isModalOpenEliminar}
+        setIsModalOpen={setIsModalOpenElimininar}
+      />
+    </>
+  );
 }

@@ -1,52 +1,62 @@
 import React from 'react';
 import { Card, List, Button } from 'antd';
-import { restaurantesData } from '@/test/data'; 
-import { TagOutlined } from '@ant-design/icons';
+
+import { ClockCircleOutlined, TagOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 
-const PublicacionesSimilares = ({ onSelect }) => {
+const PublicacionesSimilares = ({ restaurantes }) => {
+  // { onSelect }) => {} previous before my update
   const router = useRouter();
 
+  console.log(restaurantes);
+  
+
+  const handleViewDetails = (id) => { // Ver si esto hay forma de actualiar
+    console.log(id + 'id');
+    router.push(`/ListaRestaurantes/DetalleRestaurante?id=${id}`);
+  };
+
   const handleViewMore = () => {
-    router.push('/ListaRestaurantes');
+    router.push(`/ListaRestaurantes`);
   };
 
   return (
     <Card
       title={
-        <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '8px', width: '100%' }}>
+        <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
           <div className="text-2xl font-bold text-center">Publicaciones Similares</div>
         </div>
       }
-      style={{ backgroundColor: '#FFFFFF', borderRadius: '23px', border: '2px solid #ddd', height: '100%' }}
+      style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd', height: '100%' }}
       headStyle={{ padding: 0 }}
     >
       <div style={{ flex: 1, overflowY: 'auto', maxHeight: '500px', padding: '16px' }}>
         <List
           itemLayout="vertical"
-          dataSource={restaurantesData.filter(restaurante => restaurante.id_Restaurante !== onSelect.id_Restaurante)} 
+          dataSource={restaurantes} 
+          // dataSource={restaurantes.filter(restaurante => restaurante.id_Restaurante !== onSelect.id_Restaurante)} 
           renderItem={item => (
             <List.Item
               key={item.id_Restaurante}
               style={{ padding: '10px', borderBottom: '1px solid #ddd', cursor: 'pointer' }}
-              onClick={() => onSelect(item)} 
+              // onClick={() => onSelect(item)} 
             >
-              <div style={{ textAlign: 'center' }}>
+              <div style={{ textAlign: 'center' }} onClick={() => {handleViewDetails(item.id_Restaurant)}}>
                 <img
-                  src={item.foto}
-                  alt={item.Titulo}
+                  src={item.fotos[0]}
+                  alt={item.titulo}
                   style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }}
                 />
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>
-                    {item.Titulo}
+                    {item.titulo}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
                     <TagOutlined style={{ marginRight: '8px' }} />
-                    {item.categoria?.nombre_categoria || 'Categoría no disponible'}
+                    {item.descripcion || 'Categoría no disponible'}
                   </div>
                   <p style={{ marginTop: '4px', color: '#666' }}>
-                    {item.descripcion || 'Descripción no disponible'}
+                  <ClockCircleOutlined /> Horarios: {item.horario_semanal || 'No disponible'}
                   </p>
                 </div>
               </div>
