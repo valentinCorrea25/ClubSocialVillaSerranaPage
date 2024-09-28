@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect, useContext, useMemo } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Spin } from "antd";
 import { ClientContext } from "@/context/clientContext";
 import Banner from "@/components/ListaRestaurantes/DetalleRestaurante/Banner";
