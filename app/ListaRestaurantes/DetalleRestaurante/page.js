@@ -14,8 +14,10 @@ import UbicacionMap from '@/components/ListaRestaurantes/DetalleRestaurante/Ubic
 import PublicacionesSimilares from '@/components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares';
 
 const DetalleRestaurantes = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');  
+  // const searchParams = useSearchParams();
+  // const id = searchParams.get('id');
+  const router = useRouter();
+  const { id } = router.query; 
   const { buscarRestaurant } = useContext(ClientContext);
   const [restauranteSeleccionado, setRestauranteSeleccionado] = useState(null);
   const [ restaurantesSimilares, setRestaurantesSimilares ] = useState(null);  
@@ -32,7 +34,6 @@ const DetalleRestaurantes = () => {
           setRestaurantesSimilares(resultado.publicacionesRelacionadas);
         } catch (error) {
           console.error("Error fetching data:", error);
-          // Optionally set an error state here
         } finally {
           setIsLoading(false);
         }
@@ -57,7 +58,7 @@ const DetalleRestaurantes = () => {
   
 
   return (
-    <Suspense>
+    // <Suspense>
       <div className="flex flex-col min-h-screen max-w-screen-xl m-auto bg-[#F9F6EE] px-8 sm:px-12 lg:px-20 py-24">
         <div className="mb-10">
           <Banner 
@@ -96,7 +97,7 @@ const DetalleRestaurantes = () => {
           </div>
         </main>
       </div>
-    </Suspense>
+    // </Suspense>
   );
 };
 

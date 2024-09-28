@@ -15,8 +15,10 @@ import { ClientContext } from '@/context/clientContext';
 import { Spin } from 'antd';
 
 const DetalleAlojamientos = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');  
+  // const searchParams = useSearchParams();
+  // const id = searchParams.get('id');  
+  const router = useRouter();
+  const { id } = router.query; 
   const {buscarAlquiler} = useContext(ClientContext);
   const [isLoading, setIsLoading] = useState(true);
   const [alojamientoSeleccionado, setAlojamientoSeleccionado] = useState();
@@ -55,7 +57,7 @@ const DetalleAlojamientos = () => {
   }
 
   return (
-      <Suspense>
+      // <Suspense>
         <div className="container flex flex-col max-w-screen-xl bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-24 m-auto h-full "> 
           <div className="mb-14"><Banner title="Alojamientos" subtitle="Descubre nuestras opciones" 
           backgroundImage="/images/alojamiento.jpg" /></div>
@@ -75,7 +77,7 @@ const DetalleAlojamientos = () => {
           </div>
         </main>
       </div>
-    </Suspense>
+    // </Suspense>
   );
 };
 
