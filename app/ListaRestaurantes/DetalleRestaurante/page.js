@@ -14,9 +14,8 @@ import UbicacionMap from '@/components/ListaRestaurantes/DetalleRestaurante/Ubic
 import PublicacionesSimilares from '@/components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares';
 
 const DetalleRestaurantes = () => {
-  const queryString = window.location.search;
-  const searchParams = new URLSearchParams(queryString);
-  const id = searchParams.get('id');
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');  
   const { buscarRestaurant } = useContext(ClientContext);
   const [restauranteSeleccionado, setRestauranteSeleccionado] = useState(null);
   const [ restaurantesSimilares, setRestaurantesSimilares ] = useState(null);  
@@ -26,11 +25,19 @@ const DetalleRestaurantes = () => {
     const fetchRestaurant = async () => {
       if (id) {
         setIsLoading(true);
-        const resultado = await buscarRestaurant(id);
-        setRestauranteSeleccionado(resultado.publicacion);
-        setRestaurantesSimilares(resultado.publicacionesRelacionadas)
-        setIsLoading(false);
+        try {
+          const resultado = await buscarRestaurant(id);
+          console.log(resultado);
+          setRestauranteSeleccionado(resultado.publicacion);
+          setRestaurantesSimilares(resultado.publicacionesRelacionadas);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          // Optionally set an error state here
+        } finally {
+          setIsLoading(false);
+        }
       }
+
     };
     fetchRestaurant();
   }, [id]);
