@@ -42,7 +42,7 @@ const useRestaurantData = (id) => {
 
 const DetalleRestaurantes = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = router.query || {};
   const { data, isLoading, error } = useRestaurantData(id);
 
   const memoizedContent = useMemo(() => {

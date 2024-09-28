@@ -46,7 +46,7 @@ const useAccommodationData = (id) => {
 
 const DetalleAlojamientos = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = router.query || {};
   const { data, isLoading, error } = useAccommodationData(id);
 
   const memoizedContent = useMemo(() => {
