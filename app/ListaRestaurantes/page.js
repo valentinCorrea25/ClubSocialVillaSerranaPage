@@ -59,7 +59,7 @@ const ListaRestaurantesPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] px-8 sm:px-12 lg:px-20 py-24">
+    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-24">
       <div className="mb-10">
         <Banner 
           title="Restaurantes" 
@@ -68,7 +68,7 @@ const ListaRestaurantesPage = () => {
         />
       </div>
       <Content style={{ 
-        padding: '32px 64px', 
+        padding: '10px 10px', 
         backgroundColor: 'transparent',
         display: 'flex',
         flexDirection: 'column',

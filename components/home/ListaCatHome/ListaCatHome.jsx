@@ -58,14 +58,14 @@ export default function ListaCategorias() {
   }, []);
 
   return (
-    <div className='m-auto max-w-screen-xl mt-20'>
-      <h1 className='text-[--azul] font-bold text-center md:text-5xl text-2xl'>Información Turistica Villa Serrana</h1>
-      <h2 className='text-[--verde-oscuro] font-bold text-center md:text-xl text-sm'>Encuentra las mejores opciones para disfrutar en Villa Serrana.</h2>        
+    <div className='m-auto max-w-screen-xl mt-12 md:mt-20'>
+      <h1 className='text-[--azul] font-bold text-center md:text-5xl text-2xl md:px-0 px-4'>Información Turistica Villa Serrana</h1>
+      <h2 className='text-[--verde-oscuro] font-bold text-center md:text-xl text-sm md:px-0 px-4'>Encuentra las mejores opciones para disfrutar en Villa Serrana.</h2>        
 
       {isMobile ? (
         <ListaCatHomeMovile />
       ) : (
-        <Tabs defaultActiveKey="1" items={items} itemselectedcolor='#09A603' size='large' />
+        <Tabs centered defaultActiveKey="1" items={items} itemselectedcolor='#09A603' size='large' />
       )}
     </div>
   );
@@ -89,7 +89,7 @@ export function ListaCatHomeMovile() {
     <div className="m-auto max-w-screen-xl mt-10">
       <div className="flex items-center justify-center gap-4">
         <FaChevronLeft className="cursor-pointer text-2xl" onClick={handlePrevCategory} />
-        <h1 className="flex items-center gap-2 font-bold text-2xl text-[--verde] ">
+        <h1 className="flex items-center gap-2 font-bold text-xl text-[--verde] ">
           {currentCategory.label}
         </h1>
         <FaChevronRight className="cursor-pointer text-2xl" onClick={handleNextCategory} />

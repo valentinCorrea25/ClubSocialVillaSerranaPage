@@ -31,14 +31,15 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
           <Card
             onClick={() => onViewDetails(restaurante.id_Restaurant)}
             hoverable
+            className='flex flex-col justify-center items-center md:flex-row md:flex-nowrap'
             style={{
               width: '100%',
-              padding: '16px',
+              padding: '12px',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
               borderRadius: '4px',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
+              // display: 'flex',
+              // flexDirection: 'row',
+              // alignItems: 'center',
               backgroundColor: '#fff',
               position: 'relative',
               transition: 'transform 0.3s ease, box-shadow 0.3s ease',

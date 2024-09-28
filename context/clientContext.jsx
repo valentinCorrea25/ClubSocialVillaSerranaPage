@@ -40,10 +40,15 @@ export const ClientProvider = ({ children }) => {
   }
 
   async function ultimas3EventoNoticia() {
-    const res = await fetch(`/api/eventosnoticias?limit=3`);
-    const data = await res.json();
-    setPublicacion(data);
-    return data;
+    try {
+      const res = await fetch(`/api/eventosnoticias?limit=3`);
+      const data = await res.json();
+
+      setPublicacion(data);
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async function alquileresRandom() {
@@ -120,7 +125,6 @@ export const ClientProvider = ({ children }) => {
 
     return data;
   }
-  
 
   return (
     <ClientContext.Provider
