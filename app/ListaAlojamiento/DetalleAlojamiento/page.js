@@ -15,8 +15,9 @@ import { ClientContext } from '@/context/clientContext';
 import { Spin } from 'antd';
 
 const DetalleAlojamientos = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id'); 
+  const queryString = window.location.search;
+  const searchParams = new URLSearchParams(queryString);
+  const id = searchParams.get('id');
   const {buscarAlquiler} = useContext(ClientContext);
   const [isLoading, setIsLoading] = useState(true);
   const [alojamientoSeleccionado, setAlojamientoSeleccionado] = useState();

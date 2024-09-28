@@ -14,9 +14,9 @@ import UbicacionMap from '@/components/ListaRestaurantes/DetalleRestaurante/Ubic
 import PublicacionesSimilares from '@/components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares';
 
 const DetalleRestaurantes = () => {
-  const queryString = window.location.search; // Obtén la cadena de consulta
-  const searchParams = new URLSearchParams(queryString); // Crea un objeto URLSearchParams
-  const id = searchParams.get('id'); // Obtén el valor del parámetro 'id'
+  const queryString = window.location.search;
+  const searchParams = new URLSearchParams(queryString);
+  const id = searchParams.get('id');
   const { buscarRestaurant } = useContext(ClientContext);
   const [restauranteSeleccionado, setRestauranteSeleccionado] = useState(null);
   const [ restaurantesSimilares, setRestaurantesSimilares ] = useState(null);  
