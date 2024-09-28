@@ -14,43 +14,43 @@ import { ClientContext } from "@/context/clientContext";
 import { Spin } from "antd";
 
 const DetalleAlojamientos = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  const { buscarAlquiler } = useContext(ClientContext);
-  const [isLoading, setIsLoading] = useState(true);
-  const [alojamientoSeleccionado, setAlojamientoSeleccionado] = useState();
-  const [alojamientoSimilares, setAlquileresSimilares] = useState();
+  // const searchParams = useSearchParams();
+  // const id = searchParams.get("id");
+  // const { buscarAlquiler } = useContext(ClientContext);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [alojamientoSeleccionado, setAlojamientoSeleccionado] = useState();
+  // const [alojamientoSimilares, setAlquileresSimilares] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (id) {
-        setIsLoading(true);
-        const resultado = await buscarAlquiler(id);
-        console.log(resultado);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (id) {
+  //       setIsLoading(true);
+  //       const resultado = await buscarAlquiler(id);
+  //       console.log(resultado);
 
-        setAlojamientoSeleccionado(resultado.publicacion);
-        setAlquileresSimilares(resultado.publicacionesRelacionadas);
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [id]);
+  //       setAlojamientoSeleccionado(resultado.publicacion);
+  //       setAlquileresSimilares(resultado.publicacionesRelacionadas);
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [id]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <Spin size="large" />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center min-h-screen">
+  //       <Spin size="large" />
+  //     </div>
+  //   );
+  // }
 
-  if (!alojamientoSeleccionado) {
-    return <div>Alojamiento no encontrado</div>;
-  }
+  // if (!alojamientoSeleccionado) {
+  //   return <div>Alojamiento no encontrado</div>;
+  // }
 
   return (
     <>
-      <Suspense>
+      {/* <Suspense>
         <div className="container flex flex-col max-w-screen-xl bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-24 m-auto h-full ">
           <div className="mb-14">
             <Banner
@@ -70,7 +70,6 @@ const DetalleAlojamientos = () => {
 
             <div className="lg:col-span-1 flex flex-col gap-8">
               <div className="flex-1 flex flex-col gap-8">
-                {/* <div className="w-full"><Contacto alquiler={alojamientoSeleccionado} /></div> */}
                 <UbicacionMap ubicacion={alojamientoSeleccionado.ubicacion} />
               </div>
               <div className="flex-1">
@@ -79,7 +78,7 @@ const DetalleAlojamientos = () => {
             </div>
           </main>
         </div>
-      </Suspense>
+      </Suspense> */}
     </>
   );
 };
