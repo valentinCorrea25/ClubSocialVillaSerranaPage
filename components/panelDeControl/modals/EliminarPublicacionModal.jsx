@@ -14,7 +14,7 @@ export default function EliminarPublicacionModal({
   selectedItem,
   updateData,
 }) {
-  const { eliminarPublicacion } = useContext(AdminContext);
+  const { eliminarPublicacion, eliminarImagenesSupabase } = useContext(AdminContext);
   const [isLoading, setLoading] = useState(false);
 
   const handleClose = () => {
@@ -27,6 +27,7 @@ export default function EliminarPublicacionModal({
   const onFinish = async () => {
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
     try {
+      await eliminarImagenesSupabase(selectedItem.fotos);
       await eliminarPublicacion(selectedItem[idPublicacion], tipoDePublicacion);
       await updateData(); // Actualizar los datos después de modificar
     } finally {

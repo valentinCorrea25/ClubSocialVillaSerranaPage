@@ -1,22 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Image, Modal, Tag, Upload } from "antd";
+import { Modal, Tag } from "antd";
 import { Button, Form, Input } from "antd";
 import { AdminContext } from "@/context/adminContext";
-import { getBase64 } from "@/components/utils/ControlPublicaciones";
 const { TextArea } = Input;
 import {
   obtenerIdPublicacion,
   obtenerTipoSinPrefijo,
   obtenerTipoDePublicacion,
-} from "@/components/utils/ControlPublicaciones"; // Importa las funciones
-import {
-  PlusOutlined,
-  RotateLeftOutlined,
-  RotateRightOutlined,
-  ZoomInOutlined,
-  ZoomOutOutlined,
-} from "@ant-design/icons";
-import { FaTrash } from "react-icons/fa6";
+} from "@/components/utils/ControlPublicaciones";
+import ImagenControl from "./ImagenControl";
 
 export default function EditarPublicacionModal({
   isModalOpen,
@@ -24,56 +16,16 @@ export default function EditarPublicacionModal({
   selectedItem,
   updateData,
 }) {
-  const [form] = Form.useForm(); // Crear una referencia al formulario
-  const {
-    modificarPublicaciones,
-    eliminarImagenesSupabase,
-    subirImagenesSupabase,
-  } = useContext(AdminContext);
+  const [form] = Form.useForm();
+  const { modificarPublicaciones, subirImagenesSupabase } =
+    useContext(AdminContext);
   const [isLoading, setLoading] = useState(false);
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState();
+  const [restoreVariables, setRestoreVariables] = useState(false);
   const [fileList, setFileList] = useState();
-  const [isModalOpenEliminarImagen, setIsModalOpenEliminarImagen] =
-    useState(false);
-  const [imageToDelete, setImageToDelete] = useState();
-
-  const [previewImageSaved, setPreviewImageSave] = useState(true);
-
-  const toolbarRenderInfo = {
-    // Cambiar esto de archivo
-    icons: {
-      flipYIcon: <Button>Flip Y</Button>,
-      flipXIcon: <Button>Flip X</Button>,
-      rotateLeftIcon: <RotateLeftOutlined />,
-      rotateRightIcon: <RotateRightOutlined />,
-      zoomOutIcon: <ZoomOutOutlined />,
-      zoomInIcon: <ZoomInOutlined />,
-      trashIcon: <FaTrash />,
-    },
-    actions: {
-      onFlipY: () => console.log("Flip Y"),
-      onFlipX: () => console.log("Flip X"),
-      onRotateLeft: () => console.log("Rotate Left"),
-      onRotateRight: () => console.log("Rotate Right"),
-      onZoomOut: () => console.log("Zoom Out"),
-      onZoomIn: () => console.log("Zoom In"),
-      onReset: () => console.log("Reset"),
-      onClose: () => console.log("Close"),
-    },
-    transform: {
-      rotate: 0,
-      scaleX: 1,
-      scaleY: 1,
-    },
-    current: 0,
-    image: {
-      src: "image-url",
-      alt: "Image description",
-    },
-  };
+  useState(false);
 
   const handleClose = () => {
+    setRestoreVariables(true);
     setIsModalOpen(false);
   };
 
@@ -81,7 +33,7 @@ export default function EditarPublicacionModal({
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
   const onFinish = async (values) => {
-    setLoading(true); // Mostrar el estado de carga inmediatamente
+    setLoading(true);
 
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
 
@@ -92,76 +44,32 @@ export default function EditarPublicacionModal({
           tipoDePublicacion,
           selectedItem.titulo
         );
-        console.log(nuevasFotos);
 
-        values.fotos = [...selectedItem.fotos, ...nuevasFotos];
+        values.fotos = [...(selectedItem.fotos || []), ...nuevasFotos];
+      } else {
+        values.fotos = selectedItem.fotos || [];
       }
-      console.log(values);
 
       await modificarPublicaciones(
         selectedItem[idPublicacion],
         values,
         tipoDePublicacion
       );
-      await updateData(); // Actualizar los datos después de modificar
+      await updateData();
     } catch (e) {
-      console.log(e); /// <--- EMPEZAR DESDE ACAA <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+      console.log(e);
     } finally {
-      setLoading(false); // Detener el estado de carga, independientemente del resultado
-      handleClose(); // Cerrar el modal
+      setLoading(false);
+      handleClose();
     }
   };
 
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-    setPreviewImage(file.url || file.preview);
-    setPreviewOpen(true);
+  const handleResetComplete = () => {
+    setRestoreVariables(false);
   };
 
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-
-  const uploadButton = (
-    <button
-      style={{
-        border: 0,
-        background: "none",
-      }}
-      type="button"
-    >
-      <PlusOutlined />
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </button>
-  );
-
-  const handleDeleteImage = (imageSrc) => {
-    setImageToDelete(imageSrc);
-    setPreviewImageSave(false); // Close the preview
-    setIsModalOpenEliminarImagen(true); // Open the delete confirmation modal
-  };
-
-  const confirmDeleteImage = () => {
-    if (imageToDelete) {
-      selectedItem.fotos = selectedItem.fotos.filter(
-        (file) => file !== imageToDelete
-      );
-      eliminarImagenesSupabase(imageToDelete);
-      // setFileList(newFileList);
-      setImageToDelete(null);
-    }
-    setIsModalOpenEliminarImagen(false);
-  };
-
-  // Setear valores iniciales cuando se abre el modal o cambia selectedItem
   useEffect(() => {
-    if (selectedItem) {
+    if (selectedItem) {      
       form.setFieldsValue({
         titulo: selectedItem.titulo,
         descripcion: selectedItem.descripcion,
@@ -175,6 +83,7 @@ export default function EditarPublicacionModal({
         title={<div className="text-center"> Modificar Publicacion </div>}
         open={isModalOpen}
         onCancel={handleClose}
+        afterClose={handleClose}
         footer={
           <>
             <Button onClick={handleClose}>Cancelar</Button>
@@ -197,7 +106,7 @@ export default function EditarPublicacionModal({
         )}
         <>
           <Form
-            form={form} // Conectar el formulario con la referencia // Cada formulario debe ser distinto
+            form={form}
             onFinish={onFinish}
             labelCol={{
               span: 20,
@@ -227,68 +136,16 @@ export default function EditarPublicacionModal({
               <TextArea maxLength={250} className="max-h-44" />
             </Form.Item>
             <Form.Item label="Subir imagenes">
-              <div className="flex">
-                <Upload
-                  listType="picture-card"
-                  fileList={fileList}
-                  onPreview={handlePreview}
-                  onChange={handleChange}
-                >
-                  {fileList && fileList.length >= 8 ? null : uploadButton}
-                </Upload>
-                {previewImage && (
-                  <Image
-                    wrapperStyle={{ display: "none" }}
-                    preview={{
-                      visible: previewOpen,
-                      onVisibleChange: (visible) => setPreviewOpen(visible),
-                      afterOpenChange: (visible) =>
-                        !visible && setPreviewImage(""),
-                    }}
-                    src={previewImage}
-                  />
-                )}
-                <div className="flex ml-10 flex-wrap gap-1">
-                  {selectedItem.fotos &&
-                    selectedItem.fotos.map((item) => {
-                      return (
-                        <Image
-                          className="max-w-28 max-h-20"
-                          preview={
-                            previewImageSaved
-                              ? {
-                                  toolbarRender: (_, actions) => (
-                                    <Button
-                                      icon={toolbarRenderInfo.icons.trashIcon}
-                                      onClick={() => {
-                                        setIsModalOpenEliminarImagen(true);
-                                        handleDeleteImage(item);
-                                      }}
-                                    />
-                                  ),
-                                }
-                              : false
-                          }
-                          key={item}
-                          src={item}
-                          alt={selectedItem.titulo}
-                        />
-                      );
-                    })}
-                </div>
-              </div>
+              <ImagenControl
+                selectedItem={selectedItem}
+                fileList={fileList}
+                setFileList={setFileList}
+                restoreVariables={restoreVariables}
+                onReset={handleResetComplete}
+              />
             </Form.Item>
           </Form>
         </>
-      </Modal>
-      <Modal
-        title="Confirmar eliminación"
-        open={isModalOpenEliminarImagen}
-        onCancel={() => setIsModalOpenEliminarImagen(false)}
-        onOk={confirmDeleteImage}
-        afterClose={() => setPreviewImageSave(true)}
-      >
-        <p>¿Está seguro de que desea eliminar esta imagen?</p>
       </Modal>
     </>
   );
