@@ -38,20 +38,6 @@ const ListaRestaurantesPage = () => {
     fetchData();
   }, []);
 
-  // const handleFilterChange = (category) => {
-  //   const filtered = category
-  //     ? allRestaurantes.filter(restaurante => restaurante.categoria.nombre_categoria === category)
-  //     : allRestaurantes;
-
-  //   if (filtered.length === 0 && category) {
-  //     setNoResults(true);
-  //   } else {
-  //     setNoResults(false);
-  //   }
-
-  //   setFilteredRestaurantes(filtered);
-  // };
-
   const handleViewDetails = (id) => {
     console.log(id + 'id');
     
@@ -59,8 +45,8 @@ const ListaRestaurantesPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-24">
-      <div className="mb-10">
+    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+      <div className="">
         <Banner 
           title="Restaurantes" 
           subtitle="Descubre nuestras opciones" 
@@ -90,19 +76,6 @@ const ListaRestaurantesPage = () => {
           backgroundColor: 'transparent' 
         }}>
           {noResults ? (
-            // <div style={{ 
-            //   padding: '24px', 
-            //   backgroundColor: '#fff', 
-            //   borderRadius: '8px', 
-            //   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
-            // }}>
-            //   <Alert
-            //     message="No se encontraron resultados"
-            //     description="No hay restaurantes que coincidan con los filtros aplicados. Intenta ajustar tus criterios de búsqueda."
-            //     type="warning"
-            //     showIcon
-            //   />
-            // </div>
             <div className='flex flex-col gap-28'>
             <Skeleton />
             <Skeleton />

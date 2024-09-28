@@ -1,9 +1,9 @@
 import React from "react";
-import videoBG from "@/public/Villa.mp4";
-import { Button } from "antd";
+import BotonQueEncuentras from "./BotonQueEncuentras";
 export default function MainVideo() {
   const video =
     "https://mvulbmjlvpjujjfvffph.supabase.co/storage/v1/object/public/video/Villa.mp4?t=2024-08-30T20%3A59%3A06.243Z";
+
   return (
     <div className="w-full h-[100vh] relative">
       <div className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.4)]"></div>
@@ -25,12 +25,7 @@ export default function MainVideo() {
           recargar energías. Un destino ideal para amantes de la naturaleza y la
           paz.
         </p>
-        <button
-          type="button"
-          class="font-bold text-white border border-[--verde] bg-[--verde-oscuro] focus:ring-4 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-        >
-          Ver más
-        </button>
+        <BotonQueEncuentras/>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { FaWhatsapp, FaMapMarkerAlt } from "react-icons/fa";
-import { FaClock, FaHouse, FaSun } from "react-icons/fa6";
+import { FaWhatsapp } from "react-icons/fa6";
+import { ClockCircleOutlined, HomeOutlined, SunOutlined, EnvironmentOutlined, PhoneOutlined } from "@ant-design/icons";
 
 export default function Item({ informacion, type }) {
   return (
@@ -23,15 +23,15 @@ export default function Item({ informacion, type }) {
                   : informacion?.titulo}
               </h1>
               <h2 className="text-left font-normal flex items-center md:justify-start gap-1 text-sm">
-                <FaMapMarkerAlt size={12} />
+                <EnvironmentOutlined size={12} />
                 {informacion?.ubicacion}
               </h2>
               <h2 className="font-normal flex items-center md:justify-start gap-1 text-sm">
-                <FaWhatsapp size={12} />
+                <PhoneOutlined size={12} />
                 {informacion?.celular?.substring(0, 12)}
               </h2>
               <h3 className="font-normal flex items-center md:justify-start gap-1 text-sm">
-                <FaHouse size={12} /> Hasta
+                <HomeOutlined size={12} /> Hasta
                 <span className="font-extrabold">{informacion.capacidad}</span>
                 personas
               </h3>
@@ -55,15 +55,15 @@ export default function Item({ informacion, type }) {
                   : informacion?.titulo}
               </h1>
               <h2 className="font-normal flex items-center justify-start text-left gap-0.5">
-                <FaMapMarkerAlt size={10} />
+                <EnvironmentOutlined size={10} />
                 {informacion?.ubicacion}
               </h2>
               <h2 className="font-normal flex items-center gap-0.5 text-left">
-                <FaClock size={10} />
+                <ClockCircleOutlined size={10} />
                 Lunes a Viernes: {informacion?.horario_semanal}
               </h2>
               <h2 className="font-normal flex items-center gap-0.5 text-left">
-                <FaSun size={10} />
+                <SunOutlined size={10} />
                 Sábados: {informacion?.horario_finde}
               </h2>
             </div>
@@ -114,11 +114,11 @@ export default function Item({ informacion, type }) {
                   : informacion?.titulo}
               </h1>
               <h2 className="font-normal flex items-center gap-0.5">
-                <FaClock size={10} />
+                <ClockCircleOutlined size={10} />
                 Horario {informacion?.horario}
               </h2>
               <h2 className="font-normal flex items-center gap-0.5">
-                <FaMapMarkerAlt size={10} />
+                <EnvironmentOutlined size={10} />
                 {informacion?.titulo?.substring(4)}
               </h2>
             </div>
