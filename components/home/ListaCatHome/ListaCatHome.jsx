@@ -1,5 +1,6 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Tabs } from 'antd';
 import { FaHouse } from "react-icons/fa6";
 import { FaRegNewspaper } from "react-icons/fa";
@@ -39,21 +40,21 @@ const items = [
 
 export default function ListaCategorias() {
   const [isMobile, setIsMobile] = useState(false);
-  const isAvailable = useRef(false);
+
  
   useEffect(() => {
-    isAvailable.current = typeof window !== "undefined" && window.location.search;
-    const handleResize = () => {
-      if(isAvailable)
-      setIsMobile(window.innerWidth < 768); 
-    };
+    if (typeof window !== 'undefined') { // Check if window is available
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768); 
+      };
 
-    window.addEventListener('resize', handleResize);
-    handleResize(); 
+      window.addEventListener('resize', handleResize);
+      handleResize(); 
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
   }, []);
 
   return (
