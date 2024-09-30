@@ -3,16 +3,8 @@
 import React from 'react';
 import { Card, List, Button, Alert } from 'antd';
 import { ClockCircleOutlined, EnvironmentOutlined, InfoCircleOutlined, PhoneOutlined } from '@ant-design/icons';
-import { ClockCircleOutlined, EnvironmentOutlined, InfoCircleOutlined, PhoneOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
-
-const truncateText = (text, maxLength) => {
-  if (text && text.length > maxLength) {
-    return text.slice(0, maxLength) + '...';
-  }
-  return text;
-};
 
 const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
   if (restaurantes.length === 0) {
@@ -40,10 +32,8 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
             onClick={() => onViewDetails(restaurante.id_Restaurant)}
             hoverable
             className='flex justify-center sm:justify-start flex-col items-center md:flex-row md:flex-nowrap'
-            className='flex justify-center sm:justify-start flex-col items-center md:flex-row md:flex-nowrap'
             style={{
               width: '100%',
-              padding: '12px',
               padding: '12px',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
               borderRadius: '4px',
@@ -78,22 +68,20 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
               e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
             }}
           >
-            <div className='flex flex-wrap sm:max-w-56 md:max-w-72 lg:max-w-[40em] mb-6'>
+            <div style={{ flex: 1, marginBottom: '16px' }}>
               <Meta
                 title={restaurante.titulo || 'Título no disponible'}
                 description={
                   <>
                     <div><EnvironmentOutlined /> {restaurante.ubicacion || 'Ubicación no disponible'}</div>
-                    <div className='relative flex flex-wrap'><InfoCircleOutlined /> Descripción: {truncateText(restaurante.descripcion || 'No disponible', 80)}</div>
+                    <div><InfoCircleOutlined /> Descripción: {restaurante.descripcion || 'No disponible'}</div>
                     <div><ClockCircleOutlined /> Horarios: {restaurante.horario_semanal || 'No disponible'}</div>
-                    <div><PhoneOutlined /> Contacto: {restaurante.celular || 'No disponible'}</div>
                     <div><PhoneOutlined /> Contacto: {restaurante.celular || 'No disponible'}</div>
                   </>
                 }
               />
             </div>
             <div
-              className='flex sm:justify-start justify-center mt-auto'
               className='flex sm:justify-start justify-center mt-auto'
             >
               <Button type="primary" onClick={() => onViewDetails(restaurante.id_Restaurant)}>
