@@ -29,8 +29,6 @@ const ActividadCard = ({ actividad }) => {
         <div
           className="m-auto"
           style={{
-            height: "300px",
-            width: "350px",
             overflow: "hidden",
             borderRadius: "12px",
             position: "relative",
@@ -43,7 +41,7 @@ const ActividadCard = ({ actividad }) => {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              borderRadius: "12px",
+              borderRadius: "8px",
             }}
           />
         </div>
@@ -56,12 +54,12 @@ const ActividadCard = ({ actividad }) => {
         marginBottom: "24px",
         backgroundColor: "#FFFFFF",
         borderRadius: "12px",
-        padding: "16px",
+        padding: "12px",
       }}
     >
       <Meta
         title={
-          <div style={{ fontSize: "20px", fontWeight: "bold" }}>{titulo}</div>
+          <div style={{ fontSize: "20px", fontWeight: "bold"}}>{titulo}</div>
         }
         description={
           <>
@@ -83,7 +81,7 @@ const ActividadCard = ({ actividad }) => {
               style={{
                 marginTop: "16px",
                 height: "auto",
-                overflow: "hidden",
+                overflow: "auto",
                 textOverflow: "ellipsis",
               }}
             >

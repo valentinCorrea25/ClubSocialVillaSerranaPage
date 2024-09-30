@@ -10,7 +10,7 @@ const ActividadPage = () => {
   const { todasLasActividades } = useContext(ClientContext);
   const [actividades, setActividades] = useState();
   const [noResults, setNoResults] = useState(false);
-  const appStyle = { padding: "40px", margin: "0 auto", width: "100%" };
+  const appStyle = { padding: "10px", margin: "0 auto", width: "100%" };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +38,7 @@ const ActividadPage = () => {
         backgroundImage="/images/actividad.jpg"
       />
       {!noResults ? (
-        <div className="flex items-center justify-center gap-10">
+        <div className="flex items-center justify-center flex-col md:flex-row gap-10">
           <Skeleton className="w-72" paragraph title/>
           <Skeleton className="w-72" paragraph title/>
           <Skeleton className="w-72" paragraph title/>
