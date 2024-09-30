@@ -30,9 +30,9 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails }) => {
           <Card
             onClick={() => onViewDetails(alojamiento.id_Alquiler)}
             hoverable
+            className="flex md:flex-row flex-col justify-center sm:justify-start sm:p-4 p-2"
             style={{
               width: "100%",
-              padding: "16px",
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
               borderRadius: "4px",
               display: "flex",
@@ -68,29 +68,29 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails }) => {
               e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
             }}
           >
-            <div style={{ flex: 1 }}>
+            <div >
               <Meta
                 title={alojamiento.titulo || "Título no disponible"}
                 description={
                   <>
                     <div>
-                      <EnvironmentOutlined />{" "}
+                      <EnvironmentOutlined />
                       {alojamiento.ubicacion || "Ubicación no disponible"}
                     </div>
                     <div>
-                      <UserOutlined /> Capacidad:{" "}
+                      <UserOutlined /> Capacidad:
                       {alojamiento.capacidad || "No especificado"}
                     </div>
-                    <div>
-                      Precio:{" "}
+                   {alojamiento.precio ? <div>
+                      Precio:
                       {alojamiento.precio !== undefined
                         ? `$${alojamiento.precio}`
                         : "No especificado"}
-                    </div>
+                    </div> : null}
                     <div>
                       Descripción: {alojamiento.descripcion || "No disponible"}
                     </div>
-                    <div>
+                    <div className="flex flex-wrap sm:max-w-52 md:max-w-80 lg:max-w-[40em]">
                       {(() => {
                         const comodidades = [];
 
@@ -128,7 +128,7 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails }) => {
               <Button
                 type="primary"
                 onClick={() => onViewDetails(alojamiento.id_Alquiler)}
-                style={{ marginTop: "16px" }}
+                className="mt-7 m-auto sm:ml-0"
               >
                 Ver Detalles
               </Button>

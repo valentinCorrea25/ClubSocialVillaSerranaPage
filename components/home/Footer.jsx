@@ -4,9 +4,9 @@ import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
 // Redes Sociales
 const EnlacesRedesSociales = () => (
-  <div className="flex items-center justify-center md:justify-end space-x-3 mt-4 md:mt-0 ml-7 pt-2">
-    <a href="https://www.instagram.com/club_villa_serrana/" target="_blank" rel="noopener noreferrer" className="transition-transform duration-300 transform hover:scale-110 hover:text-pink-600"> <FaInstagram size="2em" /></a>
-    <a href="https://www.facebook.com/ClubVillaSerrana/" target="_blank" rel="noopener noreferrer" className="transition-transform duration-300 transform hover:scale-110 hover:text-blue-600"> <FaFacebook size="2em" /></a>
+  <div className="flex items-center justify-center md:justify-end space-x-3 md:ml-7  mt-4 md:mt-0 pt-2">
+    <a href="https://www.instagram.com/club_villa_serrana/" target="_blank" rel="noopener noreferrer" className="transition-transform duration-300 transform hover:scale-110 hover:text-pink-600"> <FaInstagram size="2.5em" /></a>
+    <a href="https://www.facebook.com/ClubVillaSerrana/" target="_blank" rel="noopener noreferrer" className="transition-transform duration-300 transform hover:scale-110 hover:text-blue-600"> <FaFacebook size="2.5em" /></a>
   </div>
 );
 

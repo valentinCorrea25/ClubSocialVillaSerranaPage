@@ -56,7 +56,7 @@ const DetalleAlojamientos = () => {
 
   return (
     <Suspense>
-      <div className="container flex flex-col max-w-screen-xl bg-[#F9F6EE] px-12 sm:px-16 lg:px-24 py-24 m-auto h-full ">
+      <div className="container flex flex-col max-w-screen-xl bg-[#F9F6EE] px-3 sm:px-16 lg:px-24 py-10 m-auto h-full ">
         <div className="mb-14">
           <Banner
             title="Alojamientos"

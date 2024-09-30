@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Table, Dropdown, Space } from "antd";
 import useSWR, { useSWRConfig } from "swr";
 import { MenuOutlined } from "@ant-design/icons";
-import EditarPublicacionModal from "./modals/EditarPublicacionModal";
 import { useRouter } from "next/navigation";
+import EditarPublicacionModal from "./modals/EditarPublicacionModal";
 import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
 import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
 
@@ -27,7 +27,6 @@ export default function App() {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  // Key for SWR
   const key = `/api/listapublicaciones?page=${page}`;
   const { data, error, isLoading } = useSWR(key, fetcher);
 
@@ -35,16 +34,17 @@ export default function App() {
     mutate(key, data);
   }
 
+
   const columns = [
     {
       title: "Portada",
-      dataIndex: "fotos", // Elige el campo principal que probablemente contenga los datos
+      dataIndex: "fotos",
       key: "portada",
       render: (text, record) => {
-        const fotos = record.fotos || record.foto; // Verifica si existe 'fotos' o 'foto'
-        const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos; // Si es array, usa la primera imagen
+        const fotos = record.fotos || record.foto;
+        const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos;
         return fotoSrc ? (
-          <img src={fotoSrc} alt="Portada" style={{ width: "100px" }} />
+          <img src={fotoSrc} alt="Portada" style={{ width: "60px", height: "60px", objectFit: "cover" }} />
         ) : null;
       },
     },
@@ -52,33 +52,24 @@ export default function App() {
       title: "Titulo",
       dataIndex: "titulo",
       key: "titulo",
-      fixed: "left",
-      elipsis: true,
-      render: (text) => (
-        <div
-          style={{
-            maxWidth: "200px", // Tamaño máximo ajustable
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-          title={text} // Esto mostrará el título completo al pasar el ratón
-        >
-          {text}
-        </div>
-      ),
-    },
-
+      ellipsis: true,
+      render: (titulo) => {
+        const maxLength = 30;
+        const truncatedTitle = titulo.length > maxLength 
+          ? `${titulo.substring(0, maxLength)}...`
+          : titulo;
+    
+        return truncatedTitle;
+      }
+    },    
     {
-      title: "Tipo de Publicación",
+      title: "Tipo",
       key: "tipoPublicacion",
+      ellipsis: true,
       render: (text, record) => {
-        // Busca el campo que empieza por "id_"
         const tipoPublicacion = Object.keys(record).find((key) =>
           key.startsWith("id_")
         );
-
-        // Si se encuentra un campo, recorta el prefijo "id_" para mostrar el tipo de publicación
         return tipoPublicacion
           ? tipoPublicacion.replace("id_", "")
           : "Desconocido";
@@ -88,23 +79,24 @@ export default function App() {
       title: "Ubicación",
       dataIndex: "location",
       key: "location",
+      ellipsis: true,
       render: (location) => (
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${location}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Ver en Google Maps
+          Ver mapa
         </a>
       ),
     },
     {
-      title: "Fecha de publicacion",
+      title: "Fecha",
       dataIndex: "fecha_publicacion",
       key: "fecha_publicacion",
+      ellipsis: true,
       render: (fechaPublicacion) => {
         const opciones = {
-          weekday: "long",
           year: "numeric",
           month: "short",
           day: "numeric",
@@ -115,90 +107,65 @@ export default function App() {
     {
       title: "Opciones",
       key: "options",
+      width: '10%',
       render: (text, record) => {
         const tipoPublicacion = Object.keys(record).find((key) =>
           key.startsWith("id_")
         );
-
-        // Recortar el prefijo "id_" para obtener el tipo de publicación
         const tipoSinPrefijo = tipoPublicacion
           ? tipoPublicacion.replace("id_", "")
           : "desconocido";
-
-        // Extraer el ID de la publicación
         const id = record[tipoPublicacion];
-
+  
         const items = [
           {
             label: (
               <a href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)} target="_blank">
-              <div
-                // onClick={() =>
-                //   router.push(obtenerDireccionDePublicacion(tipoSinPrefijo, id))
-                // }
-              >
-                Ver Publicacion
-              </div>
+                Ver
               </a>
             ),
             key: "0",
           },
           {
-            label: (
-              <div onClick={() => showModalEditar(record)}>
-                Editar Publicacion
-              </div>
-            ),
+            label: <span onClick={() => showModalEditar(record)}>Editar</span>,
             key: "1",
           },
           {
-            type: "divider",
-          },
-          {
-            label: (
-              <div onClick={() => showModalEliminar(record)}>
-                Eliminar Publicacion
-              </div>
-            ),
+            label: <span onClick={() => showModalEliminar(record)}>Eliminar</span>,
             key: "3",
             danger: true,
           },
         ];
-
+  
         return (
-          <div className="flex justify-center">
-            <Dropdown menu={{ items }} trigger={["click"]}>
-              <a onClick={(e) => e.preventDefault()}>
-                <Space align="center">
-                  <MenuOutlined size="lg" />
-                </Space>
-              </a>
-            </Dropdown>
-          </div>
+          <Dropdown menu={{ items }} trigger={["click"]}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <MenuOutlined />
+              </Space>
+            </a>
+          </Dropdown>
         );
       },
     },
   ];
 
   return (
-    <>
-      <div className="App">
-        <Table
-          style={{ padding: "20px" }}
-          dataSource={data ? data.publicaciones : []}
-          columns={columns}
-          loading={isLoading}
-          rowKey="id"
-          pagination={{
-            current: page,
-            total: data ? data.count : 0, // Asegúrate de que totalCount es el total de registros (160)
-            pageSize: 30, // Establece el tamaño de página actual
-            onChange: (newPage) => {
-              setPage(newPage); // Cambiar la página actual
-            },
-          }}
-        />
-      </div>
+    <div className="overflow-x-auto">
+      <Table
+        dataSource={data ? data.publicaciones : []}
+        columns={columns}
+        loading={isLoading}
+        rowKey="id"
+        pagination={{
+          current: page,
+          total: data ? data.count : 0,
+          pageSize: 30,
+          onChange: (newPage) => setPage(newPage),
+        }}
+        size="small"
+        scroll={{ x: true }}
+      />
       <EditarPublicacionModal
         updateData={updateData}
         selectedItem={selectedItem}
@@ -211,6 +178,6 @@ export default function App() {
         isModalOpen={isModalOpenEliminar}
         setIsModalOpen={setIsModalOpenElimininar}
       />
-    </>
+    </div>
   );
 }
