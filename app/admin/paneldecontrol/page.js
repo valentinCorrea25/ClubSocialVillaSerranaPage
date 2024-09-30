@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
-import { Button } from "antd";
+import { Button, Layout } from "antd";
 import { useRouter } from "next/navigation";
-import { Menu, Switch } from 'antd';
+import { Menu, Switch } from "antd";
 import { FaHouse } from "react-icons/fa6";
 import { FaRegNewspaper } from "react-icons/fa";
 import { AiOutlineRead } from "react-icons/ai";
@@ -12,11 +12,22 @@ import { FaPeopleCarry } from "react-icons/fa";
 import { GiKnifeFork } from "react-icons/gi";
 import { FaUserEdit } from "react-icons/fa";
 import Alquileres from "@/components/panelDeControl/Alquileres";
+import {
+  CloseOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
 import CrearNuevoUsuario from "@/components/panelDeControl/CrearNuevoUsuario";
 import NoticiasEA from "@/components/panelDeControl/NoticiasEA";
 import TodasLasPublicaciones from "@/components/panelDeControl/TodasLasPublicaciones";
 import Servicios from "@/components/panelDeControl/Servicios";
 import Restaurantes from "@/components/panelDeControl/Restaurantes";
+import Sider from "antd/es/layout/Sider";
+import { Footer, Header, Content } from "antd/es/layout/layout";
+import useWindowSize from "@/components/utils/useWindowSize";
 
 export default function PanelDeControl() {
   const [currentComponent, setCurrentComponent] = useState(
@@ -24,7 +35,10 @@ export default function PanelDeControl() {
   );
   const [currentTitle, setCurrentTitle] = useState("Todas las Publicaciones");
   const router = useRouter();
-  const [current, setCurrent] = useState('1');
+  const [current, setCurrent] = useState("1");
+  const [collapsed, setcollapsed] = useState(false);
+  const colorBgContainer = "#fff";
+  const windowsize = useWindowSize();
 
   const items = [
     {
@@ -55,27 +69,27 @@ export default function PanelDeControl() {
 
   function setComponent(component) {
     switch (component) {
-      case 'tmp-0':
+      case "tmp-0":
         setCurrentComponent("TodasLasPublicaciones");
         setCurrentTitle("Todas las publicaciones");
         break;
-      case 'tmp-1':
+      case "tmp-1":
         setCurrentComponent("Alquileres");
         setCurrentTitle("Alquileres");
         break;
-      case 'tmp-2':
+      case "tmp-2":
         setCurrentComponent("Restaurantes");
         setCurrentTitle("Restaurantes");
         break;
-      case 'tmp-3':
+      case "tmp-3":
         setCurrentComponent("NoticiasEA");
         setCurrentTitle("Noticias, Activiadades y Eventos");
         break;
-      case 'tmp-4':
+      case "tmp-4":
         setCurrentComponent("Servicios");
         setCurrentTitle("Servicios");
         break;
-      case 'tmp-5':
+      case "tmp-5":
         setCurrentComponent("CrearNuevoUsuario");
         setCurrentTitle("Crear nuevo usuario");
         break;
@@ -107,49 +121,73 @@ export default function PanelDeControl() {
   };
 
   return (
-    <div className="flex md:flex-row flex-col">
-      {/* Menú lateral en pantallas grandes y navbar en pantallas pequeñas */}
-      <div className="md:h-full md:min-h-[100vh] md:w-[25%] w-full bg-[--verde-menu] border-x-4 border-[--verde-oscuro-alternativo] flex flex-col justify-between">
-        <div>
-          <div className="md:w-1/3 h-1/6 m-auto md:my-16 my-5">
-            <Image
-              src={logo}
-              width={0}
-              height={0}
-              className="md:w-[100%] w-1/2"
-              alt="Logo Villa Serrana Club Social y Deportivo"
-            />
-          </div>
-          <h1 className="text-center font-bold text-3xl my-5">Menu</h1>
-          <>
-            <Menu
-              onClick={onClick}
-              selectedKeys={[current]}
-              mode="vertical"
-              items={items}
-            />
-          </>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        breakpoint="lg"
+        collapsedWidth="0"
+        style={{
+          ...(windowsize.width > 768
+            ? {
+                position: "fixed",
+                background: "#fff",
+                left: 0,
+                top: 0,
+                bottom: 0,
+                zIndex: 1,
+              }
+            : {
+                position: "absolute",
+                background: "#fff",
+                left: 0,
+                top: 0,
+                bottom: 0,
+                zIndex: 1,
+              }),
+        }}
+      >
+        <div className="max-w-24 m-auto relative">
+          <Image
+            src={logo}
+            width={0}
+            height={0}
+            className="md:w-[100%] w-full py-5 relative"
+            alt="Logo Villa Serrana Club Social y Deportivo"
+          />
+          <div className="absolute right-[-75%] top-5 transition-all ease-in-out opacity-100 block md:opacity-0 md:hidden pointer-events-none"> <CloseOutlined className="scale-125" /> </div>
         </div>
 
-        <div className="flex justify-center flex-col">
-          <div className="text-center py-4">Usuario: {"Martin"}</div>
-          <Button
-            size="large"
-            className="w-full mb-4 py-2 bg-[--verde-menu-claro] border-0"
-            onClick={() => router.push("/admin")}
+        <Menu
+          className="bg-white"
+          theme="light"
+          mode="inline"
+          defaultActiveFirst
+          defaultSelectedKeys={["4"]}
+          onClick={onClick}
+          items={items}
+        />
+      </Sider>
+      <Layout
+        style={{
+          marginLeft: windowsize.width > 768 && !collapsed ? 200 : 0,
+          transition: "margin-left 0.2s",
+        }}
+      >
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <div
+            className="trigger"
+            onClick={() => setcollapsed(!collapsed)}
+            style={{ padding: "0 24px", fontSize: "18px", cursor: "pointer" }}
           >
-            Salir
-          </Button>
-        </div>
-      </div>
-
-      {/* Parte del sector seleccionado que es renderizada */}
-      <div className="w-full">
-        <div className="bg-blue-400 w-full p-10 text-3xl">{currentTitle}</div>
-
-        {/* Página que se está renderizando */}
-        {renderComponent()}
-      </div>
-    </div>
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </div>
+        </Header>
+        <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+          {renderComponent()}
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
