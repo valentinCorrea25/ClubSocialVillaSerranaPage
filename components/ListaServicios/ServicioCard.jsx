@@ -10,16 +10,16 @@ const ServicioCard = ({ servicio }) => {
   return (
     <Card
       hoverable
+      className='sm:h-[420px] sm:p-5'
       style={{
         width: '100%',
         maxWidth: '500px',
         height:'420px',
         margin: '0 auto',
         marginBottom: '24px',
-        borderRadius: '12px',
+        borderRadius: '8px',
         boxShadow: '0 6px 12px rgba(0,0,0,0.2)', 
         backgroundColor: '#FFFFFF',
-        padding: '16px',
         border: '2px solid #09A603' 
       }}
     >

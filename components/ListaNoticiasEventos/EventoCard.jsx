@@ -18,37 +18,38 @@ const EventoCard = ({ evento }) => {
 
   return (
     <Card
-      hoverable
-      cover={
-        <div
+    hoverable
+    cover={
+      <div
+        className="m-auto"
+        style={{
+          overflow: "hidden",
+          borderRadius: "12px",
+          position: "relative",
+        }}
+      >
+        <img
+          alt={titulo}
+          src={foto}
           style={{
-            height: "250px",
-            overflow: "hidden",
-            borderRadius: "12px",
-            position: "relative",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "8px",
           }}
-        >
-          <img
-            alt={titulo}
-            src={foto}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "12px",
-            }}
-          />
-        </div>
-      }
-      style={{
-        width: "100%",
-        maxWidth: "700px",
-        margin: "0 auto",
-        marginBottom: "24px",
-        backgroundColor: "#FFFFFF",
-        borderRadius: "12px",
-        padding: "16px",
-      }}
+        />
+      </div>
+    }
+    style={{
+      width: "100%",
+      height: "650px",
+      maxWidth: "500px",
+      margin: "0 auto",
+      marginBottom: "24px",
+      backgroundColor: "#FFFFFF",
+      borderRadius: "12px",
+      padding: "12px",
+    }}
     >
       <Meta
         title={

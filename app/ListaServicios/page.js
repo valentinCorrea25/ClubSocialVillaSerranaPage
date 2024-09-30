@@ -54,7 +54,7 @@ const ServiciosPage = () => {
 
   return (
     <Layout>
-      <Content style={{ padding: "40px 24px" }}>
+      <Content style={{ padding: "40px 10px" }}>
         <Banner
           title="¡Bienvenido a Nuestros Servicios!"
           subtitle="Descubre nuestras ofertas y encuentra lo que necesitas."
@@ -67,11 +67,11 @@ const ServiciosPage = () => {
           />
         </div>
         {noResults ? (
-          <div style={{ padding: "24px" }}>
+          <div>
             <ServiciosList servicios={filteredServicios} />
           </div>
         ) : (
-          <div className="flex items-center justify-center gap-10">
+          <div className="flex items-center justify-center flex-col md:flex-row gap-10">
             <Skeleton className="w-72" paragraph title />
             <Skeleton className="w-72" paragraph title />
             <Skeleton className="w-72" paragraph title />

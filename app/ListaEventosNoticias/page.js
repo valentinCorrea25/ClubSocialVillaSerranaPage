@@ -8,7 +8,7 @@ import { Skeleton } from "antd";
 
 const EventosPage = () => {
   const { todasLasNoticiasEventos } = useContext(ClientContext);
-  const appStyle = { padding: "40px", margin: "0 auto", maxWidth: "1200px" };
+  const appStyle = { padding: "10px", margin: "0 auto", maxWidth: "1200px" };
   const [noticiasEventos, setNoticiasEventos] = useState();
   const [noResults, setNoResults] = useState(false);
 
@@ -40,7 +40,7 @@ const EventosPage = () => {
       />
 
       {!noResults ? (
-        <div className="flex items-center justify-center gap-10">
+        <div className="flex items-center justify-center flex-col md:flex-row gap-10">
           <Skeleton className="w-72" paragraph title/>
           <Skeleton className="w-72" paragraph title/>
           <Skeleton className="w-72" paragraph title/>
