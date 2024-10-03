@@ -59,11 +59,11 @@ const DetalleRestaurantes = () => {
     <Suspense>
       <div className="flex flex-col min-h-screen max-w-screen-xl m-auto bg-[#F9F6EE] px-3 sm:px-12 lg:px-20 py-24">
         <div className="mb-10">
-          <Banner 
+          {/* <Banner 
             title="Restaurantes" 
             subtitle="Descubre nuestras opciones" 
             backgroundImage="/images/restaurantes.jpg" 
-          />
+          /> */}
         </div>
 
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">

@@ -41,7 +41,7 @@ export default function ListaItems({ type }) {
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
         {displayedItems.length > 0 ? (
           displayedItems.map((item, index) => (
             <div className=" p-4 text-center" key={index}>

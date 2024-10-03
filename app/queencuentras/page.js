@@ -2,6 +2,8 @@
 import React from "react";
 import ImageComponent from "@/components/QueEncuentras/ImageComponent";
 import TextComponent from "@/components/QueEncuentras/TextComponent";
+import { Button } from "antd";
+import { useRouter } from "next/navigation";
 
 const QueEncuentras = () => {
   const categories = [
@@ -20,7 +22,7 @@ const QueEncuentras = () => {
       link: "/ListaRestaurantes",
     },
     {
-      name: "Explora la Naturaleza en Villa Serrana",
+      name: "Explora las Actividades en Villa Serrana",
       description:
         "Villa Serrana es un destino ideal para quienes buscan conectarse con la naturaleza. Las actividades al aire libre incluyen caminatas por los cerros Guazubirá y Bella Vista, paseos alrededor del lago Enrique Stewart Vargas, y exploración de los valles y arroyos que rodean la villa. Los visitantes pueden disfrutar de la observación de aves, la fotografía paisajística, y el simple placer de caminar por senderos que se entrelazan con la flora autóctona. La falta de urbanización masiva ha permitido que Villa Serrana conserve su pureza natural, ofreciendo un refugio de tranquilidad y belleza.",
       image: "/images/banneractividad.jpg",
@@ -41,6 +43,7 @@ const QueEncuentras = () => {
       link: "/ListaServicios",
     },
   ];
+  const router = useRouter();
 
   return (
     <div className="p-5 max-w-screen-xl mx-auto">
@@ -70,11 +73,12 @@ const QueEncuentras = () => {
             />
             </div>
           </a>
-          <div className="sm:max-w-[50vh]">
+          <div className="sm:max-w-[50vh] flex flex-col">
             <TextComponent className="w-full sm:w-1/2">
               <h2 className="text-2xl font-bold mb-3">{category.name}</h2>
               <p className="text-gray-700">{category.description}</p>
             </TextComponent>
+            <Button className="w-auto m-auto" onClick={()=>{router.push(category.link)}}>Ver mas {category.name}</Button>
           </div>
         </div>
       ))}
