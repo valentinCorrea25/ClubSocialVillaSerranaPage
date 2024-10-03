@@ -23,7 +23,7 @@ const PublicacionesSimilares = ({ restaurantes }) => {
   return (
     <Card
       title={
-        <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
+        <div style={{ backgroundColor: 'var(--verde-oscuro)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
           <div className="text-2xl font-bold text-center">Publicaciones Similares</div>
         </div>
       }

@@ -95,8 +95,8 @@ export default function Navbar() {
           <span className="sr-only">Open main menu</span>
         </button>
         <div className={`${isOpen ? 'block' : 'hidden'} w-full lg:block lg:w-auto`} id="navbar-default">
-          <ul className="font-bold flex flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-[--verde-menu-claro] lg:bg-[--blanco] lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0">
-            <li onClick={() => router.push('/')} className="block py-2 px-3 text-[--azul] rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">
+          <ul className="font-bold flex flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg lg:bg-[--blanco] lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0">
+            <li onClick={() => router.push('/')} className="block py-2 px-3 text-[--azul] rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0 border-b-4 border-[--verder-super-oscuro]">
               Home
             </li>
             <li>
@@ -123,10 +123,10 @@ export default function Navbar() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <a
-                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0 border-b-4 border-[--verder-super-oscuro]"
                   >
                     <Space className="flex items-center">
-                      <span className={`${isHovered ? 'text-[--verde]' : ''} transition-all`}>
+                      <span className= {`${isHovered ? 'text-[--verde]' : ''} transition-all `}>
                         Que encuentras
                       </span>
                       <DownOutlined
@@ -138,12 +138,12 @@ export default function Navbar() {
               </Dropdown>
             </li>
             <li>
-              <a href="/sobrenosotros" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">
+              <a href="/sobrenosotros" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0 border-b-4  border-[--verder-super-oscuro]">
                 Sobre Nosotros
               </a>
             </li>
             <li>
-              <a href="/contacto" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">
+              <a href="/contacto" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0 border-b-4 border-[--verder-super-oscuro]">
                 Contacto
               </a>
             </li>

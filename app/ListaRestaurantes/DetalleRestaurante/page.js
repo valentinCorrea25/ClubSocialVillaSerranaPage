@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { Spin } from 'antd'; // Importa el spinner de antd
 import { ClientContext } from '@/context/clientContext';
 import { Suspense } from 'react';
-import Banner from '@/components/ListaRestaurantes/DetalleRestaurante/Banner';
+
 import Informacion from '@/components/ListaRestaurantes/DetalleRestaurante/Informacion';
 import Carousel from '@/components/ListaRestaurantes/DetalleRestaurante/Carousel';
 import Descripcion from '@/components/ListaRestaurantes/DetalleRestaurante/Descripcion';
@@ -13,7 +13,7 @@ import Contacto from '@/components/ListaRestaurantes/DetalleRestaurante/Contacto
 import UbicacionMap from '@/components/ListaRestaurantes/DetalleRestaurante/UbicacionMap';
 import PublicacionesSimilares from '@/components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares';
 
-const DetalleRestaurantes = () => {
+const DetalleRestaurantes = (restaurante) => {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');  
   const { buscarRestaurant } = useContext(ClientContext);
@@ -57,13 +57,8 @@ const DetalleRestaurantes = () => {
 
   return (
     <Suspense>
-      <div className="flex flex-col min-h-screen max-w-screen-xl m-auto bg-[#F9F6EE] px-3 sm:px-12 lg:px-20 py-24">
+      <div className="flex flex-col min-h-screen max-w-screen-xl m-auto bg-[#F9F6EE] px-3 sm:px-12 lg:px-20 py-10">
         <div className="mb-10">
-          <Banner 
-            title="Restaurantes" 
-            subtitle="Descubre nuestras opciones" 
-            backgroundImage="/images/restaurantes.jpg" 
-          />
         </div>
 
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">

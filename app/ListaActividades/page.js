@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import ActividadesList from "@/components/ListaActividades/ActividadesList";
-import Banner from "@/components/ListaActividades/Banner";
+import Banner from "@/components/utils/Banners";
 import { ClientContext } from "@/context/clientContext";
 import { Skeleton } from "antd";
 

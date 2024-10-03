@@ -7,7 +7,7 @@ const UbicacionMap = ({ ubicacion }) => (
       <div
         className="text-2xl font-bold text-center"
         style={{
-          backgroundColor: "var(--azul)",
+          backgroundColor: "var(--verde-oscuro)",
           color: "var(--blanco)",
           padding: "16px",
           borderRadius: "4px",

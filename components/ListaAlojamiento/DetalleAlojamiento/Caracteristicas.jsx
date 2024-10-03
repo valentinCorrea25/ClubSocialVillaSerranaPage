@@ -17,7 +17,7 @@ const CaracteristicasAlojamiento = ({ alojamiento }) => {
     >
       <div
         style={{
-          backgroundColor: "var(--azul)",
+          backgroundColor: "var(--verde-oscuro)'",
           color: "var(--blanco)",
           padding: "16px",
           margin: "-16px -16px 16px -16px",
