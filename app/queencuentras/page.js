@@ -2,25 +2,27 @@
 import React from "react";
 import ImageComponent from "@/components/QueEncuentras/ImageComponent";
 import TextComponent from "@/components/QueEncuentras/TextComponent";
+import { Button } from "antd";
+import { useRouter } from "next/navigation";
 
 const QueEncuentras = () => {
   const categories = [
     {
-      name: "Hospedaje en Armonía con la Naturaleza",
+      name: "Hospedajecon la Naturaleza",
       description:
         "Los alojamientos en Villa Serrana están diseñados para integrarse perfectamente con el entorno natural. Aquí, las opciones van desde acogedoras cabañas de madera hasta elegantes hosterías que respetan la arquitectura tradicional. Muchos de estos lugares de hospedaje ofrecen vistas espectaculares a los cerros y valles, permitiendo a los visitantes despertar con el canto de las aves y disfrutar de la paz que caracteriza a la villa. La conexión con la naturaleza es parte esencial de la experiencia, con jardines autóctonos y terrazas que invitan al descanso y la contemplación.",
       image: "/images/banneralojamiento.jpg",
       link: "/ListaAlojamiento",
     },
     {
-      name: "Gastronomía Local en Villa Serrana",
+      name: "Gastronomía Local",
       description:
         "En Villa Serrana, la experiencia culinaria está íntimamente ligada a su entorno natural. Los restaurantes de la zona ofrecen una cocina que refleja la riqueza del paisaje, utilizando ingredientes frescos y locales para crear platos que deleitan a los visitantes. En un entorno sereno, los comensales pueden disfrutar de una comida que combina sabores tradicionales con toques contemporáneos, todo mientras se sumergen en la tranquilidad de los cerros y la vegetación autóctona. Ya sea que busques un almuerzo al aire libre rodeado de naturaleza o una cena acogedora junto a una chimenea, Villa Serrana tiene opciones gastronómicas que se adaptan a cada gusto.",
       image: "/images/bannerrestaurante.jpg",
       link: "/ListaRestaurantes",
     },
     {
-      name: "Explora la Naturaleza en Villa Serrana",
+      name: "Explora las Actividades",
       description:
         "Villa Serrana es un destino ideal para quienes buscan conectarse con la naturaleza. Las actividades al aire libre incluyen caminatas por los cerros Guazubirá y Bella Vista, paseos alrededor del lago Enrique Stewart Vargas, y exploración de los valles y arroyos que rodean la villa. Los visitantes pueden disfrutar de la observación de aves, la fotografía paisajística, y el simple placer de caminar por senderos que se entrelazan con la flora autóctona. La falta de urbanización masiva ha permitido que Villa Serrana conserve su pureza natural, ofreciendo un refugio de tranquilidad y belleza.",
       image: "/images/banneractividad.jpg",
@@ -41,6 +43,7 @@ const QueEncuentras = () => {
       link: "/ListaServicios",
     },
   ];
+  const router = useRouter();
 
   return (
     <div className="p-5 max-w-screen-xl mx-auto">
@@ -70,11 +73,12 @@ const QueEncuentras = () => {
             />
             </div>
           </a>
-          <div className="sm:max-w-[50vh]">
+          <div className="sm:max-w-[50vh] flex flex-col">
             <TextComponent className="w-full sm:w-1/2">
               <h2 className="text-2xl font-bold mb-3">{category.name}</h2>
-              <p className="text-gray-700">{category.description}</p>
+              <p className="text-gray-700 md:text-left text-justify">{category.description}</p>
             </TextComponent>
+            <Button className="w-auto m-auto" onClick={()=>{router.push(category.link)}}>Ver mas {category.name}</Button>
           </div>
         </div>
       ))}

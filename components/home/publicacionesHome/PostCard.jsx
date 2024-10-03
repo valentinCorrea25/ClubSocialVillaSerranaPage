@@ -4,7 +4,7 @@ const PostCard = ({ post }) => {
 
   return (
 
-    <div className="bg-white p-6 rounded-sm shadow-lg">
+    <div className="bg-white p-6 rounded-sm shadow-lg max-w-[350px] ">
       <img src={post.foto} alt={post.titulo} className=" mx-auto py-3" />
       <h2 className="text-lg font-extrabold mb-2">{post.titulo}</h2>
       <p className="text-gray-700 text-sm text-justify"><CiCalendar className="inline "/> {post.contenido.substring(0, 140)}...
