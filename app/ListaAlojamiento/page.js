@@ -70,7 +70,7 @@ const ListaAlojamientosPage = () => {
     >
       <div
         style={{
-          padding: "40px",
+          padding: "10px",
           borderBottom: "1px solid #ddd",
           marginBottom: "64px",
           borderRadius: "4px",

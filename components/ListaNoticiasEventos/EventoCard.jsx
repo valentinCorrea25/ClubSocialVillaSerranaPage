@@ -42,8 +42,6 @@ const EventoCard = ({ evento }) => {
     }
     style={{
       width: "100%",
-      height: "650px",
-      maxWidth: "500px",
       margin: "0 auto",
       marginBottom: "24px",
       backgroundColor: "#FFFFFF",

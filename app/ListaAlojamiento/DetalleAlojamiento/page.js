@@ -57,8 +57,7 @@ const DetalleAlojamientos = () => {
   return (
       <Suspense>
         <div className="container flex flex-col max-w-screen-xl bg-[#F9F6EE] px-3 sm:px-16 lg:px-24 py-10 m-auto h-full "> 
-          <div className="mb-14"><Banner title="Alojamientos" subtitle="Descubre nuestras opciones" 
-          backgroundImage="/images/alojamiento.jpg" /></div>
+         
 
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10"> 
           <div className="lg:col-span-2 flex flex-col gap-8"> 
