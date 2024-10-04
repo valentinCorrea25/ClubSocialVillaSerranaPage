@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Input, Upload, Image, Checkbox, Select, Form } from "antd";
+import { getBase64 } from "../utils/ControlPublicaciones";
+import { AdminContext } from "@/context/adminContext";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -11,10 +13,7 @@ export default function Publicacion() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
-
-  const onSubmit = (values) => {
-    console.log(values);
-  };
+  const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -26,25 +25,54 @@ export default function Publicacion() {
 
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
-  const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
+  const handleFecha = (inputFecha) => {
+    const [dia, mes, año] = inputFecha.split("/");
+    return new Date(año, mes - 1, dia);
+  };
+
+  const onFinish = async (values) => {
+    try {
+      if (currentForm == 'eventos') {
+        const urls = await subirImagenesSupabase(
+          fileList,
+          "eventoNoticias",
+          values.titulo
+        );
+        values.fotos = urls;
+        if (values.fecha_evento) {
+          values.fecha_evento = handleFecha(values.fecha_evento);
+        }
+
+        const mensaje = await crearPublicacion(values, "eventosnoticias");
+        console.log(mensaje);
+      } else {
+
+        const urls = await subirImagenesSupabase(
+          fileList,
+          "actividades",
+          values.titulo
+        );
+        values.fotos = urls;
+
+        const mensaje = await crearPublicacion(values, "actividades");
+        console.log(mensaje);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-1 sm:p-4 md:p-10">
+    <div className="relative bg-gray-100 p-1 sm:p-4 md:p-10">
       <Form
-        onFinish={onSubmit}
-        className="bg-[--verde-menu-claro] p-6 md:p-10 rounded-lg shadow-md w-full max-w-lg flex flex-col"
+        onFinish={onFinish}
+        className="p-1 md:p-10 rounded-lg w-full max-w-lg flex flex-col mx-auto"
       >
         <h1 className="text-center text-xl md:text-2xl mb-6">
           Crear nueva publicación de Actividad o Eventos y Noticias
         </h1>
 
-        <div className="flex flex-col md:flex-row justify-between mb-4 space-y-2 md:space-y-0 md:space-x-2">
+        <div className="flex flex-col md:flex-row justify-between mb-4 space-y-2 md:space-y-0 md:space-x-2 max-w-screen-xl">
           <Button
             type={currentForm === "eventos" ? "primary" : "default"}
             onClick={() => setCurrentForm("eventos")}
@@ -91,7 +119,7 @@ export default function Publicacion() {
             {esEvento && (
               <Form.Item
                 label="Fecha Evento"
-                name="fechaEvento"
+                name="fecha_evento"
                 rules={[{ required: true }]}
               >
                 <Input placeholder="dd/mm/aaaa" />
@@ -100,7 +128,6 @@ export default function Publicacion() {
 
             <Form.Item label="Imágenes">
               <Upload
-                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
                 listType="picture-card"
                 fileList={fileList}
                 onPreview={handlePreview}
@@ -182,7 +209,6 @@ export default function Publicacion() {
 
             <Form.Item label="Imágenes">
               <Upload
-                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
                 listType="picture-card"
                 fileList={fileList}
                 onPreview={handlePreview}

@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req){
     const data = await req.json();
     console.log(data);
-    data.coordenadas = convertirAUrlEmbed(data.coordenadas);
+    // data.coordenadas = convertirAUrlEmbed(data.coordenadas);
     
 
     try {
@@ -14,6 +14,8 @@ export async function POST(req){
         })
     } 
     catch (error) {
+        console.log(error);
+        
         return NextResponse.json({
             message: 'Hubo un error al crear el Restaurant, contactar con desarollador',
             code: 500

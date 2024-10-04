@@ -6,12 +6,13 @@ import { Button, Layout } from "antd";
 import { useRouter } from "next/navigation";
 import { Menu, Switch } from "antd";
 import { FaHouse } from "react-icons/fa6";
-import { FaRegNewspaper } from "react-icons/fa";
+import { FaRegNewspaper, FaSignOutAlt } from "react-icons/fa";
 import { AiOutlineRead } from "react-icons/ai";
 import { FaPeopleCarry } from "react-icons/fa";
 import { GiKnifeFork } from "react-icons/gi";
 import { FaUserEdit } from "react-icons/fa";
 import Alquileres from "@/components/panelDeControl/Alquileres";
+import { signOut } from "next-auth/react";
 import {
   CloseOutlined,
   MenuFoldOutlined,
@@ -69,7 +70,7 @@ export default function PanelDeControl() {
     {
       key: "tmp-5",
       icon: <FaUserEdit />,
-      label: "Crear Nuevo Usuario",
+      label: "Control de Usuario",
     },
   ];
 
@@ -97,7 +98,7 @@ export default function PanelDeControl() {
         break;
       case "tmp-5":
         setCurrentComponent("CrearNuevoUsuario");
-        setCurrentTitle("Crear nuevo usuario");
+        setCurrentTitle("Control de Usuario");
         break;
     }
   }
@@ -126,8 +127,13 @@ export default function PanelDeControl() {
     setComponent(e.key);
   };
 
+  const handleLogout = () => {
+    signOut()
+    router.push("/admin");
+  };
+
   return (
-    <Layout style={{ minHeight: "100vh"}}>
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider
         trigger={null}
         collapsible
@@ -162,7 +168,10 @@ export default function PanelDeControl() {
             className="md:w-[100%] w-full py-5 relative"
             alt="Logo Villa Serrana Club Social y Deportivo"
           />
-          <div className="absolute right-[-75%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none"> <CloseOutlined className="scale-125" /> </div>
+          <div className="absolute right-[-75%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none">
+            
+            <CloseOutlined className="scale-125" />
+          </div>
         </div>
 
         <Menu
@@ -174,6 +183,18 @@ export default function PanelDeControl() {
           onClick={onClick}
           items={items}
         />
+        {!collapsed && (
+          <div style={{ position: "absolute", bottom: "20px", width: "100%" }}>
+            <Button
+              icon={<FaSignOutAlt />} 
+              onClick={handleLogout}
+              style={{ width: "100%", textAlign: "left" }}
+              className="border-none bg-[--blanco]"
+            >
+              Cerrar Sesión
+            </Button>
+          </div>
+        )}
       </Sider>
       <Layout
         style={{
@@ -190,7 +211,10 @@ export default function PanelDeControl() {
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </div>
         </Header>
-        <Content className="max-w-screen-xl" style={{ margin: "24px 16px 0", overflow: "initial" }}>
+        <Content
+          className="max-w-screen-xl"
+          style={{ margin: "24px 16px 0", overflow: "initial" }}
+        >
           {renderComponent()}
         </Content>
       </Layout>

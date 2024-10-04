@@ -15,7 +15,7 @@ model Servicio {
   descripcion       String
   mail              String
   celular           String
-  horario           String
+  horario           String?
   dia_Semana        String[]
   fecha_publicacion DateTime
   titulo_Servicio   ServicioTitulo
@@ -27,8 +27,8 @@ model Actividad {
   titulo            String
   contenido         String
   fotos             String[]
-  horario           String
-  ubicacion         String
+  horario           String?
+  ubicacion         String?
   dia_Semana        String[]
 }
 
@@ -37,7 +37,7 @@ model EventosNoticia {
   fecha_publicacion DateTime
   titulo            String
   contenido         String
-  foto              String
+  fotos             String[]
   fecha_evento      DateTime? // Que esto sea un check box que diga 'Es evento?' y que permita llenar este campo
 }
 
@@ -82,16 +82,16 @@ model Restaurant {
   celular           String
   mail              String
   descripcion       String
-  coordenadas       String
-  ubicacion         String
+  coordenadas       String?
+  ubicacion         String?
   tipo_pago         String[]
   titulo            String
-  horario_semanal   String
-  horario_finde     String
-  domingo           Boolean
-  instagram         String
-  facebook          String
-  web               String
+  horario_semanal   String?
+  horario_finde     String?
+  domingo           Boolean?
+  instagram         String?
+  facebook          String?
+  web               String?
   fotos             String[]
   fecha_publicacion DateTime
 }

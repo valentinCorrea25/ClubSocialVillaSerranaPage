@@ -53,7 +53,7 @@ const ServiciosPage = () => {
   );
 
   return (
-    <Layout>
+    <Layout className="bg-[--blanco]">
       <Content style={{ padding: "40px 10px" }}>
         <Banner
           title="¡Bienvenido a Nuestros Servicios!"
