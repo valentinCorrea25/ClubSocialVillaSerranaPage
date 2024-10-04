@@ -5,7 +5,7 @@ import { EnvironmentOutlined, FileTextOutlined, TagOutlined } from '@ant-design/
 const Informacion = ({ restaurante }) => (
   <Card
     title={
-      <div style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
+      <div style={{ backgroundColor: 'var(--verde-oscuro)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
         <div className="text-2xl font-bold text-center">{restaurante?.titulo || 'Título no disponible'}</div>
       </div>
     }

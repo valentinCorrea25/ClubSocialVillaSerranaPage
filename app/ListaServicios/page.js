@@ -4,7 +4,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Layout, Skeleton } from "antd";
 import ServiciosList from "@/components/ListaServicios/ServiciosList";
 import Buscador from "@/components/ListaServicios/Buscador";
-import Banner from "@/components/ListaServicios/Banner";
+import Banner from "@/components/utils/Banners";
 import { ClientContext } from "@/context/clientContext";
 
 const ServiciosPage = () => {
