@@ -13,7 +13,7 @@ const Carousel = ({ restaurante }) => {
     <div className="bg-white p-4 rounded-lg shadow-md">
       <AntdCarousel arrows infinite={false}>
         {fotos.map((foto, index) => (
-          <div key={index} className="relative w-full h-full">
+          <div key={index} className="flex justify-center items-center h-[500px] w-full">
             <img src={foto} alt={`${restaurante.Titulo} - ${index + 1}`} className="w-full h-full object-cover" />
           </div>
         ))}
