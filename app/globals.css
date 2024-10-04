@@ -55,3 +55,31 @@ body {
     text-wrap: balance;
   }
 }
+
+@media print {
+  .hidden-print {
+    display: none !important;
+  }
+  
+  body * {
+    visibility: hidden;
+  }
+  
+  .printable-area,
+  .printable-area * {
+    visibility: visible;
+  }
+  
+  .printable-area {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+}

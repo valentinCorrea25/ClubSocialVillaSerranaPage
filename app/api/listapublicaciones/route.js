@@ -1,110 +1,62 @@
 import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params }) {
-  const queryString = request.url.split("?")[1];
-  const queryParams = new URLSearchParams(queryString);
-  const pageValue = queryParams.get("page");
-  const page = pageValue ? parseInt(pageValue, 10) : 1;
-  const pageSize = 36;
-  const skip = (page - 1) * (pageSize / 6);
-  const take = parseInt(pageSize / 6);
+const PAGE_SIZE = 25;
+
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const text = searchParams.get("text") == ''  ? null : searchParams.get("text");
+  const take = Math.floor(PAGE_SIZE / 5);
+  const skip = (page - 1) * take;
+
+  console.log(text);
+  
 
   try {
-    const data = await prisma.$transaction(async (tx) => {
-      const servicios = await tx.servicio.findMany({
-        orderBy: {
-          fecha_publicacion: "desc",
-        },
-        skip,
-        take,
-      });
+    const whereClause = text != undefined
+      ? {
+          OR: [
+            { titulo: { contains: text, mode: "insensitive" } },
+          ],
+        }
+      : {};
 
-      const actividades = await tx.actividad.findMany({
-        orderBy: {
-          fecha_publicacion: "desc",
-        },
-        skip,
-        take,
-      });
+    const [servicios, actividades, eventosNoticias, restaurantes, alquileres] = await prisma.$transaction([
+      prisma.servicio.findMany({ where: whereClause, orderBy: { fecha_publicacion: "desc" }, take, skip }),
+      prisma.actividad.findMany({ where: whereClause, orderBy: { fecha_publicacion: "desc" }, take, skip }),
+      prisma.eventosNoticia.findMany({ where: whereClause, orderBy: { fecha_publicacion: "desc" }, take, skip }),
+      prisma.restaurant.findMany({ where: whereClause, orderBy: { fecha_publicacion: "desc" }, take, skip }),
+      prisma.alquiler.findMany({ where: whereClause, orderBy: { fecha_publicacion: "desc" }, take, skip }),
+    ]);
 
-      const eventosNoticias = await tx.eventosNoticia.findMany({
-        orderBy: {
-          fecha_publicacion: "desc",
-        },
-        skip,
-        take,
-      });
+    // Calcular el total de publicaciones de todos los modelos
+    const [serviciosCount, actividadesCount, eventosNoticiasCount, restaurantesCount, alquileresCount] = await Promise.all([
+      prisma.servicio.count({ where: whereClause }),
+      prisma.actividad.count({ where: whereClause }),
+      prisma.eventosNoticia.count({ where: whereClause }),
+      prisma.restaurant.count({ where: whereClause }),
+      prisma.alquiler.count({ where: whereClause }),
+    ]);
 
-      const restaurantes = await tx.restaurant.findMany({
-        orderBy: {
-          fecha_publicacion: "desc",
-        },
-        skip,
-        take,
-      });
+    const totalCount = serviciosCount + actividadesCount + eventosNoticiasCount + restaurantesCount + alquileresCount;
 
-      const alquileres = await tx.alquiler.findMany({
-        orderBy: {
-          fecha_publicacion: "desc",
-        },
-        skip,
-        take,
-      });
-
-      const totalACT = await prisma.actividad.count();
-      const totalALQ = await prisma.alquiler.count();
-      const totalRES = await prisma.restaurant.count();
-      const totalEVT = await prisma.eventosNoticia.count();
-      const totalSER = await prisma.servicio.count();
-
-      const total = totalACT + totalALQ + totalRES + totalEVT + totalSER;
-
-      return {
-        servicios,
-        actividades,
-        eventosNoticias,
-        restaurantes,
-        alquileres,
-        total,
-      };
-    });
-
-    // Aplana los arrays en un solo array
-    const allData = [
-      ...data.servicios,
-      ...data.actividades,
-      ...data.eventosNoticias,
-      ...data.alquileres,
-      ...data.restaurantes,
-    ];
-
-    // Ordena el array combinado por fecha de publicación
-    const sortedData = allData.sort((a, b) => {
-      const dateA = a.fecha_publicacion
-        ? new Date(a.fecha_publicacion)
-        : new Date(0);
-      const dateB = b.fecha_publicacion
-        ? new Date(b.fecha_publicacion)
-        : new Date(0);
-
-      return dateB.getTime() - dateA.getTime(); // Ordena de más reciente a más antiguo
-    });
+    // Combina y ordena los resultados
+    const allData = [...servicios, ...actividades, ...eventosNoticias, ...restaurantes, ...alquileres];
+    const sortedData = allData.sort((a, b) => new Date(b.fecha_publicacion || 0) - new Date(a.fecha_publicacion || 0));
 
     return NextResponse.json({
-      count: data.total,
-      next: `/api/listapublicaciones?page=${parseInt(page) + 1}`,
-      previous:
-        page > 1 ? `api/listapublicaciones?page=${parseInt(page) - 1}` : null,
+      pageSize: sortedData.length,
+      count: totalCount,
+      next: `/api/listapublicaciones?page=${page + 1}${text ? `&text=${encodeURIComponent(text)}` : ''}`,
+      previous: page > 1 ? `/api/listapublicaciones?page=${page - 1}${text ? `&text=${encodeURIComponent(text)}` : ''}` : null,
       publicaciones: sortedData,
     });
   } catch (error) {
-    console.log(error);
-
+    console.error(error);
     return NextResponse.json({
-      message:
-        "Hubo un error en lista Publicaciones, contactar con desarollador",
+      message: "Hubo un error en lista Publicaciones, contactar con desarrollador",
       code: 500,
-    });
+    }, { status: 500 });
   }
 }
