@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Checkbox, Button, Input, Select, Row, Col, Form } from "antd";
+import { AdminContext } from "@/context/adminContext";
 const { TextArea } = Input;
 const { Option } = Select;
 
 export default function CrearServicio() {
   const [diasSeleccionados, setDiasSeleccionados] = useState([]);
   const [todaLaSemanaSeleccionado, setTodaLaSemanaSeleccionado] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const {getTipoDeServicios} = useContext(AdminContext);
+  const [tipoServicio, setTipoServicio] = useState([]);
+  const { crearPublicacion } = useContext(AdminContext);
   
   const opcionesDias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
@@ -26,10 +29,26 @@ export default function CrearServicio() {
     }
   };
 
-  const onSubmit = (data) => console.log(data);
+  useEffect(() => {
+    const fetchTipoServicio = async () => {
+     const data = await getTipoDeServicios();
+     setTipoServicio(data);
+    }
+    fetchTipoServicio();
+  }, []);
+
+  const onFinish = async (values) => {
+    try {
+      const mensaje = await crearPublicacion(values, "servicios");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  
 
   return (
-    <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
+    <Form onFinish={onFinish} layout="vertical">
       <div className="flex flex-col items-center justify-center p-1 sm:p-4 md:p-10">
         <h1 className="text-2xl mb-4">Crear nuevo Servicio</h1>
 
@@ -44,26 +63,26 @@ export default function CrearServicio() {
               <TextArea placeholder="Descripción" rows={4} />
             </Form.Item>
 
-            <Form.Item label="Tipo de Servicio*" name="tipoServicio" rules={[{ required: true, message: 'Seleccione un tipo de servicio' }]}>
+            <Form.Item label="Tipo de Servicio*" name="titulo_Servicio" rules={[{ required: true, message: 'Seleccione un tipo de servicio' }]}>
               <Select placeholder="Tipo de Servicio*" className="w-full">
-                <Option value="apicultor">Apicultor</Option>
-                <Option value="carpintero">Carpintero</Option>
-                <Option value="sapen">Agregar el que sea necesario</Option>
+                {tipoServicio && tipoServicio.map((item)=>{
+                  return <Option value={item}/>
+                })}
               </Select>
             </Form.Item>
           </Col>
 
           {/* Información del Titular */}
           <Col xs={24} md={12}>
-            <Form.Item label="Nombre del Titular" name="nombreTitular">
+            <Form.Item label="Nombre del Titular" name="nombre_titular" required>
               <Input placeholder="Nombre del Titular" />
             </Form.Item>
 
-            <Form.Item label="Celular" name="celular">
+            <Form.Item label="Celular" name="celular" required>
               <Input placeholder="Celular" />
             </Form.Item>
 
-            <Form.Item label="Correo Electrónico" name="correo">
+            <Form.Item label="Correo Electrónico" name="mail" required>
               <Input placeholder="Correo Electrónico" />
             </Form.Item>
           </Col>
@@ -72,7 +91,7 @@ export default function CrearServicio() {
           <Col span={24}>
             <div className="p-5 rounded-md">
               <h2 className="text-center">Horarios Semanales</h2>
-              <Form.Item name="dias">
+              <Form.Item name="dia_Semana">
                 <Checkbox.Group
                   options={[...opcionesDias, "Toda la semana"]}
                   value={diasSeleccionados}
@@ -83,15 +102,15 @@ export default function CrearServicio() {
 
               <Row gutter={[16, 16]} className="mt-4">
                 <Col xs={24} md={12}>
-                  <Form.Item label="Horario desde" name="horarioDesde">
+                  <Form.Item label="Horario" name="horario">
                     <Input />
                   </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                {/* <Col xs={24} md={12}>
                   <Form.Item label="Horario hasta" name="horarioHasta">
                     <Input />
                   </Form.Item>
-                </Col>
+                </Col> */}
               </Row>
 
               <div className="text-center">

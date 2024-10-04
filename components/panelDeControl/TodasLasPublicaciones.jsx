@@ -136,15 +136,15 @@ export default function App() {
             key: "0",
           },
           {
-            label: <span onClick={() => showModalQR(record)}>Generar código QR</span>,
-            key: "0",
-          },
-          {
-            label: <span onClick={() => showModalEditar(record)}>Editar</span>,
+            label: <div className="w-full" onClick={() => showModalQR(record)}>Generar código QR</div>,
             key: "1",
           },
           {
-            label: <span onClick={() => showModalEliminar(record)}>Eliminar</span>,
+            label: <div className="w-full" onClick={() => showModalEditar(record)}>Editar</div>,
+            key: "2",
+          },
+          {
+            label: <div className="w-full" onClick={() => showModalEliminar(record)}>Eliminar</div>,
             key: "3",
             danger: true,
           },

@@ -10,6 +10,18 @@ export const AdminContext = createContext();
 export const AdminProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState(null);
 
+  async function getTipoDeServicios() {
+    const res = await fetch(`/api/tipoServicio`);
+    const data = await res.json();
+    let responseData = [];
+
+    for (const element in data){
+      responseData.push(element);
+    };
+    
+    return responseData;
+  } 
+
   async function crearPublicacion(datos, tipoPubliacacion) {
     datos.fecha_publicacion = new Date();
     const res = await fetch(`/api/${tipoPubliacacion}`, {
@@ -145,14 +157,49 @@ export const AdminProvider = ({ children }) => {
     }
   }
 
+  async function eliminarUsuario(id) {
+    try {
+      const res = await fetch(`/api/usuarios/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error(`Error al eliminar el usuario: ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      setMensaje(data.message);
+    } catch (error) {
+      console.error("Hubo un error al eliminar la publicación:", error);
+      setMensaje("Error al eliminar la publicación. Inténtalo nuevamente.");
+    }
+  }
+
+  async function crearUsuario(datos){
+    const res = await fetch(`/api/usuarios`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datos),
+    });
+    const data = await res.json();
+    setMensaje(data.message);
+    return data.message;
+  }
+
+
   return (
     <AdminContext.Provider
       value={{
+        getTipoDeServicios,
         crearPublicacion,
         modificarPublicaciones,
         eliminarPublicacion,
         subirImagenesSupabase,
         eliminarImagenesSupabase,
+        eliminarUsuario,
+        crearUsuario,
         mensaje,
       }}
     >

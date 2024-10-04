@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Input, Upload, Image, Checkbox, Form } from "antd";
 import BuscadorMapa from "./mapaExalmple";
+import { AdminContext } from "@/context/adminContext";
+import { getBase64 } from "../utils/ControlPublicaciones";
 
 const { TextArea } = Input;
 
@@ -20,14 +22,7 @@ export default function NuevoRestaurante() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
-
-  const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
+  const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -58,8 +53,16 @@ export default function NuevoRestaurante() {
     </button>
   );
 
-  const onFinish = (values) => {
-    console.log("Submitted values:", values);
+  const onFinish = async (values) => {
+    try {
+      const urls = await subirImagenesSupabase(fileList, "restaurant", values.titulo);
+      values.fotos = urls;
+      
+      const mensaje = await crearPublicacion(values, "restaurantes");      
+      
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -74,8 +77,8 @@ export default function NuevoRestaurante() {
       <h1 className="text-center text-2xl">Información del Restaurante</h1>
 
       <Form.Item
-        label="Nombre"
-        name="nombre"
+        label="Titulo"
+        name="titulo"
         rules={[{ required: true, message: "Por favor ingresa el nombre" }]}
       >
         <Input />
@@ -135,7 +138,7 @@ export default function NuevoRestaurante() {
 
         <Form.Item
           label="Correo Electrónico"
-          name="correo"
+          name="mail"
           rules={[{ required: true, message: "Por favor ingresa el correo electrónico" }]}
         >
           <Input />
