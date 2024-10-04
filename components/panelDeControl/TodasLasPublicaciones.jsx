@@ -1,23 +1,32 @@
 import React, { useState } from "react";
-import { Table, Dropdown, Space } from "antd";
+import { Table, Dropdown, Space, Input, Button } from "antd";
 import useSWR, { useSWRConfig } from "swr";
-import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import EditarPublicacionModal from "./modals/EditarPublicacionModal";
 import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
 import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
+import Search from "antd/es/input/Search";
+import GenerarQRModal from "./modals/GenerarQRModal";
 
 export default function App() {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
+  const [isModalOpenQR, setIsModalOpenQR] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const router = useRouter();
   const { mutate } = useSWRConfig();
+  const [searchQuery, setSearchQuery] = useState('');
 
   const showModalEditar = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
+  };
+
+  const showModalQR = (item) => {
+    setSelectedItem(item);
+    setIsModalOpenQR(true);
   };
 
   const showModalEliminar = (item) => {
@@ -27,7 +36,7 @@ export default function App() {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const key = `/api/listapublicaciones?page=${page}`;
+  const key = `/api/listapublicaciones?page=${page}${searchQuery?.trim() ? `&text=${searchQuery}` : ''}`;
   const { data, error, isLoading } = useSWR(key, fetcher);
 
   function updateData() {
@@ -121,9 +130,13 @@ export default function App() {
           {
             label: (
               <a href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)} target="_blank">
-                Ver
+                Ver Publicación
               </a>
             ),
+            key: "0",
+          },
+          {
+            label: <span onClick={() => showModalQR(record)}>Generar código QR</span>,
             key: "0",
           },
           {
@@ -138,6 +151,7 @@ export default function App() {
         ];
   
         return (
+          <div className="flex justify-center">
           <Dropdown menu={{ items }} trigger={["click"]}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
@@ -145,6 +159,7 @@ export default function App() {
               </Space>
             </a>
           </Dropdown>
+          </div>
         );
       },
     },
@@ -152,6 +167,18 @@ export default function App() {
 
   return (
     <div className="overflow-x-auto">
+      <div className="flex space-x-2 my-2">
+        <Input
+          type="text"
+          placeholder="Buscar publicaciones..."
+          value={searchQuery}
+          onChange={(e) => {setSearchQuery(e.target.value);setPage(1)}}
+          className="max-w-sm mb-2"
+        />
+        {/* <Button > 
+          <SearchOutlined/> Buscar
+        </Button> */}
+      </div>
       <Table
         dataSource={data ? data.publicaciones : []}
         columns={columns}
@@ -160,7 +187,7 @@ export default function App() {
         pagination={{
           current: page,
           total: data ? data.count : 0,
-          pageSize: 30,
+          pageSize: 25,
           onChange: (newPage) => setPage(newPage),
         }}
         size="small"
@@ -177,6 +204,12 @@ export default function App() {
         selectedItem={selectedItem}
         isModalOpen={isModalOpenEliminar}
         setIsModalOpen={setIsModalOpenElimininar}
+      />
+
+      <GenerarQRModal
+        selectedItem={selectedItem}
+        isModalOpen={isModalOpenQR}
+        setIsModalOpen={setIsModalOpenQR}
       />
     </div>
   );

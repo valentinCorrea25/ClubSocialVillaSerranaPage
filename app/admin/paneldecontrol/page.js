@@ -42,28 +42,34 @@ export default function PanelDeControl() {
 
   const items = [
     {
-      label: "Todas las Publicaciones",
+      key: "tmp-0",
       icon: <AiOutlineRead />,
+      label: "Todas las Publicaciones",
     },
     {
-      label: "Alquileres",
+      key: "tmp-1",
       icon: <FaHouse />,
+      label: "Alquileres",
     },
     {
-      label: "Restaurantes",
+      key: "tmp-2",
       icon: <GiKnifeFork />,
+      label: "Restaurantes",
     },
     {
-      label: "Noticias, Actividades y Eventos",
+      key: "tmp-3",
       icon: <FaRegNewspaper />,
+      label: "Noticias, Actividades y Eventos",
     },
     {
-      label: "Servicios",
+      key: "tmp-4",
       icon: <FaPeopleCarry />,
+      label: "Servicios",
     },
     {
-      label: "Crear Nuevo Usuario",
+      key: "tmp-5",
       icon: <FaUserEdit />,
+      label: "Crear Nuevo Usuario",
     },
   ];
 
@@ -121,7 +127,7 @@ export default function PanelDeControl() {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh"}}>
       <Sider
         trigger={null}
         collapsible
@@ -156,11 +162,11 @@ export default function PanelDeControl() {
             className="md:w-[100%] w-full py-5 relative"
             alt="Logo Villa Serrana Club Social y Deportivo"
           />
-          <div className="absolute right-[-75%] top-5 transition-all ease-in-out opacity-100 block md:opacity-0 md:hidden pointer-events-none"> <CloseOutlined className="scale-125" /> </div>
+          <div className="absolute right-[-75%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none"> <CloseOutlined className="scale-125" /> </div>
         </div>
 
         <Menu
-          className="bg-white"
+          className="bg-white custom-menu"
           theme="light"
           mode="inline"
           defaultActiveFirst
@@ -184,10 +190,29 @@ export default function PanelDeControl() {
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </div>
         </Header>
-        <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+        <Content className="max-w-screen-xl" style={{ margin: "24px 16px 0", overflow: "initial" }}>
           {renderComponent()}
         </Content>
       </Layout>
+      <style jsx global>{`
+        .custom-menu .ant-menu-item {
+          height: auto;
+          line-height: 1.5;
+          padding: 6px 14px;
+          white-space: normal;
+        }
+        .custom-menu .ant-menu-item-icon {
+          min-width: 14px;
+          font-size: 18px;
+          margin-right: 10px;
+        }
+        .custom-menu .ant-menu-title-content {
+          flex: 1;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          white-space: normal;
+        }
+      `}</style>
     </Layout>
   );
 }

@@ -8,7 +8,7 @@ const Contacto = ({ restaurante }) => {
   return (
     <Card
       title={
-        <div className="text-2xl font-bold text-center" style={{ backgroundColor: 'var(--azul)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px' }}>
+        <div className="text-2xl font-bold text-center" style={{ backgroundColor: 'var(--verde-oscuro)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px' }}>
           Contacto
         </div>
       }

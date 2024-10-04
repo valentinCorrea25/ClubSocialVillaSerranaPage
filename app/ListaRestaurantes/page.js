@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/navigation'; 
 import Buscador from '@/components/ListaRestaurantes/Buscador';
 import ListaRestaurantes from '@/components/ListaRestaurantes/ListaRestaurantes';
-import Banner from '@/components/ListaRestaurantes/Banner'; 
+import Banner from '@/components/utils/Banners'; 
 // import { restaurantesData as data } from '@/test/data';
 import { Layout, Alert, Skeleton } from 'antd';
 import { ClientContext } from '@/context/clientContext';

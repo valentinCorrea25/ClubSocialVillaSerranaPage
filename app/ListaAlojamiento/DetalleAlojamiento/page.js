@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { alojamientos as allAlojamientos } from '@/test/data'; 
 import { Suspense } from 'react';
-import Banner from '@/components/ListaAlojamiento/DetalleAlojamiento/Banner';
+import Banner from '@/components/utils/Banners';
 import Informacion from '@/components/ListaAlojamiento/DetalleAlojamiento/Informacion'; 
 import Carousel from '@/components/ListaAlojamiento/DetalleAlojamiento/Carousel';
 import Descripcion from '@/components/ListaAlojamiento/DetalleAlojamiento/Descripcion';
