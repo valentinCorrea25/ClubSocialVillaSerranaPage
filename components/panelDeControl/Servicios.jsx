@@ -49,7 +49,7 @@ export default function CrearServicio() {
 
   return (
     <Form onFinish={onFinish} layout="vertical">
-      <div className="flex flex-col items-center justify-center p-1 sm:p-4 md:p-10">
+      <div className="flex flex-col items-center justify-center p-2 sm:p-4 md:p-10 ">
         <h1 className="text-2xl mb-4">Crear nuevo Servicio</h1>
 
         <Row gutter={[16, 16]}>

@@ -63,10 +63,10 @@ export default function Publicacion() {
   };
 
   return (
-    <div className="relative bg-gray-100 p-1 sm:p-4 md:p-10">
+    <div className="relative">
       <Form
         onFinish={onFinish}
-        className="p-1 md:p-10 rounded-lg w-full max-w-lg flex flex-col mx-auto"
+        className="p-5 md:p-10 rounded-lg w-full max-w-lg flex flex-col mx-auto bg-white shadow-lg"
       >
         <h1 className="text-center text-xl md:text-2xl mb-6">
           Crear nueva publicación de Actividad o Eventos y Noticias

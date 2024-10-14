@@ -72,8 +72,8 @@ export default function NuevoRestaurante() {
   onFinish={onFinish}
   className="flex flex-col justify-center items-center p-1 sm:p-4 md:p-10 max-w-screen-xl m-auto"
 >
-  <div className="w-full flex flex-col lg:flex-row gap-10 justify-center">
-    <div className="w-full lg:w-1/2 flex flex-col bg-[--verde-menu-claro] px-[5%] py-[5%]">
+  <div className="w-full flex flex-col lg:flex-row gap-10 justify-center ">
+    <div className="w-full lg:w-1/2 flex flex-col bg-white shadow-lg px-[5%] py-[5%]">
       <h1 className="text-center text-2xl">Información del Restaurante</h1>
 
       <Form.Item
@@ -117,7 +117,7 @@ export default function NuevoRestaurante() {
     </div>
 
     <div className="w-full lg:w-1/2 flex flex-col gap-4">
-      <div className="flex flex-col bg-[--verde-menu-claro] px-[5%] py-[5%]">
+      <div className="flex flex-col bg-white shadow-lg px-[5%] py-[5%]">
         <h1 className="text-center text-2xl">Información del Titular</h1>
 
         <Form.Item
@@ -145,7 +145,7 @@ export default function NuevoRestaurante() {
         </Form.Item>
       </div>
 
-      <div className="flex flex-col bg-[--verde-menu-claro] px-[5%] py-[5%]">
+      <div className="flex flex-col bg-white shadow-lg px-[5%] py-[5%]">
         <h1 className="text-center text-2xl">Ubicación</h1>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d205.81761411724335!2d-55.23491625521616!3d-34.37383905079616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x950aba2fb28ebfb9%3A0xbac440ceb51919e9!2sDomingo%20P%C3%A9rez%20740%2C%2030000%20Minas%2C%20Departamento%20de%20Lavalleja!5e0!3m2!1ses-419!2suy!4v1723153982223!5m2!1ses-419!2suy"
@@ -156,12 +156,12 @@ export default function NuevoRestaurante() {
     </div>
   </div>
 
-  <div className="w-full bg-[--verde-menu-claro] px-[5%] py-[5%] my-[1%]">
+  <div className="w-full bg-white shadow-lg px-[5%] py-[5%] my-[1%]">
     <h1 className="text-center text-2xl">Horarios</h1>
     <Form.Item name="diasSemana">
       <Checkbox.Group
         options={diasSemana}
-        className="grid grid-cols-2 gap-4 p-[5%] bg-gray-100"
+        className="grid grid-cols-2 gap-4 p-[5%]"
       />
     </Form.Item>
 
@@ -174,7 +174,7 @@ export default function NuevoRestaurante() {
     </Form.Item>
   </div>
 
-  <div className="w-full bg-[--verde-menu-claro] px-[5%] py-[5%] my-[1%]">
+  <div className="w-full bg-white shadow-lg px-[5%] py-[5%] my-[1%]">
     <h1 className="text-center text-2xl">Redes Sociales</h1>
     <Form.Item label="Facebook" name="facebook">
       <Input />
@@ -189,7 +189,7 @@ export default function NuevoRestaurante() {
     </Form.Item>
   </div>
 
-  <div className="w-full bg-[--verde-menu-claro] px-[5%] py-[5%] my-[1%]">
+  <div className="w-full bg-white shadow-lg px-[5%] py-[5%] my-[1%]">
     <h1 className="text-center text-2xl">Métodos de Pago</h1>
     <Form.Item label="Método de Pago" name="metodo_pago">
       <Input />
@@ -198,7 +198,7 @@ export default function NuevoRestaurante() {
 
   <Form.Item>
     <Button type="primary" htmlType="submit">
-      Ingresar
+      Guardar y Publicar
     </Button>
   </Form.Item>
 </Form>

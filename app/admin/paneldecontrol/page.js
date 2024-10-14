@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
-import { Button, Layout } from "antd";
+import { Button, Divider, Layout } from "antd";
 import { useRouter } from "next/navigation";
 import { Menu, Switch } from "antd";
 import { FaHouse } from "react-icons/fa6";
@@ -133,12 +133,13 @@ export default function PanelDeControl() {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh"}}>
       <Sider
         trigger={null}
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
+        width={'250px'}
         collapsedWidth="0"
         style={{
           ...(windowsize.width > 768
@@ -160,7 +161,7 @@ export default function PanelDeControl() {
               }),
         }}
       >
-        <div className="max-w-24 m-auto relative">
+        <div className="max-w-28 m-auto relative">
           <Image
             src={logo}
             width={0}
@@ -168,11 +169,14 @@ export default function PanelDeControl() {
             className="md:w-[100%] w-full py-5 relative"
             alt="Logo Villa Serrana Club Social y Deportivo"
           />
-          <div className="absolute right-[-75%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none">
+          <div className="absolute right-[-80%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none">
             
-            <CloseOutlined className="scale-125" />
+            <CloseOutlined className="scale-125 bg-white p-2 trigger"  onClick={() => setcollapsed(!collapsed)} />
           </div>
         </div>
+        <h1 className=" text-lg text-center">Panel de control</h1>
+        <h1 className=" text-lg text-center">Menu</h1>
+        <Divider className="mt-2"/>
 
         <Menu
           className="bg-white custom-menu"
@@ -189,7 +193,7 @@ export default function PanelDeControl() {
               icon={<FaSignOutAlt />} 
               onClick={handleLogout}
               style={{ width: "100%", textAlign: "left" }}
-              className="border-none bg-[--blanco]"
+              className="border-none bg-[blanco] shadow-lg"
             >
               Cerrar Sesión
             </Button>
@@ -198,22 +202,24 @@ export default function PanelDeControl() {
       </Sider>
       <Layout
         style={{
-          marginLeft: windowsize.width > 768 && !collapsed ? 200 : 0,
+          marginLeft: windowsize.width > 768 && !collapsed ? 250 : 0,
           transition: "margin-left 0.2s",
         }}
       >
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <div
-            className="trigger"
+            className="trigger flex items-center"
             onClick={() => setcollapsed(!collapsed)}
             style={{ padding: "0 24px", fontSize: "18px", cursor: "pointer" }}
           >
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            <h1 className="w-full text-center font-medium">{currentTitle}</h1>
           </div>
+          
         </Header>
         <Content
-          className="max-w-screen-xl"
-          style={{ margin: "24px 16px 0", overflow: "initial" }}
+          className="max-w-screen-xl mx-auto w-full p-5"
+          // style={{ margin: "24px 16px 0", overflow: "initial" }}
         >
           {renderComponent()}
         </Content>

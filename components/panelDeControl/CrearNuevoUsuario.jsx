@@ -24,7 +24,7 @@ const CrearNuevoUsuario = () => {
     {
       title: "Nombre de Usuario",
       key: "nombre",
-      dataIndex: "nombre", // Asegúrate de usar dataIndex para referenciar directamente el campo
+      dataIndex: "nombre",
       ellipsis: true,
       render: (text) => {
         const maxLength = 30;
@@ -40,19 +40,19 @@ const CrearNuevoUsuario = () => {
       width: "10%",
       render: (text, item) => {
         const items = [
-          {
-            label: (
-              <div
-                className="w-full"
-                onClick={() => {
-                  handleEdit();
-                }}
-              >
-                Editar
-              </div>
-            ),
-            key: "2",
-          },
+          // {
+          //   label: (
+          //     <div
+          //       className="w-full"
+          //       onClick={() => {
+          //         handleEdit();
+          //       }}
+          //     >
+          //       Editar
+          //     </div>
+          //   ),
+          //   key: "2",
+          // },
           {
             label: (
               <div
