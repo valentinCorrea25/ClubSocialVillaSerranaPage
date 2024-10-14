@@ -13,7 +13,7 @@ export async function POST(req){
     if(hasRepeteadName){
         return NextResponse.json({
             message: `Nombre de usuario ya utilizado! \n id: ${hasRepeteadName.id}`,
-            status: 400
+            code: 500
         })
     }
 

@@ -5,7 +5,11 @@ import { AdminContext } from "@/context/adminContext";
 const { TextArea } = Input;
 const { Option } = Select;
 
-export default function CrearServicio() {
+export default function CrearServicio({
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
+}) {
   const [diasSeleccionados, setDiasSeleccionados] = useState([]);
   const [todaLaSemanaSeleccionado, setTodaLaSemanaSeleccionado] = useState(false);
   const {getTipoDeServicios} = useContext(AdminContext);
@@ -38,8 +42,14 @@ export default function CrearServicio() {
   }, []);
 
   const onFinish = async (values) => {
+    mostrarCargarToast();
     try {
-      const mensaje = await crearPublicacion(values, "servicios");
+      const data = await crearPublicacion(values, "servicios");
+      if(data.code == 500){
+        mostrarFalloToast(data.message);
+      }else{
+        mostrarExitoToast(data.message);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -59,7 +69,7 @@ export default function CrearServicio() {
               <Input placeholder="Título*" />
             </Form.Item>
 
-            <Form.Item label="Descripción" name="descripcion">
+            <Form.Item label="Descripción" name="descripcion" required>
               <TextArea placeholder="Descripción" rows={4} />
             </Form.Item>
 

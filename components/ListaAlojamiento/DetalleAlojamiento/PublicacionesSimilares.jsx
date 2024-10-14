@@ -51,7 +51,7 @@ const PublicacionesSimilares = ({ similares }) => {
               <div style={{ textAlign: 'center' }}>
                 <img
                   src={item.fotos[0]}
-                  alt={item.fotos[0].titulo}
+                  alt={item.titulo}
                   style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }}
                 />
                 <div style={{ textAlign: 'left' }}>

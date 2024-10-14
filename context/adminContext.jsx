@@ -32,8 +32,8 @@ export const AdminProvider = ({ children }) => {
       body: JSON.stringify(datos),
     });
     const data = await res.json();
-    setMensaje(data.message);
-    return data.message;
+    setMensaje(data);
+    return data;
   }
 
   async function eliminarPublicacion(id, tipoPublicacion) {
@@ -185,7 +185,7 @@ export const AdminProvider = ({ children }) => {
     });
     const data = await res.json();
     setMensaje(data.message);
-    return data.message;
+    return data;
   }
 
 

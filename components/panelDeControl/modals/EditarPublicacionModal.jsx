@@ -15,6 +15,9 @@ export default function EditarPublicacionModal({
   setIsModalOpen,
   selectedItem,
   updateData,
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
 }) {
   const [form] = Form.useForm();
   const { modificarPublicaciones, subirImagenesSupabase } =
@@ -34,6 +37,7 @@ export default function EditarPublicacionModal({
 
   const onFinish = async (values) => {
     setLoading(true);
+    mostrarCargarToast();
 
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
 
@@ -56,8 +60,10 @@ export default function EditarPublicacionModal({
         tipoDePublicacion
       );
       await updateData();
+      mostrarExitoToast('Publicación modificada con éxito');
     } catch (e) {
       console.log(e);
+      mostrarFalloToast('Error al modificar la publicación, contactar programador');
     } finally {
       setLoading(false);
       handleClose();

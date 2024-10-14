@@ -10,7 +10,11 @@ import Search from "antd/es/input/Search";
 import GenerarQRModal from "./modals/GenerarQRModal";
 import useWindowSize from "@/components/utils/useWindowSize";
 
-export default function App() {
+export default function TodasLasPublicaciones({
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
+}) {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
@@ -373,12 +377,18 @@ export default function App() {
         selectedItem={selectedItem}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        mostrarCargarToast={mostrarCargarToast}
+        mostrarExitoToast={mostrarExitoToast}
+        mostrarFalloToast={mostrarFalloToast}
       />
       <EliminarPublicacionModal
         updateData={updateData}
         selectedItem={selectedItem}
         isModalOpen={isModalOpenEliminar}
         setIsModalOpen={setIsModalOpenElimininar}
+        mostrarCargarToast={mostrarCargarToast}
+        mostrarExitoToast={mostrarExitoToast}
+        mostrarFalloToast={mostrarFalloToast}
       />
 
       <GenerarQRModal
