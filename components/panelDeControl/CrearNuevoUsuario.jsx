@@ -5,7 +5,11 @@ import useSWR, { useSWRConfig } from "swr";
 import { MenuOutlined } from "@ant-design/icons";
 import EliminarUsuarioModal from "./modals/EliminarUsuarioModal";
 
-const CrearNuevoUsuario = () => {
+const CrearNuevoUsuario = ({
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
+}) => {
   const { crearUsuario, eliminarUsuario } = useContext(AdminContext);
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
@@ -24,7 +28,7 @@ const CrearNuevoUsuario = () => {
     {
       title: "Nombre de Usuario",
       key: "nombre",
-      dataIndex: "nombre", // Asegúrate de usar dataIndex para referenciar directamente el campo
+      dataIndex: "nombre",
       ellipsis: true,
       render: (text) => {
         const maxLength = 30;
@@ -40,19 +44,19 @@ const CrearNuevoUsuario = () => {
       width: "10%",
       render: (text, item) => {
         const items = [
-          {
-            label: (
-              <div
-                className="w-full"
-                onClick={() => {
-                  handleEdit();
-                }}
-              >
-                Editar
-              </div>
-            ),
-            key: "2",
-          },
+          // {
+          //   label: (
+          //     <div
+          //       className="w-full"
+          //       onClick={() => {
+          //         handleEdit();
+          //       }}
+          //     >
+          //       Editar
+          //     </div>
+          //   ),
+          //   key: "2",
+          // },
           {
             label: (
               <div
@@ -85,10 +89,16 @@ const CrearNuevoUsuario = () => {
   ];
 
   const onFinish = async (values) => {
+    mostrarCargarToast();
     try {
       delete values.repetirContrasenia;
-      const mensaje = await crearUsuario(values);
+      const data = await crearUsuario(values);
       updateData();
+      if(data.code == 500){
+        mostrarFalloToast(data.message);
+      }else{
+        mostrarExitoToast(data.message);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -174,6 +184,9 @@ const CrearNuevoUsuario = () => {
         isModalOpen={isModalOpenEliminar}
         setIsModalOpen={setIsModalOpenElimininar}
         eliminarUsuario={eliminarUsuario}
+        mostrarCargarToast={mostrarCargarToast}
+        mostrarExitoToast={mostrarExitoToast}
+        mostrarFalloToast={mostrarFalloToast}
       />
     </div>
   );

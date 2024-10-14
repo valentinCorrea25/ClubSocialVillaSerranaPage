@@ -7,7 +7,11 @@ import { AdminContext } from "@/context/adminContext";
 const { TextArea } = Input;
 const { Option } = Select;
 
-export default function Publicacion() {
+export default function Publicacion({
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
+}) {
   const [currentForm, setCurrentForm] = useState("eventos");
   const [esEvento, setEsEvento] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -31,6 +35,8 @@ export default function Publicacion() {
   };
 
   const onFinish = async (values) => {
+    let data;
+    mostrarCargarToast();
     try {
       if (currentForm == 'eventos') {
         const urls = await subirImagenesSupabase(
@@ -43,8 +49,7 @@ export default function Publicacion() {
           values.fecha_evento = handleFecha(values.fecha_evento);
         }
 
-        const mensaje = await crearPublicacion(values, "eventosnoticias");
-        console.log(mensaje);
+        data = await crearPublicacion(values, "eventosnoticias");
       } else {
 
         const urls = await subirImagenesSupabase(
@@ -54,19 +59,26 @@ export default function Publicacion() {
         );
         values.fotos = urls;
 
-        const mensaje = await crearPublicacion(values, "actividades");
-        console.log(mensaje);
+        data = await crearPublicacion(values, "actividades");
+        console.log(data);
       }
+
+      if(data.code == 500){
+        mostrarFalloToast(data.message);
+      }else{
+        mostrarExitoToast(data.message);
+      }
+      
     } catch (e) {
       console.log(e);
     }
   };
 
   return (
-    <div className="relative bg-gray-100 p-1 sm:p-4 md:p-10">
+    <div className="relative">
       <Form
         onFinish={onFinish}
-        className="p-1 md:p-10 rounded-lg w-full max-w-lg flex flex-col mx-auto"
+        className="p-5 md:p-10 rounded-lg w-full max-w-lg flex flex-col mx-auto bg-white shadow-lg"
       >
         <h1 className="text-center text-xl md:text-2xl mb-6">
           Crear nueva publicación de Actividad o Eventos y Noticias

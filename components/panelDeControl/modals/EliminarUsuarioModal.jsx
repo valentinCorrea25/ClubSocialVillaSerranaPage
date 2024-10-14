@@ -8,7 +8,10 @@ export default function EliminarUsuarioModal({
   setIsModalOpen,
   selectedItem,
   updateData,
-  eliminarUsuario
+  eliminarUsuario,
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
 }) {
   const [isLoading, setLoading] = useState(false);
   const handleClose = () => {
@@ -16,9 +19,14 @@ export default function EliminarUsuarioModal({
   };
 
   const onFinish = async () => {
+    mostrarCargarToast();
     try {
       await eliminarUsuario(selectedItem.id);
       await updateData();
+      mostrarExitoToast('Usuario eliminado con exito');
+    }catch(e){
+      console.log(e);
+      mostrarFalloToast('No se ha podido eliminar al usuario');
     } finally {
       setLoading(false); // Detener el estado de carga, independientemente del resultado
       handleClose(); // Cerrar el modal

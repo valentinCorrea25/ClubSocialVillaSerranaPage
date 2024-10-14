@@ -27,7 +27,7 @@ const PublicacionesSimilares = ({ similares }) => {
     >
       <div
         style={{
-          backgroundColor: 'var(--azul)',
+          backgroundColor: 'var(--verde-oscuro)',
           color: 'var(--blanco)',
           padding: '16px',
           margin: '-16px -16px 16px -16px', 
@@ -51,7 +51,7 @@ const PublicacionesSimilares = ({ similares }) => {
               <div style={{ textAlign: 'center' }}>
                 <img
                   src={item.fotos[0]}
-                  alt={item.fotos[0].titulo}
+                  alt={item.titulo}
                   style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }}
                 />
                 <div style={{ textAlign: 'left' }}>

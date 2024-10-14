@@ -6,6 +6,7 @@ import Buscador from "@/components/ListaAlojamiento/Buscador";
 import ListaAlojamientos from "@/components/ListaAlojamiento/ListaAlojamientos";
 import { Skeleton } from "antd";
 import { ClientContext } from "@/context/clientContext";
+import Banners from "@/components/utils/Banners";
 
 const ListaAlojamientosPage = () => {
   const [alquileres, setTodosLosAlquileres] = useState()
@@ -59,20 +60,27 @@ const ListaAlojamientosPage = () => {
   };
 
   return (
+    
     <div
       style={{
-        padding: "100px 20px",
+        padding: "30px 20px",
         backgroundColor: "#f9f6ee",
         minHeight: "100vh",
         maxWidth: "1200px",
         margin: "0 auto",
       }}
     >
+      <Banners
+      title="Alojamiento"
+      subtitle="Busca tu alojamiento"
+      backgroundImage="/images/alojamiento.jpg" 
+      />
       <div
         style={{
+          margin:"10px",
           padding: "10px",
           borderBottom: "1px solid #ddd",
-          marginBottom: "64px",
+          marginBottom: "40px",
           borderRadius: "4px",
           backgroundColor: "#fff",
         }}
