@@ -44,7 +44,9 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 2 ? (
         <>
-          <div className="p-4 shadow-md border w-full max-w-sm md:max-w-md lg:max-w-lg">
+          <div className="p-4 shadow-md border w-full max-w-sm md:max-w-md lg:max-w-lg" 
+          onClick={()=>router.push(`/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`)}>
+            
             <div className="mb-4 w-full h-[180px] max-h-[250px]">
               <img
                 src={informacion?.fotos?.[0]}
@@ -53,7 +55,7 @@ export default function Item({ informacion, type }) {
               />
             </div>
             <div className="ml-2 text-sm">
-              <h1 className="font-extrabold text-lg cursor-pointer text-left">
+              <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
                 {informacion?.titulo?.length > 24
                   ? informacion.titulo.substring(0, 24) + "..."
                   : informacion?.titulo}
@@ -83,7 +85,8 @@ export default function Item({ informacion, type }) {
                 alt={informacion?.titulo}
               />
             </div>
-            <h1 className="font-bold text-base md:text-sm text-left cursor-pointer">
+            
+            <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
               {informacion?.titulo?.length > 40
                 ? informacion.titulo.substring(0, 40) + "..."
                 : informacion?.titulo}
@@ -112,7 +115,7 @@ export default function Item({ informacion, type }) {
               />
             </div>
             <div className="ml-2 text-sm">
-              <h1 className="font-extrabold text-lg cursor-pointer text-left">
+              <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
                 {informacion?.titulo?.length > 24
                   ? informacion.titulo.substring(0, 24) + "..."
                   : informacion?.titulo}
