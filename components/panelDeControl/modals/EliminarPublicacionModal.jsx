@@ -13,6 +13,9 @@ export default function EliminarPublicacionModal({
   setIsModalOpen,
   selectedItem,
   updateData,
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
 }) {
   const { eliminarPublicacion, eliminarImagenesSupabase } = useContext(AdminContext);
   const [isLoading, setLoading] = useState(false);
@@ -25,21 +28,28 @@ export default function EliminarPublicacionModal({
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
   const onFinish = async () => {
+    mostrarCargarToast();
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
     try {
-      await eliminarImagenesSupabase(selectedItem.fotos);
+      handleClose(); // Cerrar el modal
+      if(tipoDePublicacion != 'servicios'){
+        await eliminarImagenesSupabase(selectedItem.fotos);
+      }
       await eliminarPublicacion(selectedItem[idPublicacion], tipoDePublicacion);
       await updateData(); // Actualizar los datos después de modificar
+      mostrarExitoToast('Publicación eliminada con éxito');
+    } catch(e){
+      console.log(e)
+      mostrarFalloToast('Error al borrar la publicación, contactar programador');
     } finally {
       setLoading(false); // Detener el estado de carga, independientemente del resultado
-      handleClose(); // Cerrar el modal
     }
   };
 
   return (
     <>
       <Modal
-        title={<div className="text-center"> Eliminar Publicacion </div>}
+        title={<div className="text-center"> Eliminar Publicación </div>}
         open={isModalOpen}
         onCancel={handleClose}
         footer={

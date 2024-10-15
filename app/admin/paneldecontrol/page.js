@@ -2,9 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
-import { Button, Divider, Layout } from "antd";
+import { Button, Divider, Layout, Menu, message } from "antd";
 import { useRouter } from "next/navigation";
-import { Menu, Switch } from "antd";
 import { FaHouse } from "react-icons/fa6";
 import { FaRegNewspaper, FaSignOutAlt } from "react-icons/fa";
 import { AiOutlineRead } from "react-icons/ai";
@@ -40,6 +39,32 @@ export default function PanelDeControl() {
   const [collapsed, setcollapsed] = useState(false);
   const colorBgContainer = "#fff";
   const windowsize = useWindowSize();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  function mostrarCargarToast() {
+    messageApi.open({
+      type: "loading",
+      content: "Cargando",
+      duration: 2,
+      className: "scale-110 md:scale-150 mt-5",
+    });
+  }
+
+  function mostrarExitoToast(texto) {
+    messageApi.open({
+      type: "success",
+      content: texto,
+      className: "scale-110 md:scale-150 mt-5",
+    });
+  }
+
+  function mostrarFalloToast(texto) {
+    messageApi.open({
+      type: "error",
+      content: texto,
+      className: "scale-110 md:scale-150 mt-5",
+    });
+  }
 
   const items = [
     {
@@ -106,19 +131,61 @@ export default function PanelDeControl() {
   const renderComponent = () => {
     switch (currentComponent) {
       case "TodasLasPublicaciones":
-        return <TodasLasPublicaciones />;
+        return (
+          <TodasLasPublicaciones
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        );
       case "Alquileres":
-        return <Alquileres />;
+        return (
+          <Alquileres
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        );
       case "Restaurantes":
-        return <Restaurantes />;
+        return (
+          <Restaurantes
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        );
       case "NoticiasEA":
-        return <NoticiasEA />;
+        return (
+          <NoticiasEA
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        );
       case "Servicios":
-        return <Servicios />;
+        return (
+          <Servicios
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        );
       case "CrearNuevoUsuario":
-        return <CrearNuevoUsuario />;
+        return (
+          <CrearNuevoUsuario
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        );
       default:
-        return <TodasLasPublicaciones />;
+        return (
+          <TodasLasPublicaciones
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        );
     }
   };
 
@@ -128,121 +195,127 @@ export default function PanelDeControl() {
   };
 
   const handleLogout = () => {
-    signOut()
+    signOut();
     router.push("/admin");
   };
 
   return (
-    <Layout style={{ minHeight: "100vh"}}>
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-        breakpoint="lg"
-        width={'250px'}
-        collapsedWidth="0"
-        style={{
-          ...(windowsize.width > 768
-            ? {
-                position: "fixed",
-                background: "#fff",
-                left: 0,
-                top: 0,
-                bottom: 0,
-                zIndex: 1,
-              }
-            : {
-                position: "absolute",
-                background: "#fff",
-                left: 0,
-                top: 0,
-                bottom: 0,
-                zIndex: 1,
-              }),
-        }}
-      >
-        <div className="max-w-28 m-auto relative">
-          <Image
-            src={logo}
-            width={0}
-            height={0}
-            className="md:w-[100%] w-full py-5 relative"
-            alt="Logo Villa Serrana Club Social y Deportivo"
-          />
-          <div className="absolute right-[-80%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none">
-            
-            <CloseOutlined className="scale-125 bg-white p-2 trigger"  onClick={() => setcollapsed(!collapsed)} />
-          </div>
-        </div>
-        <h1 className=" text-lg text-center">Panel de control</h1>
-        <h1 className=" text-lg text-center">Menu</h1>
-        <Divider className="mt-2"/>
-
-        <Menu
-          className="bg-white custom-menu"
-          theme="light"
-          mode="inline"
-          defaultActiveFirst
-          defaultSelectedKeys={["4"]}
-          onClick={onClick}
-          items={items}
-        />
-        {!collapsed && (
-          <div style={{ position: "absolute", bottom: "20px", width: "100%" }}>
-            <Button
-              icon={<FaSignOutAlt />} 
-              onClick={handleLogout}
-              style={{ width: "100%", textAlign: "left" }}
-              className="border-none bg-[blanco] shadow-lg"
-            >
-              Cerrar Sesión
-            </Button>
-          </div>
-        )}
-      </Sider>
-      <Layout
-        style={{
-          marginLeft: windowsize.width > 768 && !collapsed ? 250 : 0,
-          transition: "margin-left 0.2s",
-        }}
-      >
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          <div
-            className="trigger flex items-center"
-            onClick={() => setcollapsed(!collapsed)}
-            style={{ padding: "0 24px", fontSize: "18px", cursor: "pointer" }}
-          >
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            <h1 className="w-full text-center font-medium">{currentTitle}</h1>
-          </div>
-          
-        </Header>
-        <Content
-          className="max-w-screen-xl mx-auto w-full p-5"
-          // style={{ margin: "24px 16px 0", overflow: "initial" }}
+    <>
+      {contextHolder} {/* utilizado para los toast */}
+      <Layout style={{ minHeight: "100vh" }}>
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+          breakpoint="lg"
+          width={"250px"}
+          collapsedWidth="0"
+          style={{
+            ...(windowsize.width > 768
+              ? {
+                  position: "fixed",
+                  background: "#fff",
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  zIndex: 1,
+                }
+              : {
+                  position: "absolute",
+                  background: "#fff",
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  zIndex: 1,
+                }),
+          }}
         >
-          {renderComponent()}
-        </Content>
+          <div className="max-w-28 m-auto relative">
+            <Image
+              src={logo}
+              width={0}
+              height={0}
+              className="md:w-[100%] w-full py-5 relative"
+              alt="Logo Villa Serrana Club Social y Deportivo"
+            />
+            <div className="absolute right-[-80%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none">
+              <CloseOutlined
+                className="scale-125 bg-white p-2 trigger"
+                onClick={() => setcollapsed(!collapsed)}
+              />
+            </div>
+          </div>
+          <h1 className=" text-lg text-center">Panel de control</h1>
+          <h1 className=" text-lg text-center">Menu</h1>
+          <Divider className="mt-2" />
+
+          <Menu
+            className="bg-white custom-menu"
+            theme="light"
+            mode="inline"
+            defaultActiveFirst
+            defaultSelectedKeys={["4"]}
+            onClick={onClick}
+            items={items}
+          />
+          {!collapsed && (
+            <div
+              style={{ position: "absolute", bottom: "20px", width: "100%" }}
+            >
+              <Button
+                icon={<FaSignOutAlt />}
+                onClick={handleLogout}
+                style={{ width: "100%", textAlign: "left" }}
+                className="border-none bg-[blanco] shadow-lg"
+              >
+                Cerrar Sesión
+              </Button>
+            </div>
+          )}
+        </Sider>
+        <Layout
+          style={{
+            marginLeft: windowsize.width > 768 && !collapsed ? 250 : 0,
+            transition: "margin-left 0.2s",
+          }}
+        >
+          <Header style={{ padding: 0, background: colorBgContainer }}>
+            <div
+              className="trigger flex items-center"
+              onClick={() => setcollapsed(!collapsed)}
+              style={{ padding: "0 24px", fontSize: "18px", cursor: "pointer" }}
+            >
+              {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              <h1 className="w-full text-center font-medium">{currentTitle}</h1>
+            </div>
+          </Header>
+          <Content
+            className="max-w-screen-xl mx-auto w-full p-5"
+            // style={{ margin: "24px 16px 0", overflow: "initial" }}
+          >
+            {renderComponent()}
+          </Content>
+        </Layout>
+        <style jsx global>{`
+          .custom-menu .ant-menu-item {
+            height: auto;
+            line-height: 1.5;
+            padding: 6px 14px;
+            white-space: normal;
+          }
+          .custom-menu .ant-menu-item-icon {
+            min-width: 14px;
+            font-size: 18px;
+            margin-right: 10px;
+          }
+          .custom-menu .ant-menu-title-content {
+            flex: 1;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            white-space: normal;
+          }
+        `}</style>
       </Layout>
-      <style jsx global>{`
-        .custom-menu .ant-menu-item {
-          height: auto;
-          line-height: 1.5;
-          padding: 6px 14px;
-          white-space: normal;
-        }
-        .custom-menu .ant-menu-item-icon {
-          min-width: 14px;
-          font-size: 18px;
-          margin-right: 10px;
-        }
-        .custom-menu .ant-menu-title-content {
-          flex: 1;
-          overflow-wrap: break-word;
-          word-wrap: break-word;
-          white-space: normal;
-        }
-      `}</style>
-    </Layout>
+    </>
   );
 }

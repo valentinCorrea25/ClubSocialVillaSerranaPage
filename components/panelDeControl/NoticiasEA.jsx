@@ -7,7 +7,11 @@ import { AdminContext } from "@/context/adminContext";
 const { TextArea } = Input;
 const { Option } = Select;
 
-export default function Publicacion() {
+export default function Publicacion({
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
+}) {
   const [currentForm, setCurrentForm] = useState("eventos");
   const [esEvento, setEsEvento] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -31,6 +35,8 @@ export default function Publicacion() {
   };
 
   const onFinish = async (values) => {
+    let data;
+    mostrarCargarToast();
     try {
       if (currentForm == 'eventos') {
         const urls = await subirImagenesSupabase(
@@ -43,8 +49,7 @@ export default function Publicacion() {
           values.fecha_evento = handleFecha(values.fecha_evento);
         }
 
-        const mensaje = await crearPublicacion(values, "eventosnoticias");
-        console.log(mensaje);
+        data = await crearPublicacion(values, "eventosnoticias");
       } else {
 
         const urls = await subirImagenesSupabase(
@@ -54,9 +59,16 @@ export default function Publicacion() {
         );
         values.fotos = urls;
 
-        const mensaje = await crearPublicacion(values, "actividades");
-        console.log(mensaje);
+        data = await crearPublicacion(values, "actividades");
+        console.log(data);
       }
+
+      if(data.code == 500){
+        mostrarFalloToast(data.message);
+      }else{
+        mostrarExitoToast(data.message);
+      }
+      
     } catch (e) {
       console.log(e);
     }
