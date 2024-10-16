@@ -2,9 +2,9 @@
 
 import React from 'react';
 import ActividadCard from './ActividadCard';
-import { Alert, Pagination } from 'antd';
+import { Alert, Pagination, Button } from 'antd';
 
-const ActividadesList = ({ actividades }) => {
+const ActividadesList = ({ actividades, onViewDetails  }) => {
   if (!actividades || actividades.length === 0) {
     return (
       <div className="p-6">
@@ -22,7 +22,8 @@ const ActividadesList = ({ actividades }) => {
     <div className="max-w-7xl mx-auto p-1 sm:p-5">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
         {actividades.map((actividad, index) => (
-          <ActividadCard key={index} actividad={actividad} />
+          <ActividadCard key={index} actividad={actividad} onClick={() => onViewDetails(actividad.id_Actividad)} />
+          
         ))}
       </div>
       <div className="flex justify-center mt-5">

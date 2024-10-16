@@ -17,6 +17,7 @@ export const ClientProvider = ({ children }) => {
   async function buscarActividad(id) {
     const res = await fetch(`/api/actividades/${id}`);
     const data = await res.json();
+    return data.respuesta;
     setPublicacion(data.message);
   }
 

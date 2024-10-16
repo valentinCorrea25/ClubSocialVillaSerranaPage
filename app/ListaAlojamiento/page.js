@@ -60,6 +60,14 @@ const ListaAlojamientosPage = () => {
   };
 
   return (
+    <>
+    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+            <Banners
+      title="Alojamiento"
+      subtitle="Busca tu alojamiento"
+      backgroundImage="/images/alojamiento.jpg" 
+      />
+    </div>
     
     <div
       style={{
@@ -69,12 +77,9 @@ const ListaAlojamientosPage = () => {
         maxWidth: "1200px",
         margin: "0 auto",
       }}
+      
     >
-      <Banners
-      title="Alojamiento"
-      subtitle="Busca tu alojamiento"
-      backgroundImage="/images/alojamiento.jpg" 
-      />
+
       <div
         style={{
           margin:"10px",
@@ -101,6 +106,7 @@ const ListaAlojamientosPage = () => {
         />
       )}
     </div>
+    </>
   );
 };
 

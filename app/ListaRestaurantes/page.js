@@ -46,13 +46,13 @@ const ListaRestaurantesPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
-      <div className="">
+    
         <Banner 
           title="Restaurantes" 
           subtitle="Descubre nuestras opciones" 
           backgroundImage="/images/restaurantes.jpg" 
         />
-      </div>
+     
       <Content style={{ 
         padding: '10px 10px', 
         backgroundColor: 'transparent',

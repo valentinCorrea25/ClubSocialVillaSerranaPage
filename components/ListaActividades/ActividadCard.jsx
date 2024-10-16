@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Card, Tag } from "antd";
+import { useRouter } from 'next/navigation';
+import { Card, Tag, Button } from "antd";
 import {
   CalendarOutlined,
   EnvironmentOutlined,
@@ -9,6 +10,7 @@ import {
 } from "@ant-design/icons";
 
 const { Meta } = Card;
+
 
 const ActividadCard = ({ actividad }) => {
   const {
@@ -22,8 +24,13 @@ const ActividadCard = ({ actividad }) => {
     dia_Semana,
   } = actividad;
 
+  const router = useRouter();
+const handleViewDetails = (id) => {
+  router.push(`/ListaActividades/DetalleActividades?id=${id}`);
+};
+
   return (
-    <Card
+    <Card onClick={() => handleViewDetails(actividad.id_Actividad)}
       hoverable
       cover={
         <div
@@ -86,7 +93,15 @@ const ActividadCard = ({ actividad }) => {
               }}
             >
               {contenido}
+         
             </p>
+            <Button
+                type="primary"
+                onClick={() => handleViewDetails(actividad.id_Actividad)}
+                className="mt-7 m-auto sm:ml-0"
+              >
+                Ver Detalles
+              </Button>
           </>
         }
       />
