@@ -49,6 +49,7 @@ model Alquiler {
   titulo             String
   descripcion        String
   ubicacion          String
+  ubicacion_calles   String
   coordenadas        String?
   capacidad          Int
   camas_dobles       Int?
@@ -84,6 +85,7 @@ model Restaurant {
   descripcion       String
   coordenadas       String?
   ubicacion         String?
+  ubicacion_calles  String?
   tipo_pago         String[]
   titulo            String
   horario_semanal   String?
@@ -97,9 +99,19 @@ model Restaurant {
 }
 
 enum ServicioTitulo {
-  Trasporte
-  Cerrajero
-  // Add other titles here
+  Alambrados
+  Jardineria // Jardinería -- SOLCIIONAR TREMA DE TILDES
+  LimpiezaTerrenos // Limpieza de terrenos
+  Construccion // Construcción
+  Diseno // Diseño
+  Filmacion // filmación
+  Equipamiento
+  Estetica // Estética
+  Salud
+  Mecanica // Mecánica
+  ProvisionDeAgua  // Provisión de agua
+  Seguridad
+  Traslados
 }
 
 model Usuario {

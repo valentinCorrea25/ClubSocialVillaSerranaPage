@@ -9,6 +9,7 @@ export const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState(null);
+  const [username, setUsername] = useState("");
 
   async function getTipoDeServicios() {
     const res = await fetch(`/api/tipoServicio`);
@@ -201,6 +202,8 @@ export const AdminProvider = ({ children }) => {
         eliminarUsuario,
         crearUsuario,
         mensaje,
+        setUsername,
+        username
       }}
     >
       {children}

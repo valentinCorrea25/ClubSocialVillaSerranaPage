@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Flex, Image } from "antd";
-import image from "@/public/images/loginScreen.jpg";
+import { Button, Form, Input } from "antd";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import logo from "@/public/images/logo.png";
+import { useContext } from "react";
+import { AdminContext } from "@/context/adminContext";
 
 const Admin = () => {
   const router = useRouter();

@@ -100,3 +100,25 @@ export function extraerIdDelMensaje(mensaje) {
     return null; // Retornar null si no se encuentra un id
   }
 }
+
+export function getCoordsGoogleMaps(url) {
+  try {
+    if (typeof url !== 'string') {
+      throw new Error('URL no válida');
+    }
+
+    // Expresión regular para extraer las coordenadas
+    var regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
+    var match = url.match(regex);
+
+    if (match) {
+      var lat = match[1];
+      var lon = match[2];
+      return [lat, lon];
+    } else {
+      return false
+    }
+  } catch (e) {
+    return e.message;
+  }
+}

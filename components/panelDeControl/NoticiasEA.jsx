@@ -3,6 +3,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, Input, Upload, Image, Checkbox, Select, Form } from "antd";
 import { getBase64 } from "../utils/ControlPublicaciones";
 import { AdminContext } from "@/context/adminContext";
+import RichTextEditor from "./richTextEditor/RichTextEditor";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -17,6 +18,7 @@ export default function Publicacion({
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
+  const [textoRichText, setTextoRichText] = useState("");
   const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
 
   const handlePreview = async (file) => {
@@ -38,12 +40,13 @@ export default function Publicacion({
     let data;
     mostrarCargarToast();
     try {
-      if (currentForm == 'eventos') {
+      if (currentForm == "eventos") {
         const urls = await subirImagenesSupabase(
           fileList,
           "eventoNoticias",
           values.titulo
         );
+        values.contenido = textoRichText;
         values.fotos = urls;
         if (values.fecha_evento) {
           values.fecha_evento = handleFecha(values.fecha_evento);
@@ -51,7 +54,6 @@ export default function Publicacion({
 
         data = await crearPublicacion(values, "eventosnoticias");
       } else {
-
         const urls = await subirImagenesSupabase(
           fileList,
           "actividades",
@@ -63,12 +65,11 @@ export default function Publicacion({
         console.log(data);
       }
 
-      if(data.code == 500){
+      if (data.code == 500) {
         mostrarFalloToast(data.message);
-      }else{
+      } else {
         mostrarExitoToast(data.message);
       }
-      
     } catch (e) {
       console.log(e);
     }
@@ -78,7 +79,7 @@ export default function Publicacion({
     <div className="relative">
       <Form
         onFinish={onFinish}
-        className="p-5 md:p-10 rounded-lg w-full max-w-lg flex flex-col mx-auto bg-white shadow-lg"
+        className="p-1 pt-10 rounded-lg w-full max-w-xl flex flex-col mx-auto"
       >
         <h1 className="text-center text-xl md:text-2xl mb-6">
           Crear nueva publicación de Actividad o Eventos y Noticias
@@ -87,14 +88,14 @@ export default function Publicacion({
         <div className="flex flex-col md:flex-row justify-between mb-4 space-y-2 md:space-y-0 md:space-x-2 max-w-screen-xl">
           <Button
             type={currentForm === "eventos" ? "primary" : "default"}
-            onClick={() => setCurrentForm("eventos")}
+            onClick={() => {setCurrentForm("eventos");}}
             className="w-full md:w-1/2"
           >
             Eventos y Noticias
           </Button>
           <Button
             type={currentForm === "actividades" ? "primary" : "default"}
-            onClick={() => setCurrentForm("actividades")}
+            onClick={() => {setCurrentForm("actividades");}}
             className="w-full md:w-1/2"
           >
             Actividades
@@ -114,10 +115,27 @@ export default function Publicacion({
             <Form.Item
               label="Contenido"
               name="contenido"
-              rules={[{ required: true }]}
+              rules={[
+                {
+                  validator: (_, value) => {
+                    if (!textoRichText || textoRichText.trim() === '') {
+                      return Promise.reject(new Error('El contenido es requerido'));
+                    }
+                    return Promise.resolve();
+                  },
+                },
+              ]}
             >
-              <TextArea rows={4} />
+              <RichTextEditor setTextoRichText={setTextoRichText} />
             </Form.Item>
+
+            {/* <div> USADO PARA PRUEBAS DE EL EDITOR
+              <h1>Contenido Renderizado del Editor</h1>
+              <div
+                className="rendered-content"
+                dangerouslySetInnerHTML={{ __html: textoRichText }}
+              ></div>
+            </div> */}
 
             <Form.Item>
               <Checkbox
@@ -182,9 +200,18 @@ export default function Publicacion({
             <Form.Item
               label="Contenido"
               name="contenido"
-              rules={[{ required: true }]}
+              rules={[
+                {
+                  validator: (_, value) => {
+                    if (!textoRichText || textoRichText.trim() === '') {
+                      return Promise.reject(new Error('El contenido es requerido'));
+                    }
+                    return Promise.resolve();
+                  },
+                },
+              ]}
             >
-              <TextArea rows={4} />
+              <RichTextEditor setTextoRichText={setTextoRichText} />
             </Form.Item>
 
             <Form.Item
@@ -206,7 +233,7 @@ export default function Publicacion({
             <Form.Item
               label="Día de la Semana"
               name="dia_Semana"
-              rules={[{ required: true }]}
+              required
             >
               <Select mode="multiple" placeholder="Seleccione los días">
                 <Option value="Lunes">Lunes</Option>

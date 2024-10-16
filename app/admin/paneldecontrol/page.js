@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import { Button, Divider, Layout, Menu, message } from "antd";
@@ -16,9 +16,6 @@ import {
   CloseOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import CrearNuevoUsuario from "@/components/panelDeControl/CrearNuevoUsuario";
 import NoticiasEA from "@/components/panelDeControl/NoticiasEA";
@@ -26,8 +23,9 @@ import TodasLasPublicaciones from "@/components/panelDeControl/TodasLasPublicaci
 import Servicios from "@/components/panelDeControl/Servicios";
 import Restaurantes from "@/components/panelDeControl/Restaurantes";
 import Sider from "antd/es/layout/Sider";
-import { Footer, Header, Content } from "antd/es/layout/layout";
+import { Header, Content } from "antd/es/layout/layout";
 import useWindowSize from "@/components/utils/useWindowSize";
+import { AdminContext } from "@/context/adminContext";
 
 export default function PanelDeControl() {
   const [currentComponent, setCurrentComponent] = useState(
@@ -35,7 +33,6 @@ export default function PanelDeControl() {
   );
   const [currentTitle, setCurrentTitle] = useState("Todas las Publicaciones");
   const router = useRouter();
-  const [current, setCurrent] = useState("1");
   const [collapsed, setcollapsed] = useState(false);
   const colorBgContainer = "#fff";
   const windowsize = useWindowSize();

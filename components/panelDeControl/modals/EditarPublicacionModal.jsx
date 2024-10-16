@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Modal, Tag } from "antd";
 import { Button, Form, Input } from "antd";
 import { AdminContext } from "@/context/adminContext";
+import EditAlquileres from "./editForms/EditAlquileres";
 const { TextArea } = Input;
 import {
   obtenerIdPublicacion,
@@ -34,6 +35,13 @@ export default function EditarPublicacionModal({
 
   const idPublicacion = obtenerIdPublicacion(selectedItem);
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
+
+  function seleccionarForm(tipoDePublicacion){
+    switch(tipoDePublicacion){
+      case "Alquiler": 
+      break;
+    }
+  }
 
   const onFinish = async (values) => {
     setLoading(true);
