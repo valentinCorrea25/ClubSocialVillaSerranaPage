@@ -4,12 +4,14 @@ import { createContext, useState } from "react";
 import { decode } from "base64-arraybuffer";
 import { supabase } from "@/libs/supabase";
 import { getBase64 } from "@/components/utils/ControlPublicaciones";
+import { message } from "antd";
 
 export const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState(null);
   const [username, setUsername] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
 
   async function getTipoDeServicios() {
     const res = await fetch(`/api/tipoServicio`);
@@ -189,10 +191,40 @@ export const AdminProvider = ({ children }) => {
     return data;
   }
 
+  function mostrarCargarToast() {
+    messageApi.open({
+      type: "loading",
+      content: "Cargando",
+      duration: 2,
+      className: "scale-110 md:scale-150 mt-5",
+    });
+  }
+
+  function mostrarExitoToast(texto) {
+    messageApi.open({
+      type: "success",
+      content: texto,
+      className: "scale-110 md:scale-150 mt-5",
+    });
+  }
+
+  function mostrarFalloToast(texto) {
+    messageApi.open({
+      type: "error",
+      content: texto,
+      className: "scale-110 md:scale-150 mt-5",
+    });
+  }
+
 
   return (
     <AdminContext.Provider
       value={{
+        messageApi,
+        contextHolder,
+        mostrarCargarToast,
+        mostrarExitoToast,
+        mostrarFalloToast,
         getTipoDeServicios,
         crearPublicacion,
         modificarPublicaciones,

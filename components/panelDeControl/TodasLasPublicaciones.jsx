@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import EditarPublicacionModal from "./modals/EditarPublicacionModal";
 import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
 import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
-import Search from "antd/es/input/Search";
 import GenerarQRModal from "./modals/GenerarQRModal";
 import useWindowSize from "@/components/utils/useWindowSize";
 
@@ -14,6 +13,7 @@ export default function TodasLasPublicaciones({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
+  setModalIsOpenForButtonFloat
 }) {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,16 +28,19 @@ export default function TodasLasPublicaciones({
   const showModalEditar = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
+    setModalIsOpenForButtonFloat(true);
   };
 
   const showModalQR = (item) => {
     setSelectedItem(item);
     setIsModalOpenQR(true);
+    setModalIsOpenForButtonFloat(true);
   };
 
   const showModalEliminar = (item) => {
     setSelectedItem(item);
     setIsModalOpenElimininar(true);
+    setModalIsOpenForButtonFloat(true);
   };
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -196,6 +199,21 @@ export default function TodasLasPublicaciones({
       title: "Portada",
       dataIndex: "fotos",
       key: "portada",
+      onCell: (record) => {
+        return {
+          onClick: () => {
+            const tipoPublicacion = Object.keys(record).find((key) =>
+              key.startsWith("id_")
+            );
+            const tipoSinPrefijo = tipoPublicacion
+              ? tipoPublicacion.replace("id_", "")
+              : "desconocido";
+            const id = record[tipoPublicacion];
+            
+            router.push(obtenerDireccionDePublicacion(tipoSinPrefijo, id));
+          },
+        };
+      },
       render: (text, record) => {
         const fotos = record.fotos || record.foto;
         const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos;
@@ -213,6 +231,11 @@ export default function TodasLasPublicaciones({
       dataIndex: "titulo",
       key: "titulo",
       ellipsis: true,
+      onCell: (record) => {
+        return {
+          onClick: () => showModalEditar(record), // Make sure this calls the function on click
+        };
+      },
       render: (titulo, record) => {
         const maxLength = 30;
         const truncatedTitle =
@@ -354,9 +377,6 @@ export default function TodasLasPublicaciones({
           }}
           className="max-w-sm mb-2"
         />
-        {/* <Button > 
-          <SearchOutlined/> Buscar
-        </Button> */}
       </div>
       <Table
         dataSource={data ? data.publicaciones : []}
@@ -368,6 +388,7 @@ export default function TodasLasPublicaciones({
           total: data ? data.count : 0,
           pageSize: 25,
           onChange: (newPage) => setPage(newPage),
+          position: ['bottomLeft'],
         }}
         size="small"
         scroll={{ x: true }}
@@ -380,6 +401,7 @@ export default function TodasLasPublicaciones({
         mostrarCargarToast={mostrarCargarToast}
         mostrarExitoToast={mostrarExitoToast}
         mostrarFalloToast={mostrarFalloToast}
+        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
       />
       <EliminarPublicacionModal
         updateData={updateData}
@@ -389,12 +411,14 @@ export default function TodasLasPublicaciones({
         mostrarCargarToast={mostrarCargarToast}
         mostrarExitoToast={mostrarExitoToast}
         mostrarFalloToast={mostrarFalloToast}
+        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
       />
 
       <GenerarQRModal
         selectedItem={selectedItem}
         isModalOpen={isModalOpenQR}
         setIsModalOpen={setIsModalOpenQR}
+        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
       />
     </div>
   );

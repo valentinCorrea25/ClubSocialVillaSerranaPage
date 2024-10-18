@@ -19,6 +19,7 @@ export default function EditarPublicacionModal({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
+  setModalIsOpenForButtonFloat
 }) {
   const [form] = Form.useForm();
   const { modificarPublicaciones, subirImagenesSupabase } =
@@ -31,6 +32,11 @@ export default function EditarPublicacionModal({
   const handleClose = () => {
     setRestoreVariables(true);
     setIsModalOpen(false);
+    setModalIsOpenForButtonFloat(false);
+  };
+
+  const handleResetComplete = () => {
+    setRestoreVariables(false);
   };
 
   const idPublicacion = obtenerIdPublicacion(selectedItem);
@@ -78,9 +84,7 @@ export default function EditarPublicacionModal({
     }
   };
 
-  const handleResetComplete = () => {
-    setRestoreVariables(false);
-  };
+  
 
   useEffect(() => {
     if (selectedItem) {      

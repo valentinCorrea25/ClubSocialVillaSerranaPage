@@ -1,8 +1,8 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
-import { Button, Divider, Layout, Menu, message } from "antd";
+import { Button, Divider, Layout, Menu, message, Tooltip } from "antd";
 import { useRouter } from "next/navigation";
 import { FaHouse } from "react-icons/fa6";
 import { FaRegNewspaper, FaSignOutAlt } from "react-icons/fa";
@@ -12,6 +12,7 @@ import { GiKnifeFork } from "react-icons/gi";
 import { FaUserEdit } from "react-icons/fa";
 import Alquileres from "@/components/panelDeControl/Alquileres";
 import { signOut } from "next-auth/react";
+import FloatButtonCustom from "@/components/panelDeControl/FloatButtonCustom";
 import {
   CloseOutlined,
   MenuFoldOutlined,
@@ -26,6 +27,7 @@ import Sider from "antd/es/layout/Sider";
 import { Header, Content } from "antd/es/layout/layout";
 import useWindowSize from "@/components/utils/useWindowSize";
 import { AdminContext } from "@/context/adminContext";
+import ModalCrearPublicacionesControl from "@/components/panelDeControl/modals/modalsCreacionDePublicaciones/ModalCrearPublicacionesControl";
 
 export default function PanelDeControl() {
   const [currentComponent, setCurrentComponent] = useState(
@@ -33,35 +35,22 @@ export default function PanelDeControl() {
   );
   const [currentTitle, setCurrentTitle] = useState("Todas las Publicaciones");
   const router = useRouter();
-  const [collapsed, setcollapsed] = useState(false);
   const colorBgContainer = "#fff";
   const windowsize = useWindowSize();
-  const [messageApi, contextHolder] = message.useMessage();
+  const [collapsed, setcollapsed] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [tipoDePublicacionACrear, setTipoDePublicacionACrear] = useState(false);
+  const {
+    mostrarFalloToast,
+    mostrarExitoToast,
+    mostrarCargarToast,
+    contextHolder,
+  } = useContext(AdminContext);
+  const [isModalOpenCREACIONES, setIsModalOpenCREACIONES] = useState(false);
 
-  function mostrarCargarToast() {
-    messageApi.open({
-      type: "loading",
-      content: "Cargando",
-      duration: 2,
-      className: "scale-110 md:scale-150 mt-5",
-    });
-  }
-
-  function mostrarExitoToast(texto) {
-    messageApi.open({
-      type: "success",
-      content: texto,
-      className: "scale-110 md:scale-150 mt-5",
-    });
-  }
-
-  function mostrarFalloToast(texto) {
-    messageApi.open({
-      type: "error",
-      content: texto,
-      className: "scale-110 md:scale-150 mt-5",
-    });
-  }
+  useEffect(() => {
+    setcollapsed(windowsize.width <= 768);
+  }, [windowsize.width]);
 
   const items = [
     {
@@ -133,6 +122,7 @@ export default function PanelDeControl() {
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
       case "Alquileres":
@@ -188,6 +178,9 @@ export default function PanelDeControl() {
 
   const onClick = (e) => {
     console.log("click ", e);
+    if(windowsize.width <= 768){
+      setcollapsed(true);
+    }
     setComponent(e.key);
   };
 
@@ -223,7 +216,7 @@ export default function PanelDeControl() {
                   left: 0,
                   top: 0,
                   bottom: 0,
-                  zIndex: 1,
+                  zIndex: 1001,
                 }),
           }}
         >
@@ -235,7 +228,7 @@ export default function PanelDeControl() {
               className="md:w-[100%] w-full py-5 relative"
               alt="Logo Villa Serrana Club Social y Deportivo"
             />
-            <div className="absolute right-[-80%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none">
+            <div className="absolute right-[-80%] top-5 transition-all ease-in-out opacity-100 block lg:opacity-0 lg:hidden pointer-events-none md:hidden">
               <CloseOutlined
                 className="scale-125 bg-white p-2 trigger"
                 onClick={() => setcollapsed(!collapsed)}
@@ -274,22 +267,41 @@ export default function PanelDeControl() {
           style={{
             marginLeft: windowsize.width > 768 && !collapsed ? 250 : 0,
             transition: "margin-left 0.2s",
+            position: "relative",
           }}
         >
+          {!collapsed && windowsize.width <= 768 && (
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.6)", // Color negro semi-transparente
+                zIndex: 1000,
+                transition: "opacity 0.5s",
+              }}
+              onClick={() => setcollapsed(true)} // Cerrar el menú al hacer clic en el overlay
+            />
+          )}
           <Header style={{ padding: 0, background: colorBgContainer }}>
             <div
-              className="trigger flex items-center"
+              className="trigger flex items-center justify-between"
               onClick={() => setcollapsed(!collapsed)}
               style={{ padding: "0 24px", fontSize: "18px", cursor: "pointer" }}
             >
-              {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              <h1 className="w-full text-center font-medium">{currentTitle}</h1>
+              <div>
+                {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              </div>
+              <h1 className="font-medium text-lg lg:text-xl pl-5 text-center flex-grow">
+                {currentTitle}
+              </h1>
+              <div style={{ width: "24px" }}></div>{" "}
+              {/* Placeholder to balance the layout */}
             </div>
           </Header>
-          <Content
-            className="max-w-screen-xl mx-auto w-full p-5"
-            // style={{ margin: "24px 16px 0", overflow: "initial" }}
-          >
+          <Content className="max-w-screen-xl mx-auto w-full p-5">
             {renderComponent()}
           </Content>
         </Layout>
@@ -312,6 +324,27 @@ export default function PanelDeControl() {
             white-space: normal;
           }
         `}</style>
+        {!modalIsOpen ? (
+          <FloatButtonCustom
+            setcollapsed={setcollapsed}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
+          />
+        ) : null}
+        {tipoDePublicacionACrear ? (
+          <ModalCrearPublicacionesControl
+            tipoDePublicacion={tipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
+            isModalOpen={isModalOpenCREACIONES}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
+
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+          />
+        ) : null}
+        {/* ESTO ES CON EL FIN DE QUE NO LO RENDERIZE INCESERAIAMENTE */}
       </Layout>
     </>
   );

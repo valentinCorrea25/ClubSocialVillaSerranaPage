@@ -5,7 +5,7 @@ import BuscadorMapa from "./mapaExalmple";
 import { AdminContext } from "@/context/adminContext";
 import { getBase64 } from "../utils/ControlPublicaciones";
 import { getCoordsGoogleMaps } from "../utils/ControlPublicaciones";
-import Mapa from "./leafletjs/Mapa";
+// import Mapa from "./leafletjs/Mapa";
 
 const { TextArea } = Input;
 
@@ -194,7 +194,7 @@ export default function NuevoRestaurante({
                 Ubicación
               </h2>
 
-              <Form.Item
+              {/* <Form.Item
                 label="Link de Google Maps"
                 name="ubicacion"
                 rules={[
@@ -232,7 +232,7 @@ export default function NuevoRestaurante({
                   className="w-full"
                 />
               </Form.Item>
-              <Mapa urlGoogle={urlGoogle} />
+              <Mapa urlGoogle={urlGoogle} /> */}
             </div>
           </div>
 

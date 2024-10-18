@@ -83,6 +83,7 @@ model Restaurant {
   celular           String
   mail              String
   descripcion       String
+  diasSemana        String[]
   coordenadas       String?
   ubicacion         String?
   ubicacion_calles  String?
@@ -109,7 +110,7 @@ enum ServicioTitulo {
   Estetica // Estética
   Salud
   Mecanica // Mecánica
-  ProvisionDeAgua  // Provisión de agua
+  ProvisionDeAgua // Provisión de agua
   Seguridad
   Traslados
 }

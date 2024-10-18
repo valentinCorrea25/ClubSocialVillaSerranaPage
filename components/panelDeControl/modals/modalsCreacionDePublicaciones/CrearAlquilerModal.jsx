@@ -7,14 +7,15 @@ import {
   Image,
   Checkbox,
   InputNumber,
+  Modal,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { AdminContext } from "@/context/adminContext";
+import dynamic from "next/dynamic";
 const { TextArea } = Input;
-import { extraerIdDelMensaje } from "../utils/ControlPublicaciones";
-import { getBase64 } from "../utils/ControlPublicaciones";
-// import Mapa from "./leafletjs/Mapa";
-import { getCoordsGoogleMaps } from "../utils/ControlPublicaciones";
+import { extraerIdDelMensaje } from "@/components/utils/ControlPublicaciones";
+import { getBase64 } from "@/components/utils/ControlPublicaciones";
+import { getCoordsGoogleMaps } from "@/components/utils/ControlPublicaciones";
 
 const alquileresCaracteristicas = [
   { label: "Toallas", value: "toallas" },
@@ -33,17 +34,25 @@ const alquileresCaracteristicas = [
   { label: "Mascotas", value: "mascotas" },
 ];
 
-export default function Alquileres({
-  mostrarCargarToast,
-  mostrarExitoToast,
-  mostrarFalloToast,
+export default function CrearAlquilerModal({
+    mostrarCargarToast,
+    mostrarExitoToast,
+    mostrarFalloToast,
+    isModalOpen,
+    setIsModalOpen,
+    setModalIsOpenForButtonFloat,
 }) {
+const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"), {
+    ssr: false,
+    loading: () => <div>Cargando mapa...</div>,
+    });
   const [form] = Form.useForm();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
   const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
   const [urlGoogle, setUrlGoogle] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -51,6 +60,19 @@ export default function Alquileres({
     }
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
+  };
+
+  const handleClose = () => {
+    // setRestoreVariables(true);
+    setIsModalOpen(false);
+    setModalIsOpenForButtonFloat(false);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    form.resetFields();
+    setFileList([]);
+    setUrlGoogle("");
   };
 
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
@@ -75,6 +97,7 @@ export default function Alquileres({
   );
 
   const onFinish = async (values) => {
+    setIsLoading(true);
     mostrarCargarToast();
     console.log(values.caracteristicas);
 
@@ -106,15 +129,37 @@ export default function Alquileres({
       if (data.code == 500) {
         mostrarFalloToast(data.message);
       } else {
+        handleClose();
         mostrarExitoToast(data.message);
       }
+      setIsLoading(false);
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <>
+    <Modal
+      title={<div className="text-center"> Crear Publicacion </div>}
+      open={isModalOpen}
+      onCancel={handleClose}
+      afterClose={handleClose}
+      footer={
+        <>
+          <Button onClick={handleClose}>Cancelar</Button>
+          <Button
+            className="bg-[--verde] text-white"
+            loading={isLoading}
+            onClick={() => form.submit()}
+          >
+            Guardar y Publicar
+          </Button>
+        </>
+      }
+      width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
+      style={{ maxWidth: "768px" }} // Limita el ancho del modal para que parezca un móvil
+      bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
+    >
       <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8 py-8">
         <Form
           form={form}
@@ -122,7 +167,7 @@ export default function Alquileres({
           onFinish={onFinish}
           className="sm:p-6"
         >
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-8">
             <div className="space-y-6">
               <h2 className="text-2xl font-semibold text-center mb-6">
                 Información del Alquiler
@@ -266,7 +311,7 @@ export default function Alquileres({
               </Form.Item>
               <Mapa urlGoogle={urlGoogle} />
             </div>
-          </div> */}
+          </div>
 
           <div className="mt-8">
             <h2 className="text-2xl font-semibold text-center mb-6">
@@ -298,7 +343,7 @@ export default function Alquileres({
             </div>
           </div>
 
-          <Form.Item className="mt-8 text-center">
+          {/* <Form.Item className="mt-8 text-center">
             <Button
               type="primary"
               htmlType="submit"
@@ -306,9 +351,9 @@ export default function Alquileres({
             >
               Guardar y Publicar
             </Button>
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </div>
-    </>
+    </Modal>
   );
 }
