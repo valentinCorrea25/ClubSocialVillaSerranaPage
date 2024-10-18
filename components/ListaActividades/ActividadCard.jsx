@@ -88,11 +88,13 @@ const handleViewDetails = (id) => {
               style={{
                 marginTop: "16px",
                 height: "auto",
-                overflow: "auto",
+                overflow: "hidden",
                 textOverflow: "ellipsis",
               }}
             >
-              {contenido}
+             {contenido.substring(0, 350)}....
+              
+             
          
             </p>
             <Button
@@ -104,7 +106,10 @@ const handleViewDetails = (id) => {
               </Button>
           </>
         }
+        
+
       />
+      
     </Card>
   );
 };

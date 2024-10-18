@@ -1,19 +1,23 @@
 'use client';
 import React from 'react';
 import { Card, List, Button, Tag } from 'antd';
-import { EnvironmentOutlined } from '@ant-design/icons';
+import { EnvironmentOutlined, CalendarOutlined, TagOutlined} from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 
 const PublicacionesSimilares = ({ similares }) => {
   const router = useRouter();
 
   const handleViewMore = () => {
-    router.push('/ListaActividades');
+    router.push('/ListaEventosNoticias');
   };
 
   const handleViewDetails = (id) => {
-    router.push(`/ListaActividades/DetalleActividades?id=${id}`);
+    router.push(`/ListaEventosNoticias/DetalleEventosNoticias?id=${id}`);
   };
+
+
+
+
 
   return (
     <Card
@@ -42,11 +46,14 @@ const PublicacionesSimilares = ({ similares }) => {
         <List
           itemLayout="vertical"
           dataSource={similares}
+          
           renderItem={item => (
+            
+            
             <List.Item
-              key={item.id_Actividad}
+              key={item.id_EventoNoticia}
               style={{ padding: '10px', borderBottom: '1px solid #ddd', cursor: 'pointer' }}
-              onClick={() => handleViewDetails(item.id_Actividad)}
+              onClick={() => handleViewDetails(item.id_EventoNoticia)}
             >
               <div style={{ textAlign: 'center' }}>
                 <img
@@ -54,22 +61,27 @@ const PublicacionesSimilares = ({ similares }) => {
                   alt={item.fotos[0].titulo}
                   style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }}
                 />
-                                
-                
                 <div style={{ textAlign: 'left' }}>
-                   <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+                <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>
                     {item.titulo}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
-                    <EnvironmentOutlined style={{ marginRight: '8px' }} />
-                    {item.ubicacion}
-                  </div>
-                  <div>{
-                    item.dia_Semana.map((dia, index) => (
-                      <Tag key={index} style={{ marginRight: "4px" }}>
-                        {dia}
-                      </Tag>))
-                    }{item.horario} </div>
+                 
+                  <div style={{ color: "#0367A6" }}>
+              
+              {new Date(item.fecha_publicacion).toLocaleDateString()}
+              <TagOutlined style={{ marginLeft: "8px" }} />{" "}
+              {item.fecha_evento > new Date("12/31/1969") ? "Noticia" : "Evento"}
+             
+                <div style={{ marginTop: "8px" }} >
+                  <span>
+                    
+                    {item.fecha_evento > new Date("12/31/1969")
+                ? ""
+                : `Fecha del Evento: ${new Date(item.fecha_evento).toLocaleDateString()}`}
+                   
+                  </span>
+                </div>
+        </div>               
                 </div>
               </div>
             </List.Item>

@@ -22,12 +22,12 @@ const ActividadesList = ({ actividades, onViewDetails  }) => {
     <div className="max-w-7xl mx-auto p-1 sm:p-5">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
         {actividades.map((actividad, index) => (
-          <ActividadCard key={index} actividad={actividad} onClick={() => onViewDetails(actividad.id_Actividad)} />
+          <ActividadCard key={index} actividad={actividad} />
           
         ))}
       </div>
       <div className="flex justify-center mt-5">
-        <Pagination defaultCurrent={1} total={50} />
+        <Pagination defaultCurrent={1} total={10} />
       </div>
     </div>
   );
