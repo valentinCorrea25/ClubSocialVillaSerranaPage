@@ -131,6 +131,7 @@ export default function PanelDeControl() {
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
       case "Restaurantes":
@@ -139,6 +140,7 @@ export default function PanelDeControl() {
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
       case "NoticiasEA":
@@ -147,6 +149,7 @@ export default function PanelDeControl() {
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
       case "Servicios":
@@ -155,6 +158,7 @@ export default function PanelDeControl() {
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
       case "CrearNuevoUsuario":
@@ -163,6 +167,7 @@ export default function PanelDeControl() {
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
       default:
@@ -171,6 +176,7 @@ export default function PanelDeControl() {
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
     }
@@ -191,7 +197,7 @@ export default function PanelDeControl() {
 
   return (
     <>
-      {contextHolder} {/* utilizado para los toast */}
+      {contextHolder} 
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
           trigger={null}
@@ -344,7 +350,7 @@ export default function PanelDeControl() {
             mostrarFalloToast={mostrarFalloToast}
           />
         ) : null}
-        {/* ESTO ES CON EL FIN DE QUE NO LO RENDERIZE INCESERAIAMENTE */}
+        
       </Layout>
     </>
   );

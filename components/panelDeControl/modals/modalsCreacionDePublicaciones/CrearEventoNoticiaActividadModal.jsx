@@ -124,7 +124,7 @@ export default function CrearEventoNoticiaActividadModal({
         </>
       }
       width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
-      style={{ maxWidth: "768px" }} // Limita el ancho del modal para que parezca un móvil
+      style={{ maxWidth: "768px", top:"20px" }}
       bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
     >
       <div className="relative">

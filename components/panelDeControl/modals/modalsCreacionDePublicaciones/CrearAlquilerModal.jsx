@@ -157,7 +157,7 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
         </>
       }
       width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
-      style={{ maxWidth: "768px" }} // Limita el ancho del modal para que parezca un móvil
+      style={{ maxWidth: "768px", top:"20px" }}
       bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
     >
       <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8 py-8">

@@ -122,6 +122,7 @@ export default function CrearRestaurantesModal({
       open={isModalOpen}
       onCancel={handleClose}
       afterClose={handleClose}
+      
       footer={
         <>
           <Button onClick={handleClose}>Cancelar</Button>
@@ -135,7 +136,7 @@ export default function CrearRestaurantesModal({
         </>
       }
       width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
-      style={{ maxWidth: "768px" }} // Limita el ancho del modal para que parezca un móvil
+      style={{ maxWidth: "768px", top:"20px" }} // Limita el ancho del modal para que parezca un móvil
       bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
     >
       <Form

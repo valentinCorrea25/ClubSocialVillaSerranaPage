@@ -104,7 +104,7 @@ export default function CrearServicioModal({
         </>
       }
       width="100%"
-      style={{ maxWidth: "768px" }}
+      style={{ maxWidth: "768px", top:"20px" }}
       bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }}
     >
       <Form onFinish={onFinish} layout="vertical" form={form}>

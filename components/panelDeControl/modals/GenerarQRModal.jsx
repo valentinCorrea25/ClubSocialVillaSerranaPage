@@ -38,6 +38,9 @@ export default function GenerarQRModal({
     }
   }, [selectedItem]);
 
+  console.log(selectedItem);
+  
+
   return (
     <Modal
       title={

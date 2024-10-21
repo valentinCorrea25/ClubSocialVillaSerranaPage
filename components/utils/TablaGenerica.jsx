@@ -1,29 +1,49 @@
-import React, { useMemo, useState } from "react";
-import { Table, Dropdown, Space, Input, Button } from "antd";
-import useSWR, { useSWRConfig } from "swr";
-import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
-import { useRouter } from "next/navigation";
-import EditarPublicacionModal from "./modals/EditarPublicacionModal";
-import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
-import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
-import GenerarQRModal from "./modals/GenerarQRModal";
+import React, { useState, useMemo } from "react";
+import { Table, Dropdown, Space } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
+import useSWR from "swr";
 import useWindowSize from "@/components/utils/useWindowSize";
+import { mutate } from "swr";
+import EditarPublicacionModal from "../panelDeControl/modals/EditarPublicacionModal";
+import EliminarPublicacionModal from "../panelDeControl/modals/EliminarPublicacionModal";
+import GenerarQRModal from "../panelDeControl/modals/GenerarQRModal";
+import { obtenerDireccionDePublicacion } from "./ControlPublicaciones";
 
-export default function TodasLasPublicaciones({
+export default function TablaGenerica({
+  apiEndpoint,
+//   columns,
+  searchQuery = "",
+  pageSize = 25,
+  getRowKey,
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
-  setModalIsOpenForButtonFloat
+  setModalIsOpenForButtonFloat,
 }) {
   const [page, setPage] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
   const [isModalOpenQR, setIsModalOpenQR] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({});
-  const router = useRouter();
-  const { mutate } = useSWRConfig();
-  const [searchQuery, setSearchQuery] = useState("");
   const windowSize = useWindowSize();
+  // Construir URL con parámetros
+  const buildUrl = () => {
+    const params = new URLSearchParams({
+      page: page.toString(),
+      ...(searchQuery && { text: searchQuery }),
+    });
+    return `${apiEndpoint}?${params.toString()}`;
+  };
+
+  const key = buildUrl();
+
+  // Fetch data
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error, isLoading } = useSWR(key, fetcher);
+
+  function updateData(){
+    mutate(key,data);
+  }
 
   const showModalEditar = (item) => {
     setSelectedItem(item);
@@ -43,20 +63,7 @@ export default function TodasLasPublicaciones({
     setModalIsOpenForButtonFloat(true);
   };
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-  const key = `/api/listapublicaciones?page=${page}${
-    searchQuery?.trim() ? `&text=${searchQuery}` : ""
-  }`;
   
-  const { data, error, isLoading } = useSWR(key, fetcher, {
-    keepPreviousData: true
-  });
-
-  function updateData() {
-    mutate(key, data);
-  }
-
   const columns = [
     {
       title: "Portada",
@@ -177,7 +184,7 @@ export default function TodasLasPublicaciones({
           },
           {
             label: (
-              <div className="w-full" onClick={() => showModalQR(record)}>
+              <div className="w-full" onClick={() => showModalQR(record)}> {/* refactorizar esto para que todo el espacio dispnible*/}
                 Generar código QR
               </div>
             ),
@@ -227,42 +234,31 @@ export default function TodasLasPublicaciones({
   }, [windowSize.width, columns]);
 
 
+
   return (
-    <div className="overflow-x-auto">
-      <div className="flex space-x-2 my-2">
-        <Input
-          type="text"
-          placeholder="Buscar publicaciones..."
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-            setPage(1);
-          }}
-          className="max-w-sm mb-2"
-        />
-      </div>
+    <>
       <Table
         dataSource={data?.publicaciones || []}
         columns={filteredColumns}
         loading={isLoading}
-        rowKey={(record) => {
-          const tipoPublicacion = Object.keys(record).find(key => key.startsWith('id_'));
-          return `${record[tipoPublicacion]}_${tipoPublicacion}`;
-        }}
+        rowKey={getRowKey}
         pagination={{
           current: page,
           total: data?.totalCount || 0,
-          pageSize: 25,
+          pageSize,
           onChange: (newPage) => setPage(newPage),
           showSizeChanger: false,
-          showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} items`,
-          position: ['bottomLeft'],
+          showTotal: (total, range) =>
+            `${range[0]}-${range[1]} de ${total} items`,
+          position: ["bottomLeft"],
         }}
         size="small"
         scroll={{ x: true }}
-
       />
-      <EditarPublicacionModal
+
+      {selectedItem && (
+        <>
+        <EditarPublicacionModal
         updateData={updateData}
         selectedItem={selectedItem}
         isModalOpen={isModalOpen}
@@ -289,6 +285,8 @@ export default function TodasLasPublicaciones({
         setIsModalOpen={setIsModalOpenQR}
         setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
       />
-    </div>
+      </>
+      )}
+    </>
   );
 }
