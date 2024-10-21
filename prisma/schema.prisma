@@ -19,6 +19,7 @@ model Servicio {
   dia_Semana        String[]
   fecha_publicacion DateTime
   titulo_Servicio   ServicioTitulo
+  publicado         Boolean        @default(true)
 }
 
 model Actividad {
@@ -30,6 +31,7 @@ model Actividad {
   horario           String?
   ubicacion         String?
   dia_Semana        String[]
+  publicado         Boolean        @default(true)
 }
 
 model EventosNoticia {
@@ -39,6 +41,7 @@ model EventosNoticia {
   contenido         String
   fotos             String[]
   fecha_evento      DateTime? // Que esto sea un check box que diga 'Es evento?' y que permita llenar este campo
+  publicado         Boolean        @default(true)
 }
 
 model Alquiler {
@@ -75,6 +78,7 @@ model Alquiler {
   fecha_publicacion  DateTime
   fotos              String[]
   precio             Decimal?
+  publicado         Boolean        @default(true)
 }
 
 model Restaurant {
@@ -97,6 +101,7 @@ model Restaurant {
   web               String?
   fotos             String[]
   fecha_publicacion DateTime
+  publicado         Boolean        @default(true)
 }
 
 enum ServicioTitulo {

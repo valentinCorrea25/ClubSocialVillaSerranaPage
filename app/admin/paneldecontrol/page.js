@@ -28,6 +28,7 @@ import { Header, Content } from "antd/es/layout/layout";
 import useWindowSize from "@/components/utils/useWindowSize";
 import { AdminContext } from "@/context/adminContext";
 import ModalCrearPublicacionesControl from "@/components/panelDeControl/modals/modalsCreacionDePublicaciones/ModalCrearPublicacionesControl";
+import Actividades from "@/components/panelDeControl/Actividades";
 
 export default function PanelDeControl() {
   const [currentComponent, setCurrentComponent] = useState(
@@ -75,11 +76,16 @@ export default function PanelDeControl() {
     },
     {
       key: "tmp-4",
+      icon: <FaRegNewspaper />,
+      label: "Actividades",
+    },
+    {
+      key: "tmp-5",
       icon: <FaPeopleCarry />,
       label: "Servicios",
     },
     {
-      key: "tmp-5",
+      key: "tmp-6",
       icon: <FaUserEdit />,
       label: "Control de Usuario",
     },
@@ -104,10 +110,14 @@ export default function PanelDeControl() {
         setCurrentTitle("Noticias, Activiadades y Eventos");
         break;
       case "tmp-4":
+        setCurrentComponent("Actividades");
+        setCurrentTitle("Actividades");
+        break;
+      case "tmp-5":
         setCurrentComponent("Servicios");
         setCurrentTitle("Servicios");
         break;
-      case "tmp-5":
+      case "tmp-6":
         setCurrentComponent("CrearNuevoUsuario");
         setCurrentTitle("Control de Usuario");
         break;
@@ -170,6 +180,15 @@ export default function PanelDeControl() {
             setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
+        case "Actividades":
+          return (
+            <Actividades
+              mostrarCargarToast={mostrarCargarToast}
+              mostrarExitoToast={mostrarExitoToast}
+              mostrarFalloToast={mostrarFalloToast}
+              setModalIsOpenForButtonFloat={setModalIsOpen}
+            />
+          );
       default:
         return (
           <TodasLasPublicaciones
@@ -307,7 +326,7 @@ export default function PanelDeControl() {
               {/* Placeholder to balance the layout */}
             </div>
           </Header>
-          <Content className="max-w-screen-xl mx-auto w-full p-5">
+          <Content className="max-w-screen-xl mx-auto lg:w-[60em] w-full p-5">
             {renderComponent()}
           </Content>
         </Layout>
@@ -336,6 +355,7 @@ export default function PanelDeControl() {
             setTipoDePublicacionACrear={setTipoDePublicacionACrear}
             setIsModalOpen={setIsModalOpenCREACIONES}
             setModalIsOpenForButtonFloat={setModalIsOpen}
+            windowsize={windowsize}
           />
         ) : null}
         {tipoDePublicacionACrear ? (

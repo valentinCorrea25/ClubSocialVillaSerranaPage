@@ -1,17 +1,33 @@
 import React, { useState, useMemo } from "react";
 import { Table, Dropdown, Space } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  DeleteOutlined,
+  ExportOutlined,
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  FormOutlined,
+  MenuOutlined,
+  QrcodeOutlined,
+} from "@ant-design/icons";
 import useSWR from "swr";
 import useWindowSize from "@/components/utils/useWindowSize";
 import { mutate } from "swr";
 import EditarPublicacionModal from "../panelDeControl/modals/EditarPublicacionModal";
 import EliminarPublicacionModal from "../panelDeControl/modals/EliminarPublicacionModal";
 import GenerarQRModal from "../panelDeControl/modals/GenerarQRModal";
-import { obtenerDireccionDePublicacion } from "./ControlPublicaciones";
+import {
+  getColumnasPorTipoDePublicacion,
+  iconosSegunTipoServicio,
+  obtenerDireccionDePublicacion,
+  tituloCorrectoServicio,
+} from "./ControlPublicaciones";
+import { CiMap } from "react-icons/ci";
 
 export default function TablaGenerica({
   apiEndpoint,
-//   columns,
+  //   columns,
   searchQuery = "",
   pageSize = 25,
   getRowKey,
@@ -19,6 +35,7 @@ export default function TablaGenerica({
   mostrarExitoToast,
   mostrarFalloToast,
   setModalIsOpenForButtonFloat,
+  tipoDePublicacion,
 }) {
   const [page, setPage] = useState(1);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -41,8 +58,8 @@ export default function TablaGenerica({
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, isLoading } = useSWR(key, fetcher);
 
-  function updateData(){
-    mutate(key,data);
+  function updateData() {
+    mutate(key, data);
   }
 
   const showModalEditar = (item) => {
@@ -63,12 +80,12 @@ export default function TablaGenerica({
     setModalIsOpenForButtonFloat(true);
   };
 
-  
   const columns = [
     {
       title: "Portada",
       dataIndex: "fotos",
       key: "portada",
+      width: 150,
       onCell: (record) => {
         return {
           onClick: () => {
@@ -79,19 +96,29 @@ export default function TablaGenerica({
               ? tipoPublicacion.replace("id_", "")
               : "desconocido";
             const id = record[tipoPublicacion];
-            
+
             router.push(obtenerDireccionDePublicacion(tipoSinPrefijo, id));
           },
         };
       },
       render: (text, record) => {
+        console.log(record);
+
+        if (tipoDePublicacion == "Servicio") {
+          return (
+            <div className="flex justify-center">
+              {iconosSegunTipoServicio(record.titulo_Servicio)}
+            </div>
+          );
+        }
         const fotos = record.fotos || record.foto;
         const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos;
         return fotoSrc ? (
           <img
             src={fotoSrc}
             alt="Portada"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
+            style={{ width: "120px", height: "80px", objectFit: "cover" }}
+            className={!record.publicado ? "opacity-30" : null}
           />
         ) : null;
       },
@@ -121,9 +148,24 @@ export default function TablaGenerica({
           : "Desconocido";
 
         return (
-          <div className="flex flex-col max-w-24">
-            <div>{truncatedTitle}</div>
-            <div className="font-bold">{tipoPublicacion}</div>
+          <div className="flex">
+            <div className="flex flex-col max-w-24">
+              <div>{truncatedTitle}</div>
+              <div className="font-bold">{tipoPublicacion}</div>
+              {tipoDePublicacion == "Servicio" ? (
+                <div>{tituloCorrectoServicio(record.titulo_Servicio)}</div>
+              ) : null}
+
+              {record.publicado ? (
+                <div>
+                  <CheckCircleOutlined /> Publicado{" "}
+                </div>
+              ) : (
+                <div>
+                  <CloseCircleOutlined /> No publicado
+                </div>
+              )}
+            </div>
           </div>
         );
       },
@@ -133,21 +175,24 @@ export default function TablaGenerica({
       dataIndex: "location",
       key: "location",
       ellipsis: true,
+      width: 120,
       render: (location) => (
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${location}`}
           target="_blank"
           rel="noopener noreferrer"
+          className="hover:text-[--verde]"
         >
-          Ver mapa
+          <CiMap className="inline text-xl" /> Ver mapa
         </a>
       ),
     },
     {
-      title: "Fecha",
+      title: "Fecha de Publicacion",
       dataIndex: "fecha_publicacion",
       key: "fecha_publicacion",
       ellipsis: true,
+      width: 120,
       render: (fechaPublicacion) => {
         const opciones = {
           year: "numeric",
@@ -176,35 +221,64 @@ export default function TablaGenerica({
               <a
                 href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)}
                 target="_blank"
+                className="w-full flex items-center gap-2"
               >
-                Ver Publicación
+                <ExportOutlined className="inline" /> Ver Publicación
               </a>
             ),
             key: "0",
           },
           {
             label: (
-              <div className="w-full" onClick={() => showModalQR(record)}> {/* refactorizar esto para que todo el espacio dispnible*/}
-                Generar código QR
+              <div
+                className="w-full flex items-center gap-2"
+                onClick={() => showModalQR(record)}
+              >
+                <QrcodeOutlined className="inline" /> Generar código QR
               </div>
             ),
             key: "1",
           },
           {
             label: (
-              <div className="w-full" onClick={() => showModalEditar(record)}>
-                Editar
+              <div
+                className="w-full flex items-center gap-2"
+                onClick={() => showModalEditar(record)}
+              >
+                <FormOutlined className="inline" /> Editar
               </div>
             ),
             key: "2",
           },
           {
             label: (
-              <div className="w-full" onClick={() => showModalEliminar(record)}>
-                Eliminar
+              <div
+                className="w-full flex items-center gap-2"
+                onClick={() => showModalEditar(record)}
+              >
+                {record.publicado ? (
+                  <>
+                    <EyeInvisibleOutlined className="inline" /> Despublicar
+                  </>
+                ) : (
+                  <>
+                    <EyeOutlined className="inline" /> Publicar
+                  </>
+                )}
               </div>
             ),
             key: "3",
+          },
+          {
+            label: (
+              <div
+                className="w-full flex items-center gap-2"
+                onClick={() => showModalEliminar(record)}
+              >
+                <DeleteOutlined className="inline" /> Eliminar
+              </div>
+            ),
+            key: "4",
             danger: true,
           },
         ];
@@ -226,14 +300,19 @@ export default function TablaGenerica({
 
   const filteredColumns = useMemo(() => {
     if (windowSize.width <= 768) {
-      return columns.filter(column => 
-        ['portada', 'titulo', 'options'].includes(column.key)
+      return columns.filter((column) =>
+        ["portada", "titulo", "options"].includes(column.key)
+      );
+    }
+    if (tipoDePublicacion == "Servicio") {
+      return columns.filter((column) =>
+        ["portada", "titulo", "fecha_publicacion", "options"].includes(
+          column.key
+        )
       );
     }
     return columns;
   }, [windowSize.width, columns]);
-
-
 
   return (
     <>
@@ -252,40 +331,40 @@ export default function TablaGenerica({
             `${range[0]}-${range[1]} de ${total} items`,
           position: ["bottomLeft"],
         }}
-        size="small"
+        size="middle"
         scroll={{ x: true }}
       />
 
       {selectedItem && (
         <>
-        <EditarPublicacionModal
-        updateData={updateData}
-        selectedItem={selectedItem}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        mostrarCargarToast={mostrarCargarToast}
-        mostrarExitoToast={mostrarExitoToast}
-        mostrarFalloToast={mostrarFalloToast}
-        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
-      />
-      <EliminarPublicacionModal
-        updateData={updateData}
-        selectedItem={selectedItem}
-        isModalOpen={isModalOpenEliminar}
-        setIsModalOpen={setIsModalOpenElimininar}
-        mostrarCargarToast={mostrarCargarToast}
-        mostrarExitoToast={mostrarExitoToast}
-        mostrarFalloToast={mostrarFalloToast}
-        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
-      />
+          <EditarPublicacionModal
+            updateData={updateData}
+            selectedItem={selectedItem}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+          />
+          <EliminarPublicacionModal
+            updateData={updateData}
+            selectedItem={selectedItem}
+            isModalOpen={isModalOpenEliminar}
+            setIsModalOpen={setIsModalOpenElimininar}
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+          />
 
-      <GenerarQRModal
-        selectedItem={selectedItem}
-        isModalOpen={isModalOpenQR}
-        setIsModalOpen={setIsModalOpenQR}
-        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
-      />
-      </>
+          <GenerarQRModal
+            selectedItem={selectedItem}
+            isModalOpen={isModalOpenQR}
+            setIsModalOpen={setIsModalOpenQR}
+            setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+          />
+        </>
       )}
     </>
   );

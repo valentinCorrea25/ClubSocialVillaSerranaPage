@@ -10,6 +10,7 @@ export default function FloatButtonCustom({
   setTipoDePublicacionACrear,
   setIsModalOpen,
   setModalIsOpenForButtonFloat,
+  windowsize
 }) {
   function handleSelect(tipoDePublicacion) {
     setTipoDePublicacionACrear(tipoDePublicacion);
@@ -24,7 +25,7 @@ export default function FloatButtonCustom({
       style={{ insetInlineEnd: 25, fontSize: "50px" }}
       icon={<PlusOutlined />}
       className="text-xl z-[30000]"
-      onClick={() => setcollapsed(true)}
+      onClick={() => windowsize.width <= 768 ? setcollapsed(true) : null}
     >
       <div
         className="relative"

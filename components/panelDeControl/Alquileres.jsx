@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import { useRouter } from "next/navigation";
 import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
 import TablaGenerica from "../utils/TablaGenerica";
@@ -105,14 +105,15 @@ export default function Alquileres({
 
   return (
     <div>
-      <div className="flex space-x-2 my-2">
+      <div className="flex space-x-2 justify-between my-2 w-full">
         <Input
           type="text"
           placeholder="Buscar..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-sm mb-2"
+          className="max-w-sm mb-2 w-full"
         />
+        <Button className="bg-[--verde] text-white hidden sm:block"> Crear Alquiler </Button>
       </div>
 
       <TablaGenerica

@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { Button, Input } from "antd";
 import { useRouter } from "next/navigation";
+import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
 import TablaGenerica from "../utils/TablaGenerica";
 
-export default function NoticiasEA({
+export default function Actividades({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
@@ -22,12 +23,11 @@ export default function NoticiasEA({
           onChange={(e) => setSearchQuery(e.target.value)}
           className="max-w-sm mb-2 w-full"
         />
-        <Button className="bg-[--verde] text-white hidden sm:block"> Crear Servicio </Button>
+        <Button className="bg-[--verde] text-white hidden sm:block"> Crear Actividad </Button>
       </div>
 
       <TablaGenerica
-        apiEndpoint="/api/servicios/lista"
-        tipoDePublicacion={'Servicio'}
+        apiEndpoint="/api/actividades/lista"
         searchQuery={searchQuery}
         mostrarCargarToast={mostrarCargarToast}
         mostrarExitoToast={mostrarExitoToast}
