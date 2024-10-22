@@ -81,10 +81,9 @@ export async function PUT(request, { params }) {
       data: data.datos // De esta manera es posible pasar los valores a la claves que coincidan con el schema
     });
 
-    console.log(servicio);
-
     return NextResponse.json({
-      message: 'Servicio modificado con exito'
+      message: 'Servicio modificado con exito',
+      code: 200
     });
 
   } catch (error) {

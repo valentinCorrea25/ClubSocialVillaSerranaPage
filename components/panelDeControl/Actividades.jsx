@@ -1,7 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Button, Input } from "antd";
-import { useRouter } from "next/navigation";
-import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
+
 import TablaGenerica from "../utils/TablaGenerica";
 
 export default function Actividades({
@@ -9,9 +8,18 @@ export default function Actividades({
   mostrarExitoToast,
   mostrarFalloToast,
   setModalIsOpenForButtonFloat,
+  setTipoDePublicacionACrear,
+  setIsModalOpen,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const router = useRouter();
+
+  function handleCreate() {
+    console.log('click');
+    
+    setTipoDePublicacionACrear('evento_noticia_actividad');
+    setIsModalOpen(true);
+    setModalIsOpenForButtonFloat(true);
+  }
 
   return (
     <div>
@@ -23,7 +31,7 @@ export default function Actividades({
           onChange={(e) => setSearchQuery(e.target.value)}
           className="max-w-sm mb-2 w-full"
         />
-        <Button className="bg-[--verde] text-white hidden sm:block"> Crear Actividad </Button>
+        <Button onClick={handleCreate} className="bg-[--verde] text-white hidden sm:block"> Crear Actividad </Button>
       </div>
 
       <TablaGenerica

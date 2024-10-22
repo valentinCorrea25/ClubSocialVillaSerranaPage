@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { Table, Dropdown, Space } from "antd";
 import {
   CheckCircleOutlined,
@@ -18,16 +18,18 @@ import EditarPublicacionModal from "../panelDeControl/modals/EditarPublicacionMo
 import EliminarPublicacionModal from "../panelDeControl/modals/EliminarPublicacionModal";
 import GenerarQRModal from "../panelDeControl/modals/GenerarQRModal";
 import {
-  getColumnasPorTipoDePublicacion,
   iconosSegunTipoServicio,
   obtenerDireccionDePublicacion,
+  obtenerIdPublicacion,
+  obtenerTipoDePublicacion,
   tituloCorrectoServicio,
 } from "./ControlPublicaciones";
 import { CiMap } from "react-icons/ci";
 
+import { AdminContext } from "@/context/adminContext";
+
 export default function TablaGenerica({
   apiEndpoint,
-  //   columns,
   searchQuery = "",
   pageSize = 25,
   getRowKey,
@@ -43,7 +45,9 @@ export default function TablaGenerica({
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
   const [isModalOpenQR, setIsModalOpenQR] = useState(false);
   const windowSize = useWindowSize();
-  // Construir URL con parámetros
+  const { modificarPublicaciones } = useContext(AdminContext);
+
+  // Construir para las tablas URL con parámetros
   const buildUrl = () => {
     const params = new URLSearchParams({
       page: page.toString(),
@@ -80,6 +84,20 @@ export default function TablaGenerica({
     setModalIsOpenForButtonFloat(true);
   };
 
+  const handleCambiarEstado = async (record, tipoDePublicacion, id) => {
+    let resp;
+    record.publicado = !record.publicado;
+    mostrarCargarToast();
+    try {
+      resp = await modificarPublicaciones(id, record, tipoDePublicacion);
+      mostrarExitoToast(`Publicación ${record.publicado ? "publicada" : 'despublicada'} con éxito`);
+    } catch (e) {
+      console.log(e);
+      mostrarFalloToast('Error al modificar la publicación, contactar programador');
+    }
+    updateData();
+  };
+
   const columns = [
     {
       title: "Portada",
@@ -104,9 +122,9 @@ export default function TablaGenerica({
       render: (text, record) => {
         console.log(record);
 
-        if (tipoDePublicacion == "Servicio") {
+        if (record.titulo_Servicio) {
           return (
-            <div className="flex justify-center">
+            <div className={`flex justify-center ${!record.publicado ? "opacity-30" : ""}`}>
               {iconosSegunTipoServicio(record.titulo_Servicio)}
             </div>
           );
@@ -130,11 +148,11 @@ export default function TablaGenerica({
       ellipsis: true,
       onCell: (record) => {
         return {
-          onClick: () => showModalEditar(record), // Make sure this calls the function on click
+          onClick: () => showModalEditar(record),
         };
       },
       render: (titulo, record) => {
-        const maxLength = 30;
+        const maxLength = 90;
         const truncatedTitle =
           titulo.length > maxLength
             ? `${titulo.substring(0, maxLength)}...`
@@ -152,13 +170,15 @@ export default function TablaGenerica({
             <div className="flex flex-col max-w-24">
               <div>{truncatedTitle}</div>
               <div className="font-bold">{tipoPublicacion}</div>
-              {tipoDePublicacion == "Servicio" ? (
-                <div>{tituloCorrectoServicio(record.titulo_Servicio)}</div>
+              {record.titulo_Servicio ? (
+                <div className="font-semibold">
+                  {tituloCorrectoServicio(record.titulo_Servicio)}
+                </div>
               ) : null}
 
               {record.publicado ? (
                 <div>
-                  <CheckCircleOutlined /> Publicado{" "}
+                  <CheckCircleOutlined /> Publicado
                 </div>
               ) : (
                 <div>
@@ -254,7 +274,13 @@ export default function TablaGenerica({
             label: (
               <div
                 className="w-full flex items-center gap-2"
-                onClick={() => showModalEditar(record)}
+                onClick={() =>
+                  handleCambiarEstado(
+                    record,
+                    obtenerTipoDePublicacion(tipoSinPrefijo),
+                    id
+                  )
+                }
               >
                 {record.publicado ? (
                   <>
