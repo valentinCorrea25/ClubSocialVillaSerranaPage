@@ -1,400 +1,388 @@
-import React, { useMemo, useState } from "react";
-import { Table, Dropdown, Space, Input, Button } from "antd";
-import useSWR, { useSWRConfig } from "swr";
-import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
-import { useRouter } from "next/navigation";
-import EditarPublicacionModal from "./modals/EditarPublicacionModal";
-import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
-import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
-import Search from "antd/es/input/Search";
-import GenerarQRModal from "./modals/GenerarQRModal";
-import useWindowSize from "@/components/utils/useWindowSize";
+// import React, { useMemo, useState } from "react";
+// import { Table, Dropdown, Space, Input, Button } from "antd";
+// import useSWR, { useSWRConfig } from "swr";
+// import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
+// import { useRouter } from "next/navigation";
+// import EditarPublicacionModal from "./modals/EditarPublicacionModal";
+// import EliminarPublicacionModal from "./modals/EliminarPublicacionModal";
+// import { obtenerDireccionDePublicacion } from "../utils/ControlPublicaciones";
+// import GenerarQRModal from "./modals/GenerarQRModal";
+// import useWindowSize from "@/components/utils/useWindowSize";
+
+// export default function TodasLasPublicaciones({
+//   mostrarCargarToast,
+//   mostrarExitoToast,
+//   mostrarFalloToast,
+//   setModalIsOpenForButtonFloat
+// }) {
+//   const [page, setPage] = useState(1);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
+//   const [isModalOpenQR, setIsModalOpenQR] = useState(false);
+//   const [selectedItem, setSelectedItem] = useState({});
+//   const router = useRouter();
+//   const { mutate } = useSWRConfig();
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const windowSize = useWindowSize();
+
+//   const showModalEditar = (item) => {
+//     setSelectedItem(item);
+//     setIsModalOpen(true);
+//     setModalIsOpenForButtonFloat(true);
+//   };
+
+//   const showModalQR = (item) => {
+//     setSelectedItem(item);
+//     setIsModalOpenQR(true);
+//     setModalIsOpenForButtonFloat(true);
+//   };
+
+//   const showModalEliminar = (item) => {
+//     setSelectedItem(item);
+//     setIsModalOpenElimininar(true);
+//     setModalIsOpenForButtonFloat(true);
+//   };
+
+//   const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+//   const key = `/api/listapublicaciones?page=${page}${
+//     searchQuery?.trim() ? `&text=${searchQuery}` : ""
+//   }`;
+
+//   const { data, error, isLoading } = useSWR(key, fetcher, {
+//     keepPreviousData: true
+//   });
+
+//   function updateData() {
+//     mutate(key, data);
+//   }
+
+//   const columns = [
+//     {
+//       title: "Portada",
+//       dataIndex: "fotos",
+//       key: "portada",
+//       onCell: (record) => {
+//         return {
+//           onClick: () => {
+//             const tipoPublicacion = Object.keys(record).find((key) =>
+//               key.startsWith("id_")
+//             );
+//             const tipoSinPrefijo = tipoPublicacion
+//               ? tipoPublicacion.replace("id_", "")
+//               : "desconocido";
+//             const id = record[tipoPublicacion];
+
+//             router.push(obtenerDireccionDePublicacion(tipoSinPrefijo, id));
+//           },
+//         };
+//       },
+//       render: (text, record) => {
+//         const fotos = record.fotos || record.foto;
+//         const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos;
+//         return fotoSrc ? (
+//           <img
+//             src={fotoSrc}
+//             alt="Portada"
+//             style={{ width: "60px", height: "60px", objectFit: "cover" }}
+//           />
+//         ) : null;
+//       },
+//     },
+//     {
+//       title: "Informacion",
+//       dataIndex: "titulo",
+//       key: "titulo",
+//       ellipsis: true,
+//       onCell: (record) => {
+//         return {
+//           onClick: () => showModalEditar(record), // Make sure this calls the function on click
+//         };
+//       },
+//       render: (titulo, record) => {
+//         const maxLength = 30;
+//         const truncatedTitle =
+//           titulo.length > maxLength
+//             ? `${titulo.substring(0, maxLength)}...`
+//             : titulo;
+
+//         let tipoPublicacion = Object.keys(record).find((key) =>
+//           key.startsWith("id_")
+//         );
+//         tipoPublicacion = tipoPublicacion
+//           ? tipoPublicacion.replace("id_", "")
+//           : "Desconocido";
+
+//         return (
+//           <div className="flex flex-col max-w-24">
+//             <div>{truncatedTitle}</div>
+//             <div className="font-bold">{tipoPublicacion}</div>
+//           </div>
+//         );
+//       },
+//     },
+//     {
+//       title: "Ubicación",
+//       dataIndex: "location",
+//       key: "location",
+//       ellipsis: true,
+//       render: (location) => (
+//         <a
+//           href={`https://www.google.com/maps/search/?api=1&query=${location}`}
+//           target="_blank"
+//           rel="noopener noreferrer"
+//         >
+//           Ver mapa
+//         </a>
+//       ),
+//     },
+//     {
+//       title: "Fecha",
+//       dataIndex: "fecha_publicacion",
+//       key: "fecha_publicacion",
+//       ellipsis: true,
+//       render: (fechaPublicacion) => {
+//         const opciones = {
+//           year: "numeric",
+//           month: "short",
+//           day: "numeric",
+//         };
+//         return new Date(fechaPublicacion).toLocaleDateString("es-UY", opciones);
+//       },
+//     },
+//     {
+//       title: "Opciones",
+//       key: "options",
+//       width: "10%",
+//       render: (text, record) => {
+//         const tipoPublicacion = Object.keys(record).find((key) =>
+//           key.startsWith("id_")
+//         );
+//         const tipoSinPrefijo = tipoPublicacion
+//           ? tipoPublicacion.replace("id_", "")
+//           : "desconocido";
+//         const id = record[tipoPublicacion];
+
+//         const items = [
+//           {
+//             label: (
+//               <a
+//                 href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)}
+//                 target="_blank"
+//               >
+//                 Ver Publicación
+//               </a>
+//             ),
+//             key: "0",
+//           },
+//           {
+//             label: (
+//               <div className="w-full" onClick={() => showModalQR(record)}>
+//                 Generar código QR
+//               </div>
+//             ),
+//             key: "1",
+//           },
+//           {
+//             label: (
+//               <div className="w-full" onClick={() => showModalEditar(record)}>
+//                 Editar
+//               </div>
+//             ),
+//             key: "2",
+//           },
+//           {
+//             label: (
+//               <div className="w-full" onClick={() => showModalEliminar(record)}>
+//                 Eliminar
+//               </div>
+//             ),
+//             key: "3",
+//             danger: true,
+//           },
+//         ];
+
+//         return (
+//           <div className="flex justify-center">
+//             <Dropdown menu={{ items }} trigger={["click"]}>
+//               <a onClick={(e) => e.preventDefault()}>
+//                 <Space>
+//                   <MenuOutlined />
+//                 </Space>
+//               </a>
+//             </Dropdown>
+//           </div>
+//         );
+//       },
+//     },
+//   ];
+
+//   const filteredColumns = useMemo(() => {
+//     if (windowSize.width <= 768) {
+//       return columns.filter(column =>
+//         ['portada', 'titulo', 'options'].includes(column.key)
+//       );
+//     }
+//     return columns;
+//   }, [windowSize.width, columns]);
+
+//   return (
+//     <div className="overflow-x-auto">
+//       <div className="flex space-x-2 my-2">
+//         <Input
+//           type="text"
+//           placeholder="Buscar publicaciones..."
+//           value={searchQuery}
+//           onChange={(e) => {
+//             setSearchQuery(e.target.value);
+//             setPage(1);
+//           }}
+//           className="max-w-sm mb-2"
+//         />
+//       </div>
+//       <Table
+//         dataSource={data?.publicaciones || []}
+//         columns={filteredColumns}
+//         loading={isLoading}
+//         rowKey={(record) => {
+//           const tipoPublicacion = Object.keys(record).find(key => key.startsWith('id_'));
+//           return `${record[tipoPublicacion]}_${tipoPublicacion}`;
+//         }}
+//         pagination={{
+//           current: page,
+//           total: data?.totalCount || 0,
+//           pageSize: 25,
+//           onChange: (newPage) => setPage(newPage),
+//           showSizeChanger: false,
+//           showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} items`,
+//           position: ['bottomLeft'],
+//         }}
+//         size="small"
+//         scroll={{ x: true }}
+
+//       />
+//       <EditarPublicacionModal
+//         updateData={updateData}
+//         selectedItem={selectedItem}
+//         isModalOpen={isModalOpen}
+//         setIsModalOpen={setIsModalOpen}
+//         mostrarCargarToast={mostrarCargarToast}
+//         mostrarExitoToast={mostrarExitoToast}
+//         mostrarFalloToast={mostrarFalloToast}
+//         setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+//       />
+//       <EliminarPublicacionModal
+//         updateData={updateData}
+//         selectedItem={selectedItem}
+//         isModalOpen={isModalOpenEliminar}
+//         setIsModalOpen={setIsModalOpenElimininar}
+//         mostrarCargarToast={mostrarCargarToast}
+//         mostrarExitoToast={mostrarExitoToast}
+//         mostrarFalloToast={mostrarFalloToast}
+//         setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+//       />
+
+//       <GenerarQRModal
+//         selectedItem={selectedItem}
+//         isModalOpen={isModalOpenQR}
+//         setIsModalOpen={setIsModalOpenQR}
+//         setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+//       />
+//     </div>
+//   );
+// }
+
+import React, { useState } from "react";
+import { Button, Dropdown, Input, Space } from "antd";
+import TablaGenerica from "../utils/TablaGenerica";
+import { GiKnifeFork } from "react-icons/gi";
+import { HomeOutlined } from "@ant-design/icons";
+import { FaRegNewspaper } from "react-icons/fa6";
+import { FaPeopleCarry } from "react-icons/fa";
 
 export default function TodasLasPublicaciones({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
+  setModalIsOpenForButtonFloat,
+  setTipoDePublicacionACrear,
+  setIsModalOpen,
 }) {
-  const [page, setPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
-  const [isModalOpenQR, setIsModalOpenQR] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({});
-  const router = useRouter();
-  const { mutate } = useSWRConfig();
   const [searchQuery, setSearchQuery] = useState("");
-  const windowSize = useWindowSize();
 
-  const showModalEditar = (item) => {
-    setSelectedItem(item);
+  function handleCreate(tipoDePublicacion) {
+    setTipoDePublicacionACrear(tipoDePublicacion);
     setIsModalOpen(true);
-  };
-
-  const showModalQR = (item) => {
-    setSelectedItem(item);
-    setIsModalOpenQR(true);
-  };
-
-  const showModalEliminar = (item) => {
-    setSelectedItem(item);
-    setIsModalOpenElimininar(true);
-  };
-
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-  const key = `/api/listapublicaciones?page=${page}${
-    searchQuery?.trim() ? `&text=${searchQuery}` : ""
-  }`;
-  const { data, error, isLoading } = useSWR(key, fetcher);
-
-  function updateData() {
-    mutate(key, data);
+    setModalIsOpenForButtonFloat(true);
   }
 
-  // const columns = [
-  //   {
-  //     title: "Portada",
-  //     dataIndex: "fotos",
-  //     key: "portada",
-  //     render: (text, record) => {
-  //       const fotos = record.fotos || record.foto;
-  //       const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos;
-  //       return fotoSrc ? (
-  //         <img
-  //           src={fotoSrc}
-  //           alt="Portada"
-  //           style={{ width: "60px", height: "60px", objectFit: "cover" }}
-  //         />
-  //       ) : null;
-  //     },
-  //   },
-  //   {
-  //     title: "Informacion",
-  //     dataIndex: "titulo",
-  //     key: "titulo",
-  //     ellipsis: true,
-  //     render: (titulo, record) => {
-  //       const maxLength = 30;
-  //       const truncatedTitle =
-  //         titulo.length > maxLength
-  //           ? `${titulo.substring(0, maxLength)}...`
-  //           : titulo;
-
-  //       let tipoPublicacion = Object.keys(record).find((key) =>
-  //         key.startsWith("id_")
-  //       );
-  //       tipoPublicacion = tipoPublicacion
-  //         ? tipoPublicacion.replace("id_", "")
-  //         : "Desconocido";
-
-  //       return (
-  //         <div className="flex flex-col max-w-24">
-  //           <div>{truncatedTitle}</div>
-  //           <div className="font-bold">{tipoPublicacion}</div>
-  //         </div>
-  //       );
-  //     },
-  //   },
-  //   {
-  //     title: "Ubicación",
-  //     dataIndex: "location",
-  //     key: "location",
-  //     ellipsis: true,
-  //     render: (location) => (
-  //       <a
-  //         href={`https://www.google.com/maps/search/?api=1&query=${location}`}
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Ver mapa
-  //       </a>
-  //     ),
-  //   },
-  //   {
-  //     title: "Fecha",
-  //     dataIndex: "fecha_publicacion",
-  //     key: "fecha_publicacion",
-  //     ellipsis: true,
-  //     render: (fechaPublicacion) => {
-  //       const opciones = {
-  //         year: "numeric",
-  //         month: "short",
-  //         day: "numeric",
-  //       };
-  //       return new Date(fechaPublicacion).toLocaleDateString("es-UY", opciones);
-  //     },
-  //   },
-  //   {
-  //     title: "Opciones",
-  //     key: "options",
-  //     width: "10%",
-  //     render: (text, record) => {
-  //       const tipoPublicacion = Object.keys(record).find((key) =>
-  //         key.startsWith("id_")
-  //       );
-  //       const tipoSinPrefijo = tipoPublicacion
-  //         ? tipoPublicacion.replace("id_", "")
-  //         : "desconocido";
-  //       const id = record[tipoPublicacion];
-
-  //       const items = [
-  //         {
-  //           label: (
-  //             <a
-  //               href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)}
-  //               target="_blank"
-  //             >
-  //               Ver Publicación
-  //             </a>
-  //           ),
-  //           key: "0",
-  //         },
-  //         {
-  //           label: (
-  //             <div className="w-full" onClick={() => showModalQR(record)}>
-  //               Generar código QR
-  //             </div>
-  //           ),
-  //           key: "1",
-  //         },
-  //         {
-  //           label: (
-  //             <div className="w-full" onClick={() => showModalEditar(record)}>
-  //               Editar
-  //             </div>
-  //           ),
-  //           key: "2",
-  //         },
-  //         {
-  //           label: (
-  //             <div className="w-full" onClick={() => showModalEliminar(record)}>
-  //               Eliminar
-  //             </div>
-  //           ),
-  //           key: "3",
-  //           danger: true,
-  //         },
-  //       ];
-
-  //       return (
-  //         <div className="flex justify-center">
-  //           <Dropdown menu={{ items }} trigger={["click"]}>
-  //             <a onClick={(e) => e.preventDefault()}>
-  //               <Space>
-  //                 <MenuOutlined />
-  //               </Space>
-  //             </a>
-  //           </Dropdown>
-  //         </div>
-  //       );
-  //     },
-  //   },
-  // ];
-
-  const columns = [
+  const items = [
     {
-      title: "Portada",
-      dataIndex: "fotos",
-      key: "portada",
-      render: (text, record) => {
-        const fotos = record.fotos || record.foto;
-        const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos;
-        return fotoSrc ? (
-          <img
-            src={fotoSrc}
-            alt="Portada"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-        ) : null;
-      },
-    },
-    {
-      title: "Informacion",
-      dataIndex: "titulo",
-      key: "titulo",
-      ellipsis: true,
-      render: (titulo, record) => {
-        const maxLength = 30;
-        const truncatedTitle =
-          titulo.length > maxLength
-            ? `${titulo.substring(0, maxLength)}...`
-            : titulo;
-
-        let tipoPublicacion = Object.keys(record).find((key) =>
-          key.startsWith("id_")
-        );
-        tipoPublicacion = tipoPublicacion
-          ? tipoPublicacion.replace("id_", "")
-          : "Desconocido";
-
-        return (
-          <div className="flex flex-col max-w-24">
-            <div>{truncatedTitle}</div>
-            <div className="font-bold">{tipoPublicacion}</div>
-          </div>
-        );
-      },
-    },
-    {
-      title: "Ubicación",
-      dataIndex: "location",
-      key: "location",
-      ellipsis: true,
-      render: (location) => (
-        <a
-          href={`https://www.google.com/maps/search/?api=1&query=${location}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Ver mapa
-        </a>
+      key: "1",
+      label: (
+       <div onClick={() => handleCreate('alquiler')}>
+        <HomeOutlined className="inline mr-2"/>  Crear Alquiler
+        </div>
       ),
     },
     {
-      title: "Fecha",
-      dataIndex: "fecha_publicacion",
-      key: "fecha_publicacion",
-      ellipsis: true,
-      render: (fechaPublicacion) => {
-        const opciones = {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        };
-        return new Date(fechaPublicacion).toLocaleDateString("es-UY", opciones);
-      },
+      key: "2",
+      label: (
+       <div onClick={() => handleCreate('restaurante')}>
+         <GiKnifeFork className="inline mr-2"/> Crear Restaurante
+        </div>
+      ),
     },
     {
-      title: "Opciones",
-      key: "options",
-      width: "10%",
-      render: (text, record) => {
-        const tipoPublicacion = Object.keys(record).find((key) =>
-          key.startsWith("id_")
-        );
-        const tipoSinPrefijo = tipoPublicacion
-          ? tipoPublicacion.replace("id_", "")
-          : "desconocido";
-        const id = record[tipoPublicacion];
-
-        const items = [
-          {
-            label: (
-              <a
-                href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)}
-                target="_blank"
-              >
-                Ver Publicación
-              </a>
-            ),
-            key: "0",
-          },
-          {
-            label: (
-              <div className="w-full" onClick={() => showModalQR(record)}>
-                Generar código QR
-              </div>
-            ),
-            key: "1",
-          },
-          {
-            label: (
-              <div className="w-full" onClick={() => showModalEditar(record)}>
-                Editar
-              </div>
-            ),
-            key: "2",
-          },
-          {
-            label: (
-              <div className="w-full" onClick={() => showModalEliminar(record)}>
-                Eliminar
-              </div>
-            ),
-            key: "3",
-            danger: true,
-          },
-        ];
-
-        return (
-          <div className="flex justify-center">
-            <Dropdown menu={{ items }} trigger={["click"]}>
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  <MenuOutlined />
-                </Space>
-              </a>
-            </Dropdown>
-          </div>
-        );
-      },
+      key: "3",
+      label: (
+       <div onClick={() => handleCreate('evento_noticia_actividad')}>
+        <FaRegNewspaper className="inline mr-2"/> Crear Evento, Noticia o Actividad
+        </div>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+       <div onClick={() => handleCreate('servicio')}>
+         <FaPeopleCarry className="inline mr-2"/> Crear Servicio
+        </div>
+      ),
     },
   ];
 
-  const filteredColumns = useMemo(() => {
-    if (windowSize.width <= 768) {
-      return columns.filter(column => 
-        ['portada', 'titulo', 'options'].includes(column.key)
-      );
-    }
-    return columns;
-  }, [windowSize.width, columns]);
-
-
   return (
-    <div className="overflow-x-auto">
-      <div className="flex space-x-2 my-2">
+    <div>
+      <div className="flex space-x-2 justify-between my-2 w-full">
         <Input
           type="text"
-          placeholder="Buscar publicaciones..."
+          placeholder="Buscar..."
           value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-            setPage(1);
-          }}
-          className="max-w-sm mb-2"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="max-w-sm mb-2 w-full"
         />
-        {/* <Button > 
-          <SearchOutlined/> Buscar
-        </Button> */}
+        <div className="flex justify-center hidden sm:block">
+          <Dropdown menu={{ items }} trigger={["click"]}>
+            <Button onClick={(e) => e.preventDefault()} className="bg-[--verde] text-white">
+              <Space>Crear Publicación</Space>
+            </Button>
+          </Dropdown>
+        </div>
       </div>
-      <Table
-        dataSource={data ? data.publicaciones : []}
-        columns={filteredColumns}
-        loading={isLoading}
-        rowKey="id"
-        pagination={{
-          current: page,
-          total: data ? data.count : 0,
-          pageSize: 25,
-          onChange: (newPage) => setPage(newPage),
-        }}
-        size="small"
-        scroll={{ x: true }}
-      />
-      <EditarPublicacionModal
-        updateData={updateData}
-        selectedItem={selectedItem}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        mostrarCargarToast={mostrarCargarToast}
-        mostrarExitoToast={mostrarExitoToast}
-        mostrarFalloToast={mostrarFalloToast}
-      />
-      <EliminarPublicacionModal
-        updateData={updateData}
-        selectedItem={selectedItem}
-        isModalOpen={isModalOpenEliminar}
-        setIsModalOpen={setIsModalOpenElimininar}
-        mostrarCargarToast={mostrarCargarToast}
-        mostrarExitoToast={mostrarExitoToast}
-        mostrarFalloToast={mostrarFalloToast}
-      />
 
-      <GenerarQRModal
-        selectedItem={selectedItem}
-        isModalOpen={isModalOpenQR}
-        setIsModalOpen={setIsModalOpenQR}
+      <TablaGenerica
+        apiEndpoint="/api/listapublicaciones"
+        searchQuery={searchQuery}
+        mostrarCargarToast={mostrarCargarToast}
+        mostrarExitoToast={mostrarExitoToast}
+        mostrarFalloToast={mostrarFalloToast}
+        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+        getRowKey={(record) => {
+          const tipoPublicacion = Object.keys(record).find((key) =>
+            key.startsWith("id_")
+          );
+          return `${record[tipoPublicacion]}_${tipoPublicacion}`;
+        }}
       />
     </div>
   );

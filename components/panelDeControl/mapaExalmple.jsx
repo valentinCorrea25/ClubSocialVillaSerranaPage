@@ -66,7 +66,7 @@ import React, { useEffect } from 'react';
 
   return (
     <div>
-      <script
+      {/* <script
         type="module"
         src="https://unpkg.com/@googlemaps/extended-component-library@0.6"
       ></script>
@@ -116,7 +116,7 @@ import React, { useEffect } from 'react';
         <span id="place-name" className="title" style={{ fontWeight: 'bold' }}></span>
         <br />
         <span id="place-address"></span>
-      </div>
+      </div> */}
     </div>
   );
 };

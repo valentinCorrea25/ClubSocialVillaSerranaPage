@@ -16,12 +16,14 @@ export default function EliminarPublicacionModal({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
+  setModalIsOpenForButtonFloat
 }) {
   const { eliminarPublicacion, eliminarImagenesSupabase } = useContext(AdminContext);
   const [isLoading, setLoading] = useState(false);
 
   const handleClose = () => {
     setIsModalOpen(false);
+    setModalIsOpenForButtonFloat(false);
   };
 
   const idPublicacion = obtenerIdPublicacion(selectedItem);

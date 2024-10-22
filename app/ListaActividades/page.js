@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext,  } from "react";
+import { useRouter } from "next/navigation";
 import ActividadesList from "@/components/ListaActividades/ActividadesList";
 import Banner from "@/components/utils/Banners";
 import { ClientContext } from "@/context/clientContext";
@@ -11,6 +12,7 @@ const ActividadPage = () => {
   const [actividades, setActividades] = useState();
   const [noResults, setNoResults] = useState(false);
   const appStyle = { padding: "10px", margin: "0 auto", width: "100%" };
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +32,9 @@ const ActividadPage = () => {
     fetchData();
   }, []);
 
+
   return (
-    <div style={appStyle} className="flex flex-col justify-center">
+    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
       <Banner
         title="Actividades"
         subtitle="Descubre nuestras actividades más recientes"
@@ -44,7 +47,8 @@ const ActividadPage = () => {
           <Skeleton className="w-72" paragraph title/>
         </div>
       ) : (
-        <ActividadesList actividades={actividades} />
+        <ActividadesList actividades={actividades}
+        />
       )}
     </div>
   );

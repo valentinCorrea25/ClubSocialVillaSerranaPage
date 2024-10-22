@@ -12,6 +12,8 @@ export async function POST(req) {
       message: `Actividad creada con exito\nid: ${actividad.id_Actividad}`,
     });
   } catch (error) {
+    console.log(error);
+    
     return NextResponse.json({
       message:
         "Hubo un error al crear el Actividades, contactar con desarollador",

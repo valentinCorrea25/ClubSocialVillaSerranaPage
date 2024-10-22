@@ -13,6 +13,7 @@ export default function GenerarQRModal({
   isModalOpen,
   setIsModalOpen,
   selectedItem,
+  setModalIsOpenForButtonFloat
 }) {
   const [idPublicacion, setIdPublicacion] = useState(null);
   const [tipoSinPrefijo, setTipoSinPrefijo] = useState("Tipo Desconocido");
@@ -21,6 +22,7 @@ export default function GenerarQRModal({
 
   const handleClose = () => {
     setIsModalOpen(false);
+    setModalIsOpenForButtonFloat(false);
   };
 
   useEffect(() => {
@@ -35,6 +37,9 @@ export default function GenerarQRModal({
       setText(ruta);
     }
   }, [selectedItem]);
+
+  console.log(selectedItem);
+  
 
   return (
     <Modal

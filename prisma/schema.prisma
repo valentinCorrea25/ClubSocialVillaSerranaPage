@@ -19,6 +19,7 @@ model Servicio {
   dia_Semana        String[]
   fecha_publicacion DateTime
   titulo_Servicio   ServicioTitulo
+  publicado         Boolean        @default(true)
 }
 
 model Actividad {
@@ -30,6 +31,7 @@ model Actividad {
   horario           String?
   ubicacion         String?
   dia_Semana        String[]
+  publicado         Boolean        @default(true)
 }
 
 model EventosNoticia {
@@ -39,6 +41,7 @@ model EventosNoticia {
   contenido         String
   fotos             String[]
   fecha_evento      DateTime? // Que esto sea un check box que diga 'Es evento?' y que permita llenar este campo
+  publicado         Boolean        @default(true)
 }
 
 model Alquiler {
@@ -49,6 +52,7 @@ model Alquiler {
   titulo             String
   descripcion        String
   ubicacion          String
+  ubicacion_calles   String
   coordenadas        String?
   capacidad          Int
   camas_dobles       Int?
@@ -74,6 +78,7 @@ model Alquiler {
   fecha_publicacion  DateTime
   fotos              String[]
   precio             Decimal?
+  publicado         Boolean        @default(true)
 }
 
 model Restaurant {
@@ -82,8 +87,10 @@ model Restaurant {
   celular           String
   mail              String
   descripcion       String
+  diasSemana        String[]
   coordenadas       String?
   ubicacion         String?
+  ubicacion_calles  String?
   tipo_pago         String[]
   titulo            String
   horario_semanal   String?
@@ -94,12 +101,23 @@ model Restaurant {
   web               String?
   fotos             String[]
   fecha_publicacion DateTime
+  publicado         Boolean        @default(true)
 }
 
 enum ServicioTitulo {
-  Trasporte
-  Cerrajero
-  // Add other titles here
+  Alambrados
+  Jardineria // Jardinería -- SOLCIIONAR TREMA DE TILDES
+  LimpiezaTerrenos // Limpieza de terrenos
+  Construccion // Construcción
+  Diseno // Diseño
+  Filmacion // filmación
+  Equipamiento
+  Estetica // Estética
+  Salud
+  Mecanica // Mecánica
+  ProvisionDeAgua // Provisión de agua
+  Seguridad
+  Traslados
 }
 
 model Usuario {

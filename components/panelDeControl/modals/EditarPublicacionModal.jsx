@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Modal, Tag } from "antd";
 import { Button, Form, Input } from "antd";
 import { AdminContext } from "@/context/adminContext";
+import EditAlquileres from "./editForms/EditAlquileres";
 const { TextArea } = Input;
 import {
   obtenerIdPublicacion,
@@ -18,6 +19,7 @@ export default function EditarPublicacionModal({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
+  setModalIsOpenForButtonFloat
 }) {
   const [form] = Form.useForm();
   const { modificarPublicaciones, subirImagenesSupabase } =
@@ -30,10 +32,22 @@ export default function EditarPublicacionModal({
   const handleClose = () => {
     setRestoreVariables(true);
     setIsModalOpen(false);
+    setModalIsOpenForButtonFloat(false);
+  };
+
+  const handleResetComplete = () => {
+    setRestoreVariables(false);
   };
 
   const idPublicacion = obtenerIdPublicacion(selectedItem);
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
+
+  function seleccionarForm(tipoDePublicacion){
+    switch(tipoDePublicacion){
+      case "Alquiler": 
+      break;
+    }
+  }
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -70,9 +84,7 @@ export default function EditarPublicacionModal({
     }
   };
 
-  const handleResetComplete = () => {
-    setRestoreVariables(false);
-  };
+  
 
   useEffect(() => {
     if (selectedItem) {      

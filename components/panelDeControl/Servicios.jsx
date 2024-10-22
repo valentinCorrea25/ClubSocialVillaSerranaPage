@@ -1,137 +1,51 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Checkbox, Button, Input, Select, Row, Col, Form } from "antd";
-import { AdminContext } from "@/context/adminContext";
-const { TextArea } = Input;
-const { Option } = Select;
+import React, { useState } from "react";
+import { Button, Input } from "antd";
+import TablaGenerica from "../utils/TablaGenerica";
 
-export default function CrearServicio({
+export default function NoticiasEA({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
+  setModalIsOpenForButtonFloat,
+  setTipoDePublicacionACrear,
+  setIsModalOpen,
 }) {
-  const [diasSeleccionados, setDiasSeleccionados] = useState([]);
-  const [todaLaSemanaSeleccionado, setTodaLaSemanaSeleccionado] = useState(false);
-  const {getTipoDeServicios} = useContext(AdminContext);
-  const [tipoServicio, setTipoServicio] = useState([]);
-  const { crearPublicacion } = useContext(AdminContext);
-  
-  const opcionesDias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const manejarCambioDias = (checkedValues) => {
-    if (checkedValues.includes("Toda la semana")) {
-      if (todaLaSemanaSeleccionado) {
-        setDiasSeleccionados([]);
-        setTodaLaSemanaSeleccionado(false);
-      } else {
-        setDiasSeleccionados(["Toda la semana"]);
-        setTodaLaSemanaSeleccionado(true);
-      }
-    } else {
-      setDiasSeleccionados(checkedValues);
-      setTodaLaSemanaSeleccionado(false);
-    }
-  };
-
-  useEffect(() => {
-    const fetchTipoServicio = async () => {
-     const data = await getTipoDeServicios();
-     setTipoServicio(data);
-    }
-    fetchTipoServicio();
-  }, []);
-
-  const onFinish = async (values) => {
-    mostrarCargarToast();
-    try {
-      const data = await crearPublicacion(values, "servicios");
-      if(data.code == 500){
-        mostrarFalloToast(data.message);
-      }else{
-        mostrarExitoToast(data.message);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  
+  function handleCreate() {
+    setTipoDePublicacionACrear('servicio');
+    setIsModalOpen(true);
+    setModalIsOpenForButtonFloat(true);
+  }
 
   return (
-    <Form onFinish={onFinish} layout="vertical">
-      <div className="flex flex-col items-center justify-center p-2 sm:p-4 md:p-10 ">
-        <h1 className="text-2xl mb-4">Crear nuevo Servicio</h1>
-
-        <Row gutter={[16, 16]}>
-          {/* Información del Servicio */}
-          <Col xs={24} md={12}>
-            <Form.Item label="Título*" name="titulo" rules={[{ required: true, message: 'Por favor ingrese el título' }]}>
-              <Input placeholder="Título*" />
-            </Form.Item>
-
-            <Form.Item label="Descripción" name="descripcion" required>
-              <TextArea placeholder="Descripción" rows={4} />
-            </Form.Item>
-
-            <Form.Item label="Tipo de Servicio*" name="titulo_Servicio" rules={[{ required: true, message: 'Seleccione un tipo de servicio' }]}>
-              <Select placeholder="Tipo de Servicio*" className="w-full">
-                {tipoServicio && tipoServicio.map((item)=>{
-                  return <Option value={item}/>
-                })}
-              </Select>
-            </Form.Item>
-          </Col>
-
-          {/* Información del Titular */}
-          <Col xs={24} md={12}>
-            <Form.Item label="Nombre del Titular" name="nombre_titular" required>
-              <Input placeholder="Nombre del Titular" />
-            </Form.Item>
-
-            <Form.Item label="Celular" name="celular" required>
-              <Input placeholder="Celular" />
-            </Form.Item>
-
-            <Form.Item label="Correo Electrónico" name="mail" required>
-              <Input placeholder="Correo Electrónico" />
-            </Form.Item>
-          </Col>
-
-          {/* Horarios Semanales */}
-          <Col span={24}>
-            <div className="p-5 rounded-md">
-              <h2 className="text-center">Horarios Semanales</h2>
-              <Form.Item name="dia_Semana">
-                <Checkbox.Group
-                  options={[...opcionesDias, "Toda la semana"]}
-                  value={diasSeleccionados}
-                  onChange={manejarCambioDias}
-                  className="grid grid-cols-2 gap-4 p-4 bg-gray-100 items-center"
-                />
-              </Form.Item>
-
-              <Row gutter={[16, 16]} className="mt-4">
-                <Col xs={24} md={12}>
-                  <Form.Item label="Horario" name="horario">
-                    <Input />
-                  </Form.Item>
-                </Col>
-                {/* <Col xs={24} md={12}>
-                  <Form.Item label="Horario hasta" name="horarioHasta">
-                    <Input />
-                  </Form.Item>
-                </Col> */}
-              </Row>
-
-              <div className="text-center">
-                <Button type="primary" htmlType="submit" className="mt-4">
-                  Publicar
-                </Button>
-              </div>
-            </div>
-          </Col>
-        </Row>
+    <div>
+      <div className="flex space-x-2 justify-between my-2 w-full">
+        <Input
+          type="text"
+          placeholder="Buscar..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="max-w-sm mb-2 w-full"
+        />
+        <Button onClick={handleCreate} className="bg-[--verde] text-white hidden sm:block"> Crear Servicio </Button>
       </div>
-    </Form>
+
+      <TablaGenerica
+        apiEndpoint="/api/servicios/lista"
+        tipoDePublicacion={'Servicio'}
+        searchQuery={searchQuery}
+        mostrarCargarToast={mostrarCargarToast}
+        mostrarExitoToast={mostrarExitoToast}
+        mostrarFalloToast={mostrarFalloToast}
+        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+        getRowKey={(record) => {
+          const tipoPublicacion = Object.keys(record).find((key) =>
+            key.startsWith("id_")
+          );
+          return `${record[tipoPublicacion]}_${tipoPublicacion}`;
+        }}
+      />
+    </div>
   );
 }
