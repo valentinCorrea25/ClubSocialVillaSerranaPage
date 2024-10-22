@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Button, Input } from "antd";
-import { useRouter } from "next/navigation";
 import TablaGenerica from "../utils/TablaGenerica";
 
 export default function NoticiasEA({
@@ -8,9 +7,16 @@ export default function NoticiasEA({
   mostrarExitoToast,
   mostrarFalloToast,
   setModalIsOpenForButtonFloat,
+  setTipoDePublicacionACrear,
+  setIsModalOpen,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const router = useRouter();
+
+  function handleCreate() {
+    setTipoDePublicacionACrear('servicio');
+    setIsModalOpen(true);
+    setModalIsOpenForButtonFloat(true);
+  }
 
   return (
     <div>
@@ -22,7 +28,7 @@ export default function NoticiasEA({
           onChange={(e) => setSearchQuery(e.target.value)}
           className="max-w-sm mb-2 w-full"
         />
-        <Button className="bg-[--verde] text-white hidden sm:block"> Crear Servicio </Button>
+        <Button onClick={handleCreate} className="bg-[--verde] text-white hidden sm:block"> Crear Servicio </Button>
       </div>
 
       <TablaGenerica

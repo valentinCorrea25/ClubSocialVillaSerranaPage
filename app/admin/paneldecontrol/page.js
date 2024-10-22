@@ -133,6 +133,8 @@ export default function PanelDeControl() {
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
             setModalIsOpenForButtonFloat={setModalIsOpen}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
           />
         );
       case "Alquileres":
@@ -142,6 +144,8 @@ export default function PanelDeControl() {
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
             setModalIsOpenForButtonFloat={setModalIsOpen}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
           />
         );
       case "Restaurantes":
@@ -151,6 +155,8 @@ export default function PanelDeControl() {
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
             setModalIsOpenForButtonFloat={setModalIsOpen}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
           />
         );
       case "NoticiasEA":
@@ -160,6 +166,8 @@ export default function PanelDeControl() {
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
             setModalIsOpenForButtonFloat={setModalIsOpen}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
           />
         );
       case "Servicios":
@@ -169,6 +177,8 @@ export default function PanelDeControl() {
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
             setModalIsOpenForButtonFloat={setModalIsOpen}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
           />
         );
       case "CrearNuevoUsuario":
@@ -187,6 +197,8 @@ export default function PanelDeControl() {
               mostrarExitoToast={mostrarExitoToast}
               mostrarFalloToast={mostrarFalloToast}
               setModalIsOpenForButtonFloat={setModalIsOpen}
+              setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+              setIsModalOpen={setIsModalOpenCREACIONES}
             />
           );
       default:
@@ -196,6 +208,8 @@ export default function PanelDeControl() {
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
             setModalIsOpenForButtonFloat={setModalIsOpen}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
           />
         );
     }

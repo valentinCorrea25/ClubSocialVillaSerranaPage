@@ -5,7 +5,7 @@ import CrearAlquilerModal from "./CrearAlquilerModal";
 import CrearEventoNoticiaActividadModal from "./CrearEventoNoticiaActividadModal";
 import CrearServicioModal from "./CrearServicioModal";
 
-export default function ModalCrearPublicacionesControl({
+export default function ModalCrearPublicacionesControl({ // DEBERIA ACTUALIZAR LAS TABLAS CUANDO SE CREA
   tipoDePublicacion,
   isModalOpen,
   setIsModalOpen,
@@ -44,7 +44,7 @@ export default function ModalCrearPublicacionesControl({
         );
 
         
-      case "servicios":
+      case "servicio":
         return (<CrearServicioModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}

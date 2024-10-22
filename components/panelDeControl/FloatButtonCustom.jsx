@@ -22,7 +22,7 @@ export default function FloatButtonCustom({
     <FloatButton.Group
       shape="square"
       trigger="click"
-      style={{ insetInlineEnd: 25, fontSize: "50px" }}
+      style={{ insetInlineEnd: 25, fontSize: "70px" }}
       icon={<PlusOutlined />}
       className="text-xl z-[30000]"
       onClick={() => windowsize.width <= 768 ? setcollapsed(true) : null}
@@ -67,7 +67,7 @@ export default function FloatButtonCustom({
       <div
         className="relative"
         onClick={() => {
-          handleSelect("servicios");
+          handleSelect("servicio");
         }}
       >
         <FloatButton icon={<FaPeopleCarry />} />
