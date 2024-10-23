@@ -75,7 +75,7 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails }) => {
                   <>
                     <div>
                       <EnvironmentOutlined />
-                      {alojamiento.ubicacion || "Ubicación no disponible"}
+                      {alojamiento.ubicacion_calles || "Ubicación no disponible"}
                     </div>
                     <div>
                       <UserOutlined /> Capacidad:

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useState } from "react";
+import { tituloCorrectoServicio } from "@/components/utils/ControlPublicaciones";
 
 export const ClientContext = createContext();
 
@@ -58,6 +59,8 @@ export const ClientProvider = ({ children }) => {
     const data = await res.json();
     setPublicacion(data);
 
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
+
     return data;
   }
 
@@ -65,6 +68,8 @@ export const ClientProvider = ({ children }) => {
     const res = await fetch(`/api/restaurantes?limit=9`);
     const data = await res.json();
     setPublicacion(data);
+
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
 
     return data;
   }
@@ -74,6 +79,8 @@ export const ClientProvider = ({ children }) => {
     const data = await res.json();
     setPublicacion(data);
 
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
+
     return data;
   }
 
@@ -81,6 +88,8 @@ export const ClientProvider = ({ children }) => {
     const res = await fetch(`/api/actividades/?limit=9`);
     const data = await res.json();
     setPublicacion(data);
+
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
 
     return data;
   }
@@ -90,12 +99,17 @@ export const ClientProvider = ({ children }) => {
     const data = await res.json();
     setPublicacion(data);
 
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
+    data.publicaciones = tituloServicioCorrectos(data.publicaciones);
+
     return data;
   }
 
   async function todosLosRestaurantes() {
     const res = await fetch(`/api/restaurantes/lista`);
     const data = await res.json();
+
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
 
     return data;
   }
@@ -104,12 +118,16 @@ export const ClientProvider = ({ children }) => {
     const res = await fetch(`/api/alquileres/lista`);
     const data = await res.json();
 
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
+
     return data;
   }
 
   async function todasLasActividades() {
     const res = await fetch(`/api/actividades/lista`);
     const data = await res.json();
+
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
 
     return data;
   }
@@ -118,6 +136,11 @@ export const ClientProvider = ({ children }) => {
     const res = await fetch(`/api/servicios/lista`);
     const data = await res.json();
 
+    console.log(data);
+
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
+    data.publicaciones = tituloServicioCorrectos(data.publicaciones);
+
     return data;
   }
 
@@ -125,7 +148,23 @@ export const ClientProvider = ({ children }) => {
     const res = await fetch(`/api/eventosnoticias/lista`);
     const data = await res.json();
 
+    const dataFiltrada = excluirNoPublicados(data.publicaciones);
+    data.publicaciones = dataFiltrada;
+
     return data;
+  }
+
+  function excluirNoPublicados(data) {
+    if (data) return data.filter((item) => item.publicado);
+  }
+
+  function tituloServicioCorrectos(data) {
+    if (data){
+      data.forEach((servicio) => {
+        servicio.titulo_Servicio = tituloCorrectoServicio(servicio.titulo_Servicio);
+      });
+    }
+    return data
   }
 
   return (

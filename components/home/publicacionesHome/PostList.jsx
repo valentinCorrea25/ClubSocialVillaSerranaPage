@@ -20,7 +20,7 @@ function PostList() {
 
   return (
     <div className='grid gap-3 px-3 sm:px-10 py-10 md:grid md:grid-cols-3'>
-      {publicaciones.length > 0 ? (
+      {publicaciones && publicaciones.length > 0 ? (
         publicaciones.map((post) => (
           <PostCard key={post.id} post={post} />
         ))

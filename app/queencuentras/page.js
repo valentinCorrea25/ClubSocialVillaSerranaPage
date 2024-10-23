@@ -65,7 +65,7 @@ const QueEncuentras = () => {
             href={category.link}
             className="w-full md:w-full no-underline text-inherit"
           >
-            <div className="sm:max-w-[40vh]">
+            <div className="">
             <ImageComponent
               src={category.image}
               alt={category.name}

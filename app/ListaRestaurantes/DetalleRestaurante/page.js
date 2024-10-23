@@ -80,7 +80,7 @@ const DetalleRestaurantes = (restaurante) => {
               </div>
               {/* Mapa */}
               <div className="flex-1">
-                <UbicacionMap ubicacion={restauranteSeleccionado.coordenadas} />
+                <UbicacionMap ubicacion={restauranteSeleccionado.ubicacion} />
               </div>
             </div>
             {/* Publicaciones Similares */}

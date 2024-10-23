@@ -28,7 +28,7 @@ export default function Item({ informacion, type }) {
               </h1>
               <h2 className="text-left font-normal flex items-center md:justify-start gap-1 text-sm">
                 <EnvironmentOutlined size={12} />
-                {informacion?.ubicacion}
+                {informacion?.ubicacion_calles}
               </h2>
               <h2 className="font-normal flex items-center md:justify-start gap-1 text-sm">
                 <PhoneOutlined size={12} />
@@ -47,14 +47,14 @@ export default function Item({ informacion, type }) {
           <div className="p-4 shadow-md border w-full max-w-sm md:max-w-md lg:max-w-lg" 
           onClick={()=>router.push(`/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`)}>
             
-            <div className="mb-4 w-full h-[180px] max-h-[250px]">
+            <div className="mb-4 w-full max-h-[250px]">
               <img
                 src={informacion?.fotos?.[0]}
                 className="w-full shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>
-            <div className="ml-2 text-sm">
+            <div className="ml-2 mt-4 text-sm">
               <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
                 {informacion?.titulo?.length > 24
                   ? informacion.titulo.substring(0, 24) + "..."
@@ -62,7 +62,7 @@ export default function Item({ informacion, type }) {
               </h1>
               <h2 className="font-normal flex items-center justify-start text-left gap-0.5">
                 <EnvironmentOutlined size={10} />
-                {informacion?.ubicacion}
+                {informacion?.ubicacion_calles}
               </h2>
               <h2 className="font-normal flex items-center gap-0.5 text-left">
                 <ClockCircleOutlined size={10} />

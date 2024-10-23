@@ -2,7 +2,7 @@ import React from "react";
 import BotonQueEncuentras from "./BotonQueEncuentras";
 export default function MainVideo() {
   const video =
-    "https://mvulbmjlvpjujjfvffph.supabase.co/storage/v1/object/public/video/Villa.mp4?t=2024-08-30T20%3A59%3A06.243Z";
+    "https://res.cloudinary.com/dvzf7szuo/video/upload/v1729689844/Villa_wzx5sf.mp4";
 
   return (
     <div className="w-full h-[100vh] relative">
