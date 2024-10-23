@@ -42,10 +42,12 @@ export default function EditarPublicacionModal({
   const idPublicacion = obtenerIdPublicacion(selectedItem);
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
-  function seleccionarForm(tipoDePublicacion){
-    switch(tipoDePublicacion){
-      case "Alquiler": 
-      break;
+  function seleccionarForm(tipoDePublicacion) {
+    switch (tipoDePublicacion) {
+      case "Alquiler":
+        return <EditAlquileres />;
+      default:
+        return null; // Retorna null si no coincide ningún caso
     }
   }
 
@@ -84,8 +86,6 @@ export default function EditarPublicacionModal({
     }
   };
 
-  
-
   useEffect(() => {
     if (selectedItem) {      
       form.setFieldsValue({
@@ -114,9 +114,12 @@ export default function EditarPublicacionModal({
             </Button>
           </>
         }
+        width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
+        style={{ maxWidth: "768px", top:"20px" }}
+        bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
       >
         {idPublicacion ? (
-          <Tag className="text-lg mb-4">
+          <Tag className="text-lg mt-4 mx-auto">
             {`${tipoSinPrefijo} ID: ${selectedItem[idPublicacion]}`}
           </Tag>
         ) : (
@@ -133,8 +136,9 @@ export default function EditarPublicacionModal({
             style={{
               maxWidth: 600,
             }}
+            className="mx-auto"
           >
-            <h1 className="font-semibold">Informacion de Restaurante</h1>
+            {/* <h1 className="font-semibold">Informacion de Restaurante</h1>
             <Form.Item
               label="Titulo"
               name="titulo"
@@ -152,7 +156,8 @@ export default function EditarPublicacionModal({
               ]}
             >
               <TextArea maxLength={250} className="max-h-44" />
-            </Form.Item>
+            </Form.Item> */}
+            {seleccionarForm(tipoSinPrefijo)}
             <Form.Item label="Subir imagenes">
               <ImagenControl
                 selectedItem={selectedItem}
