@@ -75,7 +75,11 @@ const FixSuspenseRestaurante = (restaurante) => {
             <div className="flex flex-col flex-1 gap-6">
               {/* Contacto */}
               <div className="flex-1">
-                <Contacto restaurante={restauranteSeleccionado} />
+                <Contacto
+                nombre_titular={restauranteSeleccionado.nombre_titular}
+                mail={restauranteSeleccionado.mail}
+                celular={restauranteSeleccionado.celular} 
+                />
               </div>
               {/* Mapa */}
               <div className="flex-1">

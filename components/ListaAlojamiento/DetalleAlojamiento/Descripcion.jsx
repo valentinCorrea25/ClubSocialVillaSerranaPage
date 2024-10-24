@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Row,Col, Tag } from 'antd';
 
 const Descriptions = ({ alojamiento }) => (
   <Card
@@ -24,11 +24,6 @@ const Descriptions = ({ alojamiento }) => (
     </div>
 
     <div className="p-7">
-      {alojamiento.precio && (
-        <div className="mb-2 text-gray-800">
-          <strong>Precio:</strong> ${alojamiento.precio}
-        </div>
-      )}
       {/* {alojamiento.disponibilidad && (
         <div className="mb-2 text-gray-800">
           <strong>Disponibilidad:</strong> {alojamiento.disponibilidad}
@@ -38,6 +33,34 @@ const Descriptions = ({ alojamiento }) => (
         {alojamiento.descripacion || 'Descripción no disponible'}
       </p>
     </div>
+    <div className='flex gap-2'>
+       
+          <h4 className="font-bold">Comodidades:</h4>
+          <ul>
+            {(() => {
+              const comodidades = [];
+
+              // Iteramos sobre todas las propiedades del objeto 'caracteristicas'
+              for (const key in alojamiento) {
+                if (alojamiento[key] === true) {
+                  // Convertir el nombre de la propiedad a algo más legible si es necesario
+                  let nombreComodidad = key
+                    .replace("_", " ")
+                    .replace(/\b\w/g, (char) => char.toUpperCase());
+                  comodidades.push(nombreComodidad);
+                }
+              }
+
+              return comodidades.length > 0
+                ? comodidades.map((comodidad, index) => (
+                    <Tag key={index} >{comodidad}</Tag>
+                  ))
+                : "No hay comodidades disponibles";
+            })()}
+          </ul>
+        
+  
+  </div>
   </Card>
 );
 

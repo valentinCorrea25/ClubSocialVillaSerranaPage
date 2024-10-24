@@ -27,6 +27,9 @@ export async function GET(request) {
     const random = Math.floor(Math.random() * (total - 9 < 1 ? 1 : total - 9));
 
     const publicaciones = await prisma.alquiler.findMany({
+        orderBy: {
+            fecha_publicacion: 'desc'
+        },
         skip: random,
         take: limit,
     });

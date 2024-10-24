@@ -27,11 +27,11 @@ export const obtenerDireccionDePublicacion = (tipoSinPrefijo, id) => {
     case "alquiler":
       return `/ListaAlojamiento/DetalleAlojamiento?id=${id}`;
     case "servicio":
-      return "servicios";
+      return "/ListaServicios";
     case "eventonoticia":
-      return "eventosnoticias";
+      return `/ListaEventosNoticias/DetalleEventosNoticias?id=${id}`;
     case "actividad":
-      return "actividades";
+      return `/ListaActividades/DetalleActividades?id=${id}`;
     default:
       return "desconocido";
   }
