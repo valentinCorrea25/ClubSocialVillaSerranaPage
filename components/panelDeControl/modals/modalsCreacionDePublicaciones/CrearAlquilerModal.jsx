@@ -158,14 +158,14 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
       }
       width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
       style={{ maxWidth: "768px", top:"20px" }}
-      bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
+      bodyStyle={{ maxHeight: "80vh", overflowY: "auto"}} //
     >
       <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8 py-8">
         <Form
           form={form}
           layout="vertical"
           onFinish={onFinish}
-          className="sm:p-6"
+          className="sm:p-6 mx-auto"
         >
           <div className="flex flex-col gap-8">
             <div className="space-y-6">

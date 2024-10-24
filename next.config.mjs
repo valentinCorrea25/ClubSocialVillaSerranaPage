@@ -1,14 +1,19 @@
 /** @type {import('next').NextConfig} */
-import withVideos from "next-videos";
-
 const nextConfig = {
-  /* config options here */
-};
-
-export default {
-  ...nextConfig,
-  ...withVideos(),
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(mp4|webm)$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          publicPath: '/_next',
+          name: 'static/media/[name].[hash].[ext]',
+        },
+      },
+    });
+    return config;
   },
 };
+
+// En lugar de module.exports, usamos export default
+export default nextConfig;

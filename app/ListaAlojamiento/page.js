@@ -61,7 +61,7 @@ const ListaAlojamientosPage = () => {
 
   return (
     <>
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+    <div className="flex flex-col bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
             <Banners
       title="Alojamiento"
       subtitle="Busca tu alojamiento"

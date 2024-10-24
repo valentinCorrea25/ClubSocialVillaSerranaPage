@@ -75,7 +75,7 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails }) => {
                   <>
                     <div>
                       <EnvironmentOutlined />
-                      {alojamiento.ubicacion || "Ubicación no disponible"}
+                      {alojamiento.ubicacion_calles || "Ubicación no disponible"}
                     </div>
                     <div>
                       <UserOutlined /> Capacidad:
@@ -94,12 +94,10 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails }) => {
                       {(() => {
                         const comodidades = [];
 
-                        // Iteramos sobre todas las propiedades del objeto 'caracteristicas'
                         for (const key in alojamiento) {
-                          if (comodidades.length >= 10) break; // Limitar a 10 características
+                          if (comodidades.length >= 10) break;
 
                           if (alojamiento[key] === true) {
-                            // Convertir el nombre de la propiedad a algo más legible si es necesario
                             let nombreComodidad = key
                               .replace("_", " ")
                               .replace(/\b\w/g, (char) => char.toUpperCase());

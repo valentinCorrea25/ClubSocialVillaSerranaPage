@@ -56,7 +56,7 @@ body {
   }
 }
 
-@media print {
+/* @media print {
   .hidden-print {
     display: none !important;
   }
@@ -82,4 +82,4 @@ body {
     width: 100%;
     text-align: center;
   }
-}
+} */

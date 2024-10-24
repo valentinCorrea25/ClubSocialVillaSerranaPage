@@ -2,18 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { Input, Modal, QRCode, Space, Tag } from "antd";
 import { Button } from "antd";
 import { AdminContext } from "@/context/adminContext";
-import logo from "@/public/images/logo.png";
 import {
   obtenerIdPublicacion,
-  obtenerTipoSinPrefijo,
   obtenerRutaDetalle,
-} from "@/components/utils/ControlPublicaciones"; // Importa las funciones
+  obtenerTipoSinPrefijo,
+  tituloCorrectoServicio,
+} from "@/components/utils/ControlPublicaciones";
 
 export default function GenerarQRModal({
   isModalOpen,
   setIsModalOpen,
   selectedItem,
-  setModalIsOpenForButtonFloat
+  setModalIsOpenForButtonFloat,
 }) {
   const [idPublicacion, setIdPublicacion] = useState(null);
   const [tipoSinPrefijo, setTipoSinPrefijo] = useState("Tipo Desconocido");
@@ -38,41 +38,103 @@ export default function GenerarQRModal({
     }
   }, [selectedItem]);
 
-  console.log(selectedItem);
-  
+  const logo =
+    "https://res.cloudinary.com/dvzf7szuo/image/upload/v1729721150/logo_b5nmbu.webp";
+  const bgImage =
+    "https://res.cloudinary.com/dvzf7szuo/image/upload/v1729721600/WhatsApp_Image_2024-10-10_at_1.24.09_PM_z1qrkq.jpg";
 
   return (
-    <Modal
-      title={
-        <div className="text-center">Generar código QR de Publicación</div>
-      }
-      open={isModalOpen}
-      onCancel={handleClose}
-      footer={
-        <>
-          <Button onClick={handleClose}>Salir</Button>
-        </>
-      }
-    >
-      <div className="flex justify-center flex-col printable-area">
-        <Space direction="vertical" align="center">
-          <QRCode icon={logo} size={200} value={text || "-"} />
-        </Space>
-        <div className="flex flex-col justify-center gap-2 mx-auto">
-          <div className="m-auto">
-            <Tag className="text-lg my-2">{`Título: ${selectedItem.titulo}`}</Tag>
-            {idPublicacion ? (
-              <Tag className="text-lg mb-4">
-                {`${tipoSinPrefijo} ID: ${selectedItem[idPublicacion]}`}
-              </Tag>
-            ) : (
-              "ID no disponible"
-            )}
+    <>
+      <style>
+        {`
+          @media print {
+            @page {
+              size: A4;
+              margin: 0;
+            }
+            body * {
+              visibility: hidden;
+            }
+            .printable-area, .printable-area * {
+              visibility: visible;
+            }
+            .hidden-print {
+              display: none !important;
+            }
+            .printable-area {
+              position: fixed;
+              left: 0;
+              top: 0;
+              width: 100vw;
+              height: 100vh;
+              background-image: url(${bgImage});
+              background-size: cover;
+              background-position: center;
+              background-color: #006400;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 0;
+              margin: 0;
+            }
+            .print-content {
+              background: white;
+              padding: 2rem;
+              border-radius: 8px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              width: 80%;
+              max-width: 500px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+            .qr-container {
+              display: flex;
+              justify-content: center;
+              margin-bottom: 1.5rem;
+            }
+              .second-page, .third-page, .other-pages {
+                display: none;
+              }
+          }
+        `}
+      </style>
+      <Modal
+        title={
+          <div className="text-center">Generar código QR de Publicación</div>
+        }
+        open={isModalOpen}
+        onCancel={handleClose}
+        footer={
+          <>
+            <Button onClick={handleClose}>Salir</Button>
+          </>
+        }
+      >
+        <div className="flex justify-center flex-col printable-area">
+          <div className="print-content">
+            <Space direction="vertical" align="center" className="w-full">
+              <QRCode icon={logo} size={200} value={text || "-"} />
+              <div className="flex flex-col items-center gap-2">
+                <div className="text-center">
+                  {idPublicacion && (
+                    <Tag className="text-lg mb-4">{`${tipoSinPrefijo} ${
+                      selectedItem.titulo_Servicio
+                        ? tituloCorrectoServicio(selectedItem.titulo_Servicio)
+                        : ''
+                    }`}</Tag>
+                  )}
+                  <Tag className="text-lg my-2">{`${selectedItem.titulo}`}</Tag>
+                </div>
+                <div className="text-center">
+                  <strong>Descripción:</strong> {selectedItem.descripcion}
+                </div>
+              </div>
+            </Space>
           </div>
-          <div className="mb-2">Descripcion: {selectedItem.descripcion}</div>
-
           <Button
-            className="hidden-print w-1/2 m-auto"
+            className="hidden-print w-1/2 m-auto mt-4"
             onClick={() => {
               window.print();
             }}
@@ -80,7 +142,7 @@ export default function GenerarQRModal({
             Imprimir
           </Button>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 }

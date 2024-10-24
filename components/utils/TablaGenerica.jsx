@@ -27,6 +27,7 @@ import {
 import { CiMap } from "react-icons/ci";
 
 import { AdminContext } from "@/context/adminContext";
+import { useRouter } from "next/navigation";
 
 export default function TablaGenerica({
   apiEndpoint,
@@ -46,6 +47,7 @@ export default function TablaGenerica({
   const [isModalOpenQR, setIsModalOpenQR] = useState(false);
   const windowSize = useWindowSize();
   const { modificarPublicaciones } = useContext(AdminContext);
+  const router = useRouter();
 
   // Construir para las tablas URL con parámetros
   const buildUrl = () => {

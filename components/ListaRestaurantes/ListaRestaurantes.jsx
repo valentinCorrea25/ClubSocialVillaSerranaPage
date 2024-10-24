@@ -73,7 +73,7 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
                 title={restaurante.titulo || 'Título no disponible'}
                 description={
                   <>
-                    <div><EnvironmentOutlined /> {restaurante.ubicacion || 'Ubicación no disponible'}</div>
+                    <div><EnvironmentOutlined /> {restaurante.ubicacion_calles || 'Ubicación no disponible'}</div>
                     <div><InfoCircleOutlined /> Descripción: {restaurante.descripcion || 'No disponible'}</div>
                     <div><ClockCircleOutlined /> Horarios: {restaurante.horario_semanal || 'No disponible'}</div>
                     <div><PhoneOutlined /> Contacto: {restaurante.celular || 'No disponible'}</div>
