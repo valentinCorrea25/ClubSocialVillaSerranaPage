@@ -42,10 +42,12 @@ export default function EditarPublicacionModal({
   const idPublicacion = obtenerIdPublicacion(selectedItem);
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
-  function seleccionarForm(tipoDePublicacion) {
+  function seleccionarForm(tipoDePublicacion, selectedItem) {
+    const [urlGoogle, setUrlGoogle] = useState("");
+
     switch (tipoDePublicacion) {
       case "Alquiler":
-        return <EditAlquileres />;
+        return <EditAlquileres alquiler={selectedItem} setUrlGoogle={setUrlGoogle} urlGoogle={urlGoogle}/>;
       default:
         return null; // Retorna null si no coincide ningún caso
     }
@@ -138,26 +140,7 @@ export default function EditarPublicacionModal({
             }}
             className="mx-auto"
           >
-            {/* <h1 className="font-semibold">Informacion de Restaurante</h1>
-            <Form.Item
-              label="Titulo"
-              name="titulo"
-              rules={[
-                { required: true, message: "Por favor ingrese el título" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Descripcion"
-              name="descripcion"
-              rules={[
-                { required: true, message: "Por favor ingrese la descripción" },
-              ]}
-            >
-              <TextArea maxLength={250} className="max-h-44" />
-            </Form.Item> */}
-            {seleccionarForm(tipoSinPrefijo)}
+            {seleccionarForm(tipoSinPrefijo, selectedItem)}
             <Form.Item label="Subir imagenes">
               <ImagenControl
                 selectedItem={selectedItem}

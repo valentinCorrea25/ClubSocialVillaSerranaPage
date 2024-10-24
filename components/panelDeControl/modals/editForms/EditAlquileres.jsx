@@ -1,10 +1,9 @@
-
 import { Checkbox, Form, InputNumber, Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import React, { useState } from "react";
 // import Mapa from "../../leafletjs/Mapa";
 
-export default function EditAlquileres() {
+export default function EditAlquileres({ alquiler, urlGoogle, setUrlGoogle }) {
   const alquileresCaracteristicas = [
     { label: "Toallas", value: "toallas" },
     { label: "Agua Caliente", value: "agua_caliente" },
@@ -21,7 +20,6 @@ export default function EditAlquileres() {
     { label: "Frazadas", value: "frazadas" },
     { label: "Mascotas", value: "mascotas" },
   ];
-  const [urlGoogle, setUrlGoogle] = useState("");
   return (
     <>
       <div className="flex flex-col gap-8">
@@ -40,7 +38,7 @@ export default function EditAlquileres() {
               },
             ]}
           >
-            <Input className="w-full" />
+            <Input value={alquiler.titulo} className="w-full" />
           </Form.Item>
 
           <Form.Item
@@ -57,6 +55,7 @@ export default function EditAlquileres() {
               placeholder="Escribe una descripción"
               showCount
               maxLength={500}
+              value={alquiler.descripcion}
               className="w-full h-40 resize-none"
             />
           </Form.Item>
@@ -77,7 +76,7 @@ export default function EditAlquileres() {
               },
             ]}
           >
-            <Input className="w-full" />
+            <Input value={alquiler.nombre_titular} className="w-full" />
           </Form.Item>
 
           <Form.Item
@@ -87,7 +86,7 @@ export default function EditAlquileres() {
               { required: true, message: "Por favor ingresa el celular" },
             ]}
           >
-            <Input className="w-full" />
+            <Input value={alquiler.celular} className="w-full" />
           </Form.Item>
 
           <Form.Item
@@ -100,7 +99,7 @@ export default function EditAlquileres() {
               },
             ]}
           >
-            <Input className="w-full" />
+            <Input value={alquiler.mail} className="w-full" />
           </Form.Item>
 
           <h2 className="text-2xl font-semibold text-center mt-8 mb-6">
@@ -129,6 +128,10 @@ export default function EditAlquileres() {
           >
             <Input
               className="w-full"
+              value={alquiler.ubicacion}
+              onLoad={() => {
+                setUrlGoogle(alquiler.ubicacion);
+              }}
               onChange={(e) => {
                 setUrlGoogle(e.target.value);
               }}
@@ -141,7 +144,7 @@ export default function EditAlquileres() {
               { required: true, message: "Por favor ingresa la direccion" },
             ]}
           >
-            <Input className="w-full" />
+            <Input value={alquiler.ubicacion_calles} className="w-full" />
           </Form.Item>
           {/* <Mapa urlGoogle={urlGoogle} /> */}
         </div>
@@ -160,11 +163,19 @@ export default function EditAlquileres() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
           <Form.Item label="Camas individuales" name="camas_singles">
-            <InputNumber min={0} className="w-full" />
+            <InputNumber
+              value={alquiler.camas_singles}
+              min={0}
+              className="w-full"
+            />
           </Form.Item>
 
           <Form.Item label="Camas dobles" name="camas_dobles">
-            <InputNumber min={0} className="w-full" />
+            <InputNumber
+              value={alquiler.camas_dobles}
+              min={0}
+              className="w-full"
+            />
           </Form.Item>
 
           <Form.Item
@@ -172,7 +183,11 @@ export default function EditAlquileres() {
             name="capacidad"
             rules={[{ required: true }]}
           >
-            <InputNumber min={0} className="w-full" />
+            <InputNumber
+              value={alquiler.capacidad}
+              min={0}
+              className="w-full"
+            />
           </Form.Item>
         </div>
       </div>
