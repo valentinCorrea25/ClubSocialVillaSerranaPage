@@ -11,7 +11,7 @@ const EventoCard = ({ evento }) => {
   const {
     titulo,
     contenido,
-    foto,
+    fotos,
     fecha_publicacion,
     fecha_evento,
   } = evento;
@@ -42,7 +42,7 @@ const EventoCard = ({ evento }) => {
         >
           <img
             alt={titulo}
-            src={foto}
+            src={fotos}
             style={{
               width: "100%",
               height: "100%",
