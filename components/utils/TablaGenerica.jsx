@@ -122,8 +122,6 @@ export default function TablaGenerica({
         };
       },
       render: (text, record) => {
-        console.log(record);
-
         if (record.titulo_Servicio) {
           return (
             <div className={`flex justify-center ${!record.publicado ? "opacity-30" : ""}`}>

@@ -8,8 +8,10 @@ import {
   obtenerIdPublicacion,
   obtenerTipoSinPrefijo,
   obtenerTipoDePublicacion,
+  tiposDePago,
 } from "@/components/utils/ControlPublicaciones";
 import ImagenControl from "./ImagenControl";
+import EditRestaurantes from "./editForms/EditRestaurantes";
 
 export default function EditarPublicacionModal({
   isModalOpen,
@@ -39,25 +41,108 @@ export default function EditarPublicacionModal({
     setRestoreVariables(false);
   };
 
+  const alquileresCaracteristicas = [
+    { label: "Toallas", value: "toallas" },
+    { label: "Agua Caliente", value: "agua_caliente" },
+    { label: "Sabanas", value: "sabanas" },
+    { label: "TV", value: "tv" },
+    { label: "WIFI", value: "wifi" },
+    { label: "Piscina", value: "piscina" },
+    { label: "Parrilla", value: "parrilla" },
+    { label: "Cocina", value: "cocina" },
+    { label: "Microondas", value: "microondas" },
+    { label: "Tostadora", value: "tostadora" },
+    { label: "Aire Acondicionado", value: "aire_acondicionado" },
+    { label: "Estufa", value: "estufa" },
+    { label: "Frazadas", value: "frazadas" },
+    { label: "Mascotas", value: "mascotas" },
+  ];
+
+  const diasSemana = [
+    { label: "Lunes", value: "lunes" },
+    { label: "Martes", value: "martes" },
+    { label: "Miércoles", value: "miercoles" },
+    { label: "Jueves", value: "jueves" },
+    { label: "Viernes", value: "viernes" },
+    { label: "Sábado", value: "sabado" },
+    { label: "Domingo", value: "domingo" },
+  ]; //////////////////////////////////////// PASARLOS A CONTROLPUBLICACION.js
+
   const idPublicacion = obtenerIdPublicacion(selectedItem);
   const tipoSinPrefijo = obtenerTipoSinPrefijo(idPublicacion);
 
   function seleccionarForm(tipoDePublicacion, selectedItem) {
     const [urlGoogle, setUrlGoogle] = useState("");
+    console.log(tipoDePublicacion);
+    
 
     switch (tipoDePublicacion) {
       case "Alquiler":
-        return <EditAlquileres alquiler={selectedItem} setUrlGoogle={setUrlGoogle} urlGoogle={urlGoogle}/>;
+        return <EditAlquileres alquiler={selectedItem} setUrlGoogle={setUrlGoogle}  urlGoogle={urlGoogle} alquileresCaracteristicas={alquileresCaracteristicas}/>;
+      case "Restaurant":
+        return <EditRestaurantes restaurante={selectedItem} setUrlGoogle={setUrlGoogle}  urlGoogle={urlGoogle} tiposDePago={tiposDePago} diasSemana={diasSemana}/>
       default:
         return null; // Retorna null si no coincide ningún caso
     }
   }
 
-  const onFinish = async (values) => {
+  // const onFinish = async (values) => {
+  //   setLoading(true);
+  //   mostrarCargarToast();
+  //   const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
+
+  //   try {
+  //     if (fileList && fileList.length > 0) {
+  //       const nuevasFotos = await subirImagenesSupabase(
+  //         fileList,
+  //         tipoDePublicacion,
+  //         selectedItem.titulo
+  //       );
+
+  //       values.fotos = [...(selectedItem.fotos || []), ...nuevasFotos];
+  //     } else {
+  //       values.fotos = selectedItem.fotos || [];
+  //     }
+
+  //     await modificarPublicaciones(
+  //       selectedItem[idPublicacion],
+  //       values,
+  //       tipoDePublicacion
+  //     );
+  //     await updateData();
+  //     mostrarExitoToast('Publicación modificada con éxito');
+  //   } catch (e) {
+  //     console.log(e);
+  //     mostrarFalloToast('Error al modificar la publicación, contactar programador');
+  //   } finally {
+  //     setLoading(false);
+  //     handleClose();
+  //   }
+  // };
+  const onFinish = async (formValues) => { 
     setLoading(true);
     mostrarCargarToast();
-
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
+
+    let processedValues = { ...formValues };
+
+    if(tipoDePublicacion == 'alquileres'){
+      const caracteristicasSeleccionadas = alquileresCaracteristicas.reduce(
+        (acc, item) => {
+          acc[item.value] = formValues.caracteristicas?.includes(item.value) || false;
+          return acc;
+        },
+        {} 
+      );
+  
+      processedValues = {
+        ...processedValues,
+        ...caracteristicasSeleccionadas,
+      };
+  
+      delete processedValues.caracteristicas;
+    }
+    console.log(processedValues);
 
     try {
       if (fileList && fileList.length > 0) {
@@ -67,14 +152,14 @@ export default function EditarPublicacionModal({
           selectedItem.titulo
         );
 
-        values.fotos = [...(selectedItem.fotos || []), ...nuevasFotos];
+        processedValues.fotos = [...(selectedItem.fotos || []), ...nuevasFotos];
       } else {
-        values.fotos = selectedItem.fotos || [];
+        processedValues.fotos = selectedItem.fotos || [];
       }
 
       await modificarPublicaciones(
         selectedItem[idPublicacion],
-        values,
+        processedValues,
         tipoDePublicacion
       );
       await updateData();
@@ -116,7 +201,7 @@ export default function EditarPublicacionModal({
             </Button>
           </>
         }
-        width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
+        width="100%"
         style={{ maxWidth: "768px", top:"20px" }}
         bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
       >

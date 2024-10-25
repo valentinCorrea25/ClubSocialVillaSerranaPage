@@ -15,6 +15,7 @@ import { signOut } from "next-auth/react";
 import FloatButtonCustom from "@/components/panelDeControl/FloatButtonCustom";
 import {
   CloseOutlined,
+  CommentOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
@@ -76,7 +77,7 @@ export default function PanelDeControl() {
     },
     {
       key: "tmp-4",
-      icon: <FaRegNewspaper />,
+      icon: <CommentOutlined />,
       label: "Actividades",
     },
     {

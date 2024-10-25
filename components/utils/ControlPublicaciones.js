@@ -228,3 +228,16 @@ export function tituloCorrectoServicio(tipoServicio){
       throw new Error('Tipo de servicio no reconocido');
   }
 }
+
+export const tiposDePago = [
+  { label: "Efectivo", value: "Efectivo" },
+  { label: "Visa", value: "Visa" },
+  { label: "Mastercard", value: "Mastercard" },
+  { label: "OCA", value: "OCA" },
+  { label: "Mercado Pago", value: "Mercado Pago" },
+  { label: "PedidosYa", value: "Pedidosya" },
+  { label: "Prex", value: "Prex" },
+  { label: "Midinero", value: "MiDinero" },
+  { label: "American Express", value: "American Express" },
+  { label: "Transferencia Bancaria", value: "Transferencia Bancaria" },
+];
