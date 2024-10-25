@@ -260,21 +260,11 @@ export const alquileresCaracteristicas = [
 ];
 
 export const diasSemana = [
-  { label: "Lunes", value: "lunes" },
-  { label: "Martes", value: "martes" },
-  { label: "Miércoles", value: "miercoles" },
-  { label: "Jueves", value: "jueves" },
-  { label: "Viernes", value: "viernes" },
-  { label: "Sábado", value: "sabado" },
-  { label: "Domingo", value: "domingo" },
+  { label: "Lunes", value: "Lunes" },
+  { label: "Martes", value: "Martes" },
+  { label: "Miércoles", value: "Miércoles" },
+  { label: "Jueves", value: "Jueves" },
+  { label: "Viernes", value: "Viernes" },
+  { label: "Sábado", value: "Sábado" },
+  { label: "Domingo", value: "Domingo" },
 ];
-
-// export const diasSemana = [
-//   { label: "Lunes"},
-//   { label: "Martes"},
-//   { label: "Miércoles"},
-//   { label: "Jueves"},
-//   { label: "Viernes"},
-//   { label: "Sábado"},
-//   { label: "Domingo"},
-// ];
