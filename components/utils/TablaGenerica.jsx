@@ -86,6 +86,92 @@ export default function TablaGenerica({
     setModalIsOpenForButtonFloat(true);
   };
 
+  const handleDropdownClick = ({ key }, record) => {
+    const tipoPublicacion = Object.keys(record).find((key) =>
+      key.startsWith("id_")
+    );
+    const tipoSinPrefijo = tipoPublicacion
+      ? tipoPublicacion.replace("id_", "")
+      : "desconocido";
+    const id = record[tipoPublicacion];
+
+    switch (key) {
+      case "0": // Ver Publicación
+        window.open(obtenerDireccionDePublicacion(tipoSinPrefijo, id), "_blank");
+        break;
+      case "1": // Generar QR
+        showModalQR(record);
+        break;
+      case "2": // Editar
+        showModalEditar(record);
+        break;
+      case "3": // Publicar/Despublicar
+        handleCambiarEstado(
+          record,
+          obtenerTipoDePublicacion(tipoSinPrefijo),
+          id
+        );
+        break;
+      case "4": // Eliminar
+        showModalEliminar(record);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const getDropdownItems = (record) => [
+    {
+      key: "0",
+      label: (
+        <span className="w-full flex items-center gap-2">
+          <ExportOutlined className="inline" /> Ver Publicación
+        </span>
+      ),
+    },
+    {
+      key: "1",
+      label: (
+        <span className="w-full flex items-center gap-2">
+          <QrcodeOutlined className="inline" /> Generar código QR
+        </span>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <span className="w-full flex items-center gap-2">
+          <FormOutlined className="inline" /> Editar
+        </span>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <span className="w-full flex items-center gap-2">
+          {record.publicado ? (
+            <>
+              <EyeInvisibleOutlined className="inline" /> Despublicar
+            </>
+          ) : (
+            <>
+              <EyeOutlined className="inline" /> Publicar
+            </>
+          )}
+        </span>
+      ),
+    },
+    {
+      key: "4",
+      danger: true,
+      label: (
+        <span className="w-full flex items-center gap-2">
+          <DeleteOutlined className="inline" /> Eliminar
+        </span>
+      ),
+    },
+  ];
+
   const handleCambiarEstado = async (record, tipoDePublicacion, id) => {
     let resp;
     record.publicado = !record.publicado;
@@ -226,101 +312,23 @@ export default function TablaGenerica({
       title: "Opciones",
       key: "options",
       width: "10%",
-      render: (text, record) => {
-        const tipoPublicacion = Object.keys(record).find((key) =>
-          key.startsWith("id_")
-        );
-        const tipoSinPrefijo = tipoPublicacion
-          ? tipoPublicacion.replace("id_", "")
-          : "desconocido";
-        const id = record[tipoPublicacion];
-
-        const items = [
-          {
-            label: (
-              <a
-                href={obtenerDireccionDePublicacion(tipoSinPrefijo, id)}
-                target="_blank"
-                className="w-full flex items-center gap-2"
-              >
-                <ExportOutlined className="inline" /> Ver Publicación
-              </a>
-            ),
-            key: "0",
-          },
-          {
-            label: (
-              <div
-                className="w-full flex items-center gap-2"
-                onClick={() => showModalQR(record)}
-              >
-                <QrcodeOutlined className="inline" /> Generar código QR
-              </div>
-            ),
-            key: "1",
-          },
-          {
-            label: (
-              <div
-                className="w-full flex items-center gap-2"
-                onClick={() => showModalEditar(record)}
-              >
-                <FormOutlined className="inline" /> Editar
-              </div>
-            ),
-            key: "2",
-          },
-          {
-            label: (
-              <div
-                className="w-full flex items-center gap-2"
-                onClick={() =>
-                  handleCambiarEstado(
-                    record,
-                    obtenerTipoDePublicacion(tipoSinPrefijo),
-                    id
-                  )
-                }
-              >
-                {record.publicado ? (
-                  <>
-                    <EyeInvisibleOutlined className="inline" /> Despublicar
-                  </>
-                ) : (
-                  <>
-                    <EyeOutlined className="inline" /> Publicar
-                  </>
-                )}
-              </div>
-            ),
-            key: "3",
-          },
-          {
-            label: (
-              <div
-                className="w-full flex items-center gap-2"
-                onClick={() => showModalEliminar(record)}
-              >
-                <DeleteOutlined className="inline" /> Eliminar
-              </div>
-            ),
-            key: "4",
-            danger: true,
-          },
-        ];
-
-        return (
-          <div className="flex justify-center">
-            <Dropdown menu={{ items }} trigger={["click"]}>
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  <MenuOutlined />
-                </Space>
-              </a>
-            </Dropdown>
-          </div>
-        );
-      },
+      render: (_, record) => (
+        <div className="flex justify-center">
+          <Dropdown
+            menu={{
+              items: getDropdownItems(record),
+              onClick: (e) => handleDropdownClick(e, record),
+            }}
+            trigger={["click"]}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <MenuOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+        </div>
+      ),
     },
   ];
 

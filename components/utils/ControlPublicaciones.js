@@ -241,3 +241,40 @@ export const tiposDePago = [
   { label: "American Express", value: "American Express" },
   { label: "Transferencia Bancaria", value: "Transferencia Bancaria" },
 ];
+
+export const alquileresCaracteristicas = [
+  { label: "Toallas", value: "toallas" },
+  { label: "Agua Caliente", value: "agua_caliente" },
+  { label: "Sabanas", value: "sabanas" },
+  { label: "TV", value: "tv" },
+  { label: "WIFI", value: "wifi" },
+  { label: "Piscina", value: "piscina" },
+  { label: "Parrilla", value: "parrilla" },
+  { label: "Cocina", value: "cocina" },
+  { label: "Microondas", value: "microondas" },
+  { label: "Tostadora", value: "tostadora" },
+  { label: "Aire Acondicionado", value: "aire_acondicionado" },
+  { label: "Estufa", value: "estufa" },
+  { label: "Frazadas", value: "frazadas" },
+  { label: "Mascotas", value: "mascotas" },
+];
+
+export const diasSemana = [
+  { label: "Lunes", value: "lunes" },
+  { label: "Martes", value: "martes" },
+  { label: "Miércoles", value: "miercoles" },
+  { label: "Jueves", value: "jueves" },
+  { label: "Viernes", value: "viernes" },
+  { label: "Sábado", value: "sabado" },
+  { label: "Domingo", value: "domingo" },
+];
+
+// export const diasSemana = [
+//   { label: "Lunes"},
+//   { label: "Martes"},
+//   { label: "Miércoles"},
+//   { label: "Jueves"},
+//   { label: "Viernes"},
+//   { label: "Sábado"},
+//   { label: "Domingo"},
+// ];

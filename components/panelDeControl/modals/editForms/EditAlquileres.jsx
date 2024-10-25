@@ -1,10 +1,25 @@
+import { getCoordsGoogleMaps } from "@/components/utils/ControlPublicaciones";
 import { Checkbox, Form, InputNumber, Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import React, { useEffect, useState } from "react";
 // import Mapa from "../../leafletjs/Mapa";
 
-export default function EditAlquileres({ alquiler, urlGoogle, setUrlGoogle, alquileresCaracteristicas }) {
+export default function EditAlquileres({
+  alquiler,
+  urlGoogle,
+  setUrlGoogle,
+  alquileresCaracteristicas,
+}) {
   console.log(alquiler);
+
+  const Mapa = dynamic(
+    () => import("@/components/panelDeControl/leafletjs/Mapa"),
+    {
+      ssr: false,
+      loading: () => <div>Cargando mapa...</div>,
+    }
+  );
 
   const getInitialValues = () => {
     const selectedFeatures = [];
@@ -16,7 +31,10 @@ export default function EditAlquileres({ alquiler, urlGoogle, setUrlGoogle, alqu
     return selectedFeatures;
   };
 
- 
+  useEffect(() => {
+    setUrlGoogle(alquiler.ubicacion);
+  }, []);
+
   return (
     <>
       <div className="flex flex-col gap-8">
@@ -112,43 +130,49 @@ export default function EditAlquileres({ alquiler, urlGoogle, setUrlGoogle, alqu
             name="ubicacion"
             initialValue={alquiler.ubicacion}
             rules={[
-              { required: false, message: "Por favor ingresa la ubicación" },
               {
-                // validator: (_, value) => {
-                //   const valido = getCoordsGoogleMaps(urlGoogle);
-                //   if (valido) {
-                //     return Promise.resolve();
-                //   }
-                //   return Promise.reject(
-                //     new Error(
-                //       "Por favor ingresa un enlace válido de Google Maps"
-                //     )
-                //   );
-                // },
+                required: true,
+                message: "Por favor ingresa la ubicación",
+              },
+              {
+                validator: (_, value) => {
+                  let valido = getCoordsGoogleMaps(urlGoogle);
+                  if (valido) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(
+                      "Por favor ingresa un enlace válido de Google Maps"
+                    )
+                  );
+                },
               },
             ]}
           >
             <Input
-              className="w-full"
-              onLoad={() => {
-                setUrlGoogle(alquiler.ubicacion);
-              }}
               onChange={(e) => {
                 setUrlGoogle(e.target.value);
               }}
             />
           </Form.Item>
+
           <Form.Item
             label="Dirección completa"
             name="ubicacion_calles"
             initialValue={alquiler.ubicacion_calles}
             rules={[
-              { required: true, message: "Por favor ingresa la direccion" },
+              {
+                required: true,
+                message: "El campo no puede estar vacío",
+              },
             ]}
           >
-            <Input className="w-full" />
+            <Input />
           </Form.Item>
-          {/* <Mapa urlGoogle={urlGoogle} /> */}
+
+          <div className="w-full h-[200px] overflow-hidden">
+            <Mapa urlGoogle={urlGoogle} />
+          </div>
         </div>
       </div>
 
@@ -156,10 +180,7 @@ export default function EditAlquileres({ alquiler, urlGoogle, setUrlGoogle, alqu
         <h2 className="text-2xl font-semibold text-center mb-6">
           Características del Alquiler
         </h2>
-        <Form.Item 
-          name="caracteristicas"
-          initialValue={getInitialValues()}
-        >
+        <Form.Item name="caracteristicas" initialValue={getInitialValues()}>
           <Checkbox.Group
             options={alquileresCaracteristicas}
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
@@ -188,10 +209,7 @@ export default function EditAlquileres({ alquiler, urlGoogle, setUrlGoogle, alqu
             initialValue={alquiler.capacidad}
             rules={[{ required: true }]}
           >
-            <InputNumber
-              min={0}
-              className="w-full"
-            />
+            <InputNumber min={0} className="w-full" />
           </Form.Item>
         </div>
       </div>

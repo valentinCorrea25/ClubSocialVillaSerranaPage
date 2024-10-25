@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Checkbox, Button, Input, Select, Row, Col, Form, Modal } from "antd";
 import { AdminContext } from "@/context/adminContext";
+import { diasSemana } from "@/components/utils/ControlPublicaciones";
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -17,20 +18,9 @@ export default function CrearServicioModal({
   const [diasSeleccionados, setDiasSeleccionados] = useState([]);
   const [todaLaSemanaSeleccionado, setTodaLaSemanaSeleccionado] =
     useState(false);
-  const { getTipoDeServicios } = useContext(AdminContext);
+  const { getTipoDeServicios, crearPublicacion } = useContext(AdminContext);
   const [tipoServicio, setTipoServicio] = useState([]);
-  const { crearPublicacion } = useContext(AdminContext);
   const [isLoading, setIsLoading] = useState(false);
-
-  const opcionesDias = [
-    "Lunes",
-    "Martes",
-    "Miércoles",
-    "Jueves",
-    "Viernes",
-    "Sábado",
-    "Domingo",
-  ];
 
   const handleClose = () => {
     // setRestoreVariables(true);
@@ -111,7 +101,6 @@ export default function CrearServicioModal({
         <div className="flex flex-col items-center justify-center p-1 sm:p-4 md:p-10">
           <h1 className="text-2xl mb-4">Crear nuevo Servicio</h1>
 
-          {/* Información del Servicio */}
           <Form.Item
             label="Título*"
             name="titulo"
@@ -160,12 +149,10 @@ export default function CrearServicioModal({
           {/* Horarios Semanales */}
           <div className="w-full p-5 rounded-md">
             <h2 className="text-center">Horarios Semanales</h2>
-            <Form.Item name="dia_Semana" className="justify-center flex gap-10">
+            <Form.Item name="dia_Semana" className="mb-6">
               <Checkbox.Group
-                options={[...opcionesDias,]}
-                value={diasSeleccionados}
-                onChange={manejarCambioDias}
-                className="grid grid-cols-2 gap-4 p-4 items-center justify-center"
+                options={diasSemana}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4"
               />
             </Form.Item>
 

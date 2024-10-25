@@ -2,7 +2,7 @@ import { getCoordsGoogleMaps } from "@/components/utils/ControlPublicaciones";
 import { Checkbox, Form, InputNumber, Input, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Mapa from "../../leafletjs/Mapa";
 
 export default function EditRestaurantes({ restaurante, urlGoogle, setUrlGoogle, diasSemana, tiposDePago }) {
@@ -17,14 +17,10 @@ export default function EditRestaurantes({ restaurante, urlGoogle, setUrlGoogle,
         }
         return restaurante.diasSemana;
       };
-
-      const getInitialValuesPagos = () => {
-        if (!restaurante.tipo_pago || !Array.isArray(restaurante.tipo_pago)) {
-          return [];
-        }
-        return restaurante.tipo_pago;
-      };
     
+    useEffect(() => {
+     setUrlGoogle(restaurante.ubicacion);
+    }, []);
  
   return (
     <>
@@ -132,7 +128,7 @@ export default function EditRestaurantes({ restaurante, urlGoogle, setUrlGoogle,
                     },
                     {
                       validator: (_, value) => {
-                        const valido = getCoordsGoogleMaps(urlGoogle);
+                        let valido = getCoordsGoogleMaps(urlGoogle);
                         if (valido) {
                           return Promise.resolve();
                         }
