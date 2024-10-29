@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Checkbox, Button, Input, Select, Row, Col, Form, Modal } from "antd";
 import { AdminContext } from "@/context/adminContext";
-import { diasSemana } from "@/components/utils/ControlPublicaciones";
+import { diasSemana, tituloCorrectoServicio } from "@/components/utils/ControlPublicaciones";
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -123,7 +123,7 @@ export default function CrearServicioModal({
             <Select placeholder="Tipo de Servicio*">
               {tipoServicio &&
                 tipoServicio.map((item) => (
-                  <Option key={item} value={item} />
+                  <Option key={item} value={tituloCorrectoServicio(item)} />
                 ))}
             </Select>
           </Form.Item>

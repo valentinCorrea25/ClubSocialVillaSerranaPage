@@ -1,3 +1,4 @@
+import { tituloCorrectoServicio } from "@/components/utils/ControlPublicaciones";
 import { AdminContext } from "@/context/adminContext";
 import { Checkbox, Form, Input, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
@@ -58,7 +59,7 @@ export default function EditServicios({ servicio, diasSemana }) {
         >
           <Select placeholder="Tipo de Servicio*">
             {tipoServicio &&
-              tipoServicio.map((item) => <Option key={item} value={item} />)}
+              tipoServicio.map((item) => <Option key={item} value={tituloCorrectoServicio(item)} />)}
           </Select>
         </Form.Item>
 
