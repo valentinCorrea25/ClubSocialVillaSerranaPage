@@ -15,6 +15,7 @@ import {
 import ImagenControl from "./ImagenControl";
 import EditRestaurantes from "./editForms/EditRestaurantes";
 import EditServicios from "./editForms/EditServicios";
+import EditEventoNoticiaActividad from "./editForms/EditEventoNoticiaActividad";
 
 export default function EditarPublicacionModal({
   isModalOpen,
@@ -32,12 +33,19 @@ export default function EditarPublicacionModal({
   const [isLoading, setLoading] = useState(false);
   const [restoreVariables, setRestoreVariables] = useState(false);
   const [fileList, setFileList] = useState();
+  const [textoRichText, setTextoRichText] = useState("");
   useState(false);
 
   const handleClose = () => {
     setRestoreVariables(true);
     setIsModalOpen(false);
     setModalIsOpenForButtonFloat(false);
+    setTextoRichText('');
+  };
+
+  const handleFecha = (inputFecha) => {
+    const [dia, mes, año] = inputFecha.split("/");
+    return new Date(año, mes - 1, dia);
   };
 
   const handleResetComplete = () => {
@@ -49,7 +57,8 @@ export default function EditarPublicacionModal({
 
   function seleccionarForm(tipoDePublicacion, selectedItem) {
     const [urlGoogle, setUrlGoogle] = useState("");
-    console.log(tipoDePublicacion);
+    const [currentForm, setCurrentForm] = useState(tipoDePublicacion);
+  
 
     switch (tipoDePublicacion) {
       case "Alquiler":
@@ -75,50 +84,36 @@ export default function EditarPublicacionModal({
         return (
           <EditServicios servicio={selectedItem} diasSemana={diasSemana} />
         );
+
+      case "EventoNoticia":
+        return (
+          <EditEventoNoticiaActividad
+            key={restoreVariables ? 'reset' : 'default'}
+            eventoNoticiaActividad={selectedItem}
+            diasSemana={diasSemana}
+            setCurrentForm={setCurrentForm}
+            currentForm={currentForm}
+            setTextoRichText={setTextoRichText}
+            textoRichText={textoRichText}
+          />
+        );
       default:
         return null; // Retorna null si no coincide ningún caso
     }
   }
-
-  // const onFinish = async (values) => {
-  //   setLoading(true);
-  //   mostrarCargarToast();
-  //   const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
-
-  //   try {
-  //     if (fileList && fileList.length > 0) {
-  //       const nuevasFotos = await subirImagenesSupabase(
-  //         fileList,
-  //         tipoDePublicacion,
-  //         selectedItem.titulo
-  //       );
-
-  //       values.fotos = [...(selectedItem.fotos || []), ...nuevasFotos];
-  //     } else {
-  //       values.fotos = selectedItem.fotos || [];
-  //     }
-
-  //     await modificarPublicaciones(
-  //       selectedItem[idPublicacion],
-  //       values,
-  //       tipoDePublicacion
-  //     );
-  //     await updateData();
-  //     mostrarExitoToast('Publicación modificada con éxito');
-  //   } catch (e) {
-  //     console.log(e);
-  //     mostrarFalloToast('Error al modificar la publicación, contactar programador');
-  //   } finally {
-  //     setLoading(false);
-  //     handleClose();
-  //   }
-  // };
   const onFinish = async (formValues) => {
     setLoading(true);
     mostrarCargarToast();
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
 
     let processedValues = { ...formValues };
+
+    if(tipoDePublicacion == "eventosnoticias"){
+      processedValues.fecha_evento = formValues.fecha_evento
+      ? handleFecha(formValues.fecha_evento)
+      : null;
+      processedValues.contenido = textoRichText;
+    }
 
     if (tipoDePublicacion == "alquileres") {
       const caracteristicasSeleccionadas = alquileresCaracteristicas.reduce(
@@ -140,7 +135,7 @@ export default function EditarPublicacionModal({
     console.log(processedValues);
 
     try {
-      if(tipoDePublicacion != 'servicios'){
+      if (tipoDePublicacion != "servicios") {
         if (fileList && fileList.length > 0) {
           const nuevasFotos = await subirImagenesSupabase(
             fileList,
@@ -148,7 +143,10 @@ export default function EditarPublicacionModal({
             selectedItem.titulo
           );
 
-          processedValues.fotos = [...(selectedItem.fotos || []), ...nuevasFotos];
+          processedValues.fotos = [
+            ...(selectedItem.fotos || []),
+            ...nuevasFotos,
+          ];
         } else {
           processedValues.fotos = selectedItem.fotos || [];
         }

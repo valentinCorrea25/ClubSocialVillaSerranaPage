@@ -290,17 +290,12 @@ export default function CrearEventoNoticiaActividadModal({
                 <Input placeholder="Ubicación de la actividad" />
               </Form.Item>
 
-              <Form.Item label="Día de la Semana" name="dia_Semana" required>
-                <Select mode="multiple" placeholder="Seleccione los días">
-                  <Option value="Lunes">Lunes</Option>
-                  <Option value="Martes">Martes</Option>
-                  <Option value="Miércoles">Miércoles</Option>
-                  <Option value="Jueves">Jueves</Option>
-                  <Option value="Viernes">Viernes</Option>
-                  <Option value="Sábado">Sábado</Option>
-                  <Option value="Domingo">Domingo</Option>
-                </Select>
-              </Form.Item>
+              <Form.Item name="dia_Semana" className="mb-6">
+              <Checkbox.Group
+                options={diasSemana}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4"
+              />
+            </Form.Item>
 
               <Form.Item label="Imágenes">
                 <Upload
