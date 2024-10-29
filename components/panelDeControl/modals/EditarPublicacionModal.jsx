@@ -58,6 +58,8 @@ export default function EditarPublicacionModal({
   function seleccionarForm(tipoDePublicacion, selectedItem) {
     const [urlGoogle, setUrlGoogle] = useState("");
     const [currentForm, setCurrentForm] = useState(tipoDePublicacion);
+    console.log(tipoDePublicacion);
+    
   
 
     switch (tipoDePublicacion) {
@@ -97,6 +99,20 @@ export default function EditarPublicacionModal({
             textoRichText={textoRichText}
           />
         );
+
+        case "Actividad":
+        return (
+          <EditEventoNoticiaActividad
+            key={restoreVariables ? 'reset' : 'default'}
+            eventoNoticiaActividad={selectedItem}
+            diasSemana={diasSemana}
+            setCurrentForm={setCurrentForm}
+            currentForm={currentForm}
+            setTextoRichText={setTextoRichText}
+            textoRichText={textoRichText}
+          />
+        );
+
       default:
         return null; // Retorna null si no coincide ningún caso
     }

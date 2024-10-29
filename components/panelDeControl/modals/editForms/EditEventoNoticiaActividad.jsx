@@ -97,14 +97,6 @@ export default function EditEventoNoticiaActividad({
               <RichTextEditor setTextoRichText={setTextoRichText} initialHTML={eventoNoticiaActividad.contenido}/>
             </Form.Item>
 
-            {/* <div> USADO PARA PRUEBAS DE EL EDITOR
-              <h1>Contenido Renderizado del Editor</h1>
-              <div
-                className="rendered-content"
-                dangerouslySetInnerHTML={{ __html: textoRichText }}
-              ></div>
-            </div> */}
-
             <Form.Item>
               <Checkbox
                 checked={esEvento}
@@ -124,12 +116,6 @@ export default function EditEventoNoticiaActividad({
                 <Input placeholder="dd/mm/aaaa" />
               </Form.Item>
             )}
-
-            {/* <Form.Item className="text-center">
-              <Button type="primary" htmlType="submit">
-                {esEvento ? "Publicar Evento" : "Publicar Noticia"}
-              </Button>
-            </Form.Item> */}
           </>
         ) : (
           <>
@@ -161,6 +147,7 @@ export default function EditEventoNoticiaActividad({
               <RichTextEditor setTextoRichText={setTextoRichText} />
             </Form.Item>
 
+            <div className="flex justify-center gap-4">
             <Form.Item
               label="Horario"
               name="horario"
@@ -178,6 +165,7 @@ export default function EditEventoNoticiaActividad({
             >
               <Input placeholder="Ubicación de la actividad" />
             </Form.Item>
+            </div>
 
             <Form.Item
               name="dia_Semana"

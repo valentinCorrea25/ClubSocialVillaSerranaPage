@@ -97,7 +97,10 @@ export default function TablaGenerica({
 
     switch (key) {
       case "0": // Ver Publicación
-        window.open(obtenerDireccionDePublicacion(tipoSinPrefijo, id), "_blank");
+        window.open(
+          obtenerDireccionDePublicacion(tipoSinPrefijo, id),
+          "_blank"
+        );
         break;
       case "1": // Generar QR
         showModalQR(record);
@@ -178,10 +181,16 @@ export default function TablaGenerica({
     mostrarCargarToast();
     try {
       resp = await modificarPublicaciones(id, record, tipoDePublicacion);
-      mostrarExitoToast(`Publicación ${record.publicado ? "publicada" : 'despublicada'} con éxito`);
+      mostrarExitoToast(
+        `Publicación ${
+          record.publicado ? "publicada" : "despublicada"
+        } con éxito`
+      );
     } catch (e) {
       console.log(e);
-      mostrarFalloToast('Error al modificar la publicación, contactar programador');
+      mostrarFalloToast(
+        "Error al modificar la publicación, contactar programador"
+      );
     }
     updateData();
   };
@@ -210,21 +219,28 @@ export default function TablaGenerica({
       render: (text, record) => {
         if (record.titulo_Servicio) {
           return (
-            <div className={`flex justify-center ${!record.publicado ? "opacity-30" : ""}`}>
+            <div
+              className={`flex justify-center ${
+                !record.publicado ? "opacity-30" : ""
+              }`}
+            >
               {iconosSegunTipoServicio(record.titulo_Servicio)}
             </div>
           );
         }
         const fotos = record.fotos || record.foto;
         const fotoSrc = Array.isArray(fotos) ? fotos[0] : fotos;
-        return fotoSrc ? (
+        const imagenPorDefecto =
+          "https://res.cloudinary.com/dvzf7szuo/image/upload/v1730236113/not-found_td14yf.png";
+
+        return (
           <img
-            src={fotoSrc}
+            src={fotoSrc || imagenPorDefecto}
             alt="Portada"
             style={{ width: "120px", height: "80px", objectFit: "cover" }}
             className={!record.publicado ? "opacity-30" : null}
           />
-        ) : null;
+        );
       },
     },
     {

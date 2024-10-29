@@ -35,7 +35,6 @@ export default function App({ setTextoRichText, initialHTML = "" }) {
     theme: ExampleTheme,
     // Add initial state configuration
     editorState: () => {
-      console.log(initialHTML);
       const editor = createEditor();
       if (initialHTML && typeof initialHTML === "string") {
         try {
