@@ -25,9 +25,9 @@ const ActividadCard = ({ actividad }) => {
   } = actividad;
 
   const router = useRouter();
-const handleViewDetails = (id) => {
-  router.push(`/ListaActividades/DetalleActividades?id=${id}`);
-};
+  const handleViewDetails = (id) => {
+    router.push(`/ListaActividades/DetalleActividades?id=${id}`);
+  };
 
   return (
     <Card onClick={() => handleViewDetails(actividad.id_Actividad)}
@@ -55,7 +55,6 @@ const handleViewDetails = (id) => {
       }
       style={{
         width: "100%",
-        height: "650px",
         maxWidth: "500px",
         margin: "0 auto",
         marginBottom: "24px",
@@ -66,7 +65,7 @@ const handleViewDetails = (id) => {
     >
       <Meta
         title={
-          <div style={{ fontSize: "20px", fontWeight: "bold"}}>{titulo}</div>
+          <div style={{ fontSize: "20px", fontWeight: "bold" }}>{titulo}</div>
         }
         description={
           <>
@@ -92,24 +91,21 @@ const handleViewDetails = (id) => {
                 textOverflow: "ellipsis",
               }}
             >
-             {contenido.substring(0, 350)}....
-              
-             
-         
+              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 500) }} />....
             </p>
             <Button
-                type="primary"
-                onClick={() => handleViewDetails(actividad.id_Actividad)}
-                className="mt-7 m-auto sm:ml-0"
-              >
-                Ver Detalles
-              </Button>
+              type="primary"
+              onClick={() => handleViewDetails(actividad.id_Actividad)}
+              className="mt-7  "
+            >
+              Ver Detalles
+            </Button>
           </>
         }
-        
+
 
       />
-      
+
     </Card>
   );
 };

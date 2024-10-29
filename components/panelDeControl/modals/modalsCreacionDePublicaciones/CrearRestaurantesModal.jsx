@@ -9,9 +9,10 @@ import {
   Form,
   message,
   Modal,
+  Select,
 } from "antd";
 import { AdminContext } from "@/context/adminContext";
-import { getBase64 } from "@/components/utils/ControlPublicaciones";
+import { getBase64, tiposDePago } from "@/components/utils/ControlPublicaciones";
 import { getCoordsGoogleMaps } from "@/components/utils/ControlPublicaciones";
 // import Mapa from "@/components/panelDeControl/leafletjs/Mapa";
 import dynamic from "next/dynamic";
@@ -50,7 +51,6 @@ export default function CrearRestaurantesModal({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClose = () => {
-    // setRestoreVariables(true);
     setIsModalOpen(false);
     setModalIsOpenForButtonFloat(false);
     resetForm();
@@ -92,6 +92,8 @@ export default function CrearRestaurantesModal({
   );
 
   const onFinish = async (values) => {
+    console.log(values);
+    
     try {
       setIsLoading(true);
       mostrarCargarToast();
@@ -101,7 +103,6 @@ export default function CrearRestaurantesModal({
         values.titulo
       );
       values.fotos = urls;
-      values.tipo_pago = [values.tipo_pago];
 
       const data = await crearPublicacion(values, "restaurantes");
       if (data.code == 500) {
@@ -352,8 +353,9 @@ export default function CrearRestaurantesModal({
               Métodos de Pago
             </h2>
 
-            <Form.Item label="Método de Pago" name="tipo_pago">
-              <Input />
+            <Form.Item label="Tipos de pago" name="tipo_pago">
+                <Select mode="multiple" placeholder="Seleccione..." options={tiposDePago}>
+                </Select>
             </Form.Item>
           </div>
         </div>

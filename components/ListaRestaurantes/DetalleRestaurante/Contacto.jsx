@@ -2,8 +2,7 @@ import React from 'react';
 import { Card, Button, Divider } from 'antd';
 import { PhoneOutlined, MailOutlined, UserOutlined, WhatsAppOutlined } from '@ant-design/icons';
 
-const Contacto = ({ restaurante }) => {
-  const { nombre_titular, celular, mail } = restaurante; // agregar whatsapp // si empieza por 09algo
+const Contacto = ({ nombre_titular, celular, mail }) => {
 
   return (
     <Card

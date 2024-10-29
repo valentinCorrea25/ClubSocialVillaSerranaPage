@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
+import {TeamOutlined, EnvironmentOutlined, PhoneOutlined, UserOutlined} from "@ant-design/icons"
 
 const Informacion = ({ alojamiento }) => (
   <Card
@@ -21,13 +22,23 @@ const Informacion = ({ alojamiento }) => (
       }}
     >
       <div className="text-2xl font-bold text-center">
-        {alojamiento.titulo}
+      {alojamiento.titulo}
       </div>
     </div>
 
-    <div className="p-7">
-      <p className="text-gray-800 mb-2">{alojamiento.ubicacion}</p>
-      <p className="text-gray-800 mb-2">Hasta {alojamiento.capacidad} personas</p>
+    <div className="p-1">
+    <p className="text-gray-800 mb-2 text-[15px]"> <UserOutlined   className='mr-2'/>{alojamiento.nombre_titular  }</p>
+    <p className="text-gray-800 mb-2 text-[15px]"> <PhoneOutlined   className='mr-2'/>{alojamiento.celular}</p> 
+      <p className="text-gray-800 mb-2 text-[15px]"> <EnvironmentOutlined  className='mr-2'/>{alojamiento.ubicacion_calles}</p>
+      <p className="text-gray-800 mb-2 text-[15px]"> <TeamOutlined className='mr-2'/> Hasta {alojamiento.capacidad} personas</p>
+      <p className="text-gray-800 mb-2 text-[15px]"> 
+      {alojamiento.precio ? <div>
+        <TeamOutlined className='mr-2'/>Precio:
+                      {alojamiento.precio !== undefined
+                        ? `$${alojamiento.precio}`
+                        : "No especificado"}
+                    </div> : null}
+      </p>
     </div>
   </Card>
 );

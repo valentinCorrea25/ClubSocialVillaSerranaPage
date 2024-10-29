@@ -57,7 +57,7 @@ const PublicacionesSimilares = ({ similares }) => {
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
                     <EnvironmentOutlined style={{ marginRight: '8px' }} />
-                    {item.ubicacion}
+                    {item.ubicacion_calles}
                   </div>
                   <div>Hasta {item.capacidad} personas</div>
                 </div>

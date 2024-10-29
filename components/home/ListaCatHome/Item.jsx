@@ -10,14 +10,14 @@ export default function Item({ informacion, type }) {
     <div className="flex flex-col items-center justify-center montserrat max-w-72">
       {type == 1 ? (
         <>
-          <div className="p-4 shadow-md border w-full max-w-sm md:max-w-md lg:max-w-lg"
+          <div className="p-4 shadow-md border  max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer"
             onClick={() => router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`)}
           >
-            <div className="mb-4 w-full h-[180px] max-h-[250px]">
+            <div className="mb-4 w-full h-[180px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
-                className="w-full h-full object-cover shadow-lg cursor-pointer"
-                alt={informacion?.titulo.innerHTML}
+                className="w-full max-h-[150px] object-cover shadow-lg cursor-pointer"
+                alt={informacion?.titulo}
               />
             </div>
             <div className="ml-2">
@@ -44,7 +44,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 2 ? (
         <>
-          <div className="p-4 shadow-md border w-full max-w-sm md:max-w-md lg:max-w-lg"
+          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]"
             onClick={() => router.push(`/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`)}>
 
             <div className="mb-4 w-full max-h-[250px]">
@@ -77,11 +77,11 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 3 ? (
         <>
-          <div className="p-4 shadow-md border w-full max-w-sm md:max-w-md lg:max-w-lg">
+          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]">
             <div className="mb-4 w-full h-[180px] max-h-[250px]">
               <img
-                src={informacion?.foto}
-                className="w-full h-full object-cover shadow-lg cursor-pointer"
+                src={informacion?.fotos?.[0]}
+                className="w-full max-h-[190px] object-cover shadow-lg cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>
@@ -108,7 +108,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 4 ? (
         <>
-          <div className="p-4 shadow-md border w-full max-w-sm md:max-w-md lg:max-w-lg">
+          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]">
             <div className=" mb-4 w-full h-[180px] max-h-[250px]">
               <img
                 src={informacion?.fotos?.[0]}
@@ -135,7 +135,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 5 ? (
         <>
-          <div className="w-full text-center max-w-56">
+          <div className="w-full text-center max-w-56m">
             <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg cursor-pointer mt-2 text-center">
               {informacion?.titulo}
             </h1>

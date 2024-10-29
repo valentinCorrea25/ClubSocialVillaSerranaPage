@@ -33,6 +33,9 @@ export async function GET(request) {
     const publicaciones = await prisma.restaurant.findMany({
         skip: random,
         take: limit,
+        orderBy: {
+            fecha_publicacion: 'desc'
+        },
     });
     if(!publicaciones) return NextResponse.json({message: 'Sin Publicaciones'});
 

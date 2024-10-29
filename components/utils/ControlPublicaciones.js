@@ -27,11 +27,11 @@ export const obtenerDireccionDePublicacion = (tipoSinPrefijo, id) => {
     case "alquiler":
       return `/ListaAlojamiento/DetalleAlojamiento?id=${id}`;
     case "servicio":
-      return "servicios";
+      return "/ListaServicios";
     case "eventonoticia":
-      return "eventosnoticias";
+      return `/ListaEventosNoticias/DetalleEventosNoticias?id=${id}`;
     case "actividad":
-      return "actividades";
+      return `/ListaActividades/DetalleActividades?id=${id}`;
     default:
       return "desconocido";
   }
@@ -228,3 +228,43 @@ export function tituloCorrectoServicio(tipoServicio){
       throw new Error('Tipo de servicio no reconocido');
   }
 }
+
+export const tiposDePago = [
+  { label: "Efectivo", value: "Efectivo" },
+  { label: "Visa", value: "Visa" },
+  { label: "Mastercard", value: "Mastercard" },
+  { label: "OCA", value: "OCA" },
+  { label: "Mercado Pago", value: "Mercado Pago" },
+  { label: "PedidosYa", value: "Pedidosya" },
+  { label: "Prex", value: "Prex" },
+  { label: "Midinero", value: "MiDinero" },
+  { label: "American Express", value: "American Express" },
+  { label: "Transferencia Bancaria", value: "Transferencia Bancaria" },
+];
+
+export const alquileresCaracteristicas = [
+  { label: "Toallas", value: "toallas" },
+  { label: "Agua Caliente", value: "agua_caliente" },
+  { label: "Sabanas", value: "sabanas" },
+  { label: "TV", value: "tv" },
+  { label: "WIFI", value: "wifi" },
+  { label: "Piscina", value: "piscina" },
+  { label: "Parrilla", value: "parrilla" },
+  { label: "Cocina", value: "cocina" },
+  { label: "Microondas", value: "microondas" },
+  { label: "Tostadora", value: "tostadora" },
+  { label: "Aire Acondicionado", value: "aire_acondicionado" },
+  { label: "Estufa", value: "estufa" },
+  { label: "Frazadas", value: "frazadas" },
+  { label: "Mascotas", value: "mascotas" },
+];
+
+export const diasSemana = [
+  { label: "Lunes", value: "Lunes" },
+  { label: "Martes", value: "Martes" },
+  { label: "Miércoles", value: "Miércoles" },
+  { label: "Jueves", value: "Jueves" },
+  { label: "Viernes", value: "Viernes" },
+  { label: "Sábado", value: "Sábado" },
+  { label: "Domingo", value: "Domingo" },
+];

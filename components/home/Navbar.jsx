@@ -128,9 +128,9 @@ export default function Navbar() {
           <ul className="font-bold flex flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-white lg:bg-white lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0">
             <li
               onClick={() => router.push("/")}
-              className="block py-2 px-3 text-[--azul] rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0"
+              className="cursor-pointer block py-2 px-3 text-[--azul] rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0"
             >
-              Home
+              Inicio
             </li>
             <li>
               <Dropdown

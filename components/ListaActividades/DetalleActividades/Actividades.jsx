@@ -1,62 +1,55 @@
-import { Card } from 'antd';
+
+import React from 'react';
+import { Card, Button, Tag } from 'antd';
 import { EnvironmentOutlined, FileTextOutlined, CalendarOutlined } from '@ant-design/icons';
-import {Tag, Button } from "antd";
 
+export function Actividad({ actividad }) {
+  return (
+    <Card
+      bordered={false}
+      style={{ width: '100%', backgroundColor: '#FFFFFF', padding: '24px' }}
+    >
+      {/* Title */}
+      <h2 className="text-2xl font-bold mb-2">{actividad?.titulo || 'Título no disponible'}</h2>
 
-export function Actividad({actividad}) {
-    return (
-
-        <Card
-        title={
-          <div style={{ backgroundColor: 'var(--verde-oscuro)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
-            <div className="text-2xl font-bold text-center">{actividad?.titulo || 'Título no disponible'}</div>
-          </div>
-        }
-        style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd' }}
-        headStyle={{ padding: 0 }}
-      >
-        <p className="text-gray-800 mb-2">
-          <EnvironmentOutlined style={{ marginRight: 8 }} />
-          {actividad?.ubicacion || 'Ubicación no disponible'}
-        </p>
-        <p className="text-gray-800 mb-2">
+      {/* Location, Category, and Date */}
+      <div className="flex flex-col mb-4 text-blue-600">
+        <p className="mb-1">
           <CalendarOutlined style={{ marginRight: 8 }} />
-          {  actividad.dia_Semana.map((dia, index) => (
-                <Tag key={index} style={{ marginRight: "4px" }}>
-                  {dia}
-                </Tag>
-              ))|| 'Categoría no disponible'} {actividad?.horario || 'Categoría no disponible'}
+          <span >
+            Fecha de publicacion {new Date(actividad?.fecha_publicacion).toLocaleDateString('es-ES') || 'Fecha no disponible'}
+          </span>
         </p>
-        <p className="text-gray-800 mb-2">
-          <FileTextOutlined style={{ marginRight: 8 }} />
-           Fecha de Publicacion: { new Date(actividad?.fecha_publicacion).toLocaleDateString('es-ES') || 'Ubicación no disponible'}
+        <p className="mb-1">
+          <CalendarOutlined style={{ marginRight: 8 }} />
+          {actividad.dia_Semana.map((dia, index) => (
+            <Tag key={index} style={{ marginRight: "4px" }}>
+              {dia}
+            </Tag>
+          )) || 'Dias no disponible'} {actividad?.horario || 'Horario no disponible'}
         </p>
-       
-      </Card>
-    );
-  }
-  
-  export function Características({actividad}) {
-    return (
-              
-      <Card
-        title={
-          <div style={{ backgroundColor: 'var(--verde-oscuro)', color: 'var(--blanco)', padding: '16px', borderRadius: '4px', width: '100%' }}>
-            <div className="text-2xl font-bold text-center">Contenido</div>
-          </div>
-        }
-        style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd' }}
-        headStyle={{ padding: 0 }}
-      >
- <p className="text-gray-800 mb-2">
-          <FileTextOutlined style={{ marginRight: 8 }} />
-          {actividad?.contenido || 'Ubicación no disponible'}
+
+        <p className="mb-1">
+          <EnvironmentOutlined style={{ marginRight: 8, }} />
+          <span>
+            {actividad?.ubicacion || 'Ubicación no disponible'}
+          </span>
         </p>
-      </Card>    
-    );
-  }
-  export function UbicacionMap({ ubicacion }){
-  return(  <Card
+      </div>
+
+      {/* Description */}
+      <div className="text-gray-800">
+        <p dangerouslySetInnerHTML={{ __html: actividad?.contenido || 'Descripción no disponible' }} />
+      </div>
+    </Card>
+  );
+}
+
+export default Actividad;
+
+
+export function UbicacionMap({ ubicacion }) {
+  return (<Card
     title={
       <div
         className="text-2xl font-bold text-center"
@@ -93,7 +86,6 @@ export function Actividad({actividad}) {
       <Button type="primary">Ver Ubicación</Button>
     </div>
   </Card>
-    
-)
+
+  )
 }
-  

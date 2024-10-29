@@ -3,14 +3,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { useSearchParams } from "next/navigation";
 import { alojamientos as allAlojamientos } from "@/test/data";
 import { Suspense } from "react";
-import Banner from "@/components/utils/Banners";
 import Informacion from "@/components/ListaAlojamiento/DetalleAlojamiento/Informacion";
 import Carousel from "@/components/ListaAlojamiento/DetalleAlojamiento/Carousel";
 import Descripcion from "@/components/ListaAlojamiento/DetalleAlojamiento/Descripcion";
-import Caracteristicas from "@/components/ListaAlojamiento/DetalleAlojamiento/Caracteristicas";
+import ContactoInfo from "@/components/ListaRestaurantes/DetalleRestaurante/Contacto";
 import PublicacionesSimilares from "@/components/ListaAlojamiento/DetalleAlojamiento/PublicacionesSimilares";
 import { ClientContext } from "@/context/clientContext";
 import { Spin } from "antd";
+import dynamic from "next/dynamic";
 
 const FixSuspenseAlojamiento = () => {
   const searchParams = useSearchParams();
@@ -19,6 +19,8 @@ const FixSuspenseAlojamiento = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [alojamientoSeleccionado, setAlojamientoSeleccionado] = useState();
   const [alojamientoSimilares, setAlquileresSimilares] = useState();
+
+  // const MapaLeaflet = dynamic(() => import('@/components/utils/MapaLeaflet'), { ssr: false });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,12 +62,17 @@ const FixSuspenseAlojamiento = () => {
             <Informacion alojamiento={alojamientoSeleccionado} />
             <Carousel alojamiento={alojamientoSeleccionado} />
             <Descripcion alojamiento={alojamientoSeleccionado} />
-            <Caracteristicas alojamiento={alojamientoSeleccionado} />
           </div>
 
           <div className="lg:col-span-1 flex flex-col gap-8">
             <div className="flex-1 flex flex-col gap-8">
-              {/* <div className="w-full"><Contacto alquiler={alojamientoSeleccionado} /></div> */}
+              <div className="w-full">
+                <ContactoInfo
+                  nombre_titular={alojamientoSeleccionado.nombre_titular}
+                  mail={alojamientoSeleccionado.mail}
+                  celular={alojamientoSeleccionado.celular}
+                />
+              </div>
               {/* <MapaLeaflet ubicacion={alojamientoSeleccionado.ubicacion} /> */}
             </div>
             <div className="flex-1">
