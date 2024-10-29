@@ -1,6 +1,6 @@
 "use client";
 import Carousel from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/Carousel";
-import { Eventosnoticias,Características, UbicacionMap,} from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/EventosNoticias";
+import { Eventosnoticias, Características, UbicacionMap, } from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/EventosNoticias";
 import PubliSimilares from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/PublicacionesSimilares"
 import { useSearchParams } from "next/navigation";
 import React, { useState, useEffect, useContext } from "react";
@@ -55,25 +55,26 @@ export default function FixSuspenseNoticiaEventos() {
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Columna izquierda */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            <Eventosnoticias eventosnoticias={eventonoticiaSeleccionado} />
             <Carousel eventosnoticias={eventonoticiaSeleccionado} />
-            <Características eventosnoticias={eventonoticiaSeleccionado} />
+            <Eventosnoticias eventosnoticias={eventonoticiaSeleccionado} />
+
+
           </div>
 
           {/* Columna derecha */}
           <div className="lg:col-span-1 flex flex-col h-full gap-6">
             {/* Contenedor para Contacto y Mapa */}
             <div className="flex flex-col flex-1 gap-6">
-             
-             
-                {/* <UbicacionMap ubicacion={eventonoticiaSeleccionado} /> */}
-                <div className="">
-              <PubliSimilares similares={eventonoticiaSimilares} />
+
+
+              {/* <UbicacionMap ubicacion={eventonoticiaSeleccionado} /> */}
+              <div className="">
+                <PubliSimilares similares={eventonoticiaSimilares} />
+              </div>
+
             </div>
-             
-            </div>
-            
-           
+
+
           </div>
         </main>
       </div>

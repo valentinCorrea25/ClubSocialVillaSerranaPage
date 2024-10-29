@@ -19,77 +19,47 @@ export function Eventosnoticias({ eventosnoticias }) {
       ? ""
       : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
   return (
-    <Card
-      title={
-        <div
-          style={{
-            backgroundColor: "var(--verde-oscuro)",
-            color: "var(--blanco)",
-            padding: "16px",
-            borderRadius: "4px",
-            width: "100%",
-          }}
-        >
-          <div className="text-2xl font-bold text-center">
-            {eventosnoticias?.titulo || "Título no disponible"}
-          </div>
-        </div>
+    < Card
+      bordered={false}
+      style={{ width: '100%', backgroundColor: '#FFFFFF', padding: '24px' }
       }
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "4px",
-        border: "2px solid #ddd",
-      }}
-      headStyle={{ padding: 0 }}
     >
-      <div style={{ color: "#0367A6" }}>
-        <CalendarOutlined /> {new Date(fecha_publicacion).toLocaleDateString()}
-        <TagOutlined style={{ marginLeft: "8px" }} /> {categoriaLabel}
-        {/* Mostrar Fecha del Evento solo si es mayor a 12/31/1969 */}
-        <div style={{ marginTop: "8px" }}>
+      {/* Title */}
+      < h2 className="text-2xl font-bold mb-2" > {eventosnoticias?.titulo || 'Título no disponible'}</h2 >
+
+      {/* Location, Category, and Date */}
+      < div className="flex flex-col mb-4 text-blue-600" >
+        <p className="mb-1">
+          <CalendarOutlined style={{ marginRight: 8 }} />
+          <span >
+            Fecha de publicacion {new Date(eventosnoticias?.fecha_publicacion).toLocaleDateString('es-ES') || 'Fecha no disponible'}
+          </span>
+        </p>
+        < p className="mb-1">
+          <TagOutlined style={{ marginRight: 8 }} /> {categoriaLabel}
           <span>{fechaevento}</span>
-        </div>
+        </p>
+
+        <p className="mb-1">
+          <EnvironmentOutlined className="" style={{ marginRight: 8, }} />
+          <span >
+            {eventosnoticias?.ubicacion || 'Ubicación no disponible'}
+          </span>
+        </p>
+
+
+        {/* Description */}
+        < div className="text-gray-800" >
+          <p dangerouslySetInnerHTML={{ __html: eventosnoticias?.contenido || 'Descripción no disponible' }} />
+        </div >
       </div>
-    </Card>
+    </Card >
+
+
   );
 }
 
-export function Características({ eventosnoticias }) {
-  return (
-    <Card
-      title={
-        <div
-          style={{
-            backgroundColor: "var(--verde-oscuro)",
-            color: "var(--blanco)",
-            padding: "16px",
-            borderRadius: "4px",
-            width: "100%",
-          }}
-        >
-          <div className="text-2xl font-bold text-center">Informacion</div>
-        </div>
-      }
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: "4px",
-        border: "2px solid #ddd",
-      }}
-      headStyle={{ padding: 0 }}
-    >
-      <p className="text-gray-800 mb-2">
-        {/* <FileTextOutlined
-          style={{ marginRight: 8, fontSize: 25, textAlign: "justify" }}
-        /> */}
-        <span
-          dangerouslySetInnerHTML={{
-            __html: eventosnoticias?.contenido || "informacion no disponible",
-          }}
-        />
-      </p>
-    </Card>
-  );
-}
+
 
 export function UbicacionMap({ ubicacion }) {
   // Condición para aplicar el estilo de "display: none"

@@ -13,25 +13,25 @@ export function Actividad({ actividad }) {
       <h2 className="text-2xl font-bold mb-2">{actividad?.titulo || 'Título no disponible'}</h2>
 
       {/* Location, Category, and Date */}
-      <div className="flex flex-col mb-4 text-gray-600">
+      <div className="flex flex-col mb-4 text-blue-600">
         <p className="mb-1">
           <CalendarOutlined style={{ marginRight: 8 }} />
-          <span className="text-blue-600 ">
+          <span >
             Fecha de publicacion {new Date(actividad?.fecha_publicacion).toLocaleDateString('es-ES') || 'Fecha no disponible'}
           </span>
         </p>
         <p className="mb-1">
           <CalendarOutlined style={{ marginRight: 8 }} />
           {actividad.dia_Semana.map((dia, index) => (
-            <Tag key={index} className="text-blue-600" style={{ marginRight: "4px" }}>
+            <Tag key={index} style={{ marginRight: "4px" }}>
               {dia}
             </Tag>
-          )) || 'Categoría no disponible'} {actividad?.horario || 'Categoría no disponible'}
+          )) || 'Dias no disponible'} {actividad?.horario || 'Horario no disponible'}
         </p>
 
         <p className="mb-1">
-          <EnvironmentOutlined className="text-blue-600" style={{ marginRight: 8, }} />
-          <span className="text-blue-600">
+          <EnvironmentOutlined style={{ marginRight: 8, }} />
+          <span>
             {actividad?.ubicacion || 'Ubicación no disponible'}
           </span>
         </p>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, Tag , Button} from "antd";
+import { Card, Tag, Button } from "antd";
 import { CalendarOutlined, TagOutlined } from "@ant-design/icons";
 import { useRouter } from 'next/navigation';
 
@@ -22,7 +22,7 @@ const EventoCard = ({ evento }) => {
 
   // Lógica para mostrar "Noticias" o "Eventos"
   const categoriaLabel = fechaEventoDate > fechaCorte ? "Noticias" : "Eventos";
-  const fechaevento = fechaEventoDate > fechaCorte ? '': "Fecha del Evento: "+new Date(fecha_evento).toLocaleDateString();
+  const fechaevento = fechaEventoDate > fechaCorte ? '' : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
   const router = useRouter();
   const handleViewDetails = (id) => {
     router.push(`/ListaEventosNoticias/DetalleEventosNoticias?id=${id}`);
@@ -45,7 +45,7 @@ const EventoCard = ({ evento }) => {
             src={fotos}
             style={{
               width: "100%",
-              height: "100%",
+              height: "300px",
               objectFit: "cover",
               borderRadius: "8px",
             }}
@@ -73,14 +73,14 @@ const EventoCard = ({ evento }) => {
               <TagOutlined style={{ marginLeft: "8px" }} />{" "}
               {categoriaLabel}
               {/* Mostrar Fecha del Evento solo si es mayor a 12/31/1969 */}
-             
-                <div style={{ marginTop: "8px" }}>
-                  <span>
-                  {fechaevento }
-                   
-                  </span>
-                </div>
-              
+
+              <div style={{ marginTop: "8px" }}>
+                <span>
+                  {fechaevento}
+
+                </span>
+              </div>
+
             </div>
             <p
               style={{
@@ -90,15 +90,15 @@ const EventoCard = ({ evento }) => {
                 textOverflow: "ellipsis",
               }}
             >
-              {contenido.substring(0, 350)}....
+              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 500) }} />....
             </p>
             <Button
-                type="primary"
-                onClick={() => handleViewDetails(evento.id_EventoNoticia)}
-                className="mt-7 m-auto sm:ml-0"
-              >
-                Ver Detalles
-              </Button>
+              type="primary"
+              onClick={() => handleViewDetails(evento.id_EventoNoticia)}
+              className="mt-7 m-auto sm:ml-0"
+            >
+              Ver Detalles
+            </Button>
           </>
         }
       />
