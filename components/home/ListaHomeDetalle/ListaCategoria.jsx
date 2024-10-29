@@ -61,10 +61,10 @@ const TourismComponent = () => {
             key={index}
             hoverable
             className=" bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:-translate-y-1"
-            cover={<div className="text-4xl text-[--verde] ">{field.icon}</div>}
+            cover={<div className="text-4xl text-[--verde] items-center">{field.icon}</div>}
             onClick={() => router.push(field.path)}
           >
-            <Card.Meta  title={field.title} />
+            <Card.Meta title={field.title} />
           </Card>
         ))}
       </div>
