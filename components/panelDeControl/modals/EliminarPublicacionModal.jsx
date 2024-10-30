@@ -33,8 +33,10 @@ export default function EliminarPublicacionModal({
     mostrarCargarToast();
     const tipoDePublicacion = obtenerTipoDePublicacion(tipoSinPrefijo);
     try {
+      console.log(selectedItem);
+      
       handleClose(); // Cerrar el modal
-      if(tipoDePublicacion != 'servicios'){
+      if(selectedItem.fotos >= 1 || selectedItem.foto){
         await eliminarImagenesSupabase(selectedItem.fotos);
       }
       await eliminarPublicacion(selectedItem[idPublicacion], tipoDePublicacion);
