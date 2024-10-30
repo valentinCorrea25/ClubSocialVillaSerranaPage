@@ -4,6 +4,8 @@ import {
   FileTextOutlined,
   CalendarOutlined,
   TagOutlined,
+  ClockCircleFilled,
+  ClockCircleOutlined,
 } from "@ant-design/icons";
 import { Tag, Button } from "antd";
 
@@ -19,47 +21,56 @@ export function Eventosnoticias({ eventosnoticias }) {
       ? ""
       : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
   return (
-    < Card
+    <Card
       bordered={false}
-      style={{ width: '100%', backgroundColor: '#FFFFFF', padding: '24px' }
-      }
+      style={{ width: "100%", backgroundColor: "#FFFFFF", padding: "24px" }}
     >
       {/* Title */}
-      < h2 className="text-2xl font-bold mb-2" > {eventosnoticias?.titulo || 'Título no disponible'}</h2 >
+      <h2 className="text-2xl font-bold mb-2">
+        {eventosnoticias?.titulo || "Título no disponible"}
+      </h2>
 
       {/* Location, Category, and Date */}
-      < div className="flex flex-col mb-4 text-blue-600" >
+      <div className="flex flex-col mb-4 text-blue-600">
         <p className="mb-1">
           <CalendarOutlined style={{ marginRight: 8 }} />
-          <span >
-            Fecha de publicacion {new Date(eventosnoticias?.fecha_publicacion).toLocaleDateString('es-ES') || 'Fecha no disponible'}
+          <span>
+            Fecha de publicacion{" "}
+            {new Date(eventosnoticias?.fecha_publicacion).toLocaleDateString(
+              "es-ES"
+            ) || "Fecha no disponible"}
           </span>
         </p>
-        < p className="mb-1">
-          <TagOutlined style={{ marginRight: 8 }} /> {categoriaLabel}
-          <span>{fechaevento}</span>
-        </p>
-
         <p className="mb-1">
-          <EnvironmentOutlined className="" style={{ marginRight: 8, }} />
-          <span >
-            {eventosnoticias?.ubicacion || 'Ubicación no disponible'}
-          </span>
+          <TagOutlined style={{ marginRight: 8 }} />
+          {categoriaLabel}
         </p>
+        {fechaevento ? (
+          <p className="mb-1">
+            <ClockCircleOutlined style={{ marginRight: 8 }} />
+            <span>{fechaevento}</span>
+          </p>
+        ) : null}
 
+        {eventosnoticias?.ubicacion ? (
+          <p className="mb-1">
+            <EnvironmentOutlined className="" style={{ marginRight: 8 }} />
+            <span>{eventosnoticias?.ubicacion}</span>
+          </p>
+        ) : null}
 
         {/* Description */}
-        < div className="text-gray-800" >
-          <p dangerouslySetInnerHTML={{ __html: eventosnoticias?.contenido || 'Descripción no disponible' }} />
-        </div >
+        <div className="text-gray-800">
+          <p
+            dangerouslySetInnerHTML={{
+              __html: eventosnoticias?.contenido || "Descripción no disponible",
+            }}
+          />
+        </div>
       </div>
-    </Card >
-
-
+    </Card>
   );
 }
-
-
 
 export function UbicacionMap({ ubicacion }) {
   // Condición para aplicar el estilo de "display: none"

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, Button, Tag } from 'antd';
-import { EnvironmentOutlined, FileTextOutlined, CalendarOutlined } from '@ant-design/icons';
+import { EnvironmentOutlined, FileTextOutlined, CalendarOutlined, ClockCircleOutlined, InfoCircleOutlined } from '@ant-design/icons';
 
 export function Actividad({ actividad }) {
   return (
@@ -15,7 +15,7 @@ export function Actividad({ actividad }) {
       {/* Location, Category, and Date */}
       <div className="flex flex-col mb-4 text-blue-600">
         <p className="mb-1">
-          <CalendarOutlined style={{ marginRight: 8 }} />
+          <InfoCircleOutlined style={{ marginRight: 8 }} />
           <span >
             Fecha de publicacion {new Date(actividad?.fecha_publicacion).toLocaleDateString('es-ES') || 'Fecha no disponible'}
           </span>
@@ -26,7 +26,11 @@ export function Actividad({ actividad }) {
             <Tag key={index} style={{ marginRight: "4px" }}>
               {dia}
             </Tag>
-          )) || 'Dias no disponible'} {actividad?.horario || 'Horario no disponible'}
+          )) || 'Dias no disponible'}
+        </p>
+        <p className="mb-1">
+        <ClockCircleOutlined style={{ marginRight: 8 }} />
+        {actividad?.horario}
         </p>
 
         <p className="mb-1">
