@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Card, Tag, Button } from "antd";
 import {
   CalendarOutlined,
+  ClockCircleOutlined,
   EnvironmentOutlined,
   TagOutlined,
 } from "@ant-design/icons";
@@ -43,7 +44,7 @@ const ActividadCard = ({ actividad }) => {
         >
           <img
             alt={titulo}
-            src={fotos[0]}
+            src={fotos[0] ? fotos[0] : 'https://res.cloudinary.com/dvzf7szuo/image/upload/v1730236113/not-found_td14yf.png'}
             style={{
               width: "100%",
               height: "100%",
@@ -72,7 +73,7 @@ const ActividadCard = ({ actividad }) => {
             <div style={{ color: "#0367A6" }}>
               <CalendarOutlined />{" "}
               {new Date(fecha_publicacion).toLocaleDateString()}
-              <TagOutlined style={{ marginLeft: "8px" }} /> {categoria}
+              <TagOutlined style={{ marginLeft: "8px" }} /> Actividad
               <EnvironmentOutlined style={{ marginLeft: "8px" }} /> {ubicacion}
             </div>
             <div style={{ marginTop: "8px" }}>
@@ -81,7 +82,9 @@ const ActividadCard = ({ actividad }) => {
                   {dia}
                 </Tag>
               ))}
-              <span>{horario}</span>
+            </div>
+            <div className="mt-2 text-[--azul]" >
+            <span><ClockCircleOutlined style={{ marginRight: "4px" }} /> {horario}</span>
             </div>
             <p
               style={{
