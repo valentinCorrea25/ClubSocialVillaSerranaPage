@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, Button, Tag } from 'antd';
-import { EnvironmentOutlined, FileTextOutlined, CalendarOutlined } from '@ant-design/icons';
+import { EnvironmentOutlined, FileTextOutlined, CalendarOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
 export function Actividad({ actividad }) {
   return (
@@ -26,7 +26,11 @@ export function Actividad({ actividad }) {
             <Tag key={index} style={{ marginRight: "4px" }}>
               {dia}
             </Tag>
-          )) || 'Dias no disponible'} {actividad?.horario || 'Horario no disponible'}
+          )) || 'Dias no disponible'}
+        </p>
+        <p className="mb-1">
+        <ClockCircleOutlined style={{ marginRight: 8 }} />
+        {actividad?.horario}
         </p>
 
         <p className="mb-1">
