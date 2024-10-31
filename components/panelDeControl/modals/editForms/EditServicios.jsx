@@ -29,13 +29,13 @@ export default function EditServicios({ servicio, diasSemana }) {
         <h1 className="text-2xl mb-4">Crear nuevo Servicio</h1>
 
         <Form.Item
-          label="Título*"
+          label="Título"
           name="titulo"
           initialValue={servicio.titulo}
           rules={[{ required: true, message: "Por favor ingrese el título" }]}
           className="w-full"
         >
-          <Input placeholder="Título*" />
+          <Input placeholder="Título" />
         </Form.Item>
 
         <Form.Item
@@ -49,17 +49,22 @@ export default function EditServicios({ servicio, diasSemana }) {
         </Form.Item>
 
         <Form.Item
-          label="Tipo de Servicio*"
+          label="Tipo de Servicio"
           name="titulo_Servicio"
-          initialValue={servicio.titulo_Servicio}
+          initialValue={tituloCorrectoServicio(servicio.titulo_Servicio)}
           rules={[
             { required: true, message: "Seleccione un tipo de servicio" },
           ]}
           className="w-full"
         >
-          <Select placeholder="Tipo de Servicio*">
+          <Select placeholder="Tipo de Servicio">
             {tipoServicio &&
-              tipoServicio.map((item) => <Option key={item} value={tituloCorrectoServicio(item)} />)}
+              tipoServicio.map((item) => (
+                <Option
+                  key={tituloCorrectoServicio(item)}
+                  value={tituloCorrectoServicio(item)}
+                />
+              ))}
           </Select>
         </Form.Item>
 
@@ -74,7 +79,13 @@ export default function EditServicios({ servicio, diasSemana }) {
           <Input placeholder="Nombre del Titular" />
         </Form.Item>
 
-        <Form.Item label="Celular" name="celular" required className="w-full">
+        <Form.Item
+          label="Celular"
+          name="celular"
+          required
+          className="w-full"
+          initialValue={servicio.celular}
+        >
           <Input placeholder="Celular" />
         </Form.Item>
 

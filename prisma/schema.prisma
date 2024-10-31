@@ -12,8 +12,8 @@ model Servicio {
   id_Servicio       Int            @id @default(autoincrement())
   nombre_titular    String
   titulo            String
-  descripcion       String
-  mail              String
+  descripcion       String?
+  mail              String?
   celular           String
   horario           String?
   dia_Semana        String[]
@@ -106,6 +106,7 @@ model Restaurant {
 
 enum ServicioTitulo {
   Alambrados
+  Almacenes
   Jardineria // Jardinería -- SOLCIIONAR TREMA DE TILDES
   LimpiezaTerrenos // Limpieza de terrenos
   Construccion // Construcción

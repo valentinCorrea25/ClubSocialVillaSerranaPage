@@ -396,6 +396,7 @@ export default function TablaGenerica({
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
             setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
+            setSelectedItem={setSelectedItem}
           />
           <EliminarPublicacionModal
             updateData={updateData}

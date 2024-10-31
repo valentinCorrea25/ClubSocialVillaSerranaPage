@@ -7,7 +7,7 @@ export async function POST(req){
     console.log(data);
 
     try {
-        console.log(ServicioTitulo);
+        console.log(ServicioTitulo[data.titulo_Servicio]);
         
         if (!ServicioTitulo[data.titulo_Servicio]) {
             return NextResponse.json({

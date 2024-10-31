@@ -11,6 +11,8 @@ import {
   tiposDePago,
   alquileresCaracteristicas,
   diasSemana,
+  trimearValores,
+  obtenerTipoServicioPorTitulo,
 } from "@/components/utils/ControlPublicaciones";
 import ImagenControl from "./ImagenControl";
 import EditRestaurantes from "./editForms/EditRestaurantes";
@@ -21,6 +23,7 @@ export default function EditarPublicacionModal({
   isModalOpen,
   setIsModalOpen,
   selectedItem,
+  setSelectedItem,
   updateData,
   mostrarCargarToast,
   mostrarExitoToast,
@@ -41,6 +44,8 @@ export default function EditarPublicacionModal({
     setIsModalOpen(false);
     setModalIsOpenForButtonFloat(false);
     setTextoRichText('');
+    form.resetFields();
+    setSelectedItem(false);
   };
 
   const handleFecha = (inputFecha) => {
@@ -59,8 +64,6 @@ export default function EditarPublicacionModal({
     const [urlGoogle, setUrlGoogle] = useState("");
     const [currentForm, setCurrentForm] = useState(tipoDePublicacion);
     console.log(tipoDePublicacion);
-    
-  
 
     switch (tipoDePublicacion) {
       case "Alquiler":
@@ -124,6 +127,14 @@ export default function EditarPublicacionModal({
 
     let processedValues = { ...formValues };
 
+    processedValues = trimearValores(processedValues);
+
+    if (tipoDePublicacion == "servicios") {
+      processedValues.titulo_Servicio = obtenerTipoServicioPorTitulo(
+        processedValues.titulo_Servicio
+      );
+    }
+
     if(tipoDePublicacion == "eventosnoticias"){
       processedValues.fecha_evento = formValues.fecha_evento
       ? handleFecha(formValues.fecha_evento)
@@ -148,7 +159,9 @@ export default function EditarPublicacionModal({
 
       delete processedValues.caracteristicas;
     }
+
     console.log(processedValues);
+
 
     try {
       if (tipoDePublicacion != "servicios") {
