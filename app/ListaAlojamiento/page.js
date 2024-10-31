@@ -61,7 +61,7 @@ const ListaAlojamientosPage = () => {
 
   return (
     <>
-    <div className="flex flex-col bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+    {/* <div className="flex flex-col bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
             <Banners
       title="Alojamiento"
       subtitle="Busca tu alojamiento"
@@ -105,7 +105,35 @@ const ListaAlojamientosPage = () => {
           onViewDetails={handleViewDetails}
         />
       )}
+    </div> */}
+
+    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+      <Banners
+        title="Alojamientos"
+        subtitle="Descubre los mejores alojamientos en Villa Serrana"
+        backgroundImage="/images/actividad.jpg"
+      />
+
+        <Buscador  onFilterChange={handleFilterChange} />
+      {!noResults ? (
+        <div className="flex items-center justify-center flex-col md:flex-row gap-10">
+          <Skeleton className="w-72" paragraph title/>
+          <Skeleton className="w-72" paragraph title/>
+          <Skeleton className="w-72" paragraph title/>
+        </div>
+      ) : (
+        <ListaAlojamientos
+        alojamientos={filteredAlojamientos}
+        onViewDetails={handleViewDetails}
+      />
+      )}
     </div>
+
+
+
+
+
+
     </>
   );
 };

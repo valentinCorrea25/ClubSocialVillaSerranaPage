@@ -10,7 +10,7 @@ import {
   Form,
   Modal,
 } from "antd";
-import { getBase64 } from "@/components/utils/ControlPublicaciones";
+import { diasSemana, getBase64 } from "@/components/utils/ControlPublicaciones";
 import { AdminContext } from "@/context/adminContext";
 import RichTextEditor from "@/components/panelDeControl/richTextEditor/RichTextEditor";
 

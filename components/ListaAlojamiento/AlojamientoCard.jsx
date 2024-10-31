@@ -4,34 +4,33 @@ import React from "react";
 import { useRouter } from 'next/navigation';
 import { Card, Tag, Button } from "antd";
 import {
-  CalendarOutlined,
-  ClockCircleOutlined,
   EnvironmentOutlined,
-  TagOutlined,
+  UsergroupDeleteOutlined,
+  PhoneOutlined
 } from "@ant-design/icons";
+import { alojamientos } from "@/test/data";
 
 const { Meta } = Card;
 
 
-const ActividadCard = ({ actividad }) => {
+const AlojamientoCard = ({ alojamiento }) => {
   const {
     titulo,
-    contenido,
+    descripcion,
     fotos,
-    fecha_publicacion,
-    categoria,
-    ubicacion,
-    horario,
-    dia_Semana,
-  } = actividad;
+    ubicacion_calles,
+    capacidad,
+    comodidades,
+    celular
+  } = alojamiento;
 
   const router = useRouter();
   const handleViewDetails = (id) => {
-    router.push(`/ListaActividades/DetalleActividades?id=${id}`);
+    router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${id}`);
   };
 
   return (
-    <Card onClick={() => handleViewDetails(actividad.id_Actividad)}
+    <Card onClick={() => handleViewDetails(restaurante.id_Restaurant)}
       hoverable
       cover={
         <div
@@ -72,20 +71,35 @@ const ActividadCard = ({ actividad }) => {
         description={
           <>
             <div style={{ color: "#0367A6" }}>
-              <CalendarOutlined />{" "}
-              {new Date(fecha_publicacion).toLocaleDateString()}
-              <TagOutlined style={{ marginLeft: "8px" }} /> Actividad
-              <EnvironmentOutlined style={{ marginLeft: "8px" }} /> {ubicacion}
+              <EnvironmentOutlined style={{ marginLeft: "8px" }} /> Ubicación: {ubicacion_calles}
+            </div>
+            <div style={{ color: "#0367A6" }}>
+              <UsergroupDeleteOutlined  style={{ marginLeft: "8px" }} /> Capacidad: {capacidad}
+            </div>
+            <div style={{ color: "#0367A6" }}>
+            <PhoneOutlined  style={{ marginLeft: "8px" }} /> Telefono: {celular}
             </div>
             <div style={{ marginTop: "8px" }}>
-              {dia_Semana.map((dia, index) => (
-                <Tag key={index} style={{ marginRight: "4px" }}>
-                  {dia}
-                </Tag>
-              ))}
-            </div>
-            <div className="mt-2 text-[--azul]" >
-            <span><ClockCircleOutlined style={{ marginRight: "4px" }} /> {horario}</span>
+            {(() => {
+              const comodidades = [];
+
+              // Iteramos sobre todas las propiedades del objeto 'caracteristicas'
+              for (const key in alojamiento) {
+                if (alojamiento[key] === true) {
+                  // Convertir el nombre de la propiedad a algo más legible si es necesario
+                  let nombreComodidad = key
+                    .replace("_", " ")
+                    .replace(/\b\w/g, (char) => char.toUpperCase());
+                  comodidades.push(nombreComodidad);
+                }
+              }
+
+              return comodidades.length > 0
+                ? comodidades.map((comodidad, index) => (
+                    <Tag key={index} >{comodidad}</Tag>
+                  ))
+                : "No hay comodidades disponibles";
+            })()}
             </div>
             <p
               style={{
@@ -95,11 +109,11 @@ const ActividadCard = ({ actividad }) => {
                 textOverflow: "ellipsis",
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 150) }} />....
+              <span dangerouslySetInnerHTML={{ __html: descripcion.substring(0, 150) }} />....
             </p>
             <Button
               type="primary"
-              onClick={() => handleViewDetails(actividad.id_Actividad)}
+              onClick={() => handleViewDetails(alojamiento.id_Actividad)}
               className="mt-7  "
             >
               Ver Detalles
@@ -114,4 +128,4 @@ const ActividadCard = ({ actividad }) => {
   );
 };
 
-export default ActividadCard;
+export default AlojamientoCard;

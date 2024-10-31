@@ -89,7 +89,7 @@ const Buscador = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-wrap">
+    <div className="bg-white mt-6  rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-wrap ">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
         <label className="font-bold whitespace-nowrap">Rango de Precio:</label>
         <div className="flex items-center gap-2 w-full sm:w-auto">
