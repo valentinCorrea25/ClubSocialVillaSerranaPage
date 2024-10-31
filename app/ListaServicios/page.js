@@ -60,7 +60,7 @@ const ServiciosPage = () => {
           subtitle="Descubre nuestras ofertas y encuentra lo que necesitas."
           backgroundImage="/images/servicios.jpg"
         />
-        <div style={{ padding: "24px" }}>
+        <div style={{ padding: "24px", width:"100%" }}>
           <Buscador
             categories={categories}
             onFilterChange={handleFilterChange}
@@ -71,7 +71,7 @@ const ServiciosPage = () => {
             <ServiciosList servicios={filteredServicios} />
           </div>
         ) : (
-          <div className="flex items-center justify-center flex-col md:flex-row gap-10">
+          <div className="flex items-center justify-center flex-col md:flex-row gap-10 mt-5">
             <Skeleton className="w-72" paragraph title />
             <Skeleton className="w-72" paragraph title />
             <Skeleton className="w-72" paragraph title />

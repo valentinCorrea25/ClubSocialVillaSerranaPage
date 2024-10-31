@@ -250,7 +250,7 @@ export function tituloCorrectoServicio(tipoServicio) {
 export function obtenerTipoServicioPorTitulo(titulo) {
   switch (titulo) {
     case "Alambrados":
-      return ServicioTipo.Alambrados;
+      return ServicioTipo.Alambrados; 
     case "Almacenes":
       return ServicioTipo.Almacenes;
     case "Jardinería":
