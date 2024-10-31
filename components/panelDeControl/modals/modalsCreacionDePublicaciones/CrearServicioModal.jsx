@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Checkbox, Button, Input, Select, Row, Col, Form, Modal } from "antd";
 import { AdminContext } from "@/context/adminContext";
-import { diasSemana, tituloCorrectoServicio } from "@/components/utils/ControlPublicaciones";
+import {
+  diasSemana,
+  obtenerTipoServicioPorTitulo,
+  tituloCorrectoServicio,
+  trimearValores,
+} from "@/components/utils/ControlPublicaciones";
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -35,20 +40,20 @@ export default function CrearServicioModal({
     setTodaLaSemanaSeleccionado(false);
   };
 
-  const manejarCambioDias = (checkedValues) => {
-    if (checkedValues.includes("Toda la semana")) {
-      if (todaLaSemanaSeleccionado) {
-        setDiasSeleccionados([]);
-        setTodaLaSemanaSeleccionado(false);
-      } else {
-        setDiasSeleccionados(["Toda la semana"]);
-        setTodaLaSemanaSeleccionado(true);
-      }
-    } else {
-      setDiasSeleccionados(checkedValues);
-      setTodaLaSemanaSeleccionado(false);
-    }
-  };
+  // const manejarCambioDias = (checkedValues) => {
+  //   if (checkedValues.includes("Toda la semana")) {
+  //     if (todaLaSemanaSeleccionado) {
+  //       setDiasSeleccionados([]);
+  //       setTodaLaSemanaSeleccionado(false);
+  //     } else {
+  //       setDiasSeleccionados(["Toda la semana"]);
+  //       setTodaLaSemanaSeleccionado(true);
+  //     }
+  //   } else {
+  //     setDiasSeleccionados(checkedValues);
+  //     setTodaLaSemanaSeleccionado(false);
+  //   }
+  // };
 
   useEffect(() => {
     const fetchTipoServicio = async () => {
@@ -61,6 +66,13 @@ export default function CrearServicioModal({
   const onFinish = async (values) => {
     setIsLoading(true);
     mostrarCargarToast();
+    console.log(values);
+    
+    values.titulo_Servicio = obtenerTipoServicioPorTitulo(
+      values.titulo_Servicio
+    );
+    values = trimearValores(values);
+
     try {
       const data = await crearPublicacion(values, "servicios");
       if (data.code == 500) {
@@ -94,7 +106,7 @@ export default function CrearServicioModal({
         </>
       }
       width="100%"
-      style={{ maxWidth: "768px", top:"20px" }}
+      style={{ maxWidth: "768px", top: "20px" }}
       bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }}
     >
       <Form onFinish={onFinish} layout="vertical" form={form}>
@@ -110,14 +122,16 @@ export default function CrearServicioModal({
             <Input placeholder="Título*" />
           </Form.Item>
 
-          <Form.Item label="Descripción" name="descripcion" required className="w-full">
+          <Form.Item label="Descripción" name="descripcion" className="w-full">
             <TextArea placeholder="Descripción" rows={4} />
           </Form.Item>
 
           <Form.Item
-            label="Tipo de Servicio*"
+            label="Tipo de Servicio"
             name="titulo_Servicio"
-            rules={[{ required: true, message: "Seleccione un tipo de servicio" }]}
+            rules={[
+              { required: true, message: "Seleccione un tipo de servicio" },
+            ]}
             className="w-full"
           >
             <Select placeholder="Tipo de Servicio*">
@@ -142,7 +156,12 @@ export default function CrearServicioModal({
             <Input placeholder="Celular" />
           </Form.Item>
 
-          <Form.Item label="Correo Electrónico" name="mail" required className="w-full">
+          <Form.Item
+            label="Correo Electrónico"
+            name="mail"
+            required
+            className="w-full"
+          >
             <Input placeholder="Correo Electrónico" />
           </Form.Item>
 

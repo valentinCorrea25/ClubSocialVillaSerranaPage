@@ -1,7 +1,19 @@
-import { 
-  FaFence, FaLeaf, FaBroom, FaHardHat, FaPencilRuler, FaVideo, 
-  FaToolbox, FaCut, FaHeartbeat, FaWrench, FaTint, FaShieldAlt, FaTruck 
-} from 'react-icons/fa';
+import {
+  FaFence,
+  FaLeaf,
+  FaBroom,
+  FaHardHat,
+  FaPencilRuler,
+  FaVideo,
+  FaToolbox,
+  FaCut,
+  FaHeartbeat,
+  FaWrench,
+  FaTint,
+  FaShieldAlt,
+  FaTruck,
+  FaStore,
+} from "react-icons/fa";
 
 export const obtenerTipoDePublicacion = (tipoSinPrefijo) => {
   switch (tipoSinPrefijo.toLowerCase()) {
@@ -107,8 +119,8 @@ export function extraerIdDelMensaje(mensaje) {
 
 export function getCoordsGoogleMaps(url) {
   try {
-    if (typeof url !== 'string') {
-      throw new Error('URL no válida');
+    if (typeof url !== "string") {
+      throw new Error("URL no válida");
     }
 
     // Expresión regular para extraer las coordenadas
@@ -120,30 +132,29 @@ export function getCoordsGoogleMaps(url) {
       var lon = match[2];
       return [lat, lon];
     } else {
-      return false
+      return false;
     }
   } catch (e) {
     return e.message;
   }
 }
 
-
-
 // Enum para los tipos de servicio
 const ServicioTipo = {
-  Alambrados: 'Alambrados',
-  Jardineria: 'Jardineria',
-  LimpiezaTerrenos: 'LimpiezaTerrenos',
-  Construccion: 'Construccion',
-  Diseno: 'Diseno',
-  Filmacion: 'Filmacion',
-  Equipamiento: 'Equipamiento',
-  Estetica: 'Estetica',
-  Salud: 'Salud',
-  Mecanica: 'Mecanica',
-  ProvisionDeAgua: 'ProvisionDeAgua',
-  Seguridad: 'Seguridad',
-  Traslados: 'Traslados'
+  Alambrados: "Alambrados",
+  Almacenes: "Almacenes",
+  Jardineria: "Jardineria",
+  LimpiezaTerrenos: "LimpiezaTerrenos",
+  Construccion: "Construccion",
+  Diseno: "Diseno",
+  Filmacion: "Filmacion",
+  Equipamiento: "Equipamiento",
+  Estetica: "Estetica",
+  Salud: "Salud",
+  Mecanica: "Mecanica",
+  ProvisionDeAgua: "ProvisionDeAgua",
+  Seguridad: "Seguridad",
+  Traslados: "Traslados",
 };
 
 export function iconosSegunTipoServicio(tipoServicio) {
@@ -151,6 +162,9 @@ export function iconosSegunTipoServicio(tipoServicio) {
   switch (tipoServicio) {
     case ServicioTipo.Alambrados:
       IconComponent = FaFence;
+      break;
+    case ServicioTipo.Almacenes:
+      IconComponent = FaStore;
       break;
     case ServicioTipo.Jardineria:
       IconComponent = FaLeaf;
@@ -191,41 +205,80 @@ export function iconosSegunTipoServicio(tipoServicio) {
     default:
       return null;
   }
-  
-  return IconComponent ? <IconComponent style={{ fontSize: '24px', textAlign:'center'}} /> : null;
+
+  return IconComponent ? (
+    <IconComponent style={{ fontSize: "24px", textAlign: "center" }} />
+  ) : null;
 }
 
 // Función para obtener el título correcto del servicio
-export function tituloCorrectoServicio(tipoServicio){
+export function tituloCorrectoServicio(tipoServicio) {
   switch (tipoServicio) {
     case ServicioTipo.Alambrados:
-      return 'Alambrados';
+      return "Alambrados";
+    case ServicioTipo.Almacenes:
+      return "Almacenes";
     case ServicioTipo.Jardineria:
-      return 'Jardinería';
+      return "Jardinería";
     case ServicioTipo.LimpiezaTerrenos:
-      return 'Limpieza de terrenos';
+      return "Limpieza de terrenos";
     case ServicioTipo.Construccion:
-      return 'Construcción';
+      return "Construcción";
     case ServicioTipo.Diseno:
-      return 'Diseño';
+      return "Diseño";
     case ServicioTipo.Filmacion:
-      return 'Filmación';
+      return "Filmación";
     case ServicioTipo.Equipamiento:
-      return 'Equipamiento';
+      return "Equipamiento";
     case ServicioTipo.Estetica:
-      return 'Estética';
+      return "Estética";
     case ServicioTipo.Salud:
-      return 'Salud';
+      return "Salud";
     case ServicioTipo.Mecanica:
-      return 'Mecánica';
+      return "Mecánica";
     case ServicioTipo.ProvisionDeAgua:
-      return 'Provisión de agua';
+      return "Provisión de agua";
     case ServicioTipo.Seguridad:
-      return 'Seguridad';
+      return "Seguridad";
     case ServicioTipo.Traslados:
-      return 'Traslados';
+      return "Traslados";
     default:
-      throw new Error('Tipo de servicio no reconocido');
+      throw new Error("Tipo de servicio no reconocido");
+  }
+}
+
+export function obtenerTipoServicioPorTitulo(titulo) {
+  switch (titulo) {
+    case "Alambrados":
+      return ServicioTipo.Alambrados;
+    case "Almacenes":
+      return ServicioTipo.Almacenes;
+    case "Jardinería":
+      return ServicioTipo.Jardineria;
+    case "Limpieza de terrenos":
+      return ServicioTipo.LimpiezaTerrenos;
+    case "Construcción":
+      return ServicioTipo.Construccion;
+    case "Diseño":
+      return ServicioTipo.Diseno;
+    case "Filmación":
+      return ServicioTipo.Filmacion;
+    case "Equipamiento":
+      return ServicioTipo.Equipamiento;
+    case "Estética":
+      return ServicioTipo.Estetica;
+    case "Salud":
+      return ServicioTipo.Salud;
+    case "Mecánica":
+      return ServicioTipo.Mecanica;
+    case "Provisión de agua":
+      return ServicioTipo.ProvisionDeAgua;
+    case "Seguridad":
+      return ServicioTipo.Seguridad;
+    case "Traslados":
+      return ServicioTipo.Traslados;
+    default:
+      throw new Error("Título de servicio no reconocido");
   }
 }
 
@@ -268,3 +321,26 @@ export const diasSemana = [
   { label: "Sábado", value: "Sábado" },
   { label: "Domingo", value: "Domingo" },
 ];
+
+export function trimearValores(obj) {
+  Object.keys(obj).forEach((key) => {
+    if (typeof obj[key] === "string") {
+      obj[key] = obj[key].trim();
+    } else if (
+      typeof obj[key] === "object" &&
+      obj[key] !== null &&
+      !Array.isArray(obj[key])
+    ) {
+      obj[key] = trimearValores(obj[key]);
+    } else if (Array.isArray(obj[key])) {
+      obj[key] = obj[key].map((item) =>
+        typeof item === "string"
+          ? item.trim()
+          : typeof item === "object" && item !== null
+          ? trimearValores(item)
+          : item
+      );
+    }
+  });
+  return obj;
+}
