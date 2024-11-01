@@ -12,7 +12,7 @@ const Buscador = ({ categories, onFilterChange }) => {
     <div style={{ backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Select
         placeholder="Selecciona una categoría"
-        style={{ width: '150px', marginRight: '16px' }}
+        style={{ width: '200px', marginRight: '16px' }}
         onChange={handleCategoryChange}
         allowClear
       >

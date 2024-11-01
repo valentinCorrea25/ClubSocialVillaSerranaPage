@@ -320,7 +320,7 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
             <Form.Item name="caracteristicas">
               <Checkbox.Group
                 options={alquileresCaracteristicas}
-                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center ml-12"
               />
             </Form.Item>
 

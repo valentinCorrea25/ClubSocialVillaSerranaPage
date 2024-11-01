@@ -15,6 +15,8 @@ import {
   FaStore,
 } from "react-icons/fa";
 
+export const dateFormat = "DD/MM/YYYY";
+
 export const obtenerTipoDePublicacion = (tipoSinPrefijo) => {
   switch (tipoSinPrefijo.toLowerCase()) {
     case "restaurant":
@@ -145,11 +147,14 @@ const ServicioTipo = {
   Almacenes: "Almacenes",
   Jardineria: "Jardineria",
   LimpiezaTerrenos: "LimpiezaTerrenos",
+  LimpiezaCasas: "LimpiezaCasas",
   Construccion: "Construccion",
   Diseno: "Diseno",
   Filmacion: "Filmacion",
+  Electricista: "Electricista",
   Equipamiento: "Equipamiento",
   Estetica: "Estetica",
+  Piscinas: "Piscinas",
   Salud: "Salud",
   Mecanica: "Mecanica",
   ProvisionDeAgua: "ProvisionDeAgua",
@@ -242,6 +247,12 @@ export function tituloCorrectoServicio(tipoServicio) {
       return "Seguridad";
     case ServicioTipo.Traslados:
       return "Traslados";
+    case ServicioTipo.Piscinas:
+      return "Piscinas";
+    case ServicioTipo.Electricista:
+      return "Electricista";
+    case ServicioTipo.LimpiezaCasas:
+      return "Limpieza de casas";
     default:
       throw new Error("Tipo de servicio no reconocido");
   }
@@ -276,6 +287,12 @@ export function obtenerTipoServicioPorTitulo(titulo) {
     case "Seguridad":
       return ServicioTipo.Seguridad;
     case "Traslados":
+      return ServicioTipo.Traslados;
+    case "Limpieza de casas":
+      return ServicioTipo.Traslados;
+    case "Electricista":
+      return ServicioTipo.Traslados;
+    case "Piscinas":
       return ServicioTipo.Traslados;
     default:
       throw new Error("Título de servicio no reconocido");

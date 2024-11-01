@@ -48,6 +48,7 @@ const ActividadCard = ({ actividad }) => {
             style={{
               width: "100%",
               height: "100%",
+              maxHeight: "250px",
               objectFit: "cover",
               borderRadius: "8px",
             }}
@@ -84,7 +85,7 @@ const ActividadCard = ({ actividad }) => {
               ))}
             </div>
             <div className="mt-2 text-[--azul]" >
-            <span><ClockCircleOutlined style={{ marginRight: "4px" }} /> {horario}</span>
+              <span><ClockCircleOutlined style={{ marginRight: "4px" }} /> {horario}</span>
             </div>
             <p
               style={{
@@ -94,7 +95,9 @@ const ActividadCard = ({ actividad }) => {
                 textOverflow: "ellipsis",
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 500) }} />....
+              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 150) }} />
+              {contenido.length > 150 && "...."}
+
             </p>
             <Button
               type="primary"

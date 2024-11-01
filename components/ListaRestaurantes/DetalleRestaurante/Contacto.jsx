@@ -17,19 +17,19 @@ const Contacto = ({ nombre_titular, celular, mail }) => {
       <p><UserOutlined style={{ marginRight: '8px' }} /> <strong>Nombre:</strong> {nombre_titular || 'No disponible'}</p>
       <p><PhoneOutlined style={{ marginRight: '8px' }} /> <strong>Teléfono:</strong> {celular || 'No disponible'}</p>
       <Divider />
-      <Button 
-        type="primary" 
-        icon={<MailOutlined />} 
-        href={`mailto:${mail}`} 
+      <Button
+        type="primary"
+        icon={<MailOutlined />}
+        href={`mailto:${mail}`}
         className="w-full mb-2"
-        disabled = {!mail}
+        disabled={!mail}
       >
         {mail ? 'Consultar vía E-mail' : 'Sin Email Disponible'}
       </Button>
-      <Button 
-        type="primary" 
-        icon={<WhatsAppOutlined />} 
-        href={`https://wa.me/${celular}`} 
+      <Button
+        type="primary"
+        icon={<WhatsAppOutlined />}
+        href={`https://wa.me/${celular}`}
         className="w-full"
       >
         {mail ? 'Consultar vía WhatsApp' : 'Sin Whatsapp Disponible'}

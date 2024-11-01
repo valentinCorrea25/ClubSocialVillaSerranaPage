@@ -45,7 +45,8 @@ const EventoCard = ({ evento }) => {
             src={fotos}
             style={{
               width: "100%",
-              height: "300px",
+              height: "100%",
+              maxHeight: "250px",
               objectFit: "cover",
               borderRadius: "8px",
             }}
@@ -90,7 +91,9 @@ const EventoCard = ({ evento }) => {
                 textOverflow: "ellipsis",
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 500) }} />....
+              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 150) }} />
+              {contenido.length > 150 && "...."}
+
             </p>
             <Button
               type="primary"

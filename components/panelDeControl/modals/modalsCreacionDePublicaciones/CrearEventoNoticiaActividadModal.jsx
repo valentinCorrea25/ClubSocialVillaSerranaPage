@@ -9,8 +9,9 @@ import {
   Select,
   Form,
   Modal,
+  DatePicker,
 } from "antd";
-import { getBase64 } from "@/components/utils/ControlPublicaciones";
+import { dateFormat, diasSemana, getBase64 } from "@/components/utils/ControlPublicaciones";
 import { AdminContext } from "@/context/adminContext";
 import RichTextEditor from "@/components/panelDeControl/richTextEditor/RichTextEditor";
 
@@ -81,9 +82,9 @@ export default function CrearEventoNoticiaActividadModal({
         values.contenido = textoRichText;
         values.fotos = urls;
 
-        if (values.fecha_evento) {
-          values.fecha_evento = handleFecha(values.fecha_evento);
-        }
+        // if (values.fecha_evento) {
+        //   values.fecha_evento = handleFecha(values.fecha_evento);
+        // }
 
         data = await crearPublicacion(values, "eventosnoticias");
       } else {
@@ -124,7 +125,7 @@ export default function CrearEventoNoticiaActividadModal({
         </>
       }
       width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
-      style={{ maxWidth: "768px", top:"20px" }}
+      style={{ maxWidth: "768px", top: "20px" }}
       bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
     >
       <div className="relative">
@@ -210,7 +211,8 @@ export default function CrearEventoNoticiaActividadModal({
                   name="fecha_evento"
                   rules={[{ required: true }]}
                 >
-                  <Input placeholder="dd/mm/aaaa" />
+                  {/* <Input placeholder="dd/mm/aaaa" /> */}
+                  <DatePicker format={dateFormat} className="w-full" />
                 </Form.Item>
               )}
 
@@ -241,7 +243,7 @@ export default function CrearEventoNoticiaActividadModal({
 
               <Form.Item className="text-center">
                 <Button type="primary" htmlType="submit">
-                 {esEvento ? 'Publicar Evento' : "Publicar Noticia" }
+                  {esEvento ? "Publicar Evento" : "Publicar Noticia"}
                 </Button>
               </Form.Item>
             </>
@@ -291,11 +293,11 @@ export default function CrearEventoNoticiaActividadModal({
               </Form.Item>
 
               <Form.Item name="dia_Semana" className="mb-6">
-              <Checkbox.Group
-                options={diasSemana}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4"
-              />
-            </Form.Item>
+                <Checkbox.Group
+                  options={diasSemana}
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4"
+                />
+              </Form.Item>
 
               <Form.Item label="Imágenes">
                 <Upload

@@ -152,16 +152,16 @@ export default function CrearRestaurantesModal({
           <div className="w-full">
             <div className="bg-white p-1 md:p-6">
               <h2 className="text-2xl font-semibold text-center mb-6">
-                Información del Alquiler
+                Información del Restaurante
               </h2>
 
               <Form.Item
-                label="Título del Alquiler"
+                label="Título del Restaurante"
                 name="titulo"
                 rules={[
                   {
                     required: true,
-                    message: "Por favor ingresa el título del alquiler",
+                    message: "Por favor ingresa el título del Restaurante",
                   },
                 ]}
               >
@@ -169,7 +169,7 @@ export default function CrearRestaurantesModal({
               </Form.Item>
 
               <Form.Item
-                label="Descripción del alquiler"
+                label="Descripción del restaurante"
                 name="descripcion"
                 rules={[
                   {
@@ -308,7 +308,7 @@ export default function CrearRestaurantesModal({
               Horarios
             </h2>
 
-            <Form.Item name="diasSemana" className="mb-6">
+            <Form.Item name="diasSemana" className="mb-6 ml-12">
               <Checkbox.Group
                 options={diasSemana}
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"

@@ -12,13 +12,13 @@ const Informacion = ({ restaurante }) => (
     style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd' }}
     headStyle={{ padding: 0 }}
   >
-    <p className="text-gray-800 mb-2">
+    <p className="text-gray-800 mb-2 text-">
       <EnvironmentOutlined style={{ marginRight: 8 }} />
       {restaurante?.ubicacion_calles || 'Ubicación no disponible'}
     </p>
     <p className="text-gray-800 mb-2">
       <FileTextOutlined style={{ marginRight: 8 }} />
-      {restaurante?.descripcion || 'Categoría no disponible'}
+      {restaurante?.descripcion || 'Descripcion no disponible'}
     </p>
   </Card>
 );

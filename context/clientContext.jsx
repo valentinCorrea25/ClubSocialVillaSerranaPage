@@ -167,6 +167,18 @@ export const ClientProvider = ({ children }) => {
     return data
   }
 
+  async function serviciosPorTipo(tipo, page) {
+    const res = await fetch(`/api/servicios/lista?page=${page ? page : 1}&tiposervicio=${tipo}`);
+    const data = await res.json();
+
+    console.log(data);
+
+    data.publicaciones = excluirNoPublicados(data.publicaciones);
+    data.publicaciones = tituloServicioCorrectos(data.publicaciones);
+
+    return data;
+  }
+
   return (
     <ClientContext.Provider
       value={{
@@ -186,6 +198,7 @@ export const ClientProvider = ({ children }) => {
         todasLasActividades,
         todosLosServicios,
         todasLasNoticiasEventos,
+        serviciosPorTipo,
         publicacion,
       }}
     >

@@ -20,13 +20,13 @@ const CaracteristicasAlojamiento = ({ restaurante }) => {
           Características
         </div>
       }
-      style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd', height: '100%'}}
+      style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '2px solid #ddd', height: 'auto' }}
       headStyle={{ padding: 0 }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }} className='lg:flex-row flex-col lg:gap-0 gap-8' >
         {/* Columna 1: Horarios */}
         <div style={{ flex: 1, marginRight: '10px' }}>
-          <h3 style={{ fontWeight: 'bold'  }}>Horarios</h3>
+          <h3 style={{ fontWeight: 'bold' }}>Horarios</h3>
           <div className='flex flex-col gap-3'>
             <p><ClockCircleOutlined style={{ marginRight: '8px' }} /> <strong>Semanal:</strong> {horario_semanal || 'No disponible'}</p>
             <p><CalendarOutlined style={{ marginRight: '8px' }} /> <strong>Fin de Semana:</strong> {horario_finde || 'No disponible'}</p>
