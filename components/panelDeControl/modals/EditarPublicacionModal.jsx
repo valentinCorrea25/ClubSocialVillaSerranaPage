@@ -48,10 +48,10 @@ export default function EditarPublicacionModal({
     setSelectedItem(false);
   };
 
-  const handleFecha = (inputFecha) => {
-    const [dia, mes, año] = inputFecha.split("/");
-    return new Date(año, mes - 1, dia);
-  };
+  // const handleFecha = (inputFecha) => {
+  //   const [dia, mes, año] = inputFecha.split("/");
+  //   return new Date(año, mes - 1, dia);
+  // };
 
   const handleResetComplete = () => {
     setRestoreVariables(false);
@@ -136,9 +136,9 @@ export default function EditarPublicacionModal({
     }
 
     if(tipoDePublicacion == "eventosnoticias"){
-      processedValues.fecha_evento = formValues.fecha_evento
-      ? handleFecha(formValues.fecha_evento)
-      : null;
+      // processedValues.fecha_evento = formValues.fecha_evento
+      // ? handleFecha(formValues.fecha_evento)
+      // : null;
       processedValues.contenido = textoRichText;
     }
 

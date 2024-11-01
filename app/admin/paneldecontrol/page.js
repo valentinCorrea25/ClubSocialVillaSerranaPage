@@ -54,6 +54,19 @@ export default function PanelDeControl() {
     setcollapsed(windowsize.width <= 768);
   }, [windowsize.width]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (windowsize.width <= 768) {
+        setcollapsed(true);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [windowsize.width]);
+
   const items = [
     {
       key: "tmp-0",
@@ -191,17 +204,17 @@ export default function PanelDeControl() {
             setModalIsOpenForButtonFloat={setModalIsOpen}
           />
         );
-        case "Actividades":
-          return (
-            <Actividades
-              mostrarCargarToast={mostrarCargarToast}
-              mostrarExitoToast={mostrarExitoToast}
-              mostrarFalloToast={mostrarFalloToast}
-              setModalIsOpenForButtonFloat={setModalIsOpen}
-              setTipoDePublicacionACrear={setTipoDePublicacionACrear}
-              setIsModalOpen={setIsModalOpenCREACIONES}
-            />
-          );
+      case "Actividades":
+        return (
+          <Actividades
+            mostrarCargarToast={mostrarCargarToast}
+            mostrarExitoToast={mostrarExitoToast}
+            mostrarFalloToast={mostrarFalloToast}
+            setModalIsOpenForButtonFloat={setModalIsOpen}
+            setTipoDePublicacionACrear={setTipoDePublicacionACrear}
+            setIsModalOpen={setIsModalOpenCREACIONES}
+          />
+        );
       default:
         return (
           <TodasLasPublicaciones
@@ -217,8 +230,7 @@ export default function PanelDeControl() {
   };
 
   const onClick = (e) => {
-    console.log("click ", e);
-    if(windowsize.width <= 768){
+    if (windowsize.width <= 768) {
       setcollapsed(true);
     }
     setComponent(e.key);
@@ -231,8 +243,8 @@ export default function PanelDeControl() {
 
   return (
     <>
-      {contextHolder} 
-      <Layout style={{ minHeight: "100vh" }}>
+      {contextHolder}
+      <Layout style={{ minHeight: "100vh" }} >
         <Sider
           trigger={null}
           collapsible
@@ -341,7 +353,9 @@ export default function PanelDeControl() {
               {/* Placeholder to balance the layout */}
             </div>
           </Header>
-          <Content className="max-w-screen-xl mx-auto lg:w-[60em] w-full p-5">
+          <Content
+            className="max-w-screen-xl mx-auto lg:w-[60em] w-full p-5"
+          >
             {renderComponent()}
           </Content>
         </Layout>
@@ -379,13 +393,11 @@ export default function PanelDeControl() {
             setIsModalOpen={setIsModalOpenCREACIONES}
             isModalOpen={isModalOpenCREACIONES}
             setModalIsOpenForButtonFloat={setModalIsOpen}
-
             mostrarCargarToast={mostrarCargarToast}
             mostrarExitoToast={mostrarExitoToast}
             mostrarFalloToast={mostrarFalloToast}
           />
         ) : null}
-        
       </Layout>
     </>
   );

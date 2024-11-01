@@ -51,7 +51,7 @@ model Alquiler {
   mail               String
   titulo             String
   descripcion        String
-  ubicacion          String
+  ubicacion          String?
   ubicacion_calles   String
   coordenadas        String?
   capacidad          Int
@@ -108,12 +108,15 @@ enum ServicioTitulo {
   Alambrados
   Almacenes
   Jardineria // Jardinería -- SOLCIIONAR TREMA DE TILDES
+  LimpiezaCasas // Limpieza de casas
   LimpiezaTerrenos // Limpieza de terrenos
   Construccion // Construcción
   Diseno // Diseño
   Filmacion // filmación
+  Electricista
   Equipamiento
   Estetica // Estética
+  Piscinas
   Salud
   Mecanica // Mecánica
   ProvisionDeAgua // Provisión de agua

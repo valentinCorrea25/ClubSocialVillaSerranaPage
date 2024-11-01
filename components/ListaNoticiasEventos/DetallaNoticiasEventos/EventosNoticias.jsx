@@ -8,6 +8,8 @@ import {
   ClockCircleOutlined,
 } from "@ant-design/icons";
 import { Tag, Button } from "antd";
+import { dateFormat } from "@/components/utils/ControlPublicaciones";
+import dayjs from "dayjs";
 
 export function Eventosnoticias({ eventosnoticias }) {
   const { fecha_publicacion, fecha_evento } = eventosnoticias;
@@ -19,7 +21,7 @@ export function Eventosnoticias({ eventosnoticias }) {
   const fechaevento =
     fechaEventoDate > fechaCorte
       ? ""
-      : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
+      : "Fecha del Evento: " + dayjs(fecha_evento).format(dateFormat);
   return (
     <Card
       bordered={false}
@@ -30,8 +32,19 @@ export function Eventosnoticias({ eventosnoticias }) {
         {eventosnoticias?.titulo || "Título no disponible"}
       </h2>
 
-      {/* Location, Category, and Date */}
       <div className="flex flex-col mb-4 text-blue-600">
+        <p className="mb-1">
+          <TagOutlined style={{ marginRight: 8 }} />
+          {categoriaLabel}
+        </p>
+        
+        {fechaevento ? (
+          <p className="mb-1">
+            <ClockCircleOutlined style={{ marginRight: 8 }} />
+            <span>{fechaevento}</span>
+          </p>
+        ) : null}
+
         <p className="mb-1">
           <CalendarOutlined style={{ marginRight: 8 }} />
           <span>
@@ -41,16 +54,6 @@ export function Eventosnoticias({ eventosnoticias }) {
             ) || "Fecha no disponible"}
           </span>
         </p>
-        <p className="mb-1">
-          <TagOutlined style={{ marginRight: 8 }} />
-          {categoriaLabel}
-        </p>
-        {fechaevento ? (
-          <p className="mb-1">
-            <ClockCircleOutlined style={{ marginRight: 8 }} />
-            <span>{fechaevento}</span>
-          </p>
-        ) : null}
 
         {eventosnoticias?.ubicacion ? (
           <p className="mb-1">
