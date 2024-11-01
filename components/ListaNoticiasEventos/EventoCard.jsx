@@ -91,7 +91,9 @@ const EventoCard = ({ evento }) => {
                 textOverflow: "ellipsis",
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 150) }} />....
+              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 150) }} />
+              {contenido.length > 150 && "...."}
+
             </p>
             <Button
               type="primary"

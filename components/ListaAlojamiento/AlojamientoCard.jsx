@@ -30,7 +30,7 @@ const AlojamientoCard = ({ alojamiento }) => {
   };
 
   return (
-    <Card onClick={() => handleViewDetails(restaurante.id_Restaurant)}
+    <Card onClick={() => handleViewDetails(alojamiento.id_Alquiler)}
       hoverable
       cover={
         <div
@@ -74,32 +74,37 @@ const AlojamientoCard = ({ alojamiento }) => {
               <EnvironmentOutlined style={{ marginLeft: "8px" }} /> Ubicación: {ubicacion_calles}
             </div>
             <div style={{ color: "#0367A6" }}>
-              <UsergroupDeleteOutlined  style={{ marginLeft: "8px" }} /> Capacidad: {capacidad}
+              <UsergroupDeleteOutlined style={{ marginLeft: "8px" }} /> Capacidad: {capacidad}
             </div>
             <div style={{ color: "#0367A6" }}>
-            <PhoneOutlined  style={{ marginLeft: "8px" }} /> Telefono: {celular}
+              <PhoneOutlined style={{ marginLeft: "8px" }} /> Telefono: {celular}
             </div>
             <div style={{ marginTop: "8px" }}>
-            {(() => {
-              const comodidades = [];
+              {(() => {
+                const comodidades = [];
 
-              // Iteramos sobre todas las propiedades del objeto 'caracteristicas'
-              for (const key in alojamiento) {
-                if (alojamiento[key] === true) {
-                  // Convertir el nombre de la propiedad a algo más legible si es necesario
-                  let nombreComodidad = key
-                    .replace("_", " ")
-                    .replace(/\b\w/g, (char) => char.toUpperCase());
-                  comodidades.push(nombreComodidad);
+                // Iteramos sobre todas las propiedades del objeto 'alojamiento'
+                for (const key in alojamiento) {
+                  if (alojamiento[key] === true) {
+                    // Convertir el nombre de la propiedad a algo más legible si es necesario
+                    let nombreComodidad = key
+                      .replace("_", " ")
+                      .replace(/\b\w/g, (char) => char.toUpperCase());
+                    comodidades.push(nombreComodidad);
+                  }
                 }
-              }
 
-              return comodidades.length > 0
-                ? comodidades.map((comodidad, index) => (
-                    <Tag key={index} >{comodidad}</Tag>
-                  ))
-                : "No hay comodidades disponibles";
-            })()}
+                return comodidades.length > 0
+                  ? (
+                    <>
+                      {comodidades.slice(0, 4).map((comodidad, index) => (
+                        <Tag key={index}>{comodidad}</Tag>
+                      ))}
+                      {comodidades.length > 4}
+                    </>
+                  )
+                  : "No hay comodidades disponibles";
+              })()}
             </div>
             <p
               style={{
@@ -109,7 +114,8 @@ const AlojamientoCard = ({ alojamiento }) => {
                 textOverflow: "ellipsis",
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: descripcion.substring(0, 150) }} />....
+              <span dangerouslySetInnerHTML={{ __html: descripcion.substring(0, 150) }} />
+              {descripcion.length > 150 && "...."}
             </p>
             <Button
               type="primary"

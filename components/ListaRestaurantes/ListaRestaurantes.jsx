@@ -1,4 +1,4 @@
-'use client';
+/* 'use client';
 
 import React from 'react';
 import { Card, List, Button, Alert } from 'antd';
@@ -20,7 +20,7 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
     );
   }
   console.log(restaurantes[0].fotos[0]);
-  
+
 
   return (
     <List
@@ -54,7 +54,7 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
                     objectFit: 'cover',
                     marginRight: '16px',
                     marginBottom: '16px',
-                    flexShrink: 0, 
+                    flexShrink: 0,
                   }}
                 />
               ) : null
@@ -95,4 +95,43 @@ const ListaRestaurantes = ({ restaurantes, onViewDetails }) => {
   );
 };
 
-export default ListaRestaurantes;
+export default ListaRestaurantes; */
+
+
+'use client';
+
+import React from 'react';
+import RestauranteCard from './RestauranteCard';
+import { Alert, Pagination, Button } from 'antd';
+
+const ListaRestaurante = ({ restaurantes, onViewDetails }) => {
+  if (!restaurantes || restaurantes.length === 0) {
+    return (
+      <div className="p-6">
+        <Alert
+          message="No se encontraron resultados"
+          description="No hay alojamientos que coincidan con los filtros aplicados. Intenta ajustar tus criterios de búsqueda."
+          type="warning"
+          showIcon
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto p-1 sm:p-5">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+        {restaurantes.map((restaurante, index) => (
+          <RestauranteCard key={index} restaurante={restaurante} />
+
+        ))}
+      </div>
+      <div className="flex justify-center mt-5">
+        <Pagination defaultCurrent={1} total={10} />
+      </div>
+    </div>
+  );
+};
+
+export default ListaRestaurante;
+
