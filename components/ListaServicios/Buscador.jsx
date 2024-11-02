@@ -1,9 +1,13 @@
 import React from 'react';
 import { Select, Button, Space } from 'antd';
+import { tituloCorrectoServicio } from '../utils/ControlPublicaciones';
 
 const { Option } = Select;
 
 const Buscador = ({ categories, onFilterChange }) => {
+  // Convertir el objeto de categorías en un array para poder mapearlo
+  const categoryArray = Object.keys(categories);
+
   const handleCategoryChange = (value) => {
     onFilterChange(value);
   };
@@ -17,9 +21,9 @@ const Buscador = ({ categories, onFilterChange }) => {
         allowClear
       >
         <Option value="">Todos</Option>
-        {categories.map((category) => (
+        {categoryArray.map((category) => (
           <Option key={category} value={category}>
-            {category}
+            {tituloCorrectoServicio(categories[category])}
           </Option>
         ))}
       </Select>

@@ -12,22 +12,16 @@ import {
   Select,
 } from "antd";
 import { AdminContext } from "@/context/adminContext";
-import { getBase64, tiposDePago } from "@/components/utils/ControlPublicaciones";
+import {
+  diasSemana,
+  getBase64,
+  tiposDePago,
+} from "@/components/utils/ControlPublicaciones";
 import { getCoordsGoogleMaps } from "@/components/utils/ControlPublicaciones";
 // import Mapa from "@/components/panelDeControl/leafletjs/Mapa";
 import dynamic from "next/dynamic";
 
 const { TextArea } = Input;
-
-const diasSemana = [
-  { label: "Lunes", value: "lunes" },
-  { label: "Martes", value: "martes" },
-  { label: "Miércoles", value: "miercoles" },
-  { label: "Jueves", value: "jueves" },
-  { label: "Viernes", value: "viernes" },
-  { label: "Sábado", value: "sabado" },
-  { label: "Domingo", value: "domingo" },
-];
 
 export default function CrearRestaurantesModal({
   mostrarCargarToast,
@@ -37,16 +31,20 @@ export default function CrearRestaurantesModal({
   setIsModalOpen,
   setModalIsOpenForButtonFloat,
 }) {
-  const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"), {
-    ssr: false,
-    loading: () => <div>Cargando mapa...</div>,
-  });
+  const Mapa = dynamic(
+    () => import("@/components/panelDeControl/leafletjs/Mapa"),
+    {
+      ssr: false,
+      loading: () => <div>Cargando mapa...</div>,
+    }
+  );
 
   const [form] = Form.useForm();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
-  const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
+  const { crearPublicacion, subirImagenesSupabase, setUpdateData } =
+    useContext(AdminContext);
   const [urlGoogle, setUrlGoogle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -93,7 +91,7 @@ export default function CrearRestaurantesModal({
 
   const onFinish = async (values) => {
     console.log(values);
-    
+
     try {
       setIsLoading(true);
       mostrarCargarToast();
@@ -110,8 +108,11 @@ export default function CrearRestaurantesModal({
       } else {
         handleClose();
         mostrarExitoToast(data.message);
+        setUpdateData('rest');
       }
       setIsLoading(false);
+      console.log(update);
+      
     } catch (e) {
       console.log(e);
     }
@@ -123,7 +124,6 @@ export default function CrearRestaurantesModal({
       open={isModalOpen}
       onCancel={handleClose}
       afterClose={handleClose}
-      
       footer={
         <>
           <Button onClick={handleClose}>Cancelar</Button>
@@ -137,7 +137,7 @@ export default function CrearRestaurantesModal({
         </>
       }
       width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
-      style={{ maxWidth: "768px", top:"20px" }} // Limita el ancho del modal para que parezca un móvil
+      style={{ maxWidth: "768px", top: "20px" }} // Limita el ancho del modal para que parezca un móvil
       bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
     >
       <Form
@@ -252,22 +252,27 @@ export default function CrearRestaurantesModal({
                 <Form.Item
                   label="Link de Google Maps"
                   name="ubicacion"
+                  required={false}
                   rules={[
-                    {
-                      required: true,
-                      message: "Por favor ingresa la ubicación",
-                    },
+                    // {
+                    //   required: false,
+                    //   message: "Por favor ingresa la ubicación",
+                    // },
                     {
                       validator: (_, value) => {
                         const valido = getCoordsGoogleMaps(urlGoogle);
-                        if (valido) {
+                        if (urlGoogle) {
+                          if (valido) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(
+                            new Error(
+                              "Por favor ingresa un enlace válido de Google Maps"
+                            )
+                          );
+                        }else{
                           return Promise.resolve();
                         }
-                        return Promise.reject(
-                          new Error(
-                            "Por favor ingresa un enlace válido de Google Maps"
-                          )
-                        );
                       },
                     },
                   ]}
@@ -354,8 +359,11 @@ export default function CrearRestaurantesModal({
             </h2>
 
             <Form.Item label="Tipos de pago" name="tipo_pago">
-                <Select mode="multiple" placeholder="Seleccione..." options={tiposDePago}>
-                </Select>
+              <Select
+                mode="multiple"
+                placeholder="Seleccione..."
+                options={tiposDePago}
+              ></Select>
             </Form.Item>
           </div>
         </div>

@@ -23,7 +23,7 @@ export default function CrearServicioModal({
   const [diasSeleccionados, setDiasSeleccionados] = useState([]);
   const [todaLaSemanaSeleccionado, setTodaLaSemanaSeleccionado] =
     useState(false);
-  const { getTipoDeServicios, crearPublicacion } = useContext(AdminContext);
+  const { getTipoDeServicios, crearPublicacion, setUpdateData } = useContext(AdminContext);
   const [tipoServicio, setTipoServicio] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -82,6 +82,7 @@ export default function CrearServicioModal({
         mostrarExitoToast(data.message);
       }
       setIsLoading(false);
+      setUpdateData('serv');
     } catch (e) {
       console.log(e);
     }

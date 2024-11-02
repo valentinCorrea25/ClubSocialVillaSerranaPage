@@ -50,7 +50,7 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
-  const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
+  const { crearPublicacion, subirImagenesSupabase, setUpdateData } = useContext(AdminContext);
   const [urlGoogle, setUrlGoogle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -131,6 +131,7 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
       } else {
         handleClose();
         mostrarExitoToast(data.message);
+        setUpdateData('aql');
       }
       setIsLoading(false);
     } catch (e) {

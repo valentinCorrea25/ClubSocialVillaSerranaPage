@@ -33,7 +33,7 @@ export default function CrearEventoNoticiaActividadModal({
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
   const [textoRichText, setTextoRichText] = useState("");
-  const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
+  const { crearPublicacion, subirImagenesSupabase, setUpdateData } = useContext(AdminContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClose = () => {
@@ -108,6 +108,7 @@ export default function CrearEventoNoticiaActividadModal({
         mostrarExitoToast(data.message);
       }
       setIsLoading(false);
+      setUpdateData('not');
     } catch (e) {
       console.log(e);
     }

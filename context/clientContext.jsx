@@ -132,8 +132,12 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todosLosServicios() {
-    const res = await fetch(`/api/servicios/lista`);
+  async function todosLosServicios(page, tipo) {
+    const res = await fetch(
+      `/api/servicios/lista?page=${page ? page : 1}${
+        tipo ? `&tiposervicio=${tipo}` : ""
+      }`
+    );
     const data = await res.json();
 
     console.log(data);
@@ -159,16 +163,20 @@ export const ClientProvider = ({ children }) => {
   }
 
   function tituloServicioCorrectos(data) {
-    if (data){
+    if (data) {
       data.forEach((servicio) => {
-        servicio.titulo_Servicio = tituloCorrectoServicio(servicio.titulo_Servicio);
+        servicio.titulo_Servicio = tituloCorrectoServicio(
+          servicio.titulo_Servicio
+        );
       });
     }
-    return data
+    return data;
   }
 
   async function serviciosPorTipo(tipo, page) {
-    const res = await fetch(`/api/servicios/lista?page=${page ? page : 1}&tiposervicio=${tipo}`);
+    const res = await fetch(
+      `/api/servicios/lista?page=${page ? page : 1}&tiposervicio=${tipo}`
+    );
     const data = await res.json();
 
     console.log(data);

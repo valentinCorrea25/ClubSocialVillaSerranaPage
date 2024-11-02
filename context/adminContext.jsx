@@ -12,6 +12,7 @@ export const AdminProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState(null);
   const [username, setUsername] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
+  const [update, setUpdateData] = useState(() => () => {});
 
   async function getTipoDeServicios() {
     const res = await fetch(`/api/tipoServicio`);
@@ -236,6 +237,8 @@ export const AdminProvider = ({ children }) => {
         mensaje,
         setUsername,
         username,
+        setUpdateData,
+        update
       }}
     >
       {children}

@@ -1,10 +1,10 @@
 {
   "name": "Club Social Y Deportivo Villa Serrana",
-  "short_name": "Villa Serrana",
-  "start_url": "./",
+  "short_name": "Club Social Y Deportivo Villa Serrana",
+  "start_url": "./admin",
   "display": "standalone",
-  "theme_color": "#f9f6ee",
-  "background_color": "#09a603",
+  "theme_color": "#fff",
+  "background_color": "#fff",
   "icons": [
     {
       "purpose": "maskable",
@@ -22,14 +22,5 @@
   "orientation": "any",
   "dir": "auto",
   "lang": "es-UY",
-  "scope": "https://club-social-villa-serrana-page.vercel.app",
-  "related_applications": [
-    {
-      "platform": "web"
-    },
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.google.samples.apps.iosched"
-    }
-  ]
+  "scope": "https://club-social-villa-serrana-page.vercel.app"
 }
