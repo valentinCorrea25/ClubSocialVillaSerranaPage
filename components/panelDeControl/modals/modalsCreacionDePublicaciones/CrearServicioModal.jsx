@@ -23,7 +23,8 @@ export default function CrearServicioModal({
   const [diasSeleccionados, setDiasSeleccionados] = useState([]);
   const [todaLaSemanaSeleccionado, setTodaLaSemanaSeleccionado] =
     useState(false);
-  const { getTipoDeServicios, crearPublicacion, setUpdateData } = useContext(AdminContext);
+  const { getTipoDeServicios, crearPublicacion, setUpdateData } =
+    useContext(AdminContext);
   const [tipoServicio, setTipoServicio] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -67,7 +68,7 @@ export default function CrearServicioModal({
     setIsLoading(true);
     mostrarCargarToast();
     console.log(values);
-    
+
     values.titulo_Servicio = obtenerTipoServicioPorTitulo(
       values.titulo_Servicio
     );
@@ -82,7 +83,7 @@ export default function CrearServicioModal({
         mostrarExitoToast(data.message);
       }
       setIsLoading(false);
-      setUpdateData('serv');
+      setUpdateData("serv");
     } catch (e) {
       console.log(e);
     }
@@ -149,12 +150,36 @@ export default function CrearServicioModal({
             name="nombre_titular"
             required
             className="w-full"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingresa el nombre completo",
+              },
+            ]}
           >
             <Input placeholder="Nombre del Titular" />
           </Form.Item>
 
-          <Form.Item label="Celular" name="celular" required className="w-full">
-            <Input placeholder="Celular" />
+          <Form.Item
+            label="Celular"
+            name="celular"
+            required
+            className="w-full"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              placeholder="Celular"
+              maxLength={12}
+              count={{
+                show: true,
+                max: 12,
+              }}
+              className="w-full"
+            />
           </Form.Item>
 
           <Form.Item
@@ -162,6 +187,13 @@ export default function CrearServicioModal({
             name="mail"
             required
             className="w-full"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingresa el correo electrónico",
+                type: "email",
+              },
+            ]}
           >
             <Input placeholder="Correo Electrónico" />
           </Form.Item>

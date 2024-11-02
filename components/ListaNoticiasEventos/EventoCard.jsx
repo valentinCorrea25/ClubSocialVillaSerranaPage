@@ -24,8 +24,22 @@ const EventoCard = ({ evento }) => {
   const categoriaLabel = fechaEventoDate > fechaCorte ? "Noticias" : "Eventos";
   const fechaevento = fechaEventoDate > fechaCorte ? '' : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
   const router = useRouter();
+  
   const handleViewDetails = (id) => {
     router.push(`/ListaEventosNoticias/DetalleEventosNoticias?id=${id}`);
+  };
+
+  // Función para limpiar el contenido de tags BR y obtener texto plano
+  const cleanContent = (htmlContent) => {
+    const temp = document.createElement('div');
+    temp.innerHTML = htmlContent;
+    
+    const brElements = temp.getElementsByTagName('br');
+    while(brElements.length) {
+      brElements[0].replaceWith(' ');
+    }
+    
+    return temp.textContent || temp.innerText;
   };
 
   return (
@@ -42,7 +56,7 @@ const EventoCard = ({ evento }) => {
         >
           <img
             alt={titulo}
-            src={fotos}
+            src={fotos[0]}
             style={{
               width: "100%",
               height: "100%",
@@ -64,7 +78,18 @@ const EventoCard = ({ evento }) => {
     >
       <Meta
         title={
-          <div style={{ fontSize: "20px", fontWeight: "bold" }}>{titulo}</div>
+          <div 
+            style={{ 
+              fontSize: "20px", 
+              fontWeight: "bold",
+              whiteSpace: "normal",
+              wordWrap: "break-word",
+              lineHeight: "1.4",
+              marginBottom: "12px"
+            }}
+          >
+            {titulo}
+          </div>
         }
         description={
           <>
@@ -73,15 +98,9 @@ const EventoCard = ({ evento }) => {
               {new Date(fecha_publicacion).toLocaleDateString()}
               <TagOutlined style={{ marginLeft: "8px" }} />{" "}
               {categoriaLabel}
-              {/* Mostrar Fecha del Evento solo si es mayor a 12/31/1969 */}
-
               <div style={{ marginTop: "8px" }}>
-                <span>
-                  {fechaevento}
-
-                </span>
+                <span>{fechaevento}</span>
               </div>
-
             </div>
             <p
               style={{
@@ -89,11 +108,14 @@ const EventoCard = ({ evento }) => {
                 height: "auto",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: "3",
+                WebkitBoxOrient: "vertical",
+                lineHeight: "1.5"
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 150) }} />
-              {contenido.length > 150 && "...."}
-
+              {cleanContent(contenido).substring(0, 150)}
+              {contenido.length > 150 && "..."}
             </p>
             <Button
               type="primary"

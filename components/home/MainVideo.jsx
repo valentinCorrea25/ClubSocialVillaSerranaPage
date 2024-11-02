@@ -16,7 +16,7 @@ export default function MainVideo() {
         className="w-full h-full object-cover"
       />
       <div className="absolute w-full h-full top-0 flex flex-col justify-center items-center text-white p-7 md:p-10">
-        <h1 className="text-center text-4xl md:text-5xl">
+        <h1 className="text-center text-4xl md:text-5xl text-white">
           Bienvenido a Villa Serrana
         </h1>
         <p className="max-w-[1000px] text-md md:text-xl text-center mt-4 mb-10">

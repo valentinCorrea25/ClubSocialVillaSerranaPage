@@ -72,13 +72,16 @@ export default function CrearEventoNoticiaActividadModal({
     let data;
     mostrarCargarToast();
     try {
+      console.log(currentForm);
+      
       if (currentForm == "eventos") {
         const urls = await subirImagenesSupabase(
           fileList,
           "eventoNoticias",
           values.titulo
         );
-
+        
+        console.log(urls);
         values.contenido = textoRichText;
         values.fotos = urls;
 
@@ -105,10 +108,10 @@ export default function CrearEventoNoticiaActividadModal({
         mostrarFalloToast(data.message);
       } else {
         handleClose();
+        setUpdateData('notEA');
         mostrarExitoToast(data.message);
       }
       setIsLoading(false);
-      setUpdateData('not');
     } catch (e) {
       console.log(e);
     }
@@ -242,8 +245,8 @@ export default function CrearEventoNoticiaActividadModal({
                 )}
               </Form.Item>
 
-              <Form.Item className="text-center">
-                <Button type="primary" htmlType="submit">
+              <Form.Item className="text-center" >
+                <Button type="primary" htmlType="submit" loading={isLoading}>
                   {esEvento ? "Publicar Evento" : "Publicar Noticia"}
                 </Button>
               </Form.Item>
@@ -326,7 +329,7 @@ export default function CrearEventoNoticiaActividadModal({
               </Form.Item>
 
               <Form.Item className="text-center">
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={isLoading}>
                   Publicar Actividad
                 </Button>
               </Form.Item>

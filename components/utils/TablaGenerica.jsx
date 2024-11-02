@@ -179,7 +179,7 @@ export default function TablaGenerica({
 
   useEffect(() => { // Pasar el update data al contexto para la creacion y su posterior actualizacion de tablas 
     updateData();
-  }, [update, tipoDePublicacion]);
+  }, [update, tipoDePublicacion, setModalIsOpenForButtonFloat]);
 
   const handleCambiarEstado = async (record, tipoDePublicacion, id) => {
     let resp;
@@ -381,8 +381,8 @@ export default function TablaGenerica({
         rowKey={getRowKey}
         pagination={{
           current: page,
-          total: data?.totalPages * 25 || 0,
-          pageSize: 25,
+          total: data?.count || 0,  // Aquí usamos count directamente
+          pageSize: data?.count <= 25 ? data?.count : 25,
           onChange: (newPage) => setPage(newPage),
           showSizeChanger: false,
           showTotal: (total, range) =>

@@ -225,10 +225,18 @@ export default function CrearRestaurantesModal({
                 label="Celular"
                 name="celular"
                 rules={[
-                  { required: true, message: "Por favor ingresa el celular" },
+                  { required: true, message: "Por favor ingresa el celular"},
+                  
                 ]}
               >
-                <Input />
+                <Input
+                maxLength={12}
+                  count={{
+                    show: true,
+                    max: 12,
+                  }}
+                  className="w-full"
+                />
               </Form.Item>
 
               <Form.Item
@@ -238,6 +246,7 @@ export default function CrearRestaurantesModal({
                   {
                     required: true,
                     message: "Por favor ingresa el correo electrónico",
+                    type: 'email'
                   },
                 ]}
               >
