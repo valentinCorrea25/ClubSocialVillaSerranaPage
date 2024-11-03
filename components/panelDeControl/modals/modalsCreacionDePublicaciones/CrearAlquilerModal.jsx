@@ -35,22 +35,26 @@ const alquileresCaracteristicas = [
 ];
 
 export default function CrearAlquilerModal({
-    mostrarCargarToast,
-    mostrarExitoToast,
-    mostrarFalloToast,
-    isModalOpen,
-    setIsModalOpen,
-    setModalIsOpenForButtonFloat,
+  mostrarCargarToast,
+  mostrarExitoToast,
+  mostrarFalloToast,
+  isModalOpen,
+  setIsModalOpen,
+  setModalIsOpenForButtonFloat,
 }) {
-const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"), {
-    ssr: false,
-    loading: () => <div>Cargando mapa...</div>,
-    });
+  const Mapa = dynamic(
+    () => import("@/components/panelDeControl/leafletjs/Mapa"),
+    {
+      ssr: false,
+      loading: () => <div>Cargando mapa...</div>,
+    }
+  );
   const [form] = Form.useForm();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
-  const { crearPublicacion, subirImagenesSupabase } = useContext(AdminContext);
+  const { crearPublicacion, subirImagenesSupabase, setUpdateData } =
+    useContext(AdminContext);
   const [urlGoogle, setUrlGoogle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -131,6 +135,7 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
       } else {
         handleClose();
         mostrarExitoToast(data.message);
+        setUpdateData("aql");
       }
       setIsLoading(false);
     } catch (e) {
@@ -157,8 +162,8 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
         </>
       }
       width="100%" // Esto ajustará el modal al 100% del ancho de la pantalla
-      style={{ maxWidth: "768px", top:"20px" }}
-      bodyStyle={{ maxHeight: "80vh", overflowY: "auto"}} //
+      style={{ maxWidth: "768px", top: "20px" }}
+      bodyStyle={{ maxHeight: "80vh", overflowY: "auto" }} //
     >
       <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8 py-8">
         <Form
@@ -248,19 +253,29 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
                 label="Celular"
                 name="celular"
                 rules={[
-                  { required: true, message: "Por favor ingresa el celular" },
+                  { required: true, message: "Por favor ingresa el celular"},
+                  
                 ]}
               >
-                <Input className="w-full" />
+                <Input
+                maxLength={12}
+                  count={{
+                    show: true,
+                    max: 12,
+                  }}
+                  className="w-full"
+                />
               </Form.Item>
 
               <Form.Item
                 label="Correo Electrónico"
                 name="mail"
+                
                 rules={[
                   {
                     required: true,
                     message: "Por favor ingresa el correo electrónico",
+                    type: 'email'
                   },
                 ]}
               >
@@ -274,19 +289,27 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
               <Form.Item
                 label="Link de Google Maps"
                 name="ubicacion"
+                required={false}
                 rules={[
-                  { required: true, message: "Por favor ingresa la ubicación" },
+                  // {
+                  //   required: false,
+                  //   message: "Por favor ingresa la ubicación",
+                  // },
                   {
                     validator: (_, value) => {
                       const valido = getCoordsGoogleMaps(urlGoogle);
-                      if (valido) {
+                      if (urlGoogle) {
+                        if (valido) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error(
+                            "Por favor ingresa un enlace válido de Google Maps"
+                          )
+                        );
+                      } else {
                         return Promise.resolve();
                       }
-                      return Promise.reject(
-                        new Error(
-                          "Por favor ingresa un enlace válido de Google Maps"
-                        )
-                      );
                     },
                   },
                 ]}
@@ -298,16 +321,14 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
                   }}
                 />
               </Form.Item>
-             <Form.Item
+              <Form.Item
                 label="Dirección completa"
                 name="ubicacion_calles"
                 rules={[
                   { required: true, message: "Por favor ingresa la direccion" },
                 ]}
               >
-                <Input
-                  className="w-full"
-                />
+                <Input className="w-full" />
               </Form.Item>
               <Mapa urlGoogle={urlGoogle} />
             </div>
@@ -336,7 +357,7 @@ const Mapa = dynamic(() => import("@/components/panelDeControl/leafletjs/Mapa"),
               <Form.Item
                 label="Capacidad"
                 name="capacidad"
-                rules={[{ required: true }]}
+                rules={[{ required: true, message: 'Porfavor ingresar capacidad' }]}
               >
                 <InputNumber min={0} className="w-full" />
               </Form.Item>

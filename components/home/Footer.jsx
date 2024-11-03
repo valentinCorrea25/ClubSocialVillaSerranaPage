@@ -1,12 +1,13 @@
 'use client';
+import Image from 'next/image';
 import React from 'react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
 // Redes Sociales
 const EnlacesRedesSociales = () => (
   <div className="flex items-center justify-center md:justify-end space-x-3 md:ml-7  mt-4 md:mt-0 pt-2">
-    <a href="https://www.instagram.com/club_villa_serrana/" target="_blank" rel="noopener noreferrer" className="transition-transform duration-300 transform hover:scale-110 hover:text-pink-600"> <FaInstagram size="2.5em" /></a>
-    <a href="https://www.facebook.com/ClubVillaSerrana/" target="_blank" rel="noopener noreferrer" className="transition-transform duration-300 transform hover:scale-110 hover:text-blue-600"> <FaFacebook size="2.5em" /></a>
+    <a href="https://www.instagram.com/club_villa_serrana/" target="_blank" rel="noopener noreferrer" className="transition-all duration-300 transform hover:scale-110 hover:text-pink-600"> <FaInstagram size="2.5em" /></a>
+    <a href="https://www.facebook.com/ClubVillaSerrana/" target="_blank" rel="noopener noreferrer" className="transition-all duration-300 transform hover:scale-110 hover:text-blue-600"> <FaFacebook size="2.5em" /></a>
   </div>
 );
 
@@ -39,13 +40,32 @@ const Informacion = () => (
   </div>
 );
 
+const BackgroundImage = ({ src, alt, className }) => {
+  return (
+    <div className={`absolute inset-0 overflow-hidden ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        quality={100}
+        priority
+        className="object-cover"
+        sizes="100vw"
+      />
+    </div>
+  );
+};
+
 // Componente Principal del Footer
 export default function PieDePagina() {
   return (
-    <div className='text-[--blanco] w-full'>
-      <footer className="relative text-blanco py-5">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/footer.jpg')", backgroundSize: 'cover' }}></div>
-        <div className="max-w-screen-xl relative container mx-auto flex flex-col md:flex-row md:justify-around md:items-start space-y-7 md:space-y-0 px-7 md:py-6">
+    <div className='text-[--blanco] w-full mt-2'>
+      <footer className="relative text-blanco py-20">
+        <BackgroundImage
+          src="/images/footer.jpg"
+          alt="Footer background"
+        />
+        <div className="relative z-10 max-w-screen-xl container mx-auto flex flex-col md:flex-row md:justify-around md:items-start space-y-7 md:space-y-0 px-7 md:py-6">
           <Informacion />
           <EnlacesDestacados />
         </div>

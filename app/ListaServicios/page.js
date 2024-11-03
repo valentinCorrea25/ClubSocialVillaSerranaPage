@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useContext, useState, useEffect } from "react";
-import { Layout, Skeleton } from "antd";
+import { Layout, Pagination, Skeleton } from "antd";
 import ServiciosList from "@/components/ListaServicios/ServiciosList";
 import Buscador from "@/components/ListaServicios/Buscador";
 import Banner from "@/components/utils/Banners";
+import { ServicioTitulo } from "@prisma/client";
 import { ClientContext } from "@/context/clientContext";
 
 const ServiciosPage = () => {
@@ -13,15 +14,21 @@ const ServiciosPage = () => {
   const [filteredServicios, setFilteredServicios] = useState([]);
   const { Content } = Layout;
   const [noResults, setNoResults] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState();
+  const [filtroServicio, setFiltroServicio] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await todosLosServicios();
+        const data = await todosLosServicios(page, filtroServicio);
         if (data) {
           console.log(data);
-          setServicios(data.publicaciones);
+          setServicios(ServicioTitulo);
           setFilteredServicios(data.publicaciones);
+          setTotal(data.totalPages);
+          console.log(data.totalPages);
+          
           setNoResults(true);
         } else {
           console.log("publicacion is null after fetch");
@@ -32,26 +39,16 @@ const ServiciosPage = () => {
     };
 
     fetchData();
-  }, [todosLosServicios]);
+  }, [todosLosServicios, page, filtroServicio]);
 
   const handleFilterChange = (selectedCategory) => {
+    setPage(1);
     if (selectedCategory === "") {
-      // Mostrar todos los servicios
-      setFilteredServicios(servicios);
+      setFiltroServicio(null);
     } else {
-      // Filtrar por categoría
-      const filtered = servicios.filter(
-        (servicio) => servicio.titulo_Servicio === selectedCategory
-      );
-      setFilteredServicios(filtered);
+      setFiltroServicio(selectedCategory);
     }
   };
-
-  // Extraer categorías únicas para el selector
-  const categories = Array.from(
-    new Set(servicios.map((s) => s.titulo_Servicio))
-  );
-
   return (
     <Layout className="bg-[--blanco]">
       <Content style={{ padding: "40px 10px" }}>
@@ -60,9 +57,9 @@ const ServiciosPage = () => {
           subtitle="Descubre nuestras ofertas y encuentra lo que necesitas."
           backgroundImage="/images/servicios.jpg"
         />
-        <div style={{ padding: "24px", width:"100%" }}>
+        <div style={{ padding: "24px", width: "100%" }}>
           <Buscador
-            categories={categories}
+            categories={servicios}
             onFilterChange={handleFilterChange}
           />
         </div>
@@ -78,6 +75,13 @@ const ServiciosPage = () => {
           </div>
         )}
       </Content>
+      <Pagination
+        current={page}
+        onChange={(newPage) => setPage(newPage)}
+        total={total*25}
+        pageSize={25}
+        align="center"
+      />
     </Layout>
   );
 };

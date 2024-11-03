@@ -4,14 +4,17 @@ import { AdminContext } from "@/context/adminContext";
 import useSWR, { useSWRConfig } from "swr";
 import { MenuOutlined } from "@ant-design/icons";
 import EliminarUsuarioModal from "./modals/EliminarUsuarioModal";
+import CrearUsuarioModal from "./modals/modalsCreacionDePublicaciones/CrearUsuarioModal";
 
 const CrearNuevoUsuario = ({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
+  setModalIsOpenForButtonFloat
 }) => {
-  const { crearUsuario, eliminarUsuario } = useContext(AdminContext);
+  const { eliminarUsuario } = useContext(AdminContext);
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
+  const [isModalOpenCrear, setIsModalOpenCrear] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const { mutate } = useSWRConfig();
 
@@ -88,88 +91,29 @@ const CrearNuevoUsuario = ({
     },
   ];
 
-  const onFinish = async (values) => {
-    mostrarCargarToast();
-    try {
-      delete values.repetirContrasenia;
-      const data = await crearUsuario(values);
-      updateData();
-      if(data.code == 500){
-        mostrarFalloToast(data.message);
-      }else{
-        mostrarExitoToast(data.message);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const showModalEliminar = (item) => {
     setSelectedItem(item);
     setIsModalOpenElimininar(true);
   };
 
+  const handleCreate = () => {
+    setIsModalOpenCrear(true);
+    setModalIsOpenForButtonFloat(true);
+  }
+
   return (
     <div
       className="mx-auto flex flex-col"
-      style={{ maxWidth: 400, margin: "0 auto" }}
+      style={{ maxWidth: 450, margin: "0 auto" }}
     >
-      <Form name="crear_usuario" onFinish={onFinish} layout="vertical">
-        <h1 className="text-center text-xl md:text-2xl pb-4">
-          Crear Nuevo Usuario
-        </h1>
-        <Form.Item
-          label="Nombre"
-          name="nombre"
-          rules={[{ required: true, message: "Por favor ingresa tu nombre" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Contraseña"
-          name="hashPass"
-          rules={[
-            { required: true, message: "Por favor ingresa tu contraseña" },
-            {
-              min: 4,
-              message: "La contraseña debe tener al menos 4 caracteres",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          label="Repetir Contraseña"
-          name="repetirContrasenia"
-          rules={[
-            { required: true, message: "Por favor repite tu contraseña" },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("hashPass") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error("Las contraseñas no coinciden")
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-            Crear Usuario
-          </Button>
-        </Form.Item>
-      </Form>
       <h1 className="text-center text-xl md:text-2xl pb-4 mt-4">
-          Control de Usuarios
-        </h1>
-      <Table
+        Control de Usuarios
+      </h1>
+     <div className="flex flex-col">
+      <div className=" w-full flex justify-end mb-2">
+     <Button onClick={handleCreate} className="bg-[--verde] text-white hidden sm:block right-0"> Crear Usuario </Button>
+      </div>
+     <Table
         dataSource={data ? data.usuarios : []}
         columns={columns}
         loading={isLoading}
@@ -178,6 +122,7 @@ const CrearNuevoUsuario = ({
         scroll={{ x: true }}
         pagination={false}
       />
+     </div>
       <EliminarUsuarioModal
         updateData={updateData}
         selectedItem={selectedItem}
@@ -187,6 +132,15 @@ const CrearNuevoUsuario = ({
         mostrarCargarToast={mostrarCargarToast}
         mostrarExitoToast={mostrarExitoToast}
         mostrarFalloToast={mostrarFalloToast}
+      />
+      <CrearUsuarioModal
+        mostrarCargarToast={mostrarCargarToast}
+        mostrarExitoToast={mostrarExitoToast}
+        mostrarFalloToast={mostrarFalloToast}
+        updateData={updateData}
+        isModalOpen={isModalOpenCrear}
+        setIsModalOpen={setIsModalOpenCrear}
+        setModalIsOpenForButtonFloat={setModalIsOpenForButtonFloat}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useState, useMemo, useContext, useEffect } from "react";
 import { Table, Dropdown, Space } from "antd";
 import {
   CheckCircleOutlined,
@@ -46,7 +46,7 @@ export default function TablaGenerica({
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
   const [isModalOpenQR, setIsModalOpenQR] = useState(false);
   const windowSize = useWindowSize();
-  const { modificarPublicaciones } = useContext(AdminContext);
+  const { modificarPublicaciones, update } = useContext(AdminContext);
   const router = useRouter();
 
   // Construir para las tablas URL con parámetros
@@ -63,6 +63,8 @@ export default function TablaGenerica({
   // Fetch data
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, isLoading } = useSWR(key, fetcher);
+  console.log(data);
+  
 
   function updateData() {
     mutate(key, data);
@@ -174,6 +176,10 @@ export default function TablaGenerica({
       ),
     },
   ];
+
+  useEffect(() => { // Pasar el update data al contexto para la creacion y su posterior actualizacion de tablas 
+    updateData();
+  }, [update, tipoDePublicacion, setModalIsOpenForButtonFloat]);
 
   const handleCambiarEstado = async (record, tipoDePublicacion, id) => {
     let resp;
@@ -315,6 +321,8 @@ export default function TablaGenerica({
       key: "fecha_publicacion",
       ellipsis: true,
       width: 120,
+      // defaultSortOrder: 'ascend',
+      sorter: (a, b) => a.fecha_publicacion < b.fecha_publicacion,
       render: (fechaPublicacion) => {
         const opciones = {
           year: "numeric",
@@ -373,8 +381,8 @@ export default function TablaGenerica({
         rowKey={getRowKey}
         pagination={{
           current: page,
-          total: data?.totalCount || 0,
-          pageSize,
+          total: data?.count || 0,  // Aquí usamos count directamente
+          pageSize: data?.count <= 25 ? data?.count : 25,
           onChange: (newPage) => setPage(newPage),
           showSizeChanger: false,
           showTotal: (total, range) =>

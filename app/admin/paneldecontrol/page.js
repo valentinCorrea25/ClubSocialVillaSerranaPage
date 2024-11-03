@@ -86,7 +86,7 @@ export default function PanelDeControl() {
     {
       key: "tmp-3",
       icon: <FaRegNewspaper />,
-      label: "Noticias, Actividades y Eventos",
+      label: "Noticias y Eventos",
     },
     {
       key: "tmp-4",
@@ -121,7 +121,7 @@ export default function PanelDeControl() {
         break;
       case "tmp-3":
         setCurrentComponent("NoticiasEA");
-        setCurrentTitle("Noticias, Activiadades y Eventos");
+        setCurrentTitle("Noticias y Eventos");
         break;
       case "tmp-4":
         setCurrentComponent("Actividades");

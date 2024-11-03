@@ -18,72 +18,55 @@ export async function GET(request) {
         }
       : {};
 
-    // Primero obtenemos los conteos totales
-    const [serviciosCount, actividadesCount, eventosNoticiasCount, restaurantesCount, alquileresCount] = await Promise.all([
-      prisma.servicio.count({ where: whereClause }),
-      prisma.actividad.count({ where: whereClause }),
-      prisma.eventosNoticia.count({ where: whereClause }),
-      prisma.restaurant.count({ where: whereClause }),
-      prisma.alquiler.count({ where: whereClause }),
-    ]);
-
-    const totalCount = serviciosCount + actividadesCount + eventosNoticiasCount + restaurantesCount + alquileresCount;
-
-    // Calculamos cuántos elementos obtener de cada modelo de forma proporcional
-    const calculateTake = (modelCount) => {
-      return Math.ceil((modelCount / totalCount) * PAGE_SIZE);
-    };
-
-    // Obtenemos los datos de forma dinámica
+    // Obtenemos todos los datos sin límite
     const [servicios, actividades, eventosNoticias, restaurantes, alquileres] = await prisma.$transaction([
       prisma.servicio.findMany({ 
         where: whereClause, 
-        orderBy: { fecha_publicacion: "desc" }, 
-        take: calculateTake(serviciosCount),
-        skip: offset 
+        orderBy: { fecha_publicacion: "desc" }
       }),
       prisma.actividad.findMany({ 
         where: whereClause, 
-        orderBy: { fecha_publicacion: "desc" }, 
-        take: calculateTake(actividadesCount),
-        skip: offset 
+        orderBy: { fecha_publicacion: "desc" }
       }),
       prisma.eventosNoticia.findMany({ 
         where: whereClause, 
-        orderBy: { fecha_publicacion: "desc" }, 
-        take: calculateTake(eventosNoticiasCount),
-        skip: offset 
+        orderBy: { fecha_publicacion: "desc" }
       }),
       prisma.restaurant.findMany({ 
         where: whereClause, 
-        orderBy: { fecha_publicacion: "desc" }, 
-        take: calculateTake(restaurantesCount),
-        skip: offset 
+        orderBy: { fecha_publicacion: "desc" }
       }),
       prisma.alquiler.findMany({ 
         where: whereClause, 
-        orderBy: { fecha_publicacion: "desc" }, 
-        take: calculateTake(alquileresCount),
-        skip: offset 
+        orderBy: { fecha_publicacion: "desc" }
       }),
     ]);
 
-    // Combina y ordena los resultados
+    // Combina todos los resultados
     const allData = [...servicios, ...actividades, ...eventosNoticias, ...restaurantes, ...alquileres];
-    const sortedData = allData
-      .sort((a, b) => new Date(b.fecha_publicacion || 0) - new Date(a.fecha_publicacion || 0))
-      .slice(0, PAGE_SIZE); // Nos aseguramos de no devolver más de PAGE_SIZE elementos
+    
+    // Ordena por fecha de publicación
+    const sortedData = allData.sort((a, b) => 
+      new Date(b.fecha_publicacion || 0) - new Date(a.fecha_publicacion || 0)
+    );
+
+    const totalCount = sortedData.length;
+    const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+
+    // Aplicamos la paginación después de tener todos los datos ordenados
+    const paginatedData = sortedData.slice(offset, offset + PAGE_SIZE);
 
     return NextResponse.json({
-      pageSize: sortedData.length,
+      pageSize: paginatedData.length,
       count: totalCount,
+      totalPages,
       next: totalCount > (page * PAGE_SIZE) 
         ? `/api/listapublicaciones?page=${page + 1}${text ? `&text=${encodeURIComponent(text)}` : ''}`
         : null,
       previous: page > 1 
         ? `/api/listapublicaciones?page=${page - 1}${text ? `&text=${encodeURIComponent(text)}` : ''}` 
         : null,
-      publicaciones: sortedData,
+      publicaciones: paginatedData,
     });
   } catch (error) {
     console.error(error);

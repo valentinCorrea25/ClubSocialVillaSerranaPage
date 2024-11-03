@@ -101,7 +101,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white border-b-4 border-[--verder-super-oscuro] montserrat z-[5000]">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-3 px-10">
         <a href="/">
           <Image
             src={logo}

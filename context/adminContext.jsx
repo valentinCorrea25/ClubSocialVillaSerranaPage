@@ -12,6 +12,7 @@ export const AdminProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState(null);
   const [username, setUsername] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
+  const [update, setUpdateData] = useState(() => () => {});
 
   async function getTipoDeServicios() {
     const res = await fetch(`/api/tipoServicio`);
@@ -73,6 +74,15 @@ export const AdminProvider = ({ children }) => {
     setMensaje(data.message);
   }
 
+  const sanitizeFileName = (fileName) => {
+    return fileName
+      .replace(/\s+/g, '')
+      .normalize('NFD') 
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9.-]/g, '');
+  };
+  
+
   async function subirImagenesSupabase(fileList, tipoDePublicacion, titulo) {
     try {
       console.log(fileList);
@@ -97,7 +107,7 @@ export const AdminProvider = ({ children }) => {
 
       const uploadPromises = imagenesValidas.map(async (imagen) => {
         const { fileName, base64Data, contentType } = imagen;
-        const filePath = `posts/${new Date().getTime()}_${titulo}_${fileName}`;
+        const filePath = `posts/${new Date().getTime()}_${sanitizeFileName(fileName)}`;
 
         const { data, error } = await supabase.storage
           .from("posts")
@@ -236,6 +246,8 @@ export const AdminProvider = ({ children }) => {
         mensaje,
         setUsername,
         username,
+        setUpdateData,
+        update
       }}
     >
       {children}
