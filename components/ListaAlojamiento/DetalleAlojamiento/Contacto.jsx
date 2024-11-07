@@ -8,7 +8,7 @@ export default function ContactoInfo() {
     <div className="min-h-screen bg-[--blanco]">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center text-green-800 mb-8">Contacto - Club Social y Deportivo Villa Serrana</h1>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold mb-4 text-green-700">Información de Contacto</h2>
@@ -27,7 +27,7 @@ export default function ContactoInfo() {
               </a>
             </div>
           </div>
-          
+
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold mb-4 text-green-700">Envíanos un mensaje</h2>
             <form className="space-y-4">
@@ -38,11 +38,11 @@ export default function ContactoInfo() {
             </form>
           </div>
         </div>
-        
+
         <div className="mt-8">
-          <img 
-            src='https://www.dronestagr.am/wp-content/uploads/2017/08/DJI_0029-4-scaled.jpg' 
-            alt="Villa Serrana" 
+          <img
+            src='https://www.dronestagr.am/wp-content/uploads/2017/08/DJI_0029-4-scaled.jpg'
+            alt="Villa Serrana"
             className="w-full h-64 object-cover rounded-lg shadow-lg"
           />
         </div>

@@ -9,7 +9,7 @@ const PublicacionesSimilares = ({ restaurantes }) => {
   const router = useRouter();
 
   console.log(restaurantes);
-  
+
 
   const handleViewDetails = (id) => { // Ver si esto hay forma de actualiar
     console.log(id + 'id');
@@ -33,15 +33,15 @@ const PublicacionesSimilares = ({ restaurantes }) => {
       <div style={{ flex: 1, overflowY: 'auto', maxHeight: '500px', padding: '16px' }}>
         <List
           itemLayout="vertical"
-          dataSource={restaurantes} 
+          dataSource={restaurantes}
           // dataSource={restaurantes.filter(restaurante => restaurante.id_Restaurante !== onSelect.id_Restaurante)} 
           renderItem={item => (
             <List.Item
               key={item.id_Restaurante}
               style={{ padding: '10px', borderBottom: '1px solid #ddd', cursor: 'pointer' }}
-              // onClick={() => onSelect(item)} 
+            // onClick={() => onSelect(item)} 
             >
-              <div style={{ textAlign: 'center' }} onClick={() => {handleViewDetails(item.id_Restaurant)}}>
+              <div style={{ textAlign: 'center' }} onClick={() => { handleViewDetails(item.id_Restaurant) }}>
                 <img
                   src={item.fotos[0]}
                   alt={item.titulo}
@@ -53,10 +53,13 @@ const PublicacionesSimilares = ({ restaurantes }) => {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
                     <TagOutlined style={{ marginRight: '8px' }} />
-                    {item.descripcion || 'Categoría no disponible'}
+
+                    {item.descripcion.substring(0, 50)}
+                    {item.descripcion.length > 50 && "...."}
+
                   </div>
                   <p style={{ marginTop: '4px', color: '#666' }}>
-                  <ClockCircleOutlined /> Horarios: {item.horario_semanal || 'No disponible'}
+                    <ClockCircleOutlined /> Horarios: {item.horario_semanal || 'No disponible'}
                   </p>
                 </div>
               </div>

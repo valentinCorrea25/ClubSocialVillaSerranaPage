@@ -72,6 +72,7 @@ const FixSuspenseAlojamiento = () => {
                   mail={alojamientoSeleccionado.mail}
                   celular={alojamientoSeleccionado.celular}
                 />
+
               </div>
               {/* <MapaLeaflet ubicacion={alojamientoSeleccionado.ubicacion} /> */}
             </div>

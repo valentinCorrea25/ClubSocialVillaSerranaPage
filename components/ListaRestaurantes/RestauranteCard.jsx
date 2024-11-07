@@ -71,15 +71,25 @@ const RestauranteCard = ({ restaurante }) => {
                 }
                 description={
                     <>
-                        <div style={{ color: "#0367A6" }}>
-                            <EnvironmentOutlined style={{ marginLeft: "8px" }} /> Ubicación: {ubicacion_calles}
+                        <div style={{ display: "flex", alignItems: "center", color: "#0367A6" }}>
+                            <EnvironmentOutlined style={{ marginRight: "8px" }} />
+                            <span>Ubicación: {ubicacion_calles}</span>
                         </div>
-                        <div style={{ color: "#0367A6" }}>
-                            <HistoryOutlined style={{ marginLeft: "8px" }} /> Horario semana: {horario_semanal}
-                        </div>
-                        <div style={{ color: "#0367A6" }}>
-                            <HistoryOutlined style={{ marginLeft: "8px" }} /> Horario fin de semana: {horario_finde}
-                        </div>
+                        {horario_semanal && (
+                            <div style={{ display: "flex", alignItems: "center", color: "#0367A6" }}>
+                                <HistoryOutlined style={{ marginRight: "8px" }} />
+                                <span>Horario semana: {horario_semanal}</span>
+                            </div>
+                        )}
+                        {horario_finde && (
+                            <div style={{ display: "flex", alignItems: "center", color: "#0367A6" }}>
+                                <HistoryOutlined style={{ marginRight: "8px" }} />
+                                <span>Horario fin de semana: {horario_finde}</span>
+                            </div>
+                        )}
+
+
+
                         <div style={{ marginTop: "8px" }}>
                             {diasSemana.map((dia, index) => (
                                 <Tag key={index} style={{ marginRight: "4px" }}>

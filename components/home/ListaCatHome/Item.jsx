@@ -66,11 +66,11 @@ export default function Item({ informacion, type }) {
               </h2>
               <h2 className="font-normal flex items-center gap-0.5 text-left">
                 <ClockCircleOutlined size={10} />
-                Lunes a Viernes: {informacion?.horario_semanal}
+                Horario semana: {informacion?.horario_semanal}
               </h2>
               <h2 className="font-normal flex items-center gap-0.5 text-left">
                 <SunOutlined size={10} />
-                Sábados: {informacion?.horario_finde}
+                Fin de semana: {informacion?.horario_finde}
               </h2>
             </div>
           </div>

@@ -30,7 +30,6 @@ const CaracteristicasAlojamiento = ({ restaurante }) => {
           <div className='flex flex-col gap-3'>
             <p><ClockCircleOutlined style={{ marginRight: '8px' }} /> <strong>Semanal:</strong> {horario_semanal || 'No disponible'}</p>
             <p><CalendarOutlined style={{ marginRight: '8px' }} /> <strong>Fin de Semana:</strong> {horario_finde || 'No disponible'}</p>
-            <p><CalendarOutlined style={{ marginRight: '8px' }} /> <strong>Domingos:</strong> {domingo ? 'Sí' : 'No'}</p>
           </div>
         </div>
 

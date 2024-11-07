@@ -14,11 +14,11 @@ const Informacion = ({ restaurante }) => (
   >
     <p className="text-gray-800 mb-2 text-">
       <EnvironmentOutlined style={{ marginRight: 8 }} />
-      {restaurante?.ubicacion_calles || 'Ubicación no disponible'}
+      Ubicacion: {restaurante?.ubicacion_calles || 'Ubicación no disponible'}
     </p>
     <p className="text-gray-800 mb-2">
       <FileTextOutlined style={{ marginRight: 8 }} />
-      {restaurante?.descripcion || 'Descripcion no disponible'}
+      Descripcion: {restaurante?.descripcion || 'Descripcion no disponible'}
     </p>
   </Card>
 );

@@ -30,9 +30,9 @@ const PublicacionesSimilares = ({ similares }) => {
           backgroundColor: 'var(--verde-oscuro)',
           color: 'var(--blanco)',
           padding: '16px',
-          margin: '-16px -16px 16px -16px', 
-          borderRadius: '8px 8px 0 0', 
-          width: 'calc(100% + 32px)' 
+          margin: '-16px -16px 16px -16px',
+          borderRadius: '8px 8px 0 0',
+          width: 'calc(100% + 32px)'
         }}
       >
         <div className="text-2xl font-bold text-center">Publicaciones Similares</div>
