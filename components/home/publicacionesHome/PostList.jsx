@@ -14,7 +14,7 @@ function PostList() {
       const data = await ultimas3EventoNoticia();
       setPublicaciones(data);  // Directly set the data returned from ultimas3EventoNoticia
     };
-  
+
     fetchPublicaciones();
   }, []); // Empty dependency array means this runs once on component mount
 
@@ -38,8 +38,8 @@ export function ListaDeUltimasPublicaciones() {
       <h1 className="text-2xl md:text-3xl text-center font-semibold">ÚLTIMOS EVENTOS Y NOTICIAS</h1>
       <PostList />
       <Button onClick={() => router.push('/ListaEventosNoticias')} className="w-32" type="primary">
-        <h1>Ver más</h1>
-      </Button> 
+        Ver más
+      </Button>
     </div>
   );
 };
