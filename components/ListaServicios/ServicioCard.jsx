@@ -21,7 +21,7 @@ const ServicioCard = ({ servicio }) => {
         hoverable
         className="sm:h-[420px] sm:p-5 md:max-w-[500px] max-w-80"
         style={{
-          height: "420px",
+          height: "auto",
           margin: "0 auto",
           marginBottom: "24px",
           borderRadius: "8px",

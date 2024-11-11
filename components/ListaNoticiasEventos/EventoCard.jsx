@@ -24,7 +24,7 @@ const EventoCard = ({ evento }) => {
   const categoriaLabel = fechaEventoDate > fechaCorte ? "Noticias" : "Eventos";
   const fechaevento = fechaEventoDate > fechaCorte ? '' : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
   const router = useRouter();
-  
+
   const handleViewDetails = (id) => {
     router.push(`/ListaEventosNoticias/DetalleEventosNoticias?id=${id}`);
   };
@@ -33,12 +33,12 @@ const EventoCard = ({ evento }) => {
   const cleanContent = (htmlContent) => {
     const temp = document.createElement('div');
     temp.innerHTML = htmlContent;
-    
+
     const brElements = temp.getElementsByTagName('br');
-    while(brElements.length) {
+    while (brElements.length) {
       brElements[0].replaceWith(' ');
     }
-    
+
     return temp.textContent || temp.innerText;
   };
 
@@ -59,7 +59,7 @@ const EventoCard = ({ evento }) => {
             src={fotos[0]}
             style={{
               width: "100%",
-              height: "100%",
+              height: "250px",
               maxHeight: "250px",
               objectFit: "cover",
               borderRadius: "8px",
@@ -78,9 +78,9 @@ const EventoCard = ({ evento }) => {
     >
       <Meta
         title={
-          <div 
-            style={{ 
-              fontSize: "20px", 
+          <div
+            style={{
+              fontSize: "20px",
               fontWeight: "bold",
               whiteSpace: "normal",
               wordWrap: "break-word",

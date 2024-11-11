@@ -18,7 +18,7 @@ const ListaAlojamientosPage = () => {
   const handleFilterChange = (filters) => {
     const { priceRange, capacity } = filters;
     console.log(alquileres + 'ogoalsd');
-    
+
     const filtered = alquileres.filter(
       (alojamiento) =>
         alojamiento.price >= priceRange[0] &&
@@ -41,7 +41,7 @@ const ListaAlojamientosPage = () => {
         const data = await todosLosAlquileres();
         if (data) {
           console.log(data);
-          
+
           setFilteredAlojamientos(data.publicaciones)
           setNoResults(true);
         } else {
@@ -61,7 +61,7 @@ const ListaAlojamientosPage = () => {
 
   return (
     <>
-    {/* <div className="flex flex-col bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+      {/* <div className="flex flex-col bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
             <Banners
       title="Alojamiento"
       subtitle="Busca tu alojamiento"
@@ -106,28 +106,30 @@ const ListaAlojamientosPage = () => {
         />
       )}
     </div> */}
+      <div style={{ padding: "10px", margin: "0 auto", maxWidth: "1200px" }}>
+        <Banners
+          title="Alojamientos"
+          subtitle="Descubre los mejores alojamientos en Villa Serrana"
+          backgroundImage="/images/actividad.jpg"
+        />
+      </div>
+      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
 
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
-      <Banners
-        title="Alojamientos"
-        subtitle="Descubre los mejores alojamientos en Villa Serrana"
-        backgroundImage="/images/actividad.jpg"
-      />
 
-        <Buscador  onFilterChange={handleFilterChange} />
-      {!noResults ? (
-        <div className="flex items-center justify-center flex-col md:flex-row gap-10">
-          <Skeleton className="w-72" paragraph title/>
-          <Skeleton className="w-72" paragraph title/>
-          <Skeleton className="w-72" paragraph title/>
-        </div>
-      ) : (
-        <ListaAlojamientos
-        alojamientos={filteredAlojamientos}
-        onViewDetails={handleViewDetails}
-      />
-      )}
-    </div>
+        <Buscador onFilterChange={handleFilterChange} />
+        {!noResults ? (
+          <div className="flex items-center justify-center flex-col md:flex-row gap-10">
+            <Skeleton className="w-72" paragraph title />
+            <Skeleton className="w-72" paragraph title />
+            <Skeleton className="w-72" paragraph title />
+          </div>
+        ) : (
+          <ListaAlojamientos
+            alojamientos={filteredAlojamientos}
+            onViewDetails={handleViewDetails}
+          />
+        )}
+      </div>
 
 
 

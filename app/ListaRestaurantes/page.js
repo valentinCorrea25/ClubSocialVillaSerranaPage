@@ -46,24 +46,20 @@ const ListaRestaurantesPage = () => {
 
   return (
     <>
-
-
-
-      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+      <div style={{ padding: "10px", margin: "0 auto", maxWidth: "1200px" }}>
         <Banner
           title="Restaurantes"
           subtitle="Descubre nuestras opciones"
           backgroundImage="/images/restaurantes.jpg"
 
         />
-
-
-
+      </div>
+      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 ">
 
         <Content>
           <div style={{
             textAlign: 'center',
-            marginBottom: '32px'
+            marginBottom: ''
           }}>
             {/* <Buscador 
             categories={categories}
