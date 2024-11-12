@@ -13,10 +13,10 @@ export default function Item({ informacion, type }) {
           <div className="p-4 shadow-md border  max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer"
             onClick={() => router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`)}
           >
-            <div className="mb-4 w-full h-[180px] max-h-[250px] ">
+            <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
-                className="w-full max-h-[150px] object-cover shadow-lg cursor-pointer"
+                className="w-full h-[160px] max-h-[250px] object-cover shadow-lg cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>
@@ -47,10 +47,10 @@ export default function Item({ informacion, type }) {
           <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]"
             onClick={() => router.push(`/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`)}>
 
-            <div className="mb-4 w-full max-h-[250px]">
+            <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
-                className="w-full shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
+                className="w-full h-[169px] max-h-[250px] shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>
@@ -78,23 +78,23 @@ export default function Item({ informacion, type }) {
       ) : type == 3 ? (
         <>
           <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]">
-            <div className="mb-4 w-full h-[180px] max-h-[250px]">
+            <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
-                className="w-full max-h-[190px] object-cover shadow-lg cursor-pointer"
+                className="w-full h-[160px] max-h-[250px] object-cover shadow-lg cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>
 
             <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
-              {informacion?.titulo?.length > 40
-                ? informacion.titulo.substring(0, 40) + "..."
+              {informacion?.titulo?.length > 35
+                ? informacion.titulo.substring(0, 35) + "..."
                 : informacion?.titulo}
             </h1>
             <p className="font-normal leading-5 text-sm text-justify w-full max-w-[320px] md:max-w-none">
               <span dangerouslySetInnerHTML={{
-                __html: informacion?.contenido?.length > 120
-                  ? informacion.contenido.substring(0, 110) + "... "
+                __html: informacion?.contenido?.length > 220
+                  ? informacion.contenido.substring(0, 210) + "... "
                   : informacion?.contenido
               }}></span>
               <a className="text-[--verde] font-semibold cursor-pointer">
@@ -109,10 +109,10 @@ export default function Item({ informacion, type }) {
       ) : type == 4 ? (
         <>
           <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]">
-            <div className=" mb-4 w-full h-[180px] max-h-[250px]">
+            <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
-                className="w-full shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
+                className="w-full h-[160px] max-h-[250px]shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>

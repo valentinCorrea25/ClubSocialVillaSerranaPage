@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, Tag, Button } from "antd";
+import { Card, Button } from "antd";
 import { CalendarOutlined, TagOutlined } from "@ant-design/icons";
 import { useRouter } from 'next/navigation';
 
@@ -98,13 +98,13 @@ const EventoCard = ({ evento }) => {
               {new Date(fecha_publicacion).toLocaleDateString()}
               <TagOutlined style={{ marginLeft: "8px" }} />{" "}
               {categoriaLabel}
-              <div style={{ marginTop: "8px" }}>
+              <div style={{ marginTop: "5px" }}>
                 <span>{fechaevento}</span>
               </div>
             </div>
             <p
               style={{
-                marginTop: "16px",
+                marginTop: "5px",
                 height: "auto",
                 overflow: "hidden",
                 textOverflow: "ellipsis",

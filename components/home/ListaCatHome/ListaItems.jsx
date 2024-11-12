@@ -7,10 +7,10 @@ import { ClientContext } from "@/context/clientContext";
 
 export default function ListaItems({ type }) {
   const { alquileresRandom,
-          restaurantesRandom, 
-          eventosNoticiasRandom, 
-          actividadesRandom, 
-          serviciosRandom } = useContext(ClientContext);
+    restaurantesRandom,
+    eventosNoticiasRandom,
+    actividadesRandom,
+    serviciosRandom } = useContext(ClientContext);
   const router = useRouter();
   const [items, setItems] = useState([]);
 
@@ -33,10 +33,10 @@ export default function ListaItems({ type }) {
     }
   }
 
-  
-  const isMobile = window.innerWidth < 640; 
 
-  
+  const isMobile = window.innerWidth < 640;
+
+
   const displayedItems = isMobile && items.length > 3 ? items.slice(0, 3) : items;
 
   return (
@@ -44,7 +44,7 @@ export default function ListaItems({ type }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
         {displayedItems.length > 0 ? (
           displayedItems.map((item, index) => (
-            <div className=" p-4 text-center" key={index}>
+            <div className="  text-center" key={index}>
               <Item type={type} informacion={item} />
             </div>
           ))
@@ -60,25 +60,25 @@ export default function ListaItems({ type }) {
         onClick={() => {
           router.push(
             type === 1 ? "/ListaAlojamiento"
-            : type === 2 ? "/ListaRestaurantes"
-            : type === 3 ? "/ListaEventosNoticias"
-            : type === 4 ? "/ListaActividades"
-            : type === 5 ? "/ListaServicios"
-            : null
+              : type === 2 ? "/ListaRestaurantes"
+                : type === 3 ? "/ListaEventosNoticias"
+                  : type === 4 ? "/ListaActividades"
+                    : type === 5 ? "/ListaServicios"
+                      : null
           );
         }}
       > Ver
-          {type === 1
+        {type === 1
           ? " Alojamientos"
           : type === 2
-          ? " Restaurantes"
-          : type === 3
-          ? " Noticias y Eventos"
-          : type === 4
-          ? " Actividades"
-          : type === 5
-          ? " Servicios"
-          : null}
+            ? " Restaurantes"
+            : type === 3
+              ? " Noticias y Eventos"
+              : type === 4
+                ? " Actividades"
+                : type === 5
+                  ? " Servicios"
+                  : null}
       </Button>
     </div>
   );
