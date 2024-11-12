@@ -105,8 +105,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todosLosRestaurantes() {
-    const res = await fetch(`/api/restaurantes/lista`);
+  async function todosLosRestaurantes(page) {
+    const res = await fetch(`/api/restaurantes/lista?page=${page ? page : 1}`);
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -114,8 +114,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todosLosAlquileres() {
-    const res = await fetch(`/api/alquileres/lista`);
+  async function todosLosAlquileres(page) {
+    const res = await fetch(`/api/alquileres/lista?page=${page ? page : 1}`);
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -148,8 +148,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todasLasNoticiasEventos() {
-    const res = await fetch(`/api/eventosnoticias/lista`);
+  async function todasLasNoticiasEventos(page) {
+    const res = await fetch(`/api/eventosnoticias/lista?page=${page ? page : 1}`);
     const data = await res.json();
 
     const dataFiltrada = excluirNoPublicados(data.publicaciones);

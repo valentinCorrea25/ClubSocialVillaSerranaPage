@@ -4,15 +4,18 @@ import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Buscador from "@/components/ListaAlojamiento/Buscador";
 import ListaAlojamientos from "@/components/ListaAlojamiento/ListaAlojamientos";
-import { Skeleton } from "antd";
+import { Pagination, Skeleton } from "antd";
 import { ClientContext } from "@/context/clientContext";
 import Banners from "@/components/utils/Banners";
+import { scrollToTop } from "@/components/utils/ControlPublicaciones";
 
 const ListaAlojamientosPage = () => {
   const [alquileres, setTodosLosAlquileres] = useState()
   const [filteredAlojamientos, setFilteredAlojamientos] = useState();
   const { todosLosAlquileres } = useContext(ClientContext);
   const [noResults, setNoResults] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState();
   const router = useRouter();
 
   const handleFilterChange = (filters) => {
@@ -38,11 +41,11 @@ const ListaAlojamientosPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await todosLosAlquileres();
+        const data = await todosLosAlquileres(page);
         if (data) {
           console.log(data);
-          
           setFilteredAlojamientos(data.publicaciones)
+          setTotal(data.totalPages);
           setNoResults(true);
         } else {
           console.log("publicacion is null after fetch");
@@ -53,7 +56,11 @@ const ListaAlojamientosPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    scrollToTop();
+  }, [page]);
 
   const handleViewDetails = (id) => {
     router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${id}`);
@@ -128,9 +135,13 @@ const ListaAlojamientosPage = () => {
       />
       )}
     </div>
-
-
-
+    <Pagination
+        current={page}
+        onChange={(newPage) => setPage(newPage)}
+        total={total * 25}
+        pageSize={25}
+        align="center"
+      />
 
 
 

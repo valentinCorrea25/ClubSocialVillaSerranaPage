@@ -111,7 +111,7 @@ const CrearNuevoUsuario = ({
       </h1>
      <div className="flex flex-col">
       <div className=" w-full flex justify-end mb-2">
-     <Button onClick={handleCreate} className="bg-[--verde] text-white hidden sm:block right-0"> Crear Usuario </Button>
+     <Button onClick={handleCreate} className="bg-[--verde] text-white sm:block right-0"> Crear Usuario </Button>
       </div>
      <Table
         dataSource={data ? data.usuarios : []}

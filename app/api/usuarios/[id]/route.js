@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(request, { params }) {
   try {
-    const USUARIO_PRICIPAL = 9
+    const USUARIO_PRICIPAL = 7
 
     if (params.id == USUARIO_PRICIPAL) {
       return NextResponse.json({
-        message: "No se puede eliminar al usuario pricipal",
+        message: "No se puede eliminar al usuario pricipal Martin",
         code: 500,
       });
     }

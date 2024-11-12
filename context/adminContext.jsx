@@ -182,9 +182,9 @@ export const AdminProvider = ({ children }) => {
 
       const data = await res.json();
       setMensaje(data.message);
+      return data;
     } catch (error) {
-      console.error("Hubo un error al eliminar la publicación:", error);
-      setMensaje("Error al eliminar la publicación. Inténtalo nuevamente.");
+      console.error("Hubo un error al eliminar el usuario:", error);
     }
   }
 

@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import ActividadesList from "@/components/ListaActividades/ActividadesList";
 import Banner from "@/components/utils/Banners";
 import { ClientContext } from "@/context/clientContext";
-import { Skeleton } from "antd";
+import { Pagination, Skeleton } from "antd";
 
 const ActividadPage = () => {
   const { todasLasActividades } = useContext(ClientContext);
   const [actividades, setActividades] = useState();
   const [noResults, setNoResults] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState();
   const appStyle = { padding: "10px", margin: "0 auto", width: "100%" };
   const router = useRouter();
 
@@ -21,6 +23,7 @@ const ActividadPage = () => {
         if (data) {
           setActividades(data.publicaciones);
           setNoResults(true);
+          setTotal(data.totalPages);
         } else {
           console.log("publicacion is null after fetch");
         }
@@ -50,6 +53,13 @@ const ActividadPage = () => {
         <ActividadesList actividades={actividades}
         />
       )}
+      <Pagination
+        current={page}
+        onChange={(newPage) => setPage(newPage)}
+        total={total*25}
+        pageSize={25}
+        align="center"
+      />
     </div>
   );
 };

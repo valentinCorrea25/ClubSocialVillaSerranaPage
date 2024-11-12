@@ -34,11 +34,12 @@ export default function CrearUsuarioModal({
       } else {
         mostrarExitoToast(data.message);
         handleClose();
-        setLoading(false);
         updateData();
       }
     } catch (e) {
       console.log(e);
+      setLoading(false);
+    }finally {
       setLoading(false);
     }
   };

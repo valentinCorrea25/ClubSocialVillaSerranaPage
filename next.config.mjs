@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ['res.cloudinary.com'],  // Add Cloudinary domain to allowed list
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(mp4|webm)$/,
@@ -15,5 +18,4 @@ const nextConfig = {
   },
 };
 
-// En lugar de module.exports, usamos export default
 export default nextConfig;

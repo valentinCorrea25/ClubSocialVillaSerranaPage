@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Select, Button, Space } from 'antd';
 import { tituloCorrectoServicio } from '../utils/ControlPublicaciones';
 
@@ -6,10 +6,17 @@ const { Option } = Select;
 
 const Buscador = ({ categories, onFilterChange }) => {
   // Convertir el objeto de categorías en un array para poder mapearlo
+  const [selectedCategory, setSelectedCategory] = useState('');
   const categoryArray = Object.keys(categories);
 
   const handleCategoryChange = (value) => {
+    setSelectedCategory(value);
     onFilterChange(value);
+  };
+
+  const handleShowAll = () => {
+    setSelectedCategory('');
+    onFilterChange('');
   };
 
   return (
@@ -19,6 +26,7 @@ const Buscador = ({ categories, onFilterChange }) => {
         style={{ width: '200px', marginRight: '16px' }}
         onChange={handleCategoryChange}
         allowClear
+        value={selectedCategory}
       >
         <Option value="">Todos</Option>
         {categoryArray.map((category) => (
@@ -27,7 +35,7 @@ const Buscador = ({ categories, onFilterChange }) => {
           </Option>
         ))}
       </Select>
-      <Button type="primary" onClick={() => handleCategoryChange('')}>
+      <Button type="primary" onClick={() => handleShowAll()}>
         Mostrar Todos
       </Button>
     </div>

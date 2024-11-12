@@ -19,17 +19,22 @@ export default function EliminarUsuarioModal({
   };
 
   const onFinish = async () => {
+    setLoading(true);
     mostrarCargarToast();
     try {
-      await eliminarUsuario(selectedItem.id);
+      const data = await eliminarUsuario(selectedItem.id);
       await updateData();
-      mostrarExitoToast('Usuario eliminado con exito');
+      if(data.code == 500){
+        mostrarFalloToast(data.message);
+      }else{
+        mostrarExitoToast(data.message);
+      }
     }catch(e){
       console.log(e);
       mostrarFalloToast('No se ha podido eliminar al usuario');
     } finally {
-      setLoading(false); // Detener el estado de carga, independientemente del resultado
-      handleClose(); // Cerrar el modal
+      setLoading(false);
+      handleClose(); 
     }
   };
 
