@@ -2,11 +2,12 @@
 import Carousel from '@/components/ListaActividades/DetalleActividades/Carousel'
 import { Actividad, Características, UbicacionMap } from '@/components/ListaActividades/DetalleActividades/Actividades';
 import PubliSimilares from '@/components/ListaActividades/DetalleActividades/PublicacionesSimilares';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useContext } from 'react';
 import { ClientContext } from '@/context/clientContext';
 import { Spin } from 'antd';
 import { Suspense } from 'react';
+import PublicacionNoEncontrada from '@/components/utils/PublicacionNoEncontrada';
 
 export default function FixSuspenseActividades() {
   const searchParams = useSearchParams();
@@ -15,6 +16,7 @@ export default function FixSuspenseActividades() {
   const [actividadSeleccionado, setActividadSeleccionado] = useState(null);
   const [actividadesSimilares, setActividadSimilares] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function FixSuspenseActividades() {
   }
 
   if (!actividadSeleccionado) {
-    return <div>Actividad no encontrada</div>;
+    return <PublicacionNoEncontrada/>
   }
 
 

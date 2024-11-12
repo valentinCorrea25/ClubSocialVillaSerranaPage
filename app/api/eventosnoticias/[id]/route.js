@@ -7,6 +7,7 @@ export async function GET(request, { params }) {
     const eventosNoticia = await prisma.eventosNoticia.findUnique({
       where: {
         id_EventoNoticia: Number(params.id),
+        publicado: true
       },
     });
 

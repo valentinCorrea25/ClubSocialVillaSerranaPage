@@ -244,7 +244,7 @@ export default function TablaGenerica({
             src={fotoSrc || imagenPorDefecto}
             alt="Portada"
             style={{ width: "120px", height: "80px", objectFit: "cover" }}
-            className={!record.publicado ? "opacity-30" : null}
+            className={`${!record.publicado ? "opacity-30" : ''} hover:opacity-85 cursor-pointer transition-all`}
           />
         );
       },
@@ -274,7 +274,7 @@ export default function TablaGenerica({
           : "Desconocido";
 
         return (
-          <div className="flex">
+          <div className="flex hover:opacity-85 hover:shadow-sm cursor-pointer transition-all">
             <div className="flex flex-col max-w-24">
               <div>{truncatedTitle}</div>
               <div className="font-bold">{tipoPublicacion}</div>

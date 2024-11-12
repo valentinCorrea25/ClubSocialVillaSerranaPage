@@ -13,9 +13,18 @@ export async function POST(req) {
       },
     });
 
+    const count = await prisma.usuario.count();
+
+    if(count >= 6){
+      return NextResponse.json({
+        message: `No pueden crearse mas de 5 usuarios, sin contar al usuario principal`,
+        code: 500,
+      });
+    }
+
     if (hasRepeteadName) {
       return NextResponse.json({
-        message: `Nombre de usuario ya utilizado! \n id: ${hasRepeteadName.id}`,
+        message: `Nombre de usuario ya utilizado: ${hasRepeteadName.nombre}`,
         code: 500,
       });
     }

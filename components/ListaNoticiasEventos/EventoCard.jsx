@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { Card, Tag, Button } from "antd";
+import { Card, Button } from "antd";
 import { CalendarOutlined, TagOutlined } from "@ant-design/icons";
 import { useRouter } from 'next/navigation';
+import { cleanContent } from "../utils/ControlPublicaciones";
 
 const { Meta } = Card;
 
@@ -24,22 +25,9 @@ const EventoCard = ({ evento }) => {
   const categoriaLabel = fechaEventoDate > fechaCorte ? "Noticias" : "Eventos";
   const fechaevento = fechaEventoDate > fechaCorte ? '' : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
   const router = useRouter();
-  
+
   const handleViewDetails = (id) => {
     router.push(`/ListaEventosNoticias/DetalleEventosNoticias?id=${id}`);
-  };
-
-  // Función para limpiar el contenido de tags BR y obtener texto plano
-  const cleanContent = (htmlContent) => {
-    const temp = document.createElement('div');
-    temp.innerHTML = htmlContent;
-    
-    const brElements = temp.getElementsByTagName('br');
-    while(brElements.length) {
-      brElements[0].replaceWith(' ');
-    }
-    
-    return temp.textContent || temp.innerText;
   };
 
   return (
@@ -59,7 +47,7 @@ const EventoCard = ({ evento }) => {
             src={fotos[0]}
             style={{
               width: "100%",
-              height: "100%",
+              height: "250px",
               maxHeight: "250px",
               objectFit: "cover",
               borderRadius: "8px",
@@ -78,9 +66,9 @@ const EventoCard = ({ evento }) => {
     >
       <Meta
         title={
-          <div 
-            style={{ 
-              fontSize: "20px", 
+          <div
+            style={{
+              fontSize: "20px",
               fontWeight: "bold",
               whiteSpace: "normal",
               wordWrap: "break-word",
@@ -98,13 +86,13 @@ const EventoCard = ({ evento }) => {
               {new Date(fecha_publicacion).toLocaleDateString()}
               <TagOutlined style={{ marginLeft: "8px" }} />{" "}
               {categoriaLabel}
-              <div style={{ marginTop: "8px" }}>
+              <div style={{ marginTop: "5px" }}>
                 <span>{fechaevento}</span>
               </div>
             </div>
             <p
               style={{
-                marginTop: "16px",
+                marginTop: "5px",
                 height: "auto",
                 overflow: "hidden",
                 textOverflow: "ellipsis",

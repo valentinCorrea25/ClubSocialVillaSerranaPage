@@ -6,6 +6,7 @@ export async function GET(request, { params }) {
     const actividad = await prisma.actividad.findUnique({
       where: {
         id_Actividad: Number(params.id),
+        publicado: true
       },
     });
 

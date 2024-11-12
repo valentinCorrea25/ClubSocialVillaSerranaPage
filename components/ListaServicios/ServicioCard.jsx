@@ -21,7 +21,7 @@ const ServicioCard = ({ servicio }) => {
         hoverable
         className="sm:h-[420px] sm:p-5 md:max-w-[500px] max-w-80"
         style={{
-          height: "420px",
+          height: "390px",
           margin: "0 auto",
           marginBottom: "24px",
           borderRadius: "8px",
@@ -41,7 +41,7 @@ const ServicioCard = ({ servicio }) => {
         visible={visible}
         onCancel={handleCancel}
         footer={
-          <a href="tel:555-555-5555" className="flex justify-center">
+          <a href={`tel:${servicio.celular}`} className="flex justify-center">
             <Button size="large" className="bg-[--verde] text-white">Llamar</Button>
           </a>
         }

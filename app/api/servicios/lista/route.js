@@ -12,7 +12,8 @@ export async function GET(request, { params }) {
       ? null
       : searchParams.get("tiposervicio");
   const page = pageValue ? parseInt(pageValue, 10) : 1;
-  const pageSize = 25;
+  const web = searchParams.get("web") == "" ? null : searchParams.get("web");
+  const pageSize = web ? 9 : 25;
   const skip = (page - 1) * pageSize;
   const take = parseInt(pageSize);
 
@@ -23,6 +24,8 @@ export async function GET(request, { params }) {
           mode: "insensitive",
         },
       }
+    : web
+    ? { publicado: true }
     : {};
 
   if (!tipoServicio) {
@@ -49,12 +52,12 @@ export async function GET(request, { params }) {
         next: hasNextPage
           ? `/api/servicios/lista?page=${page + 1}${
               text ? `&text=${text}` : ""
-            }`
+            }${web ? "&web=true" : ""}`
           : null,
         previous: hasPreviousPage
           ? `/api/servicios/lista?page=${page - 1}${
               text ? `&text=${text}` : ""
-            }`
+            }${web ? "&web=true" : ""}`
           : null,
         publicaciones: servicios,
       });
@@ -92,12 +95,12 @@ export async function GET(request, { params }) {
         next: hasNextPage
           ? `/api/servicios/lista?page=${page + 1}${
               tipoServicio ? `&tiposervicio=${tipoServicio}` : ""
-            }`
+            }${web ? "&web=true" : ""}`
           : null,
         previous: hasPreviousPage
           ? `/api/servicios/lista?page=${page - 1}${
               tipoServicio ? `&tiposervicio=${tipoServicio}` : ""
-            }`
+            }${web ? "&web=true" : ""}`
           : null,
         publicaciones: servicios,
       });

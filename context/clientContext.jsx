@@ -105,8 +105,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todosLosRestaurantes() {
-    const res = await fetch(`/api/restaurantes/lista`);
+  async function todosLosRestaurantes(page) {
+    const res = await fetch(`/api/restaurantes/lista?page=${page ? page : 1}&web=true`);
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -114,8 +114,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todosLosAlquileres() {
-    const res = await fetch(`/api/alquileres/lista`);
+  async function todosLosAlquileres(page) {
+    const res = await fetch(`/api/alquileres/lista?page=${page ? page : 1}&web=true`);
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -123,8 +123,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todasLasActividades() {
-    const res = await fetch(`/api/actividades/lista`);
+  async function todasLasActividades(page) {
+    const res = await fetch(`/api/actividades/lista?page=${page ? page : 1}`);
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -134,13 +134,15 @@ export const ClientProvider = ({ children }) => {
 
   async function todosLosServicios(page, tipo) {
     const res = await fetch(
-      `/api/servicios/lista?page=${page ? page : 1}${
+      `/api/servicios/lista?page=${page ? page : 1}&web=true${
         tipo ? `&tiposervicio=${tipo}` : ""
       }`
     );
     const data = await res.json();
 
-    console.log(data);
+    console.log(`/api/servicios/lista?page=${page ? page : 1}&web=true${
+        tipo ? `&tiposervicio=${tipo}` : ""
+      }`);
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
     data.publicaciones = tituloServicioCorrectos(data.publicaciones);
@@ -148,8 +150,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todasLasNoticiasEventos() {
-    const res = await fetch(`/api/eventosnoticias/lista`);
+  async function todasLasNoticiasEventos(page) {
+    const res = await fetch(`/api/eventosnoticias/lista?page=${page ? page : 1}&web=true`);
     const data = await res.json();
 
     const dataFiltrada = excluirNoPublicados(data.publicaciones);

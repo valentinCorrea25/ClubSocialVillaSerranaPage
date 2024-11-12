@@ -4,21 +4,24 @@ import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Buscador from "@/components/ListaAlojamiento/Buscador";
 import ListaAlojamientos from "@/components/ListaAlojamiento/ListaAlojamientos";
-import { Skeleton } from "antd";
+import { Pagination, Skeleton } from "antd";
 import { ClientContext } from "@/context/clientContext";
 import Banners from "@/components/utils/Banners";
+import { scrollToTop } from "@/components/utils/ControlPublicaciones";
 
 const ListaAlojamientosPage = () => {
   const [alquileres, setTodosLosAlquileres] = useState()
   const [filteredAlojamientos, setFilteredAlojamientos] = useState();
   const { todosLosAlquileres } = useContext(ClientContext);
   const [noResults, setNoResults] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState();
   const router = useRouter();
 
   const handleFilterChange = (filters) => {
     const { priceRange, capacity } = filters;
     console.log(alquileres + 'ogoalsd');
-    
+
     const filtered = alquileres.filter(
       (alojamiento) =>
         alojamiento.price >= priceRange[0] &&
@@ -38,11 +41,11 @@ const ListaAlojamientosPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await todosLosAlquileres();
+        const data = await todosLosAlquileres(page);
         if (data) {
           console.log(data);
-          
           setFilteredAlojamientos(data.publicaciones)
+          setTotal(data.totalPages);
           setNoResults(true);
         } else {
           console.log("publicacion is null after fetch");
@@ -53,7 +56,11 @@ const ListaAlojamientosPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    scrollToTop();
+  }, [page]);
 
   const handleViewDetails = (id) => {
     router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${id}`);
@@ -61,79 +68,38 @@ const ListaAlojamientosPage = () => {
 
   return (
     <>
-    {/* <div className="flex flex-col bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
-            <Banners
-      title="Alojamiento"
-      subtitle="Busca tu alojamiento"
-      backgroundImage="/images/alojamiento.jpg" 
-      />
-    </div>
-    
-    <div
-      style={{
-        padding: "30px 20px",
-        backgroundColor: "#f9f6ee",
-        minHeight: "100vh",
-        maxWidth: "1200px",
-        margin: "0 auto",
-      }}
-      
-    >
 
-      <div
-        style={{
-          margin:"10px",
-          padding: "10px",
-          borderBottom: "1px solid #ddd",
-          marginBottom: "40px",
-          borderRadius: "4px",
-          backgroundColor: "#fff",
-        }}
-      >
-        <Buscador onFilterChange={handleFilterChange} />
-      </div>
-      {!noResults ? (
-        <div className="flex flex-col gap-28">
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-        </div>
-      ) : (
-        <ListaAlojamientos
-          alojamientos={filteredAlojamientos}
-          onViewDetails={handleViewDetails}
+      <div style={{ padding: "10px", margin: "0 auto", maxWidth: "1250px" }}>
+        <Banners
+          title="Alojamientos"
+          subtitle="Descubre los mejores alojamientos en Villa Serrana"
+          backgroundImage="/images/actividad.jpg"
         />
-      )}
-    </div> */}
+      </div>
+      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
 
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
-      <Banners
-        title="Alojamientos"
-        subtitle="Descubre los mejores alojamientos en Villa Serrana"
-        backgroundImage="/images/actividad.jpg"
+
+        <Buscador onFilterChange={handleFilterChange} />
+        {!noResults ? (
+          <div className="flex items-center justify-center flex-col md:flex-row gap-10">
+            <Skeleton className="w-72" paragraph title />
+            <Skeleton className="w-72" paragraph title />
+            <Skeleton className="w-72" paragraph title />
+          </div>
+        ) : (
+          <ListaAlojamientos
+            alojamientos={filteredAlojamientos}
+            onViewDetails={handleViewDetails}
+          />
+        )}
+      </div>
+    <Pagination
+        current={page}
+        onChange={(newPage) => setPage(newPage)}
+        total={total * 25}
+        pageSize={25}
+        align="center"
       />
-
-        <Buscador  onFilterChange={handleFilterChange} />
-      {!noResults ? (
-        <div className="flex items-center justify-center flex-col md:flex-row gap-10">
-          <Skeleton className="w-72" paragraph title/>
-          <Skeleton className="w-72" paragraph title/>
-          <Skeleton className="w-72" paragraph title/>
-        </div>
-      ) : (
-        <ListaAlojamientos
-        alojamientos={filteredAlojamientos}
-        onViewDetails={handleViewDetails}
-      />
-      )}
-    </div>
-
-
-
-
-
-
     </>
   );
 };

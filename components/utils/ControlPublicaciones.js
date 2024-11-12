@@ -361,3 +361,28 @@ export function trimearValores(obj) {
   });
   return obj;
 }
+
+export function scrollToTop (){
+  if (typeof window !== 'undefined') {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+}
+
+export const cleanContent = (htmlContent) => {
+  const temp = document.createElement('div');
+  temp.innerHTML = htmlContent;
+
+  const brElements = temp.getElementsByTagName('br');
+  while (brElements.length) {
+    brElements[0].replaceWith(' ');
+  }
+
+  return temp.textContent || temp.innerText;
+};
+
+export function excluirNoPublicados(data) {
+  if (data) return data.filter((item) => item.publicado);
+}

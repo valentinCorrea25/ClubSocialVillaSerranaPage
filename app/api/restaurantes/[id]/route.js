@@ -14,6 +14,7 @@ export async function GET(request, { params }) {
     const restaurant = await prisma.restaurant.findUnique({
       where: {
         id_Restaurant: Number(params.id),
+        publicado: true
       },
     });
 

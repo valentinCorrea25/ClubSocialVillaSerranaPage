@@ -5,6 +5,7 @@ import EventosList from "@/components/ListaNoticiasEventos/EventosList";
 import Banner from "@/components/utils/Banners";
 import { ClientContext } from "@/context/clientContext";
 import { Pagination, Skeleton } from "antd";
+import { scrollToTop } from "@/components/utils/ControlPublicaciones";
 
 const EventosPage = () => {
   const { todasLasNoticiasEventos } = useContext(ClientContext);
@@ -17,12 +18,11 @@ const EventosPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await todasLasNoticiasEventos();
+        const data = await todasLasNoticiasEventos(page);
         if (data) {
           setNoticiasEventos(data.publicaciones);
           setNoResults(true);
           setTotal(data.totalPages);
-
         } else {
           console.log("publicacion is null after fetch");
         }
@@ -32,8 +32,11 @@ const EventosPage = () => {
     };
 
     fetchData();
-  }, []);
-  // const headerStyle = { textAlign: 'center', marginBottom: '40px', color: '#333' };
+  }, [page]);
+
+  useEffect(() => {
+    scrollToTop();
+  }, [page]);
 
   return (
     <div style={appStyle}>
@@ -56,8 +59,8 @@ const EventosPage = () => {
       <Pagination
         current={page}
         onChange={(newPage) => setPage(newPage)}
-        total={total * 25}
-        pageSize={25}
+        total={total * 9}
+        pageSize={9}
         align="center"
       />
     </div>

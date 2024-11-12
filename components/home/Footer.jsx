@@ -62,7 +62,7 @@ export default function PieDePagina() {
     <div className='text-[--blanco] w-full mt-2'>
       <footer className="relative text-blanco py-20">
         <BackgroundImage
-          src="/images/footer.jpg"
+          src="https://res.cloudinary.com/dvzf7szuo/image/upload/v1731370862/WhatsApp_Image_2024-11-11_at_5.52.22_PM_1_nltp4q_1_grnkwg.png"
           alt="Footer background"
         />
         <div className="relative z-10 max-w-screen-xl container mx-auto flex flex-col md:flex-row md:justify-around md:items-start space-y-7 md:space-y-0 px-7 md:py-6">

@@ -169,9 +169,6 @@ const ListaAlojamientos = ({ alojamientos, onViewDetails  }) => {
           
         ))}
       </div>
-      <div className="flex justify-center mt-5">
-        <Pagination defaultCurrent={1} total={10} />
-      </div>
     </div>
   );
 };

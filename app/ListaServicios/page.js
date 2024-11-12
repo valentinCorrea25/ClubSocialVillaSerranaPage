@@ -7,6 +7,7 @@ import Buscador from "@/components/ListaServicios/Buscador";
 import Banner from "@/components/utils/Banners";
 import { ServicioTitulo } from "@prisma/client";
 import { ClientContext } from "@/context/clientContext";
+import { scrollToTop } from "@/components/utils/ControlPublicaciones";
 
 const ServiciosPage = () => {
   const { todosLosServicios } = useContext(ClientContext);
@@ -41,6 +42,10 @@ const ServiciosPage = () => {
     fetchData();
   }, [todosLosServicios, page, filtroServicio]);
 
+  useEffect(() => {
+    scrollToTop();
+  }, [page]);
+
   const handleFilterChange = (selectedCategory) => {
     setPage(1);
     if (selectedCategory === "") {
@@ -50,7 +55,7 @@ const ServiciosPage = () => {
     }
   };
   return (
-    <Layout className="bg-[--blanco]">
+    <Layout className="bg-[#f9f6ee]">
       <Content style={{ padding: "40px 10px" }}>
         <Banner
           title="¡Bienvenido a Nuestros Servicios!"
@@ -78,8 +83,8 @@ const ServiciosPage = () => {
       <Pagination
         current={page}
         onChange={(newPage) => setPage(newPage)}
-        total={total*25}
-        pageSize={25}
+        total={total*9}
+        pageSize={9}
         align="center"
       />
     </Layout>
