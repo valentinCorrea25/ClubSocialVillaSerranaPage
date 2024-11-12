@@ -17,7 +17,6 @@ export async function GET(request, { params }) {
   const skip = (page - 1) * pageSize;
   const take = parseInt(pageSize);
   
-
   const where = text
     ? {
         titulo: {

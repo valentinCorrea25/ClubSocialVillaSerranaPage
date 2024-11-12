@@ -83,8 +83,8 @@ const ServiciosPage = () => {
       <Pagination
         current={page}
         onChange={(newPage) => setPage(newPage)}
-        total={total*25}
-        pageSize={25}
+        total={total*9}
+        pageSize={9}
         align="center"
       />
     </Layout>

@@ -134,13 +134,15 @@ export const ClientProvider = ({ children }) => {
 
   async function todosLosServicios(page, tipo) {
     const res = await fetch(
-      `/api/servicios/lista?page=${page ? page : 1}${
+      `/api/servicios/lista?page=${page ? page : 1}&web=true${
         tipo ? `&tiposervicio=${tipo}` : ""
-      }&web=true`
+      }`
     );
     const data = await res.json();
 
-    console.log(data);
+    console.log(`/api/servicios/lista?page=${page ? page : 1}&web=true${
+        tipo ? `&tiposervicio=${tipo}` : ""
+      }`);
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
     data.publicaciones = tituloServicioCorrectos(data.publicaciones);
