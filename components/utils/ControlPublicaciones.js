@@ -370,3 +370,15 @@ export function scrollToTop (){
     });
   }
 }
+
+export const cleanContent = (htmlContent) => {
+  const temp = document.createElement('div');
+  temp.innerHTML = htmlContent;
+
+  const brElements = temp.getElementsByTagName('br');
+  while (brElements.length) {
+    brElements[0].replaceWith(' ');
+  }
+
+  return temp.textContent || temp.innerText;
+};

@@ -46,7 +46,7 @@ const AlojamientoCard = ({ alojamiento }) => {
             src={fotos[0] ? fotos[0] : 'https://res.cloudinary.com/dvzf7szuo/image/upload/v1730236113/not-found_td14yf.png'}
             style={{
               width: "100%",
-              height: "100%",
+              height: "250px",
               maxHeight: "250px",
               objectFit: "cover",
               borderRadius: "8px",

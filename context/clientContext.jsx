@@ -123,8 +123,8 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todasLasActividades() {
-    const res = await fetch(`/api/actividades/lista`);
+  async function todasLasActividades(page) {
+    const res = await fetch(`/api/actividades/lista?page=${page ? page : 1}`);
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -136,7 +136,7 @@ export const ClientProvider = ({ children }) => {
     const res = await fetch(
       `/api/servicios/lista?page=${page ? page : 1}${
         tipo ? `&tiposervicio=${tipo}` : ""
-      }`
+      }&web=true`
     );
     const data = await res.json();
 

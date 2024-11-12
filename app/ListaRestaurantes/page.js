@@ -8,6 +8,7 @@ import Banner from "@/components/utils/Banners";
 // import { restaurantesData as data } from '@/test/data';
 import { Layout, Alert, Skeleton, Pagination } from "antd";
 import { ClientContext } from "@/context/clientContext";
+import { scrollToTop } from "@/components/utils/ControlPublicaciones";
 
 const { Content } = Layout;
 
@@ -37,6 +38,10 @@ const ListaRestaurantesPage = () => {
     };
 
     fetchData();
+  }, [page]);
+
+  useEffect(() => {
+    scrollToTop();
   }, [page]);
 
   const handleViewDetails = (id) => {

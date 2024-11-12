@@ -9,6 +9,7 @@ import {
   EnvironmentOutlined,
   TagOutlined,
 } from "@ant-design/icons";
+import { cleanContent } from "../utils/ControlPublicaciones";
 
 const { Meta } = Card;
 
@@ -47,7 +48,7 @@ const ActividadCard = ({ actividad }) => {
             src={fotos[0] ? fotos[0] : 'https://res.cloudinary.com/dvzf7szuo/image/upload/v1730236113/not-found_td14yf.png'}
             style={{
               width: "100%",
-              height: "100%",
+              height: "250px",
               maxHeight: "250px",
               objectFit: "cover",
               borderRadius: "8px",
@@ -89,15 +90,18 @@ const ActividadCard = ({ actividad }) => {
             </div>
             <p
               style={{
-                marginTop: "16px",
+                marginTop: "5px",
                 height: "auto",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: "3",
+                WebkitBoxOrient: "vertical",
+                lineHeight: "1.5"
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: contenido.substring(0, 150) }} />
-              {contenido.length > 150 && "...."}
-
+              {cleanContent(contenido).substring(0, 150)}
+              {contenido.length > 150 && "..."}
             </p>
             <Button
               type="primary"

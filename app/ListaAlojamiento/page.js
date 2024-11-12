@@ -21,7 +21,7 @@ const ListaAlojamientosPage = () => {
   const handleFilterChange = (filters) => {
     const { priceRange, capacity } = filters;
     console.log(alquileres + 'ogoalsd');
-    
+
     const filtered = alquileres.filter(
       (alojamiento) =>
         alojamiento.price >= priceRange[0] &&
@@ -68,73 +68,31 @@ const ListaAlojamientosPage = () => {
 
   return (
     <>
-    {/* <div className="flex flex-col bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
-            <Banners
-      title="Alojamiento"
-      subtitle="Busca tu alojamiento"
-      backgroundImage="/images/alojamiento.jpg" 
-      />
-    </div>
-    
-    <div
-      style={{
-        padding: "30px 20px",
-        backgroundColor: "#f9f6ee",
-        minHeight: "100vh",
-        maxWidth: "1200px",
-        margin: "0 auto",
-      }}
-      
-    >
 
-      <div
-        style={{
-          margin:"10px",
-          padding: "10px",
-          borderBottom: "1px solid #ddd",
-          marginBottom: "40px",
-          borderRadius: "4px",
-          backgroundColor: "#fff",
-        }}
-      >
-        <Buscador onFilterChange={handleFilterChange} />
-      </div>
-      {!noResults ? (
-        <div className="flex flex-col gap-28">
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-        </div>
-      ) : (
-        <ListaAlojamientos
-          alojamientos={filteredAlojamientos}
-          onViewDetails={handleViewDetails}
+      <div style={{ padding: "10px", margin: "0 auto", maxWidth: "1250px" }}>
+        <Banners
+          title="Alojamientos"
+          subtitle="Descubre los mejores alojamientos en Villa Serrana"
+          backgroundImage="/images/actividad.jpg"
         />
-      )}
-    </div> */}
+      </div>
+      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
 
-    <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
-      <Banners
-        title="Alojamientos"
-        subtitle="Descubre los mejores alojamientos en Villa Serrana"
-        backgroundImage="/images/actividad.jpg"
-      />
 
-        <Buscador  onFilterChange={handleFilterChange} />
-      {!noResults ? (
-        <div className="flex items-center justify-center flex-col md:flex-row gap-10">
-          <Skeleton className="w-72" paragraph title/>
-          <Skeleton className="w-72" paragraph title/>
-          <Skeleton className="w-72" paragraph title/>
-        </div>
-      ) : (
-        <ListaAlojamientos
-        alojamientos={filteredAlojamientos}
-        onViewDetails={handleViewDetails}
-      />
-      )}
-    </div>
+        <Buscador onFilterChange={handleFilterChange} />
+        {!noResults ? (
+          <div className="flex items-center justify-center flex-col md:flex-row gap-10">
+            <Skeleton className="w-72" paragraph title />
+            <Skeleton className="w-72" paragraph title />
+            <Skeleton className="w-72" paragraph title />
+          </div>
+        ) : (
+          <ListaAlojamientos
+            alojamientos={filteredAlojamientos}
+            onViewDetails={handleViewDetails}
+          />
+        )}
+      </div>
     <Pagination
         current={page}
         onChange={(newPage) => setPage(newPage)}
@@ -142,9 +100,6 @@ const ListaAlojamientosPage = () => {
         pageSize={25}
         align="center"
       />
-
-
-
     </>
   );
 };
