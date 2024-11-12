@@ -12,6 +12,7 @@ import Caracteristicas from '@/components/ListaRestaurantes/DetalleRestaurante/C
 import Contacto from '@/components/ListaRestaurantes/DetalleRestaurante/Contacto';
 import UbicacionMap from '@/components/ListaRestaurantes/DetalleRestaurante/UbicacionMap';
 import PublicacionesSimilares from '@/components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares';
+import PublicacionNoEncontrada from '@/components/utils/PublicacionNoEncontrada';
 
 const FixSuspenseRestaurante = (restaurante) => {
   const searchParams = useSearchParams();
@@ -44,13 +45,13 @@ const FixSuspenseRestaurante = (restaurante) => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Spin size="large" /> {/* Spinner */}
+        <Spin size="large" />
       </div>
     );
   }
 
   if (!restauranteSeleccionado) {
-    return <div>Restaurante no encontrado</div>;
+    return <PublicacionNoEncontrada/>
   }
   
   

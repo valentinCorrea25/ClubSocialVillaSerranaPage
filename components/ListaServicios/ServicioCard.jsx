@@ -41,7 +41,7 @@ const ServicioCard = ({ servicio }) => {
         visible={visible}
         onCancel={handleCancel}
         footer={
-          <a href="tel:555-555-5555" className="flex justify-center">
+          <a href={`tel:${servicio.celular}`} className="flex justify-center">
             <Button size="large" className="bg-[--verde] text-white">Llamar</Button>
           </a>
         }

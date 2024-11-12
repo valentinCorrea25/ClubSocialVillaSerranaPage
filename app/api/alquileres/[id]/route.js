@@ -6,6 +6,7 @@ export async function GET(request, { params }) {
     const alquiler = await prisma.alquiler.findUnique({
       where: {
         id_Alquiler: Number(params.id),
+        publicado: true
       },
     });
 

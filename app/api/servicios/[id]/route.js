@@ -6,6 +6,7 @@ export async function GET(request, { params }) {
     const servicio = await prisma.servicio.findUnique({
       where: {
         id_Servicio: Number(params.id),
+        publicado: true
       },
     });
 

@@ -16,7 +16,7 @@ export async function GET(request, { params }) {
   const pageSize = web ? 9 : 25;
   const skip = (page - 1) * pageSize;
   const take = parseInt(pageSize);
-  
+
   const where = text
     ? {
         titulo: {
@@ -24,6 +24,8 @@ export async function GET(request, { params }) {
           mode: "insensitive",
         },
       }
+    : web
+    ? { publicado: true }
     : {};
 
   if (!tipoServicio) {
@@ -50,12 +52,12 @@ export async function GET(request, { params }) {
         next: hasNextPage
           ? `/api/servicios/lista?page=${page + 1}${
               text ? `&text=${text}` : ""
-            }${web ? "&web=true" : "" }`
+            }${web ? "&web=true" : ""}`
           : null,
         previous: hasPreviousPage
           ? `/api/servicios/lista?page=${page - 1}${
               text ? `&text=${text}` : ""
-            }${web ? "&web=true" : "" }`
+            }${web ? "&web=true" : ""}`
           : null,
         publicaciones: servicios,
       });
@@ -93,12 +95,12 @@ export async function GET(request, { params }) {
         next: hasNextPage
           ? `/api/servicios/lista?page=${page + 1}${
               tipoServicio ? `&tiposervicio=${tipoServicio}` : ""
-            }${web ? "&web=true" : "" }`
+            }${web ? "&web=true" : ""}`
           : null,
         previous: hasPreviousPage
           ? `/api/servicios/lista?page=${page - 1}${
               tipoServicio ? `&tiposervicio=${tipoServicio}` : ""
-            }${web ? "&web=true" : "" }`
+            }${web ? "&web=true" : ""}`
           : null,
         publicaciones: servicios,
       });

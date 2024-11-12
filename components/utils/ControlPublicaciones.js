@@ -382,3 +382,7 @@ export const cleanContent = (htmlContent) => {
 
   return temp.textContent || temp.innerText;
 };
+
+export function excluirNoPublicados(data) {
+  if (data) return data.filter((item) => item.publicado);
+}

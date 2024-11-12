@@ -11,6 +11,7 @@ import PublicacionesSimilares from "@/components/ListaAlojamiento/DetalleAlojami
 import { ClientContext } from "@/context/clientContext";
 import { Spin } from "antd";
 import dynamic from "next/dynamic";
+import PublicacionNoEncontrada from "@/components/utils/PublicacionNoEncontrada";
 
 const FixSuspenseAlojamiento = () => {
   const searchParams = useSearchParams();
@@ -51,7 +52,7 @@ const FixSuspenseAlojamiento = () => {
   }
 
   if (!alojamientoSeleccionado) {
-    return <div>Alojamiento no encontrado</div>;
+    return <PublicacionNoEncontrada/>
   }
 
   return (

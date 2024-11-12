@@ -7,6 +7,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { ClientContext } from "@/context/clientContext";
 import { Spin } from "antd";
 import { Suspense } from "react";
+import PublicacionNoEncontrada from "@/components/utils/PublicacionNoEncontrada";
 
 export default function FixSuspenseNoticiaEventos() {
   const searchParams = useSearchParams();
@@ -44,7 +45,7 @@ export default function FixSuspenseNoticiaEventos() {
   }
 
   if (!eventonoticiaSeleccionado) {
-    return <div>Evento o Noticias no encontrada</div>;
+    return <PublicacionNoEncontrada/>
   }
 
   return (
