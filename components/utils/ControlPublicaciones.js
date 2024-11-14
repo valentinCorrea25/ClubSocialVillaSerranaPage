@@ -1,5 +1,4 @@
 import {
-  FaFence,
   FaLeaf,
   FaBroom,
   FaHardHat,
@@ -16,6 +15,7 @@ import {
   FaHome,
   FaBolt,
   FaSwimmingPool,
+  FaTrailer
 } from "react-icons/fa";
 
 export const dateFormat = "DD/MM/YYYY";
@@ -169,7 +169,7 @@ export function iconosSegunTipoServicio(tipoServicio) {
   let IconComponent;
   switch (tipoServicio) {
     case ServicioTipo.Alambrados:
-      IconComponent = FaFence;
+      IconComponent = FaTrailer;
       break;
     case ServicioTipo.Almacenes:
       IconComponent = FaStore;

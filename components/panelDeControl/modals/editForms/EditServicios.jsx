@@ -75,6 +75,13 @@ export default function EditServicios({ servicio, diasSemana }) {
           required
           className="w-full"
           initialValue={servicio.nombre_titular}
+          rules={[
+            {
+              required: true,
+              message: "El nombre no puede estar vacío",
+            },
+          ]}
+          
         >
           <Input placeholder="Nombre del Titular" />
         </Form.Item>
@@ -85,6 +92,19 @@ export default function EditServicios({ servicio, diasSemana }) {
           required
           className="w-full"
           initialValue={servicio.celular}
+          rules={[
+            {
+              required: true,
+              message: "Por favor ingrese un número de celular"
+            },
+            {
+              pattern: /^[\d\s]+$/,
+              message: "Solo se permiten números y espacios"
+            },
+            {
+              transform: (value) => value.replace(/[^\d\s]/g, ''), // Transforma el valor automáticamente
+            }
+          ]}
         >
           <Input placeholder="Celular" />
         </Form.Item>
@@ -92,9 +112,15 @@ export default function EditServicios({ servicio, diasSemana }) {
         <Form.Item
           label="Correo Electrónico"
           name="mail"
-          required
           className="w-full"
           initialValue={servicio.mail}
+          rules={[
+            {
+              required: false,
+              message: "Por favor ingresa un correo electrónico valido",
+              type: 'email'
+            },
+          ]}
         >
           <Input placeholder="Correo Electrónico" />
         </Form.Item>

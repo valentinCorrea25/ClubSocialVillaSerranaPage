@@ -304,15 +304,18 @@ export default function TablaGenerica({
       key: "location",
       ellipsis: true,
       width: 120,
-      render: (location) => (
-        <a
-          href={`https://www.google.com/maps/search/?api=1&query=${location}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-[--verde]"
-        >
-          <CiMap className="inline text-xl" /> Ver mapa
-        </a>
+      render: (location, record) => (
+        record.id_Servicio == null && record.ubicacion != null ? (
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${record.ubicacion}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[--verde]"
+          >
+            {console.log(record)}
+            <CiMap className="inline text-xl mr-1" /> Ver mapa
+          </a>
+        ) : null
       ),
     },
     {

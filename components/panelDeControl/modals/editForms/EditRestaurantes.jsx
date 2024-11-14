@@ -88,7 +88,7 @@ export default function EditRestaurantes({
               rules={[
                 {
                   required: true,
-                  message: "Por favor ingresa el nombre completo",
+                  message: "El nombre no puede estar vacío",
                 },
               ]}
             >
@@ -100,7 +100,17 @@ export default function EditRestaurantes({
               name="celular"
               initialValue={restaurante.celular}
               rules={[
-                { required: true, message: "Por favor ingresa el celular" },
+                {
+                  required: true,
+                  message: "Por favor ingrese un número de celular",
+                },
+                {
+                  pattern: /^[\d\s]+$/,
+                  message: "Solo se permiten números y espacios",
+                },
+                {
+                  transform: (value) => value.replace(/[^\d\s]/g, ""), // Transforma el valor automáticamente
+                },
               ]}
             >
               <Input />
@@ -112,8 +122,9 @@ export default function EditRestaurantes({
               initialValue={restaurante.mail}
               rules={[
                 {
-                  required: true,
-                  message: "Por favor ingresa el correo electrónico",
+                  required: false,
+                  message: "Por favor ingresa un correo electrónico valido",
+                  type: 'email'
                 },
               ]}
             >
@@ -129,22 +140,23 @@ export default function EditRestaurantes({
                 label="Link de Google Maps"
                 name="ubicacion"
                 initialValue={restaurante.ubicacion}
+                required={false}
                 rules={[
                   {
-                    required: true,
-                    message: "Por favor ingresa la ubicación",
-                  },
-                  {
                     validator: (_, value) => {
-                      let valido = getCoordsGoogleMaps(urlGoogle);
-                      if (valido) {
+                      const valido = getCoordsGoogleMaps(urlGoogle);
+                      if (urlGoogle) {
+                        if (valido) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error(
+                            "Por favor ingresa un enlace válido de Google Maps"
+                          )
+                        );
+                      } else {
                         return Promise.resolve();
                       }
-                      return Promise.reject(
-                        new Error(
-                          "Por favor ingresa un enlace válido de Google Maps"
-                        )
-                      );
                     },
                   },
                 ]}
