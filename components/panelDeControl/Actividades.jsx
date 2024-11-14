@@ -47,6 +47,7 @@ export default function Actividades({
           );
           return `${record[tipoPublicacion]}_${tipoPublicacion}`;
         }}
+        tipoDePublicacion={'Actividad'}
       />
     </div>
   );

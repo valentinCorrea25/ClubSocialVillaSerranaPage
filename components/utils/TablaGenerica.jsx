@@ -305,19 +305,18 @@ export default function TablaGenerica({
       ellipsis: true,
       width: 120,
       render: (location, record) => (
-        record.id_Servicio == null && record.ubicacion != null ? (
+        record.ubicacion && !record.id_Servicio && !record.id_EventoNoticia && !record.id_Actividad ? (
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${record.ubicacion}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[--verde]"
           >
-            {console.log(record)}
             <CiMap className="inline text-xl mr-1" /> Ver mapa
           </a>
         ) : null
       ),
-    },
+    },    
     {
       title: "Fecha de Publicacion",
       dataIndex: "fecha_publicacion",
@@ -365,7 +364,8 @@ export default function TablaGenerica({
         ["portada", "titulo", "options"].includes(column.key)
       );
     }
-    if (tipoDePublicacion == "Servicio") {
+    
+    if (tipoDePublicacion == "Servicio" || tipoDePublicacion == 'EventoNoticia' || tipoDePublicacion == 'Actividad') {
       return columns.filter((column) =>
         ["portada", "titulo", "fecha_publicacion", "options"].includes(
           column.key
