@@ -22,7 +22,7 @@ const EventoCard = ({ evento }) => {
   const fechaCorte = new Date("12/31/1969");
 
   // Lógica para mostrar "Noticias" o "Eventos"
-  const categoriaLabel = fechaEventoDate > fechaCorte ? "Noticias" : "Eventos";
+  const categoriaLabel = fechaEventoDate > fechaCorte ? "Noticia" : "Evento";
   const fechaevento = fechaEventoDate > fechaCorte ? '' : "Fecha del Evento: " + new Date(fecha_evento).toLocaleDateString();
   const router = useRouter();
 

@@ -29,7 +29,7 @@ const ServiciosPage = () => {
           setFilteredServicios(data.publicaciones);
           setTotal(data.totalPages);
           console.log(data.totalPages);
-          
+
           setNoResults(true);
         } else {
           console.log("publicacion is null after fetch");
@@ -55,39 +55,47 @@ const ServiciosPage = () => {
     }
   };
   return (
-    <Layout className="bg-[#f9f6ee]">
-      <Content style={{ padding: "40px 10px" }}>
+    <>
+      <div className="p-[10px] mx-auto max-w-[1200px]">
         <Banner
           title="¡Bienvenido a Nuestros Servicios!"
           subtitle="Descubre nuestras ofertas y encuentra lo que necesitas."
           backgroundImage="/images/servicios.jpg"
         />
-        <div style={{ padding: "24px", width: "100%" }}>
-          <Buscador
-            categories={servicios}
-            onFilterChange={handleFilterChange}
-          />
-        </div>
-        {noResults ? (
-          <div>
-            <ServiciosList servicios={filteredServicios} />
+      </div>
+
+
+      <Layout className="bg-[#f9f6ee]">
+        <Content style={{ padding: "40px 10px" }}>
+
+          <div style={{ padding: "24px", width: "100%" }}>
+            <Buscador
+              categories={servicios}
+              onFilterChange={handleFilterChange}
+            />
           </div>
-        ) : (
-          <div className="flex items-center justify-center flex-col md:flex-row gap-10 mt-5">
-            <Skeleton className="w-72" paragraph title />
-            <Skeleton className="w-72" paragraph title />
-            <Skeleton className="w-72" paragraph title />
-          </div>
-        )}
-      </Content>
-      <Pagination
-        current={page}
-        onChange={(newPage) => setPage(newPage)}
-        total={total*9}
-        pageSize={9}
-        align="center"
-      />
-    </Layout>
+          {noResults ? (
+            <div>
+              <ServiciosList servicios={filteredServicios} />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center flex-col md:flex-row gap-10 mt-5">
+              <Skeleton className="w-72" paragraph title />
+              <Skeleton className="w-72" paragraph title />
+              <Skeleton className="w-72" paragraph title />
+            </div>
+          )}
+        </Content>
+        <Pagination
+          current={page}
+          onChange={(newPage) => setPage(newPage)}
+          total={total * 9}
+          pageSize={9}
+          align="center"
+        />
+      </Layout>
+    </>
+
   );
 };
 

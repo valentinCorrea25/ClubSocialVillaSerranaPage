@@ -69,7 +69,7 @@ const ListaAlojamientosPage = () => {
   return (
     <>
 
-      <div style={{ padding: "10px", margin: "0 auto", maxWidth: "1250px" }}>
+      <div className="p-[10px] mx-auto max-w-[1200px]">
         <Banners
           title="Alojamientos"
           subtitle="Descubre los mejores alojamientos en Villa Serrana"
@@ -93,7 +93,7 @@ const ListaAlojamientosPage = () => {
           />
         )}
       </div>
-    <Pagination
+      <Pagination
         current={page}
         onChange={(newPage) => setPage(newPage)}
         total={total * 25}

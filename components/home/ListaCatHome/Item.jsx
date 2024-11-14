@@ -10,7 +10,7 @@ export default function Item({ informacion, type }) {
     <div className="flex flex-col items-center justify-center montserrat max-w-72">
       {type == 1 ? (
         <>
-          <div className="p-4 shadow-md border  max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer"
+          <div className="p-4 shadow-md border  max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[320px] "
             onClick={() => router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`)}
           >
             <div className=" w-full h-[169px] max-h-[250px] ">
@@ -44,7 +44,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 2 ? (
         <>
-          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]"
+          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[365px]"
             onClick={() => router.push(`/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`)}>
 
             <div className=" w-full h-[169px] max-h-[250px] ">
@@ -77,7 +77,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 3 ? (
         <>
-          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]">
+          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] h-[340px] ">
             <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
@@ -92,11 +92,13 @@ export default function Item({ informacion, type }) {
                 : informacion?.titulo}
             </h1>
             <p className="font-normal leading-5 text-sm text-justify w-full max-w-[320px] md:max-w-none">
-              <span dangerouslySetInnerHTML={{
-                __html: informacion?.contenido?.length > 220
-                  ? informacion.contenido.substring(0, 210) + "... "
-                  : informacion?.contenido
-              }}></span>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: informacion?.contenido?.length > 110
+                    ? informacion.contenido.replace(/<[^>]+>/g, '').substring(0, 120) + "... "
+                    : informacion?.contenido.replace(/<[^>]+>/g, '')
+                }}
+              ></span>
               <a className="text-[--verde] font-semibold cursor-pointer">
                 Ver más
               </a>
@@ -108,7 +110,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 4 ? (
         <>
-          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px]">
+          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[350px]" >
             <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
@@ -130,6 +132,18 @@ export default function Item({ informacion, type }) {
                 <EnvironmentOutlined size={10} />
                 {informacion?.titulo?.substring(4)}
               </h2>
+              <p className="font-normal leading-5 text-sm text-justify w-full max-w-[320px] md:max-w-none">
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: informacion?.contenido?.length > 110
+                      ? informacion.contenido.replace(/<[^>]+>/g, '').substring(0, 120) + "... "
+                      : informacion?.contenido.replace(/<[^>]+>/g, '')
+                  }}
+                ></span>
+                <a className="text-[--verde] font-semibold cursor-pointer">
+                  Ver más
+                </a>
+              </p>
             </div>
           </div>
         </>
