@@ -1,10 +1,9 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import { useSearchParams } from "next/navigation";
-import { alojamientos as allAlojamientos } from "@/test/data";
 import { Suspense } from "react";
 import Informacion from "@/components/ListaAlojamiento/DetalleAlojamiento/Informacion";
-import Carousel from "@/components/ListaAlojamiento/DetalleAlojamiento/Carousel";
+import Carousel from "@/components/utils/Carousel";
 import Descripcion from "@/components/ListaAlojamiento/DetalleAlojamiento/Descripcion";
 import ContactoInfo from "@/components/ListaRestaurantes/DetalleRestaurante/Contacto";
 import PublicacionesSimilares from "@/components/ListaAlojamiento/DetalleAlojamiento/PublicacionesSimilares";
@@ -61,7 +60,7 @@ const FixSuspenseAlojamiento = () => {
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
           <div className="lg:col-span-2 flex flex-col gap-8">
             <Informacion alojamiento={alojamientoSeleccionado} />
-            <Carousel alojamiento={alojamientoSeleccionado} />
+            <Carousel record={alojamientoSeleccionado} />
             <Descripcion alojamiento={alojamientoSeleccionado} />
           </div>
 
@@ -77,9 +76,7 @@ const FixSuspenseAlojamiento = () => {
               </div>
               {/* <MapaLeaflet ubicacion={alojamientoSeleccionado.ubicacion} /> */}
             </div>
-            <div className="flex-1">
               <PublicacionesSimilares similares={alojamientoSimilares} />
-            </div>
           </div>
         </main>
       </div>

@@ -398,3 +398,11 @@ export const cleanContent = (htmlContent) => {
 export function excluirNoPublicados(data) {
   if (data) return data.filter((item) => item.publicado);
 }
+
+export function formatearTelefonoAUruguayo(phoneNumber) {
+  const cleanedNumber = phoneNumber.replace(/\s+/g, '');
+  if (cleanedNumber.length === 9 && cleanedNumber.startsWith('0')) {
+    return `+598${cleanedNumber.slice(1)}`;
+  }
+}
+

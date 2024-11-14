@@ -16,19 +16,15 @@ export async function GET(request, { params }) {
         code: 400,
       });
     }
-    
-
-    const count = await prisma.alquiler.count();
-    const skip = Math.floor(Math.random() * count);
 
     const publicacionesRelacionadas = await prisma.alquiler.findMany({
       where: {
         id_Alquiler: {
           not: alquiler.id_Alquiler,
         },
+        publicado: true,
       },
       take: 5,
-      skip: skip,
     });
     
 

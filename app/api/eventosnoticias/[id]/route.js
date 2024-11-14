@@ -2,12 +2,11 @@ import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-
   try {
     const eventosNoticia = await prisma.eventosNoticia.findUnique({
       where: {
         id_EventoNoticia: Number(params.id),
-        publicado: true
+        publicado: true,
       },
     });
 
@@ -17,30 +16,32 @@ export async function GET(request, { params }) {
         code: 400,
       });
     }
-    eventosNoticia.fecha_evento ? eventosNoticia.isEvento = true : eventosNoticia.isEvento = false
-
-    const count = await prisma.eventosNoticia.count();
-    const skip = Math.floor(Math.random() * count);
+    eventosNoticia.fecha_evento
+      ? (eventosNoticia.isEvento = true)
+      : (eventosNoticia.isEvento = false);
 
     const publicacionesRelacionadas = await prisma.eventosNoticia.findMany({
       where: {
         id_EventoNoticia: {
           not: eventosNoticia.id_EventoNoticia,
         },
+        publicado: true,
       },
       take: 5,
-      skip: skip,
     });
 
-    const respuesta = {publicacion: eventosNoticia, publicacionesRelacionadas: publicacionesRelacionadas ? publicacionesRelacionadas : null}
-    return NextResponse.json({respuesta});
-
-
-
+    const respuesta = {
+      publicacion: eventosNoticia,
+      publicacionesRelacionadas: publicacionesRelacionadas
+        ? publicacionesRelacionadas
+        : null,
+    };
+    return NextResponse.json({ respuesta });
   } catch (error) {
     console.log(error);
     return NextResponse.json({
-      message: "Hubo un error en Eventos - Noticias, contactar con desarollador",
+      message:
+        "Hubo un error en Eventos - Noticias, contactar con desarollador",
       code: 500,
     });
   }
@@ -55,12 +56,11 @@ export async function DELETE(request, { params }) {
     });
 
     return NextResponse.json({
-      message: 'Evento - Noticia eliminada con exito'
+      message: "Evento - Noticia eliminada con exito",
     });
-
   } catch (error) {
     console.log(error);
-    if(error.code === 'P2025'){
+    if (error.code === "P2025") {
       return NextResponse.json({
         message: "Evento - Noticia no encontrada",
         code: 500,
@@ -68,7 +68,8 @@ export async function DELETE(request, { params }) {
     }
 
     return NextResponse.json({
-      message: "Hubo un error al borrar en Evento - Noticia, contactar con desarollador",
+      message:
+        "Hubo un error al borrar en Evento - Noticia, contactar con desarollador",
       code: 500,
     });
   }
@@ -83,18 +84,17 @@ export async function PUT(request, { params }) {
       where: {
         id_EventoNoticia: Number(params.id),
       },
-      data: data.datos // De esta manera es posible pasar los valores a la claves que coincidan con el schema
+      data: data.datos, // De esta manera es posible pasar los valores a la claves que coincidan con el schema
     });
 
     console.log(eventosNoticia);
 
     return NextResponse.json({
-      message: 'Evento - Noticia modificada con exito'
+      message: "Evento - Noticia modificada con exito",
     });
-
   } catch (error) {
     console.log(error);
-    if(error.code === 'P2025'){
+    if (error.code === "P2025") {
       return NextResponse.json({
         message: "Evento - Noticia no encontrada",
         code: 400,

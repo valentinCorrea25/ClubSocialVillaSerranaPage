@@ -25,17 +25,14 @@ export async function GET(request, { params }) {
       });
     }
 
-    const count = await prisma.restaurant.count();
-    const skip = Math.floor(Math.random() * count);
-
     const publicacionesRelacionadas = await prisma.restaurant.findMany({
       where: {
         id_Restaurant: {
           not: restaurant.id_Restaurant,
         },
+        publicado: true,
       },
       take: 5,
-      skip: skip,
     });
 
     const respuesta = {publicacion: restaurant, publicacionesRelacionadas: publicacionesRelacionadas ? publicacionesRelacionadas : null}

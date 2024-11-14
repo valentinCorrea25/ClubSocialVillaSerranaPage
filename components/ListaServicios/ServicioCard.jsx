@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Card, Modal } from "antd";
 import ServicioContent from "./ServicioContent";
+import { formatearTelefonoAUruguayo } from "../utils/ControlPublicaciones";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ServicioCard = ({ servicio }) => {
   // Estado para controlar el modal
@@ -41,10 +43,16 @@ const ServicioCard = ({ servicio }) => {
         visible={visible}
         onCancel={handleCancel}
         footer={
-          <a href={`tel:${servicio.celular}`} className="flex justify-center">
-            <Button size="large" className="bg-[--verde] text-white">Llamar</Button>
-          </a>
+          <div className="flex justify-center gap-8 items-center">
+            <a href={`tel:${formatearTelefonoAUruguayo(servicio.celular)}`} className="flex justify-center">
+              <Button size="large" className="bg-[--verde] text-white">Llamar</Button>
+            </a>
+            <a href={`https://wa.me/${formatearTelefonoAUruguayo(servicio.celular)}`} className="flex justify-center" target="_blank" rel="noopener noreferrer">
+              <Button size="large" className="bg-[--verde] text-white">WhatsApp <FaWhatsapp/></Button>
+            </a>
+          </div>
         }
+        
         width={600}
         bodyStyle={{ fontSize: "20px", padding: "24px" }}
       >

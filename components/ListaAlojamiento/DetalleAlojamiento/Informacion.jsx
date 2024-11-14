@@ -27,8 +27,8 @@ const Informacion = ({ alojamiento }) => (
     </div>
 
     <div className="p-1">
-    <p className="text-gray-800 mb-2 text-[15px]"> <UserOutlined   className='mr-2'/>{alojamiento.nombre_titular  }</p>
-    <p className="text-gray-800 mb-2 text-[15px]"> <PhoneOutlined   className='mr-2'/>{alojamiento.celular}</p> 
+    {/* <p className="text-gray-800 mb-2 text-[15px]"> <UserOutlined   className='mr-2'/>{alojamiento.nombre_titular  }</p>
+    <p className="text-gray-800 mb-2 text-[15px]"> <PhoneOutlined   className='mr-2'/>{alojamiento.celular}</p>  */}
       <p className="text-gray-800 mb-2 text-[15px]"> <EnvironmentOutlined  className='mr-2'/>{alojamiento.ubicacion_calles}</p>
       <p className="text-gray-800 mb-2 text-[15px]"> <TeamOutlined className='mr-2'/> Hasta {alojamiento.capacidad} personas</p>
       <p className="text-gray-800 mb-2 text-[15px]"> 
