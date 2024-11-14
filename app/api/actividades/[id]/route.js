@@ -17,17 +17,14 @@ export async function GET(request, { params }) {
       });
     }
 
-    const count = await prisma.actividad.count();
-    const skip = Math.floor(Math.random() * count);
-
     const publicacionesRelacionadas = await prisma.actividad.findMany({
       where: {
         id_Actividad: {
           not: actividad.id_Actividad,
         },
+        publicado: true,
       },
       take: 5,
-      skip: skip,
     });
 
     const respuesta = {publicacion: actividad, publicacionesRelacionadas: publicacionesRelacionadas ? publicacionesRelacionadas : null}

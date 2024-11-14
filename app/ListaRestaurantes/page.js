@@ -52,12 +52,14 @@ const ListaRestaurantesPage = () => {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+      <div className="p-[10px] mx-auto max-w-[1200px]">
         <Banner
           title="Restaurantes"
           subtitle="Descubre nuestras opciones"
           backgroundImage="/images/restaurantes.jpg"
         />
+      </div>
+      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
 
         <Content>
           <div

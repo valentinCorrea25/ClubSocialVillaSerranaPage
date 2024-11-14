@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 const fields = [
   {
-    title: " Ver Alojamientos",
+    title: "Ver Alojamientos",
     icon: <HomeOutlined className="pt-4" />,
     path: "/ListaAlojamiento",
   },
@@ -61,10 +61,21 @@ const TourismComponent = () => {
             key={index}
             hoverable
             className=" bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:-translate-y-1"
-            cover={<div className="text-4xl text-[--verde] items-center">{field.icon}</div>}
+            cover={
+              <div className="text-4xl text-[--verde] items-center">
+                {field.icon}
+              </div>
+            }
             onClick={() => router.push(field.path)}
           >
-            <Card.Meta title={field.title} />
+            <Card.Meta
+              title={
+                <span>
+                  {field.title.split(" ")[0]} <br className="sm:hidden" />
+                  {field.title.split(" ")[1]}
+                </span>
+              }
+            />
           </Card>
         ))}
       </div>

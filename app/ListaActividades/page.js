@@ -41,7 +41,7 @@ const ActividadPage = () => {
   }, [page]);
 
   return (
-    <><div style={{ padding: "10px", margin: "0 auto", maxWidth: "1200px" }}>
+    <><div className="p-[10px] mx-auto max-w-[1200px]">
       <Banner
         title="Actividades"
         subtitle="Descubre nuestras actividades más recientes"
@@ -61,13 +61,13 @@ const ActividadPage = () => {
           />
         )}
         <Pagination
-        current={page}
-        onChange={(newPage) => setPage(newPage)}
-        total={total*25}
-        pageSize={25}
-        align="center"
-      />
-    </div>
+          current={page}
+          onChange={(newPage) => setPage(newPage)}
+          total={total * 25}
+          pageSize={25}
+          align="center"
+        />
+      </div>
     </>
   );
 };

@@ -33,7 +33,7 @@ const Descriptions = ({ alojamiento }) => (
         {alojamiento.descripcion || 'Descripción no disponible'}
       </p>
     </div>
-    <div className='flex gap-2'>
+    <div className='flex gap-2 mt-6 mb-2'>
 
       <h4 className="font-bold">Comodidades:</h4>
       <ul>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button, Divider } from 'antd';
 import { PhoneOutlined, MailOutlined, UserOutlined, WhatsAppOutlined } from '@ant-design/icons';
+import { formatearTelefonoAUruguayo } from '@/components/utils/ControlPublicaciones';
 
 const Contacto = ({ nombre_titular, celular, mail }) => {
 
@@ -22,17 +23,18 @@ const Contacto = ({ nombre_titular, celular, mail }) => {
         icon={<MailOutlined />}
         href={`mailto:${mail}`}
         className="w-full mb-2"
-        disabled={!mail}
+        disabled={mail ? false : true}
       >
         {mail ? 'Consultar vía E-mail' : 'Sin Email Disponible'}
       </Button>
       <Button
         type="primary"
         icon={<WhatsAppOutlined />}
-        href={`https://wa.me/${celular}`}
+        href={`https://wa.me/${formatearTelefonoAUruguayo(celular)}`}
         className="w-full"
+        disabled={celular ? false : true}
       >
-        {mail ? 'Consultar vía WhatsApp' : 'Sin Whatsapp Disponible'}
+        {celular ? 'Consultar vía WhatsApp' : 'Sin Whatsapp Disponible'}
       </Button>
     </Card>
   );
