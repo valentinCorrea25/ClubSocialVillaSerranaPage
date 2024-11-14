@@ -144,7 +144,6 @@ export default function CrearServicioModal({
             </Select>
           </Form.Item>
 
-          {/* Información del Titular */}
           <Form.Item
             label="Nombre del Titular"
             name="nombre_titular"
@@ -168,7 +167,15 @@ export default function CrearServicioModal({
             rules={[
               {
                 required: true,
+                message: "Por favor ingrese un número de celular"
               },
+              {
+                pattern: /^[\d\s]+$/,
+                message: "Solo se permiten números y espacios"
+              },
+              {
+                transform: (value) => value.replace(/[^\d\s]/g, ''), // Transforma el valor automáticamente
+              }
             ]}
           >
             <Input
@@ -185,13 +192,12 @@ export default function CrearServicioModal({
           <Form.Item
             label="Correo Electrónico"
             name="mail"
-            required
             className="w-full"
             rules={[
               {
-                required: true,
-                message: "Por favor ingresa el correo electrónico",
-                type: "email",
+                required: false,
+                message: "Por favor ingresa un correo electrónico valido",
+                type: 'email'
               },
             ]}
           >

@@ -225,8 +225,17 @@ export default function CrearRestaurantesModal({
                 label="Celular"
                 name="celular"
                 rules={[
-                  { required: true, message: "Por favor ingresa el celular"},
-                  
+                  {
+                    required: true,
+                    message: "Por favor ingrese un número de celular"
+                  },
+                  {
+                    pattern: /^[\d\s]+$/,
+                    message: "Solo se permiten números y espacios"
+                  },
+                  {
+                    transform: (value) => value.replace(/[^\d\s]/g, ''), // Transforma el valor automáticamente
+                  }
                 ]}
               >
                 <Input
@@ -244,8 +253,8 @@ export default function CrearRestaurantesModal({
                 name="mail"
                 rules={[
                   {
-                    required: true,
-                    message: "Por favor ingresa el correo electrónico",
+                    required: false,
+                    message: "Por favor ingresa un correo electrónico valido",
                     type: 'email'
                   },
                 ]}
@@ -263,10 +272,6 @@ export default function CrearRestaurantesModal({
                   name="ubicacion"
                   required={false}
                   rules={[
-                    // {
-                    //   required: false,
-                    //   message: "Por favor ingresa la ubicación",
-                    // },
                     {
                       validator: (_, value) => {
                         const valido = getCoordsGoogleMaps(urlGoogle);

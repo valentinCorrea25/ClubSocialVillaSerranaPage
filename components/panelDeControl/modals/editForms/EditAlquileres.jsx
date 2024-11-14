@@ -89,7 +89,7 @@ export default function EditAlquileres({
             rules={[
               {
                 required: true,
-                message: "Por favor ingresa el nombre completo",
+                message: "El nombre no puede estar vacío",
               },
             ]}
           >
@@ -101,7 +101,17 @@ export default function EditAlquileres({
             name="celular"
             initialValue={alquiler.celular}
             rules={[
-              { required: true, message: "Por favor ingresa el celular" },
+              {
+                required: true,
+                message: "Por favor ingrese un número de celular",
+              },
+              {
+                pattern: /^[\d\s]+$/,
+                message: "Solo se permiten números y espacios",
+              },
+              {
+                transform: (value) => value.replace(/[^\d\s]/g, ""), // Transforma el valor automáticamente
+              },
             ]}
           >
             <Input className="w-full" />
@@ -113,8 +123,9 @@ export default function EditAlquileres({
             initialValue={alquiler.mail}
             rules={[
               {
-                required: true,
-                message: "Por favor ingresa el correo electrónico",
+                required: false,
+                message: "Por favor ingresa un correo electrónico valido",
+                type: 'email'
               },
             ]}
           >
@@ -129,22 +140,23 @@ export default function EditAlquileres({
             label="Link de Google Maps"
             name="ubicacion"
             initialValue={alquiler.ubicacion}
+            required={false}
             rules={[
               {
-                required: true,
-                message: "Por favor ingresa la ubicación",
-              },
-              {
                 validator: (_, value) => {
-                  let valido = getCoordsGoogleMaps(urlGoogle);
-                  if (valido) {
+                  const valido = getCoordsGoogleMaps(urlGoogle);
+                  if (urlGoogle) {
+                    if (valido) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(
+                        "Por favor ingresa un enlace válido de Google Maps"
+                      )
+                    );
+                  } else {
                     return Promise.resolve();
                   }
-                  return Promise.reject(
-                    new Error(
-                      "Por favor ingresa un enlace válido de Google Maps"
-                    )
-                  );
                 },
               },
             ]}
@@ -207,7 +219,7 @@ export default function EditAlquileres({
             label="Capacidad"
             name="capacidad"
             initialValue={alquiler.capacidad}
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: 'Capacidad es requerido' }]}
           >
             <InputNumber min={0} className="w-full" />
           </Form.Item>

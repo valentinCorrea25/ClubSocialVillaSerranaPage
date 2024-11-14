@@ -1,5 +1,4 @@
 import {
-  FaFence,
   FaLeaf,
   FaBroom,
   FaHardHat,
@@ -13,6 +12,10 @@ import {
   FaShieldAlt,
   FaTruck,
   FaStore,
+  FaHome,
+  FaBolt,
+  FaSwimmingPool,
+  FaTrailer
 } from "react-icons/fa";
 
 export const dateFormat = "DD/MM/YYYY";
@@ -166,16 +169,10 @@ export function iconosSegunTipoServicio(tipoServicio) {
   let IconComponent;
   switch (tipoServicio) {
     case ServicioTipo.Alambrados:
-      IconComponent = FaFence;
+      IconComponent = FaTrailer;
       break;
     case ServicioTipo.Almacenes:
       IconComponent = FaStore;
-      break;
-    case ServicioTipo.Jardineria:
-      IconComponent = FaLeaf;
-      break;
-    case ServicioTipo.LimpiezaTerrenos:
-      IconComponent = FaBroom;
       break;
     case ServicioTipo.Construccion:
       IconComponent = FaHardHat;
@@ -183,8 +180,8 @@ export function iconosSegunTipoServicio(tipoServicio) {
     case ServicioTipo.Diseno:
       IconComponent = FaPencilRuler;
       break;
-    case ServicioTipo.Filmacion:
-      IconComponent = FaVideo;
+    case ServicioTipo.Electricista:
+      IconComponent = FaBolt;  // Ícono de rayo/electricidad
       break;
     case ServicioTipo.Equipamiento:
       IconComponent = FaToolbox;
@@ -192,14 +189,29 @@ export function iconosSegunTipoServicio(tipoServicio) {
     case ServicioTipo.Estetica:
       IconComponent = FaCut;
       break;
-    case ServicioTipo.Salud:
-      IconComponent = FaHeartbeat;
+    case ServicioTipo.Filmacion:
+      IconComponent = FaVideo;
+      break;
+    case ServicioTipo.Jardineria:
+      IconComponent = FaLeaf;
+      break;
+    case ServicioTipo.LimpiezaCasas:
+      IconComponent = FaHome;
+      break;
+    case ServicioTipo.LimpiezaTerrenos:
+      IconComponent = FaBroom;
       break;
     case ServicioTipo.Mecanica:
       IconComponent = FaWrench;
       break;
+    case ServicioTipo.Piscinas:
+      IconComponent = FaSwimmingPool;
+      break;
     case ServicioTipo.ProvisionDeAgua:
       IconComponent = FaTint;
+      break;
+    case ServicioTipo.Salud:
+      IconComponent = FaHeartbeat;
       break;
     case ServicioTipo.Seguridad:
       IconComponent = FaShieldAlt;
@@ -289,11 +301,11 @@ export function obtenerTipoServicioPorTitulo(titulo) {
     case "Traslados":
       return ServicioTipo.Traslados;
     case "Limpieza de casas":
-      return ServicioTipo.Traslados;
+      return ServicioTipo.LimpiezaCasas;
     case "Electricista":
-      return ServicioTipo.Traslados;
+      return ServicioTipo.Electricista;
     case "Piscinas":
-      return ServicioTipo.Traslados;
+      return ServicioTipo.Piscinas;
     default:
       throw new Error("Título de servicio no reconocido");
   }
