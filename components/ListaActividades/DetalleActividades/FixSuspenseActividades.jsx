@@ -1,6 +1,7 @@
 "use client";
-import Carousel from '@/components/ListaActividades/DetalleActividades/Carousel'
-import { Actividad, Características, UbicacionMap } from '@/components/ListaActividades/DetalleActividades/Actividades';
+import Carousel from '@/components/utils/Carousel';
+import { Actividad } from '@/components/ListaActividades/DetalleActividades/Actividades';
+import UbicacionMap from '@/components/utils/UbicacionMap';
 import PubliSimilares from '@/components/ListaActividades/DetalleActividades/PublicacionesSimilares';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useContext } from 'react';
@@ -28,6 +29,10 @@ export default function FixSuspenseActividades() {
           console.log(resultado);
           setActividadSeleccionado(resultado.publicacion);
           setActividadSimilares(resultado.publicacionesRelacionadas);
+          if(document != undefined){
+            document.title = resultado.publicacion.titulo
+            document.querySelector('meta[name="description"]').content = eliminarHTMLparaMetaData(resultado.publicacion.contenido);
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
@@ -55,42 +60,29 @@ export default function FixSuspenseActividades() {
 
 
   return (
-    // <div className="flex flex-col min-h-screen bg-[#F9F6EE]">
-
-    //   <Actividad actividad={actividadSeleccionado}/>
-    //   <Carousel actividad={actividadSeleccionado}/>
-    //   <Características actividad={actividadSeleccionado}/>
-    //   <PubliSimilares similares={actividadesSimilares}/>
-
-    // </div>
     <Suspense>
       <div className="flex flex-col min-h-screen max-w-screen-xl m-auto bg-[#F9F6EE] px-3 sm:px-12 lg:px-20 py-10">
         <div className="mb-10">
         </div>
 
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {/* Columna izquierda */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            <Carousel actividad={actividadSeleccionado} />
-
+            <Carousel record={actividadSeleccionado} />
             <Actividad actividad={actividadSeleccionado} />
-
           </div>
 
-          {/* Columna derecha */}
           <div className="lg:col-span-1 flex flex-col h-full gap-6">
-            {/* Contenedor para Contacto y Mapa */}
             <div className="flex flex-col flex-1 gap-6">
-              {/* Contacto */}
-              {/* Mapa */}
-              <div className="flex-1">
+            
+              {/* <div className="flex-1">
                 <UbicacionMap ubicacion={actividadSeleccionado.ubicacion} />
-              </div>
+              </div> */}
             </div>
-            {/* Publicaciones Similares */}
+
             <div className="mt-auto">
               <PubliSimilares similares={actividadesSimilares} />
             </div>
+
           </div>
         </main>
       </div>

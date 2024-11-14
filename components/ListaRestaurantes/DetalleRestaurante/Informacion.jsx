@@ -16,10 +16,10 @@ const Informacion = ({ restaurante }) => (
       <EnvironmentOutlined style={{ marginRight: 8 }} />
       Ubicacion: {restaurante?.ubicacion_calles || 'Ubicación no disponible'}
     </p>
-    <p className="text-gray-800 mb-2">
+    {/* <p className="text-gray-800 mb-2">
       <FileTextOutlined style={{ marginRight: 8 }} />
       Descripcion: {restaurante?.descripcion || 'Descripcion no disponible'}
-    </p>
+    </p> */}
   </Card>
 );
 

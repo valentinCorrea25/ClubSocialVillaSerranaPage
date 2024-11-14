@@ -1,5 +1,5 @@
 "use client";
-import Carousel from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/Carousel";
+// import Carousel from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/Carousel";
 import { Eventosnoticias, Características, UbicacionMap, } from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/EventosNoticias";
 import PubliSimilares from "@/components/ListaNoticiasEventos/DetallaNoticiasEventos/PublicacionesSimilares"
 import { useSearchParams } from "next/navigation";
@@ -8,6 +8,7 @@ import { ClientContext } from "@/context/clientContext";
 import { Spin } from "antd";
 import { Suspense } from "react";
 import PublicacionNoEncontrada from "@/components/utils/PublicacionNoEncontrada";
+import Carousel from "@/components/utils/Carousel";
 
 export default function FixSuspenseNoticiaEventos() {
   const searchParams = useSearchParams();
@@ -26,6 +27,10 @@ export default function FixSuspenseNoticiaEventos() {
           console.log(resultado);
           setEventoNoticiaSeleccionado(resultado.publicacion);
           setEventoNoticiaSimilares(resultado.publicacionesRelacionadas);
+          if(document != undefined){
+            document.title = resultado.publicacion.titulo
+            document.querySelector('meta[name="description"]').content = eliminarHTMLparaMetaData(resultado.publicacion.contenido);
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
@@ -54,28 +59,17 @@ export default function FixSuspenseNoticiaEventos() {
         <div className="mb-10"></div>
 
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {/* Columna izquierda */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            <Carousel eventosnoticias={eventonoticiaSeleccionado} />
+            <Carousel record={eventonoticiaSeleccionado}/>
             <Eventosnoticias eventosnoticias={eventonoticiaSeleccionado} />
-
-
           </div>
-
-          {/* Columna derecha */}
           <div className="lg:col-span-1 flex flex-col h-full gap-6">
             {/* Contenedor para Contacto y Mapa */}
             <div className="flex flex-col flex-1 gap-6">
-
-
-              {/* <UbicacionMap ubicacion={eventonoticiaSeleccionado} /> */}
               <div className="">
                 <PubliSimilares similares={eventonoticiaSimilares} />
               </div>
-
             </div>
-
-
           </div>
         </main>
       </div>

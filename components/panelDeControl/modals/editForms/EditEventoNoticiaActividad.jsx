@@ -49,27 +49,6 @@ export default function EditEventoNoticiaActividad({
           Editar publicación de Actividad o Eventos y Noticias
         </h1>
 
-        {/* <div className="flex flex-col md:flex-row justify-between mb-4 space-y-2 md:space-y-0 md:space-x-2 max-w-screen-xl">
-          <Button
-            type={currentForm === "eventos" ? "primary" : "default"}
-            onClick={() => {
-              setCurrentForm("eventos");
-            }}
-            className="w-full md:w-1/2"
-          >
-            Eventos y Noticias
-          </Button>
-          <Button
-            type={currentForm === "actividades" ? "primary" : "default"}
-            onClick={() => {
-              setCurrentForm("actividades");
-            }}
-            className="w-full md:w-1/2"
-          >
-            Actividades
-          </Button>
-        </div> */}
-
         {currentForm === "EventoNoticia" ? (
           <>
             <Form.Item
@@ -143,6 +122,7 @@ export default function EditEventoNoticiaActividad({
             <Form.Item
               label="Contenido"
               name="contenido"
+              initialValue={textoRichText}
               rules={[
                 {
                   validator: (_, value) => {
@@ -156,7 +136,10 @@ export default function EditEventoNoticiaActividad({
                 },
               ]}
             >
-              <RichTextEditor setTextoRichText={setTextoRichText} />
+              <RichTextEditor
+                setTextoRichText={setTextoRichText}
+                initialHTML={eventoNoticiaActividad.contenido}
+              />
             </Form.Item>
 
             <div className="flex justify-center gap-4">
@@ -170,7 +153,7 @@ export default function EditEventoNoticiaActividad({
               </Form.Item>
 
               <Form.Item
-                label="Ubicación"
+                label="Ubicación calles"
                 name="ubicacion"
                 initialValue={eventoNoticiaActividad.ubicacion}
                 rules={[{ required: true }]}

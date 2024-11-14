@@ -6,11 +6,11 @@ import { ClientContext } from '@/context/clientContext';
 import { Suspense } from 'react';
 
 import Informacion from '@/components/ListaRestaurantes/DetalleRestaurante/Informacion';
-import Carousel from '@/components/ListaRestaurantes/DetalleRestaurante/Carousel';
+import Carousel from '@/components/utils/Carousel';
 import Descripcion from '@/components/ListaRestaurantes/DetalleRestaurante/Descripcion';
 import Caracteristicas from '@/components/ListaRestaurantes/DetalleRestaurante/Caracteristicas';
-import Contacto from '@/components/ListaRestaurantes/DetalleRestaurante/Contacto';
-import UbicacionMap from '@/components/ListaRestaurantes/DetalleRestaurante/UbicacionMap';
+import Contacto from '@/components/utils/Contacto';
+import UbicacionMap from '@/components/utils/UbicacionMap';
 import PublicacionesSimilares from '@/components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares';
 import PublicacionNoEncontrada from '@/components/utils/PublicacionNoEncontrada';
 
@@ -31,6 +31,10 @@ const FixSuspenseRestaurante = (restaurante) => {
           console.log(resultado);
           setRestauranteSeleccionado(resultado.publicacion);
           setRestaurantesSimilares(resultado.publicacionesRelacionadas);
+          if(document != undefined){
+            document.title = resultado.publicacion.titulo
+            document.querySelector('meta[name="description"]').content = resultado.publicacion.descripcion;
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
@@ -65,7 +69,7 @@ const FixSuspenseRestaurante = (restaurante) => {
           {/* Columna izquierda */}
           <div className="lg:col-span-2 flex flex-col gap-6">
             <Informacion restaurante={restauranteSeleccionado} />
-            <Carousel restaurante={restauranteSeleccionado} />
+            <Carousel record={restauranteSeleccionado} />
             {/* <Descripcion restaurante={restauranteSeleccionado} /> */}
             <Caracteristicas restaurante={restauranteSeleccionado} />
           </div>

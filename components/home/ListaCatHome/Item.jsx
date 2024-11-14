@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa6";
-import { ClockCircleOutlined, HomeOutlined, SunOutlined, EnvironmentOutlined, PhoneOutlined } from "@ant-design/icons";
+import {
+  ClockCircleOutlined,
+  HomeOutlined,
+  SunOutlined,
+  EnvironmentOutlined,
+  PhoneOutlined,
+} from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import ModalServicio from "@/components/ListaServicios/ModalServicio";
 
 export default function Item({ informacion, type }) {
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
   const router = useRouter();
   return (
+    <>
     <div className="flex flex-col items-center justify-center montserrat max-w-72">
       {type == 1 ? (
         <>
-          <div className="p-4 shadow-md border  max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[320px] "
-            onClick={() => router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`)}
+          <div
+            className="p-4 shadow-md border  max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[320px] "
+            onClick={() =>
+              router.push(
+                `/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`
+              )
+            }
           >
             <div className=" w-full h-[169px] max-h-[250px] ">
               <img
@@ -44,9 +66,14 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 2 ? (
         <>
-          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[365px]"
-            onClick={() => router.push(`/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`)}>
-
+          <div
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[365px]"
+            onClick={() =>
+              router.push(
+                `/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`
+              )
+            }
+          >
             <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
@@ -77,7 +104,14 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 3 ? (
         <>
-          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] h-[340px] ">
+          <div
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] h-[340px] "
+            onClick={() =>
+              router.push(
+                `/ListaEventosNoticias/DetalleEventosNoticias?id=${informacion.id_EventoNoticia}`
+              )
+            }
+          >
             <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
@@ -94,9 +128,12 @@ export default function Item({ informacion, type }) {
             <p className="font-normal leading-5 text-sm text-justify w-full max-w-[320px] md:max-w-none">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: informacion?.contenido?.length > 110
-                    ? informacion.contenido.replace(/<[^>]+>/g, '').substring(0, 120) + "... "
-                    : informacion?.contenido.replace(/<[^>]+>/g, '')
+                  __html:
+                    informacion?.contenido?.length > 110
+                      ? informacion.contenido
+                          .replace(/<[^>]+>/g, "")
+                          .substring(0, 120) + "... "
+                      : informacion?.contenido.replace(/<[^>]+>/g, ""),
                 }}
               ></span>
               <a className="text-[--verde] font-semibold cursor-pointer">
@@ -110,7 +147,14 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 4 ? (
         <>
-          <div className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[350px]" >
+          <div
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[350px]"
+            onClick={() =>
+              router.push(
+                `/ListaActividades/DetalleActividades?id=${informacion.id_Actividad}`
+              )
+            }
+          >
             <div className=" w-full h-[169px] max-h-[250px] ">
               <img
                 src={informacion?.fotos?.[0]}
@@ -135,9 +179,12 @@ export default function Item({ informacion, type }) {
               <p className="font-normal leading-5 text-sm text-justify w-full max-w-[320px] md:max-w-none">
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: informacion?.contenido?.length > 110
-                      ? informacion.contenido.replace(/<[^>]+>/g, '').substring(0, 120) + "... "
-                      : informacion?.contenido.replace(/<[^>]+>/g, '')
+                    __html:
+                      informacion?.contenido?.length > 110
+                        ? informacion.contenido
+                            .replace(/<[^>]+>/g, "")
+                            .substring(0, 120) + "... "
+                        : informacion?.contenido.replace(/<[^>]+>/g, ""),
                   }}
                 ></span>
                 <a className="text-[--verde] font-semibold cursor-pointer">
@@ -149,7 +196,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : type == 5 ? (
         <>
-          <div className="w-full text-center max-w-56m">
+          <div className="w-full text-center max-w-56m" onClick={setVisible}>
             <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg cursor-pointer mt-2 text-center">
               {informacion?.titulo}
             </h1>
@@ -163,5 +210,7 @@ export default function Item({ informacion, type }) {
         </>
       ) : null}
     </div>
+    <ModalServicio  isOpen={visible} handleCancel={handleCancel} servicio={informacion} />
+    </>
   );
 }

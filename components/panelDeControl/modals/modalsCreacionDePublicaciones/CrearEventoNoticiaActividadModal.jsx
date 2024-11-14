@@ -289,7 +289,7 @@ export default function CrearEventoNoticiaActividadModal({
               </Form.Item>
 
               <Form.Item
-                label="Ubicación"
+                label="Ubicación calles"
                 name="ubicacion"
                 rules={[{ required: true }]}
               >

@@ -44,6 +44,7 @@ export default function NoticiasEA({
           );
           return `${record[tipoPublicacion]}_${tipoPublicacion}`;
         }}
+        tipoDePublicacion={'EventoNoticia'}
       />
     </div>
   );

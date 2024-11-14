@@ -135,7 +135,7 @@ export default function EditarPublicacionModal({
       );
     }
 
-    if(tipoDePublicacion == "eventosnoticias"){
+    if(tipoDePublicacion == "eventosnoticias" || tipoDePublicacion == "actividades"){
       // processedValues.fecha_evento = formValues.fecha_evento
       // ? handleFecha(formValues.fecha_evento)
       // : null;
@@ -159,10 +159,6 @@ export default function EditarPublicacionModal({
 
       delete processedValues.caracteristicas;
     }
-
-    console.log(processedValues);
-
-
     try {
       if (tipoDePublicacion != "servicios") {
         if (fileList && fileList.length > 0) {

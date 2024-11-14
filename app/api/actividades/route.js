@@ -32,6 +32,9 @@ export async function GET(request) {
     const publicaciones = await prisma.actividad.findMany({
         skip: random,
         take: limit,
+        where:{
+          publicado: true
+      },
         orderBy: {
           fecha_publicacion: 'desc'
       },
