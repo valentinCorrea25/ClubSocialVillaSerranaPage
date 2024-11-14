@@ -9,7 +9,7 @@ import { scrollToTop } from "@/components/utils/ControlPublicaciones";
 
 const EventosPage = () => {
   const { todasLasNoticiasEventos } = useContext(ClientContext);
-  const appStyle = { padding: "10px", margin: "0 auto", maxWidth: "1200px" };
+
   const [noticiasEventos, setNoticiasEventos] = useState();
   const [noResults, setNoResults] = useState(false);
   const [page, setPage] = useState(1);
@@ -39,7 +39,7 @@ const EventosPage = () => {
   }, [page]);
 
   return (
-    <div style={appStyle}>
+    <div className="p-[10px] mx-auto max-w-[1200px]">
       <Banner
         title="Eventos y Noticias"
         subtitle="Descubre nuestros últimos eventos y noticias"
