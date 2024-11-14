@@ -40,10 +40,8 @@ const Descriptions = ({ alojamiento }) => (
         {(() => {
           const comodidades = [];
 
-          // Iteramos sobre todas las propiedades del objeto 'caracteristicas'
-          for (const key in alojamiento) {
-            if (alojamiento[key] === true) {
-              // Convertir el nombre de la propiedad a algo más legible si es necesario
+          for (const key in alojamiento) {            
+            if (alojamiento[key] === true && key != 'publicado') {
               let nombreComodidad = key
                 .replace("_", " ")
                 .replace(/\b\w/g, (char) => char.toUpperCase());

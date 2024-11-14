@@ -6,11 +6,11 @@ import { ClientContext } from '@/context/clientContext';
 import { Suspense } from 'react';
 
 import Informacion from '@/components/ListaRestaurantes/DetalleRestaurante/Informacion';
-import Carousel from '@/components/ListaRestaurantes/DetalleRestaurante/Carousel';
+import Carousel from '@/components/utils/Carousel';
 import Descripcion from '@/components/ListaRestaurantes/DetalleRestaurante/Descripcion';
 import Caracteristicas from '@/components/ListaRestaurantes/DetalleRestaurante/Caracteristicas';
-import Contacto from '@/components/ListaRestaurantes/DetalleRestaurante/Contacto';
-import UbicacionMap from '@/components/ListaRestaurantes/DetalleRestaurante/UbicacionMap';
+import Contacto from '@/components/utils/Contacto';
+import UbicacionMap from '@/components/utils/UbicacionMap';
 import PublicacionesSimilares from '@/components/ListaRestaurantes/DetalleRestaurante/PublicacionesSimilares';
 import PublicacionNoEncontrada from '@/components/utils/PublicacionNoEncontrada';
 
@@ -65,7 +65,7 @@ const FixSuspenseRestaurante = (restaurante) => {
           {/* Columna izquierda */}
           <div className="lg:col-span-2 flex flex-col gap-6">
             <Informacion restaurante={restauranteSeleccionado} />
-            <Carousel restaurante={restauranteSeleccionado} />
+            <Carousel record={restauranteSeleccionado} />
             {/* <Descripcion restaurante={restauranteSeleccionado} /> */}
             <Caracteristicas restaurante={restauranteSeleccionado} />
           </div>

@@ -3,12 +3,11 @@ import { Button, Card, Modal } from "antd";
 import ServicioContent from "./ServicioContent";
 import { formatearTelefonoAUruguayo } from "../utils/ControlPublicaciones";
 import { FaWhatsapp } from "react-icons/fa";
+import ModalServicio from "./ModalServicio";
 
 const ServicioCard = ({ servicio }) => {
-  // Estado para controlar el modal
   const [visible, setVisible] = useState(false);
 
-  // Funciones para abrir y cerrar el modal
   const showModal = () => {
     setVisible(true);
   };
@@ -35,29 +34,7 @@ const ServicioCard = ({ servicio }) => {
       >
         <ServicioContent servicio={servicio} />
       </Card>
-
-      <Modal
-        // title={
-        //   <h2 style={{ fontSize: "26px", marginLeft: "20px" }}>{servicio.titulo}</h2>
-        // }
-        visible={visible}
-        onCancel={handleCancel}
-        footer={
-          <div className="flex justify-center gap-8 items-center">
-            <a href={`tel:${formatearTelefonoAUruguayo(servicio.celular)}`} className="flex justify-center">
-              <Button size="large" className="bg-[--verde] text-white">Llamar</Button>
-            </a>
-            <a href={`https://wa.me/${formatearTelefonoAUruguayo(servicio.celular)}`} className="flex justify-center" target="_blank" rel="noopener noreferrer">
-              <Button size="large" className="bg-[--verde] text-white">WhatsApp <FaWhatsapp/></Button>
-            </a>
-          </div>
-        }
-        
-        width={600}
-        bodyStyle={{ fontSize: "20px", padding: "24px" }}
-      >
-        <ServicioContent servicio={servicio} />
-      </Modal>
+      <ModalServicio  isOpen={visible} handleCancel={handleCancel} servicio={servicio} />
     </>
   );
 };

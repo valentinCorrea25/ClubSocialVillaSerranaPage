@@ -111,7 +111,7 @@ const RestauranteCard = ({ restaurante }) => {
                         </p>
                         <Button
                             type="primary"
-                            onClick={() => handleViewDetails(alojamiento.id_Actividad)}
+                            onClick={() => handleViewDetails(restaurante.id_Restaurant)}
                             className="mt-7  "
                         >
                             Ver Detalles

@@ -32,6 +32,9 @@ export async function GET(request) {
     const limit = parseInt(searchParams.get('limit')) || 3;
 
     const publicaciones = await prisma.eventosNoticia.findMany({
+        where:{
+            publicado: true
+        },
         orderBy: {
             fecha_publicacion: 'desc',
         },

@@ -400,9 +400,17 @@ export function excluirNoPublicados(data) {
 }
 
 export function formatearTelefonoAUruguayo(phoneNumber) {
+  if(!phoneNumber){
+    return
+  }
   const cleanedNumber = phoneNumber.replace(/\s+/g, '');
   if (cleanedNumber.length === 9 && cleanedNumber.startsWith('0')) {
     return `+598${cleanedNumber.slice(1)}`;
   }
+}
+
+function eliminarHTMLparaMetaData(str) {
+  const textoLimpio = str.replace(/<[^>]*>/g, ''); 
+  return textoLimpio.length > 235 ? textoLimpio.slice(0, 235) + "..." : textoLimpio;
 }
 

@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import Informacion from "@/components/ListaAlojamiento/DetalleAlojamiento/Informacion";
 import Carousel from "@/components/utils/Carousel";
 import Descripcion from "@/components/ListaAlojamiento/DetalleAlojamiento/Descripcion";
-import ContactoInfo from "@/components/ListaRestaurantes/DetalleRestaurante/Contacto";
+import ContactoInfo from "@/components/utils/Contacto";
 import PublicacionesSimilares from "@/components/ListaAlojamiento/DetalleAlojamiento/PublicacionesSimilares";
 import { ClientContext } from "@/context/clientContext";
 import { Spin } from "antd";

@@ -36,6 +36,9 @@ export async function GET(request) {
         orderBy: {
             fecha_publicacion: 'desc'
         },
+        where:{
+            publicado: true
+        },
     });
     if(!publicaciones) return NextResponse.json({message: 'Sin Publicaciones'});
 
