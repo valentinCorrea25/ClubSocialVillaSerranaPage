@@ -31,6 +31,10 @@ const FixSuspenseRestaurante = (restaurante) => {
           console.log(resultado);
           setRestauranteSeleccionado(resultado.publicacion);
           setRestaurantesSimilares(resultado.publicacionesRelacionadas);
+          if(document != undefined){
+            document.title = resultado.publicacion.titulo
+            document.querySelector('meta[name="description"]').content = resultado.publicacion.descripcion;
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {

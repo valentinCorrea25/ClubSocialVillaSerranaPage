@@ -27,6 +27,10 @@ export default function FixSuspenseNoticiaEventos() {
           console.log(resultado);
           setEventoNoticiaSeleccionado(resultado.publicacion);
           setEventoNoticiaSimilares(resultado.publicacionesRelacionadas);
+          if(document != undefined){
+            document.title = resultado.publicacion.titulo
+            document.querySelector('meta[name="description"]').content = eliminarHTMLparaMetaData(resultado.publicacion.contenido);
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
