@@ -189,8 +189,7 @@ export default function CrearServicioModal({
             className="w-full"
             rules={[
               {
-                required: true,
-                message: "Por favor ingresa el correo electrónico",
+                message: "Ingresa un correo electrónico valido",
                 type: "email",
               },
             ]}
