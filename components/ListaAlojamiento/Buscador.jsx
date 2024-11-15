@@ -19,7 +19,7 @@ import { InputNumber, Button, Space } from 'antd';
 //     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px', padding: '16px', 
 //       backgroundColor: '#ffffff', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
 //       flexWrap: 'wrap', }}>
-      
+
 //       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px' }}>
 //         <label style={{ fontWeight: 'bold' }}>Rango de Precio:</label>
 //         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -78,7 +78,7 @@ import { InputNumber, Button, Space } from 'antd';
 
 const Buscador = ({ onFilterChange }) => {
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(40000);
+  const [maxPrice, setMaxPrice] = useState(5000);
   const [capacity, setCapacity] = useState(0);
 
   const handleFilterChange = () => {
@@ -89,7 +89,7 @@ const Buscador = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="bg-white mt-6  rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-wrap ">
+    <div className=" w-[1200px] bg-white mt-1 rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-wrap ">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
         <label className="font-bold whitespace-nowrap">Rango de Precio:</label>
         <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -105,11 +105,11 @@ const Buscador = ({ onFilterChange }) => {
           <span className="text-xl">-</span>
           <input
             type="number"
+            placeholder="5000"
             min={0}
             max={40000}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
-            placeholder="40000"
             className="w-full sm:w-24 p-2 border rounded"
           />
         </div>

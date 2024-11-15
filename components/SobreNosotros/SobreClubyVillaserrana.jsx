@@ -3,13 +3,10 @@ import fotoClub from "@/public/images/sobreElClub.jpg";
 import fotoHistoria from "@/public/images/villaserrana.jpg";
 import Image from "next/image";
 
-
-
 export function SobreElCLub() {
   return (
     <div className="flex justify-center items-center p-4 pt-10">
-
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-screen-xl">
         <div className="md:float-right md:ml-8 md:mb-4 mb-8 flex justify-center md:block">
           <Image
             src={fotoClub}
@@ -23,15 +20,15 @@ export function SobreElCLub() {
           HISTORIA DEL CLUB
         </h1>
         <p className="text-gray-700 mb-4 text-justify">
-          En el año 2019 un grupo de vecinos nos comenzamos a juntar con el fin
+          En el año 2019, un grupo de vecinos nos comenzamos a juntar con el fin
           de crear un Club Social y Deportivo. Luego de varias reuniones y
           eventos, donde participaron una gran cantidad de vecinos, tomamos la
-          decisión de hacerlo realidad. Fue así, que a mediados de 2020
+          decisión de hacerlo realidad. Fue así que, a mediados de 2020,
           obtuvimos la personería jurídica con más de 30 socios fundadores.
         </p>
         <p className="text-gray-700 mb-4 text-justify">
-          Debido al Covid19, nos hemos visto imposibilitados de realizar
-          actividades. Tenemos desde fines de 2019 presentado en la IDL un
+          Debido al Covid-19, nos hemos visto imposibilitados de realizar
+          actividades. Tenemos, desde fines de 2019, presentado en la IDL un
           expediente, solicitando un predio para llevar adelante el sueño de
           tener un espacio de encuentro y esparcimiento para la comunidad,
           residente y no residente.
@@ -46,8 +43,8 @@ export function SobreElCLub() {
           culturales y deportivas.
         </p>
         <p className="text-gray-700 text-justify">
-          Por este motivo, los invitamos a todos, residentes y no residentes a
-          ser parte, y hacerse socios del Club Social y Deportivo Villa Serrana.
+          Por este motivo, los invitamos a todos, residentes y no residentes, a
+          ser parte y hacerse socios del Club Social y Deportivo Villa Serrana.
         </p>
       </div>
     </div>
@@ -56,8 +53,8 @@ export function SobreElCLub() {
 
 export function Sobrevillaserrana() {
   return (
-    <div className="flex justify-center items-center pb-10  p-4">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
+    <div className="flex justify-center items-center pb-10 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-screen-xl">
         <div className="md:float-right md:ml-8 md:mb-4 mb-8 flex justify-center md:block">
           <Image
             src={fotoHistoria}
@@ -68,17 +65,17 @@ export function Sobrevillaserrana() {
           />
         </div>
         <h1 className="text-2xl font-bold mb-4 text-center">
-          Historia De Villa Serrana
+          HISTORIA DE VILLA SERRANA
         </h1>
         <p className="text-gray-700 mb-4 text-justify">
           Villa Serrana es un pintoresco poblado ubicado en el departamento de
-          Lavalleja, Uruguay, a unos 25 kilómetros al noreste de Minas1. Fue
+          Lavalleja, Uruguay, a unos 25 kilómetros al noreste de Minas. Fue
           fundada en 1946 como una villa de descanso de estilo europeo.
         </p>
         <p className="text-gray-700 mb-4 text-justify">
           La idea de crear Villa Serrana surgió en 1945, cuando se constituyó la
           sociedad Villa Serrana S.A. con el objetivo de desarrollar villas
-          residenciales en un entorno natural panorámico1. El arquitecto Julio
+          residenciales en un entorno natural panorámico. El arquitecto Julio
           Vilamajó, junto con otros colegas, fue el encargado de diseñar la
           villa, integrando la arquitectura con los materiales regionales como
           la piedra, la madera y la paja.

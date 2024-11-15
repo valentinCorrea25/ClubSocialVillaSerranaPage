@@ -16,10 +16,10 @@ import PublicacionNoEncontrada from '@/components/utils/PublicacionNoEncontrada'
 
 const FixSuspenseRestaurante = (restaurante) => {
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');  
+  const id = searchParams.get('id');
   const { buscarRestaurant } = useContext(ClientContext);
   const [restauranteSeleccionado, setRestauranteSeleccionado] = useState(null);
-  const [ restaurantesSimilares, setRestaurantesSimilares ] = useState(null);  
+  const [restaurantesSimilares, setRestaurantesSimilares] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const FixSuspenseRestaurante = (restaurante) => {
           console.log(resultado);
           setRestauranteSeleccionado(resultado.publicacion);
           setRestaurantesSimilares(resultado.publicacionesRelacionadas);
-          if(document != undefined){
+          if (document != undefined) {
             document.title = resultado.publicacion.titulo
             document.querySelector('meta[name="description"]').content = resultado.publicacion.descripcion;
           }
@@ -45,7 +45,7 @@ const FixSuspenseRestaurante = (restaurante) => {
     };
     fetchRestaurant();
   }, [id]);
-  
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -55,49 +55,49 @@ const FixSuspenseRestaurante = (restaurante) => {
   }
 
   if (!restauranteSeleccionado) {
-    return <PublicacionNoEncontrada/>
+    return <PublicacionNoEncontrada />
   }
-  
-  
+
+
 
   return (
-      <div className="flex flex-col min-h-screen max-w-screen-xl m-auto bg-[#F9F6EE] px-3 sm:px-12 lg:px-20 py-10">
-        <div className="mb-10">
+    <div className="flex flex-col min-h-screen max-w-screen-xl m-auto bg-[#F9F6EE] px-3 sm:px-12 lg:px-20 py-10">
+      <div className="mb-10">
+      </div>
+
+      <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Columna izquierda */}
+        <div className="lg:col-span-2 flex flex-col gap-6">
+          <Informacion restaurante={restauranteSeleccionado} />
+          <Carousel record={restauranteSeleccionado} />
+          {/* <Descripcion restaurante={restauranteSeleccionado} /> */}
+          <Caracteristicas restaurante={restauranteSeleccionado} />
         </div>
 
-        <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {/* Columna izquierda */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
-            <Informacion restaurante={restauranteSeleccionado} />
-            <Carousel record={restauranteSeleccionado} />
-            {/* <Descripcion restaurante={restauranteSeleccionado} /> */}
-            <Caracteristicas restaurante={restauranteSeleccionado} />
-          </div>
-          
-          {/* Columna derecha */}
-          <div className="lg:col-span-1 flex flex-col h-full gap-6">
-            {/* Contenedor para Contacto y Mapa */}
-            <div className="flex flex-col flex-1 gap-6">
-              {/* Contacto */}
-              <div className="flex-1">
-                <Contacto
+        {/* Columna derecha */}
+        <div className="lg:col-span-1 flex flex-col h-full gap-6">
+          {/* Contenedor para Contacto y Mapa */}
+          <div className="flex flex-col flex-1 gap-6">
+            {/* Contacto */}
+            <div className="flex-1">
+              <Contacto
                 nombre_titular={restauranteSeleccionado.nombre_titular}
                 mail={restauranteSeleccionado.mail}
-                celular={restauranteSeleccionado.celular} 
-                />
-              </div>
-              {/* Mapa */}
-              <div className="flex-1">
-                <UbicacionMap ubicacion={restauranteSeleccionado.ubicacion} />
-              </div>
+                celular={restauranteSeleccionado.celular}
+              />
             </div>
-            {/* Publicaciones Similares */}
-            <div className="mt-auto">
-              <PublicacionesSimilares restaurantes={restaurantesSimilares} />
+            {/* Mapa */}
+            <div className="flex-1">
+              <UbicacionMap ubicacion={restauranteSeleccionado.ubicacion} />
             </div>
           </div>
-        </main>
-      </div>
+          {/* Publicaciones Similares */}
+          <div className="mt-auto">
+            <PublicacionesSimilares restaurantes={restaurantesSimilares} />
+          </div>
+        </div>
+      </main>
+    </div>
   );
 };
 

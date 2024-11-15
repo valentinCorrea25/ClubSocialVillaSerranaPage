@@ -21,21 +21,22 @@ export default function Item({ informacion, type }) {
   const handleCancel = () => {
     setVisible(false);
   };
+
   const router = useRouter();
+
   return (
     <>
-    <div className="flex flex-col items-center justify-center montserrat max-w-72">
-      {type == 1 ? (
-        <>
+      <div className="flex flex-col items-center justify-center montserrat max-w-72">
+        {type == 1 ? (
           <div
-            className="p-4 shadow-md border  max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[320px] "
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[320px] transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() =>
               router.push(
                 `/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`
               )
             }
           >
-            <div className=" w-full h-[169px] max-h-[250px] ">
+            <div className="w-full h-[169px] max-h-[250px]">
               <img
                 src={informacion?.fotos?.[0]}
                 className="w-full h-[160px] max-h-[250px] object-cover shadow-lg cursor-pointer"
@@ -63,28 +64,26 @@ export default function Item({ informacion, type }) {
               </h3>
             </div>
           </div>
-        </>
-      ) : type == 2 ? (
-        <>
+        ) : type == 2 ? (
           <div
-            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[365px]"
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[365px] transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() =>
               router.push(
                 `/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`
               )
             }
           >
-            <div className=" w-full h-[169px] max-h-[250px] ">
+            <div className="w-full h-[169px] max-h-[250px]">
               <img
                 src={informacion?.fotos?.[0]}
                 className="w-full h-[169px] max-h-[250px] shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>
-            <div className="ml-2 mt-4 text-sm">
+            <div className="ml-2 mt-2 text-sm">
               <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
-                {informacion?.titulo?.length > 24
-                  ? informacion.titulo.substring(0, 24) + "..."
+                {informacion?.titulo?.length > 20
+                  ? informacion.titulo.substring(0, 20) + "..."
                   : informacion?.titulo}
               </h1>
               <h2 className="font-normal flex items-center justify-start text-left gap-0.5">
@@ -101,18 +100,16 @@ export default function Item({ informacion, type }) {
               </h2>
             </div>
           </div>
-        </>
-      ) : type == 3 ? (
-        <>
+        ) : type == 3 ? (
           <div
-            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] h-[340px] "
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] h-[340px] transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() =>
               router.push(
                 `/ListaEventosNoticias/DetalleEventosNoticias?id=${informacion.id_EventoNoticia}`
               )
             }
           >
-            <div className=" w-full h-[169px] max-h-[250px] ">
+            <div className="w-full h-[169px] max-h-[250px]">
               <img
                 src={informacion?.fotos?.[0]}
                 className="w-full h-[160px] max-h-[250px] object-cover shadow-lg cursor-pointer"
@@ -131,8 +128,8 @@ export default function Item({ informacion, type }) {
                   __html:
                     informacion?.contenido?.length > 110
                       ? informacion.contenido
-                          .replace(/<[^>]+>/g, "")
-                          .substring(0, 120) + "... "
+                        .replace(/<[^>]+>/g, "")
+                        .substring(0, 120) + "... "
                       : informacion?.contenido.replace(/<[^>]+>/g, ""),
                 }}
               ></span>
@@ -144,28 +141,26 @@ export default function Item({ informacion, type }) {
               {informacion?.fecha}
             </h3>
           </div>
-        </>
-      ) : type == 4 ? (
-        <>
+        ) : type == 4 ? (
           <div
-            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[350px]"
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[350px] transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() =>
               router.push(
                 `/ListaActividades/DetalleActividades?id=${informacion.id_Actividad}`
               )
             }
           >
-            <div className=" w-full h-[169px] max-h-[250px] ">
+            <div className="w-full h-[169px] max-h-[250px]">
               <img
                 src={informacion?.fotos?.[0]}
-                className="w-full h-[160px] max-h-[250px]shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
+                className="w-full h-[160px] max-h-[250px] shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] cursor-pointer"
                 alt={informacion?.titulo}
               />
             </div>
             <div className="ml-2 text-sm">
               <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
-                {informacion?.titulo?.length > 24
-                  ? informacion.titulo.substring(0, 24) + "..."
+                {informacion?.titulo?.length > 20
+                  ? informacion.titulo.substring(0, 20) + "..."
                   : informacion?.titulo}
               </h1>
               <h2 className="font-normal flex items-center gap-0.5">
@@ -174,16 +169,16 @@ export default function Item({ informacion, type }) {
               </h2>
               <h2 className="font-normal flex items-center gap-0.5">
                 <EnvironmentOutlined size={10} />
-                {informacion?.titulo?.substring(4)}
+                {informacion?.ubicacion}
               </h2>
-              <p className="font-normal leading-5 text-sm text-justify w-full max-w-[320px] md:max-w-none">
+              <p className="font-normal leading-5 text-sm text-justify w-full max-w-[320px] md:max-w-none mt-1">
                 <span
                   dangerouslySetInnerHTML={{
                     __html:
                       informacion?.contenido?.length > 110
                         ? informacion.contenido
-                            .replace(/<[^>]+>/g, "")
-                            .substring(0, 120) + "... "
+                          .replace(/<[^>]+>/g, "")
+                          .substring(0, 120) + "... "
                         : informacion?.contenido.replace(/<[^>]+>/g, ""),
                   }}
                 ></span>
@@ -193,24 +188,22 @@ export default function Item({ informacion, type }) {
               </p>
             </div>
           </div>
-        </>
-      ) : type == 5 ? (
-        <>
-          <div className="w-full text-center max-w-56m" onClick={setVisible}>
-            <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg cursor-pointer mt-2 text-center">
-              {informacion?.titulo}
-            </h1>
-            <h2 className="font-normal justify-center flex items-center gap-0.5">
-              <FaWhatsapp /> Contacto: {informacion?.celular?.substring(0, 12)}
-            </h2>
-            <h3 className="font-semibold text-xs text-[--verde-oscuro]">
-              {informacion?.nombre_titular}
-            </h3>
-          </div>
-        </>
-      ) : null}
-    </div>
-    <ModalServicio  isOpen={visible} handleCancel={handleCancel} servicio={informacion} />
+        ) : type == 5 ? (
+          <>
+            <div className=" w-[260px] p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] cursor-pointer h-[155px] transform transition-transform duration-200 ease-in-out hover:scale-105" onClick={setVisible}>
+              <h1 className="hover:text-[--verde] transition-all font-extrabold text-sm cursor-pointer mt-2 text-center">
+                {informacion?.titulo}
+              </h1>
+              <h2 className="font-normal justify-center flex items-center gap-0.5">
+                <FaWhatsapp /> Contacto: {informacion?.celular?.substring(0, 12)}
+              </h2>
+              <h3 className="font-semibold text-xs text-[--verde-oscuro]">
+                {informacion?.nombre_titular}
+              </h3>
+            </div>
+          </>
+        ) : null}
+      </div>
     </>
   );
 }

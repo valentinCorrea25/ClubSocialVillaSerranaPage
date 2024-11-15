@@ -40,7 +40,7 @@ export default function ListaItems({ type }) {
   const displayedItems = isMobile && items.length > 3 ? items.slice(0, 3) : items;
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center p-4">
+    <div className="flex flex-col gap-4 justify-center items-center ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
         {displayedItems.length > 0 ? (
           displayedItems.map((item, index) => (
@@ -49,7 +49,7 @@ export default function ListaItems({ type }) {
             </div>
           ))
         ) : (
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center ">
             <Spin size="large" />
           </div>
         )}
