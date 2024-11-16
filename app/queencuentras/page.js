@@ -47,7 +47,7 @@ const QueEncuentras = () => {
 
   return (
     <div className="p-5 max-w-screen-xl mx-auto">
-      <h1 className="text-center text-3xl md:text-4xl mb-5 text-[var(--azul)]">
+      <h1 className="text-center text-3xl md:text-4xl mb-5 text-[var(--verde)]">
         ¿Qué Encuentras Aquí?
       </h1>
       <p className="text-center text-lg md:text-xl mb-10 text-gray-600">
@@ -57,28 +57,23 @@ const QueEncuentras = () => {
       {categories.map((category, index) => (
         <div
           key={category.name}
-          className={`mb-10 flex flex-col ${
-            index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-          } items-center gap-5`}
+          className={`mb-10 flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+            } items-center gap-5`}
         >
           <a
             href={category.link}
-            className="w-full md:w-full no-underline text-inherit"
+            className="w-full md:w-1/2 no-underline text-inherit"
           >
-            <div className="">
             <ImageComponent
               src={category.image}
               alt={category.name}
-              className="w-full h-auto rounded-lg shadow-md"
+              className="w-full h-auto max-w-sm rounded-lg shadow-md"
             />
-            </div>
           </a>
-          <div className="sm:max-w-[50vh] flex flex-col">
-            <TextComponent className="w-full sm:w-1/2">
-              <h2 className="text-2xl font-bold mb-3">{category.name}</h2>
-              <p className="text-gray-700 md:text-left text-justify">{category.description}</p>
-            </TextComponent>
-            <Button className="w-auto m-auto" onClick={()=>{router.push(category.link)}}>Ver mas {category.name}</Button>
+          <div className="w-full md:w-1/2 flex flex-col px-5">
+            <h2 className="text-2xl font-bold mb-3">{category.name}</h2>
+            <p className="text-gray-700 md:text-left text-justify mb-5">{category.description}</p>
+            <Button type="primary" className="w-auto m-auto" onClick={() => { router.push(category.link) }}>Ver más</Button>
           </div>
         </div>
       ))}

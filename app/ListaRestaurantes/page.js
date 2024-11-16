@@ -59,13 +59,13 @@ const ListaRestaurantesPage = () => {
           backgroundImage="/images/restaurantes.jpg"
         />
       </div>
-      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
+      <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 ">
 
         <Content>
           <div
             style={{
               textAlign: "center",
-              marginBottom: "32px",
+              /* marginBottom: "32px", */
             }}
           >
             {/* <Buscador 

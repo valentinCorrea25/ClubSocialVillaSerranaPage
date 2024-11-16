@@ -204,7 +204,7 @@ export default function CrearAlquilerModal({
                 <TextArea
                   placeholder="Escribe una descripción"
                   showCount
-                  maxLength={500}
+                  maxLength={1000}
                   className="w-full h-40 resize-none"
                 />
               </Form.Item>
@@ -267,7 +267,7 @@ export default function CrearAlquilerModal({
                 ]}
               >
                 <Input
-                maxLength={12}
+                  maxLength={12}
                   count={{
                     show: true,
                     max: 12,

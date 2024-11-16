@@ -112,7 +112,7 @@ export default function CrearRestaurantesModal({
       }
       setIsLoading(false);
       console.log(update);
-      
+
     } catch (e) {
       console.log(e);
     }
@@ -181,7 +181,7 @@ export default function CrearRestaurantesModal({
                 <TextArea
                   placeholder="Escribe una descripción"
                   showCount
-                  maxLength={500}
+                  maxLength={1000}
                   className="w-full h-40 resize-none"
                 />
               </Form.Item>
@@ -239,7 +239,7 @@ export default function CrearRestaurantesModal({
                 ]}
               >
                 <Input
-                maxLength={12}
+                  maxLength={12}
                   count={{
                     show: true,
                     max: 12,
@@ -284,7 +284,7 @@ export default function CrearRestaurantesModal({
                               "Por favor ingresa un enlace válido de Google Maps"
                             )
                           );
-                        }else{
+                        } else {
                           return Promise.resolve();
                         }
                       },
