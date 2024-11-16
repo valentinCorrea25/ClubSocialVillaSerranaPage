@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Tag } from "antd";
 import {
   DollarCircleOutlined,
   ClockCircleOutlined,
@@ -8,13 +8,14 @@ import {
   FacebookOutlined,
   GlobalOutlined,
   FileTextOutlined,
+  ScheduleOutlined
 } from "@ant-design/icons";
 
 const CaracteristicasAlojamiento = ({ restaurante }) => {
   const {
     horario_semanal,
     horario_finde,
-    domingo,
+    diasSemana,
     instagram,
     facebook,
     web,
@@ -71,6 +72,14 @@ const CaracteristicasAlojamiento = ({ restaurante }) => {
               <CalendarOutlined style={{ marginRight: "8px" }} />{" "}
               <strong>Fin de Semana:</strong> {horario_finde || "No disponible"}
             </p>
+            <div>
+              <ScheduleOutlined style={{ marginRight: "8px" }} />
+              <strong> Dias Abiertos: </strong>{diasSemana.map((dia, index) => (
+                <Tag key={index} style={{ marginRight: "5px" }}>
+                  {dia}
+                </Tag>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -119,8 +128,11 @@ const CaracteristicasAlojamiento = ({ restaurante }) => {
           <h3 style={{ fontWeight: "bold" }}>Tipo de Pago</h3>
           <p>
             <DollarCircleOutlined style={{ marginRight: "8px" }} />{" "}
-            <strong>Formas de Pago:</strong>{" "}
-            {tipo_pago.join(", ") || "No disponible"}
+            <strong> Dias Abiertos: </strong>{tipo_pago.map((tipo, index) => (
+              <Tag key={index} style={{ marginRight: "5px" }}>
+                {tipo}
+              </Tag>
+            ))}
           </p>
         </div>
       </div>

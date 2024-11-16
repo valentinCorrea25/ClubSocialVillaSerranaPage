@@ -16,32 +16,19 @@ const ListaAlojamientosPage = () => {
   const [noResults, setNoResults] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState();
+  const [filter, setFilter] = useState();
+  const [capacity, setCapacity] = useState(0);
   const router = useRouter();
 
-  const handleFilterChange = (filters) => {
-    const { priceRange, capacity } = filters;
-    console.log(alquileres + 'ogoalsd');
-
-    const filtered = alquileres.filter(
-      (alojamiento) =>
-        alojamiento.price >= priceRange[0] &&
-        alojamiento.price <= priceRange[1] &&
-        alojamiento.capacity >= capacity
-    );
-
-    if (filtered.length === 0) {
-      setNoResults(true);
-    } else {
-      setNoResults(false);
-    }
-
-    setFilteredAlojamientos(filtered);
+  const handleFilterChange = () => {
+    setPage(1);
+   setFilter(!filter);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await todosLosAlquileres(page);
+        const data = await todosLosAlquileres(page, capacity);
         if (data) {
           console.log(data);
           setFilteredAlojamientos(data.publicaciones)
@@ -56,7 +43,7 @@ const ListaAlojamientosPage = () => {
     };
 
     fetchData();
-  }, [page]);
+  }, [page, filter]);
 
   useEffect(() => {
     scrollToTop();
@@ -79,7 +66,7 @@ const ListaAlojamientosPage = () => {
       <div className="flex flex-col min-h-screen bg-[#F9F6EE] sm:px-12 lg:px-20 py-5">
 
 
-        <Buscador onFilterChange={handleFilterChange} />
+        <Buscador onFilterChange={handleFilterChange} setCapacity={setCapacity} capacity={capacity} />
         {!noResults ? (
           <div className="flex items-center justify-center flex-col md:flex-row gap-10">
             <Skeleton className="w-72" paragraph title />

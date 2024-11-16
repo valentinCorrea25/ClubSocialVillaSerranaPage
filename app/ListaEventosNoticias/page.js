@@ -6,6 +6,7 @@ import Banner from "@/components/utils/Banners";
 import { ClientContext } from "@/context/clientContext";
 import { Pagination, Skeleton } from "antd";
 import { scrollToTop } from "@/components/utils/ControlPublicaciones";
+import Buscador from "@/components/ListaNoticiasEventos/Buscador";
 
 const EventosPage = () => {
   const { todasLasNoticiasEventos } = useContext(ClientContext);
@@ -14,11 +15,19 @@ const EventosPage = () => {
   const [noResults, setNoResults] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState();
+  const [filter, setFilter] = useState();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const handleFilterChange = () => {
+    setPage(1);
+    setFilter(!filter);
+   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await todasLasNoticiasEventos(page);
+        const data = await todasLasNoticiasEventos(page, startDate, endDate);
         if (data) {
           setNoticiasEventos(data.publicaciones);
           setNoResults(true);
@@ -32,7 +41,7 @@ const EventosPage = () => {
     };
 
     fetchData();
-  }, [page]);
+  }, [page, filter]);
 
   useEffect(() => {
     scrollToTop();
@@ -45,7 +54,7 @@ const EventosPage = () => {
         subtitle="Descubre nuestros últimos eventos y noticias"
         backgroundImage="/images/eventos.jpg"
       />
-
+      <Buscador onFilterChange={handleFilterChange} setStartDate={setStartDate} setEndDate={setEndDate} startDate={startDate} endDate={endDate}/>
       {!noResults ? (
         <div className="flex items-center justify-center flex-col md:flex-row gap-10 mt-10">
           <Skeleton className="w-72" paragraph title />

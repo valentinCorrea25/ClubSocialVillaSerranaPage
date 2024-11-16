@@ -7,23 +7,35 @@ export async function GET(request, { params }) {
   const queryParams = new URLSearchParams(queryString);
   const pageValue = queryParams.get("page");
   const text = searchParams.get("text") == "" ? null : searchParams.get("text");
-  const page = pageValue ? parseInt(pageValue, 10) : 1;
   const web = searchParams.get("web") == "" ? null : searchParams.get("web");
+  const startDate =
+    searchParams.get("startDate") == "" ? null : searchParams.get("startDate");
+  const endDate =
+    searchParams.get("endDate") == "" ? null : searchParams.get("endDate");
+  const page = pageValue ? parseInt(pageValue, 10) : 1;
   const pageSize = web ? 9 : 25;
   const skip = (page - 1) * pageSize;
   const take = parseInt(pageSize);
 
   try {
-    const where = text
+    const where = {
+      ...(text && {
+        titulo: {
+          contains: text,
+          mode: "insensitive",
+        },
+      }),
+      ...(web && { publicado: true }),
+      ...(startDate || endDate
         ? {
-            titulo: {
-              contains: text,
-              mode: "insensitive",
+          fecha_publicacion: {
+              ...(startDate && { gte: new Date(startDate) }),
+              ...(endDate && { lte: new Date(endDate) }),
             },
           }
-        : web
-        ? { publicado: true }
-        : {};
+        : {}),
+    };
+
     const [eventosnoticias, total] = await Promise.all([
       prisma.eventosNoticia.findMany({
         where,

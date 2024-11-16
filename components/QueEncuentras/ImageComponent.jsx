@@ -13,7 +13,7 @@ const ImageComponent = ({ src, alt }) => {
       ref={ref}
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: inView ? 0 : 100, opacity: inView ? 1 : 0 }}
-      transition={{ duration: 1.2 }}  
+      transition={{ duration: 1.2 }}
     >
       <img src={src} alt={alt} style={{ width: '100%', borderRadius: '4px' }} />
     </motion.div>

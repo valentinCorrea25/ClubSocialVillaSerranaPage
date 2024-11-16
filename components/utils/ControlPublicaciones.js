@@ -235,36 +235,36 @@ export function tituloCorrectoServicio(tipoServicio) {
       return "Alambrados";
     case ServicioTipo.Almacenes:
       return "Almacenes";
-    case ServicioTipo.Jardineria:
-      return "Jardinería";
-    case ServicioTipo.LimpiezaTerrenos:
-      return "Limpieza de terrenos";
     case ServicioTipo.Construccion:
       return "Construcción";
     case ServicioTipo.Diseno:
       return "Diseño";
-    case ServicioTipo.Filmacion:
-      return "Filmación";
+    case ServicioTipo.Electricista:
+      return "Electricista";
     case ServicioTipo.Equipamiento:
       return "Equipamiento";
     case ServicioTipo.Estetica:
       return "Estética";
-    case ServicioTipo.Salud:
-      return "Salud";
+    case ServicioTipo.Filmacion:
+      return "Filmación";
+    case ServicioTipo.Jardineria:
+      return "Jardinería";
+    case ServicioTipo.LimpiezaCasas:
+      return "Limpieza de casas";
+    case ServicioTipo.LimpiezaTerrenos:
+      return "Limpieza de terrenos";
     case ServicioTipo.Mecanica:
       return "Mecánica";
+    case ServicioTipo.Piscinas:
+      return "Piscinas";
     case ServicioTipo.ProvisionDeAgua:
       return "Provisión de agua";
+    case ServicioTipo.Salud:
+      return "Salud";
     case ServicioTipo.Seguridad:
       return "Seguridad";
     case ServicioTipo.Traslados:
       return "Traslados";
-    case ServicioTipo.Piscinas:
-      return "Piscinas";
-    case ServicioTipo.Electricista:
-      return "Electricista";
-    case ServicioTipo.LimpiezaCasas:
-      return "Limpieza de casas";
     default:
       throw new Error("Tipo de servicio no reconocido");
   }

@@ -106,7 +106,9 @@ export const ClientProvider = ({ children }) => {
   }
 
   async function todosLosRestaurantes(page) {
-    const res = await fetch(`/api/restaurantes/lista?page=${page ? page : 1}&web=true`);
+    const res = await fetch(
+      `/api/restaurantes/lista?page=${page ? page : 1}&web=true`
+    );
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -114,8 +116,12 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todosLosAlquileres(page) {
-    const res = await fetch(`/api/alquileres/lista?page=${page ? page : 1}&web=true`);
+  async function todosLosAlquileres(page, capacity) {
+    const res = await fetch(
+      `/api/alquileres/lista?page=${page ? page : 1}&web=true${
+        capacity ? `&capacity=${capacity}` : ""
+      }`
+    );
     const data = await res.json();
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
@@ -140,9 +146,11 @@ export const ClientProvider = ({ children }) => {
     );
     const data = await res.json();
 
-    console.log(`/api/servicios/lista?page=${page ? page : 1}&web=true${
+    console.log(
+      `/api/servicios/lista?page=${page ? page : 1}&web=true${
         tipo ? `&tiposervicio=${tipo}` : ""
-      }`);
+      }`
+    );
 
     data.publicaciones = excluirNoPublicados(data.publicaciones);
     data.publicaciones = tituloServicioCorrectos(data.publicaciones);
@@ -150,8 +158,16 @@ export const ClientProvider = ({ children }) => {
     return data;
   }
 
-  async function todasLasNoticiasEventos(page) {
-    const res = await fetch(`/api/eventosnoticias/lista?page=${page ? page : 1}&web=true`);
+  async function todasLasNoticiasEventos(page, startDate, endDate) {
+    const formatDate = (date) => {
+      return date ? new Date(date).toISOString().split("T")[0] : "";
+    };
+  
+    const res = await fetch(
+      `/api/eventosnoticias/lista?page=${page ? page : 1}&web=true` +
+      `${startDate ? `&startDate=${formatDate(startDate)}` : ""}` +
+      `${endDate ? `&endDate=${formatDate(endDate)}` : ""}`
+    );
     const data = await res.json();
 
     const dataFiltrada = excluirNoPublicados(data.publicaciones);
