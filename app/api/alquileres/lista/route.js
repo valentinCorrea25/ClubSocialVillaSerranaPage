@@ -8,23 +8,28 @@ export async function GET(request, { params }) {
   const queryParams = new URLSearchParams(queryString);
   const pageValue = queryParams.get("page");
   const text = searchParams.get("text") == "" ? null : searchParams.get("text");
-  const page = pageValue ? parseInt(pageValue, 10) : 1;
   const web = searchParams.get("web") == "" ? null : searchParams.get("web");
+  const capacity =
+    searchParams.get("capacity") == "" ? null : searchParams.get("capacity");
+  const page = pageValue ? parseInt(pageValue, 10) : 1;
   const pageSize = web ? 9 : 25;
   const skip = (page - 1) * pageSize;
   const take = parseInt(pageSize);
 
   try {
-    const where = text
-      ? {
-          titulo: {
-            contains: text,
-            mode: "insensitive",
-          },
-        }
-      : web
-      ? { publicado: true }
-      : {};
+    const where = {
+      ...(text
+        ? {
+            titulo: {
+              contains: text,
+              mode: "insensitive",
+            },
+          }
+        : web
+        ? { publicado: true }
+        : {}),
+      ...(capacity ? { capacidad: parseInt(capacity) } : {}),
+    };
 
     const [alquileres, total] = await Promise.all([
       prisma.alquiler.findMany({

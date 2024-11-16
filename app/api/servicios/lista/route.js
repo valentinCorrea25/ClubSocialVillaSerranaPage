@@ -76,8 +76,8 @@ export async function GET(request, { params }) {
       const [servicios, total] = await Promise.all([
         prisma.servicio.findMany({
           where: { titulo_Servicio: tipoServicio },
-          skip: tipoServicio ? undefined : skip,
-          take: tipoServicio ? undefined : take,
+          skip: tipoServicio ? skip : undefined,
+          take: tipoServicio ? take : undefined,
           orderBy: {
             id_Servicio: "desc",
           },
