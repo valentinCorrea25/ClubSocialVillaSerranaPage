@@ -48,7 +48,7 @@ model Alquiler {
   id_Alquiler        Int      @id @default(autoincrement())
   nombre_titular     String
   celular            String
-  mail               String
+  mail               String?
   titulo             String
   descripcion        String
   ubicacion          String?
@@ -85,7 +85,7 @@ model Restaurant {
   id_Restaurant     Int      @id @default(autoincrement())
   nombre_titular    String
   celular           String
-  mail              String
+  mail              String?
   descripcion       String
   diasSemana        String[]
   coordenadas       String?
