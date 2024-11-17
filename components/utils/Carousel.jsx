@@ -13,18 +13,14 @@ const Carousel = ({ record }) => {
     carouselRef.current.prev();
   };
 
+  // Validación para retornar null si no hay fotos
+  if (!record?.fotos || record.fotos.length === 0) {
+    return null;
+  }
+
   return (
     <div className="p-2 rounded-lg shadow-lg relative">
       <AntdCarousel ref={carouselRef} infinite autoplay draggable dots={true}>
-        {/* {record.fotos.map((image, index) => (
-          <div key={index} className="flex justify-center items-center h-[200px] sm:h-[450px] w-full">
-            <img 
-              src={image} 
-              alt={record.titulo} 
-              className="h-full w-full object-fill" 
-            />
-          </div>
-        ))} */}
         {record.fotos.map((foto, index) => (
           <div key={index} className="relative aspect-[16/9] w-full">
             <div className="absolute inset-0 flex items-center justify-center">
