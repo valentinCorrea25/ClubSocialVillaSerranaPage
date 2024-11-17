@@ -126,7 +126,7 @@ export function ListaCatHomeMovile() {
 
   return (
     <div className="m-auto max-w-screen-xl mt-10">
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-4 mb-4">
         <FaChevronLeft
           className="cursor-pointer text-2xl text-[--verde]"
           onClick={handlePrevCategory}
