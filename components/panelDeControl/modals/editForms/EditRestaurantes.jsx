@@ -68,7 +68,7 @@ export default function EditRestaurantes({
               <TextArea
                 placeholder="Escribe una descripción"
                 showCount
-                maxLength={500}
+                maxLength={1200}
                 className="w-full h-40 resize-none"
               />
             </Form.Item>
