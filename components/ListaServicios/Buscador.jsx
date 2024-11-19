@@ -37,18 +37,18 @@ const Buscador = ({ categories, onFilterChange }) => {
       >
         <Option value="">Todos</Option>
         {[...categoryArray]
-  .sort((a, b) => 
-    // Add a null check and provide a default empty string
-    (tituloCorrectoServicio(categories[a]) || '').localeCompare(
-      tituloCorrectoServicio(categories[b]) || '', 
-      "es"
-    )
-  )
-  .map((category) => (
-    <Option key={category} value={category}>
-      {tituloCorrectoServicio(categories[category])}
-    </Option>
-  ))}
+          .sort((a, b) =>
+            // Add a null check and provide a default empty string
+            (tituloCorrectoServicio(categories[a]) || "").localeCompare(
+              tituloCorrectoServicio(categories[b]) || "",
+              "es"
+            )
+          )
+          .map((category) => (
+            <Option key={category} value={category}>
+              {tituloCorrectoServicio(categories[category])}
+            </Option>
+          ))}
       </Select>
       <Button type="primary" onClick={() => handleShowAll()}>
         Mostrar Todos
