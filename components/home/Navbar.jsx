@@ -11,8 +11,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false); // Estado para manejar la visibilidad del menú
   const router = useRouter();
   const [isHovered, setIsHovered] = useState(false); // Estado para hover en el Dropdown o su contenido
-  const handleMouseEnter = () => {setIsHovered(true); setDropdownVisible(true)}
-  const handleMouseLeave = () => {setIsHovered(false); setDropdownVisible(false)}
+  const handleMouseEnter = () => { setIsHovered(true); setDropdownVisible(true) }
+  const handleMouseLeave = () => { setIsHovered(false); setDropdownVisible(false) }
   const [dropdownTrigger, setDropdownTrigger] = useState(["hover"]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -148,32 +148,39 @@ export default function Navbar() {
                   </div>
                 }
                 trigger={dropdownTrigger}
-                onVisibleChange={(visible) => setIsHovered(visible)}
+                onVisibleChange={(visible) => {
+                  if (window.innerWidth > 768) {
+                    setIsHovered(visible); // Mantener el hover en escritorio
+                  }
+                  setDropdownVisible(visible); // Controlar la visibilidad en ambos modos
+                }}
                 visible={dropdownVisible}
               >
                 <div
                   className="block"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
+                  onClick={() => {
+                    if (window.innerWidth <= 768) {
+                      setDropdownVisible(!dropdownVisible); // Alternar visibilidad en móviles
+                    }
+                  }}
                 >
                   <a className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent hover:text-[--verde] transition-all lg:border-0">
                     <Space className="flex items-center">
                       <span
-                        className={`${
-                          isHovered ? "text-[--verde]" : ""
-                        } transition-all`}
+                        className={`${dropdownVisible ? "text-[--verde]" : ""} transition-all`}
                       >
                         Que encuentras
                       </span>
                       <DownOutlined
-                        className={`transform transition-transform duration-300 ${
-                          isHovered ? "rotate-0 text-[--verde]" : "rotate-90"
-                        }`}
+                        className={`transform transition-transform duration-300 ${dropdownVisible ? "rotate-0 text-[--verde]" : "rotate-90"}`}
                       />
                     </Space>
                   </a>
                 </div>
               </Dropdown>
+
             </li>
             <li>
               <a
