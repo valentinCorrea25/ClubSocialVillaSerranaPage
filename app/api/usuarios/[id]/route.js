@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(request, { params }) {
   try {
-    const USUARIO_PRICIPAL = 7
+    const USUARIO_PRICIPAL = 19
 
     if (params.id == USUARIO_PRICIPAL) {
       return NextResponse.json({
