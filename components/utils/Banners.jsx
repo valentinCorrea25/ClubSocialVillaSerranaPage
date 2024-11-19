@@ -7,7 +7,7 @@ const Banner = ({ title, subtitle, backgroundImage }) => (
       style={{ backgroundImage: `url(${backgroundImage})`, filter: 'brightness(70%)' }}
     />
     <div className="absolute inset-0 flex items-center justify-center bg-green-800 bg-opacity-50 rounded-lg">
-      <div className="text-center">
+      <div className="text-center py-4">
         <h1 className="text-white text-4xl font-bold brightness-100">{title}</h1>
         <p className="text-white text-xl">{subtitle}</p>
       </div>
