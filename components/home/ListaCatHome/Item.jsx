@@ -45,7 +45,7 @@ export default function Item({ informacion = {}, type }) {
       case 1:
         return (
           <div
-            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[330px] bg-white"
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[330px] bg-white transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() => router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`)}
           >
             <div className="w-full h-[169px] max-h-[250px]">
@@ -79,7 +79,7 @@ export default function Item({ informacion = {}, type }) {
       case 2:
         return (
           <div
-            className="bg-white p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[365px]"
+            className="bg-white p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[368px] transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() => router.push(`/ListaRestaurantes/DetalleRestaurante?id=${informacion.id_Restaurant}`)}
           >
             <div className="w-full h-[169px] max-h-[250px]">
@@ -89,7 +89,7 @@ export default function Item({ informacion = {}, type }) {
                 alt={informacion?.titulo || "Restaurante"}
               />
             </div>
-            <div className="ml-2 mt-4 text-sm">
+            <div className="ml-2 mt-3 text-sm">
               <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
                 {processTitle(informacion?.titulo, 24)}
               </h1>
@@ -112,7 +112,7 @@ export default function Item({ informacion = {}, type }) {
       case 3:
         return (
           <div
-            className="bg-white p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] h-[340px]"
+            className="bg-white p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] h-[340px] transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() => router.push(`/ListaEventosNoticias/DetalleEventosNoticias?id=${informacion.id_EventoNoticia}`)}
           >
             <div className="w-full h-[169px] max-h-[250px]">
@@ -135,7 +135,7 @@ export default function Item({ informacion = {}, type }) {
       case 4:
         return (
           <div
-            className="bg-white p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[350px]"
+            className="bg-white p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[350px] transform transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() => router.push(`/ListaActividades/DetalleActividades?id=${informacion.id_Actividad}`)}
           >
             <div className="w-full h-[169px] max-h-[250px]">
@@ -164,7 +164,7 @@ export default function Item({ informacion = {}, type }) {
 
       case 5:
         return (
-          <div className="bg-white w-full text-center h-36 px-2" onClick={showModal}>
+          <div className="bg-white w-full text-center h-36 px-2 transform transition-transform duration-200 ease-in-out hover:scale-105" onClick={showModal}>
             <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg cursor-pointer mt-2 text-center">
               {informacion?.titulo.length > 20 ? informacion?.titulo.substring(0,20)+'...' : informacion?.titulo}
             </h1>

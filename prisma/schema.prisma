@@ -107,6 +107,7 @@ model Restaurant {
 enum ServicioTitulo {
   Alambrados
   Almacenes
+  Artesanias
   Jardineria // Jardinería -- SOLCIIONAR TREMA DE TILDES
   LimpiezaCasas // Limpieza de casas
   LimpiezaTerrenos // Limpieza de terrenos
