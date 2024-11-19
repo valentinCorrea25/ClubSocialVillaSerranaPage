@@ -24,7 +24,7 @@ const processTitle = (title, maxLength) => {
 export default function Item({ informacion = {}, type }) {
   const [visible, setVisible] = useState(false);
   const router = useRouter();
-  
+
   const handleCancel = () => setVisible(false);
   const showModal = () => setVisible(true);
 
@@ -45,7 +45,7 @@ export default function Item({ informacion = {}, type }) {
       case 1:
         return (
           <div
-            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[320px] bg-white"
+            className="p-4 shadow-md border max-w-sm md:max-w-md lg:max-w-lg sm:w-[280px] w-[260px] cursor-pointer h-[330px] bg-white"
             onClick={() => router.push(`/ListaAlojamiento/DetalleAlojamiento?id=${informacion.id_Alquiler}`)}
           >
             <div className="w-full h-[169px] max-h-[250px]">
@@ -57,7 +57,7 @@ export default function Item({ informacion = {}, type }) {
             </div>
             <div className="ml-2">
               <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
-                {processTitle(informacion?.titulo, 20)}
+                {processTitle(informacion?.titulo, 18)}
               </h1>
               <h2 className="text-left font-normal flex items-center md:justify-start gap-1 text-sm">
                 <EnvironmentOutlined size={12} />
@@ -147,7 +147,7 @@ export default function Item({ informacion = {}, type }) {
             </div>
             <div className="ml-2 text-sm">
               <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg md:text-lg cursor-pointer text-left">
-                {processTitle(informacion?.titulo, 24)}
+                {processTitle(informacion?.titulo, 20)}
               </h1>
               <h2 className="font-normal flex items-center gap-0.5">
                 <ClockCircleOutlined size={10} />
@@ -155,7 +155,7 @@ export default function Item({ informacion = {}, type }) {
               </h2>
               <h2 className="font-normal flex items-center gap-0.5">
                 <EnvironmentOutlined size={10} />
-                {informacion?.titulo?.substring(4)}
+                {informacion?.ubicacion}
               </h2>
               {renderContent()}
             </div>
