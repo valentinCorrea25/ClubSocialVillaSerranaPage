@@ -20,7 +20,7 @@ export async function POST(request) {
 
         await resend.emails.send({
             from: " Contacto de Club Social y Deportivo Villa Serrana <onboarding@resend.dev>",
-            to: ["correavalentin89@gmail.com"],
+            to: ["tomirodriguez3101@gmail.com"],
             subject: `Club Social y Deportivo Villa Serrana`,
             html: emailContent,
         });

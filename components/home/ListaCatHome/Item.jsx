@@ -166,7 +166,7 @@ export default function Item({ informacion = {}, type }) {
         return (
           <div className="bg-white w-full text-center h-36 px-2 transform transition-transform duration-200 ease-in-out hover:scale-105" onClick={showModal}>
             <h1 className="hover:text-[--verde] transition-all font-extrabold text-lg cursor-pointer mt-2 text-center">
-              {informacion?.titulo}
+              {informacion?.titulo.length > 35 ? informacion?.titulo.substring(0, 35)+'...' : informacion?.titulo}
             </h1>
             <h2 className="font-normal justify-center flex items-center gap-0.5">
               <FaWhatsapp /> Contacto: {informacion?.celular?.substring(0, 12)}
