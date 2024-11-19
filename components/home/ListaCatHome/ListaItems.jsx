@@ -49,7 +49,7 @@ export default function ListaItems({ type }) {
             </div>
           ))
         ) : (
-          <div className="flex justify-center items-center ">
+          <div className="col-span-1 sm:col-span-2 md:col-span-3  flex justify-center items-center">
             <Spin size="large" />
           </div>
         )}

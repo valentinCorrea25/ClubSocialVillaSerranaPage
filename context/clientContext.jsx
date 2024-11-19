@@ -55,7 +55,7 @@ export const ClientProvider = ({ children }) => {
   }
 
   async function alquileresRandom() {
-    const res = await fetch(`/api/alquileres?limit=9`);
+    const res = await fetch(`/api/alquileres?limit=6`);
     const data = await res.json();
     setPublicacion(data);
 
@@ -65,7 +65,7 @@ export const ClientProvider = ({ children }) => {
   }
 
   async function restaurantesRandom() {
-    const res = await fetch(`/api/restaurantes?limit=9`);
+    const res = await fetch(`/api/restaurantes?limit=6`);
     const data = await res.json();
     setPublicacion(data);
 
@@ -75,7 +75,7 @@ export const ClientProvider = ({ children }) => {
   }
 
   async function eventosNoticiasRandom() {
-    const res = await fetch(`/api/eventosnoticias/?limit=9`);
+    const res = await fetch(`/api/eventosnoticias/?limit=6`);
     const data = await res.json();
     setPublicacion(data);
 
@@ -85,7 +85,7 @@ export const ClientProvider = ({ children }) => {
   }
 
   async function actividadesRandom() {
-    const res = await fetch(`/api/actividades/?limit=9`);
+    const res = await fetch(`/api/actividades/?limit=6`);
     const data = await res.json();
     setPublicacion(data);
 

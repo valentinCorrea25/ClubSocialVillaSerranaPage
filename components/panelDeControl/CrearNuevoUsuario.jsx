@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, Input, Button, Table, Dropdown, Space } from "antd";
 import { AdminContext } from "@/context/adminContext";
 import useSWR, { useSWRConfig } from "swr";
@@ -26,6 +26,10 @@ const CrearNuevoUsuario = ({
   function updateData() {
     mutate(key, data);
   }
+
+  useEffect(() => {
+    updateData();
+  }, []);
 
   const columns = [
     {
