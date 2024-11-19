@@ -230,6 +230,8 @@ export function iconosSegunTipoServicio(tipoServicio) {
 
 // Función para obtener el título correcto del servicio
 export function tituloCorrectoServicio(tipoServicio) {
+  console.log(tipoServicio);
+  
   switch (tipoServicio) {
     case ServicioTipo.Alambrados:
       return "Alambrados";
@@ -266,7 +268,8 @@ export function tituloCorrectoServicio(tipoServicio) {
     case ServicioTipo.Traslados:
       return "Traslados";
     default:
-      throw new Error("Tipo de servicio no reconocido");
+      console.log('Tipo Servicio no reconocido');
+      
   }
 }
 
