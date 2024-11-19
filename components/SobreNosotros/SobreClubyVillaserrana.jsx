@@ -9,7 +9,7 @@ export function SobreElCLub() {
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-screen-xl">
         <div className="md:float-right md:ml-8 md:mb-4 mb-8 flex justify-center md:block">
           <Image
-            src={fotoClub}
+            src='https://res.cloudinary.com/dvzf7szuo/image/upload/v1732046930/WhatsApp_Image_2024-11-19_at_16.57.04_1_pib70r.jpg'
             alt="Club Historia"
             className="rounded-lg shadow-lg"
             width={300}
