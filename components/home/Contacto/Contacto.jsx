@@ -58,11 +58,11 @@ export default function ContactoInfo() {
             </h2>
             <div className="space-y-4 text-xl">
               <a
-                href="https://www.instagram.com/villaserrana"
+                href="https://www.instagram.com/club_villa_serrana/"
                 className="flex items-center space-x-2 text-gray-600 hover:text-green-600"
               >
                 <InstagramOutlined className="h-5 w-5" />
-                <span>@villaserrana</span>
+                <span>@club_villa_serrana</span>
               </a>
               <a
                 href="tel:+59812345678"
@@ -72,7 +72,7 @@ export default function ContactoInfo() {
                 <span>+598 1234 5678</span>
               </a>
               <a
-                href="https://www.facebook.com/villaserrana"
+                href="https://www.facebook.com/ClubVillaSerrana/"
                 className="flex items-center space-x-2 text-gray-600 hover:text-green-600"
               >
                 <FacebookOutlined className="h-5 w-5" />
