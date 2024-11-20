@@ -25,7 +25,9 @@ function PostList() {
           <PostCard key={post.id} post={post} />
         ))
       ) : (
+        <div className="col-span-1 sm:col-span-2 md:col-span-3  flex justify-center items-center">
         <Spin size='large' />
+        </div>
       )}
     </div>
   );
