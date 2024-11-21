@@ -127,9 +127,9 @@ export default function GenerarQRModal({
                   )}
                   <Tag className="text-lg my-2 px-5">{`${selectedItem.titulo}`}</Tag>
                 </div>
-                <div className="text-center">
+               {selectedItem.descripcion ? (<div className="text-center">
                   <strong>Descripción:</strong> {selectedItem.descripcion}
-                </div>
+                </div>) : null}
               </div>
             </Space>
           </div>
