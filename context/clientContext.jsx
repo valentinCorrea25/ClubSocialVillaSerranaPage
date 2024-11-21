@@ -32,7 +32,11 @@ export const ClientProvider = ({ children }) => {
   async function buscarServicio(id) {
     const res = await fetch(`/api/servicios/${id}`);
     const data = await res.json();
+
     setPublicacion(data.message);
+    console.log(data);
+    
+    return data.respuesta;
   }
 
   async function buscarEventoNoticia(id) {

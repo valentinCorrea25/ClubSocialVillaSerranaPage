@@ -87,15 +87,16 @@ export const obtenerRutaDetalle = (
     case "Actividad":
       tipoRuta = "ListaActividades/DetalleActividad?";
       break;
-    case "NoticiaEvento":
+    case "EventoNoticia":
       tipoRuta = "ListaNoticiaEventos/DetalleNoticiaEvento?";
       break;
     case "Servicio":
       tipoRuta = "ListaServicios/DetalleServicio?";
       break;
   }
-  console.log(tipoRuta);
-
+  // if(tipoSinPrefijo == 'Servicio'){
+  //   return `${domain}/${tipoRuta}`
+  // }
   return `${domain}/${tipoRuta}id=${selectedItem[idPublicacion]}`;
 };
 
