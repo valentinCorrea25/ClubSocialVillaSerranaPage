@@ -31,6 +31,9 @@ export default function GenerarQRModal({
       const tipo = obtenerTipoSinPrefijo(id);
       const ruta = obtenerRutaDetalle(tipo, id, selectedItem);
 
+      console.log(tipo + '000000 ');
+      
+
       setIdPublicacion(id);
       setTipoSinPrefijo(tipo);
       setRutaDetalle(ruta);
@@ -117,19 +120,25 @@ export default function GenerarQRModal({
             <Space direction="vertical" align="center" className="w-full">
               <QRCode icon={logo} size={200} value={text || "-"} />
               <div className="flex flex-col items-center gap-2">
-                <div className="text-center">
+                <div className="text-center flex items-center">
                   {idPublicacion && (
-                    <Tag className="text-lg mb-4">{`${tipoSinPrefijo} ${
+                    <Tag className="text-lg">{`${tipoSinPrefijo} ${
                       selectedItem.titulo_Servicio
                         ? tituloCorrectoServicio(selectedItem.titulo_Servicio)
-                        : ''
+                        : ""
                     }`}</Tag>
                   )}
-                  <Tag className="text-lg my-2 px-5">{`${selectedItem.titulo}`}</Tag>
+                  <Tag className="text-lg my-2 overflow-hidden">
+                    {`${selectedItem.titulo.slice(0, 55)}${
+                      selectedItem.titulo.length > 55 ? "..." : ""
+                    }`}
+                  </Tag>
                 </div>
-               {selectedItem.descripcion ? (<div className="text-center">
-                  <strong>Descripción:</strong> {selectedItem.descripcion}
-                </div>) : null}
+                {selectedItem.descripcion ? (
+                  <div className="text-center">
+                    <strong>Descripción:</strong> {selectedItem.descripcion}
+                  </div>
+                ) : null}
               </div>
             </Space>
           </div>
