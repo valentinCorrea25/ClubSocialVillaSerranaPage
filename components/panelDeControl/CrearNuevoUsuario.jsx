@@ -10,7 +10,7 @@ const CrearNuevoUsuario = ({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
-  setModalIsOpenForButtonFloat
+  setModalIsOpenForButtonFloat,
 }) => {
   const { eliminarUsuario } = useContext(AdminContext);
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
@@ -21,7 +21,11 @@ const CrearNuevoUsuario = ({
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const key = `/api/usuarios/lista`;
-  const { data, error, isLoading } = useSWR(key, fetcher);
+  const { data, error, isLoading } = useSWR(key, fetcher, {
+    revalidateOnMount: true, // Revalida siempre al montar
+    revalidateOnFocus: true, // Revalida al volver a la pestaña
+    cacheTime: 0,
+  });
 
   function updateData() {
     mutate(key, data);
@@ -103,7 +107,7 @@ const CrearNuevoUsuario = ({
   const handleCreate = () => {
     setIsModalOpenCrear(true);
     setModalIsOpenForButtonFloat(true);
-  }
+  };
 
   return (
     <div
@@ -113,20 +117,26 @@ const CrearNuevoUsuario = ({
       <h1 className="text-center text-xl md:text-2xl pb-4 mt-4">
         Control de Usuarios
       </h1>
-     <div className="flex flex-col">
-      <div className=" w-full flex justify-end mb-2">
-     <Button onClick={handleCreate} className="bg-[--verde] text-white sm:block right-0"> Crear Usuario </Button>
+      <div className="flex flex-col">
+        <div className=" w-full flex justify-end mb-2">
+          <Button
+            onClick={handleCreate}
+            className="bg-[--verde] text-white sm:block right-0"
+          >
+            {" "}
+            Crear Usuario{" "}
+          </Button>
+        </div>
+        <Table
+          dataSource={data ? data.usuarios : []}
+          columns={columns}
+          loading={isLoading}
+          rowKey="id"
+          size="small"
+          scroll={{ x: true }}
+          pagination={false}
+        />
       </div>
-     <Table
-        dataSource={data ? data.usuarios : []}
-        columns={columns}
-        loading={isLoading}
-        rowKey="id"
-        size="small"
-        scroll={{ x: true }}
-        pagination={false}
-      />
-     </div>
       <EliminarUsuarioModal
         updateData={updateData}
         selectedItem={selectedItem}
