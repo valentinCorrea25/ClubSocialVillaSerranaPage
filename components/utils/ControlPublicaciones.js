@@ -88,7 +88,7 @@ export const obtenerRutaDetalle = (
       tipoRuta = "ListaActividades/DetalleActividad?";
       break;
     case "EventoNoticia":
-      tipoRuta = "ListaNoticiaEventos/DetalleNoticiaEvento?";
+      tipoRuta = "ListaEventosNoticias/DetalleEventosNoticias?";
       break;
     case "Servicio":
       tipoRuta = "ListaServicios/DetalleServicio?";
