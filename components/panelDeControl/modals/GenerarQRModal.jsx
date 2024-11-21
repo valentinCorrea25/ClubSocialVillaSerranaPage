@@ -129,8 +129,8 @@ export default function GenerarQRModal({
                     }`}</Tag>
                   )}
                   <Tag className="text-lg my-2 overflow-hidden">
-                    {`${selectedItem.titulo.slice(0, 55)}${
-                      selectedItem.titulo.length > 55 ? "..." : ""
+                    {`${selectedItem.titulo.slice(0, 45)}${
+                      selectedItem.titulo.length > 45 ? "..." : ""
                     }`}
                   </Tag>
                 </div>
