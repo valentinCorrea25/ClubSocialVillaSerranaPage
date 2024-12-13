@@ -27,7 +27,7 @@ const CrearNuevoUsuario = ({
   });
 
   function updateData() {
-    mutate(key, data);
+    mutate(key);
   }
 
   useEffect(() => {
