@@ -65,7 +65,7 @@ export default function ContactoInfo({record}) {
 
         <div className="mt-8">
           <img
-            src="https://www.dronestagr.am/wp-content/uploads/2017/08/DJI_0029-4-scaled.jpg"
+            src="https://res.cloudinary.com/dvzf7szuo/image/upload/v1734121540/IMG_0849_iyheqs.webp"
             alt="Villa Serrana"
             className="w-full h-64 object-cover rounded-lg shadow-lg"
           />

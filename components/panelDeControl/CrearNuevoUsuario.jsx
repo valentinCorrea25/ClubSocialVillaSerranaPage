@@ -24,7 +24,6 @@ const CrearNuevoUsuario = ({
   const { data, error, isLoading } = useSWR(key, fetcher, {
     revalidateOnMount: true, // Revalida siempre al montar
     revalidateOnFocus: true, // Revalida al volver a la pestaña
-    cacheTime: 0,
   });
 
   function updateData() {

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function SobreElCLub() {
   return (
-    <div className="flex justify-center items-center p-4 pt-10">
+    <div className="flex justify-center items-center p-4 ">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-screen-xl">
         <div className="md:float-right md:ml-8 md:mb-4 mb-8 flex justify-center md:block">
           <Image

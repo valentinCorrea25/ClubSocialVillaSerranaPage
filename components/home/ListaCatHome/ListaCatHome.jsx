@@ -15,23 +15,23 @@ const items = [
     key: "1",
     label: (
       <div className="flex items-center gap-2 font-extrabold">
+        <FaRegFutbol />
+        Actividades
+      </div>
+    ),
+    children: <ListaItems type={4} />,
+    type: 4,
+  },
+  {
+    key: "2",
+    label: (
+      <div className="flex items-center gap-2 font-extrabold">
         <FaHouse />
         Alojamientos
       </div>
     ),
     children: <ListaItems type={1} />,
     type: 1,
-  },
-  {
-    key: "2",
-    label: (
-      <div className="flex items-center gap-2 font-extrabold">
-        <GiKnifeFork />
-        Restaurantes
-      </div>
-    ),
-    children: <ListaItems type={2} />,
-    type: 2,
   },
   {
     key: "3",
@@ -48,12 +48,12 @@ const items = [
     key: "4",
     label: (
       <div className="flex items-center gap-2 font-extrabold">
-        <FaRegFutbol />
-        Actividades
+        <GiKnifeFork />
+        Restaurantes
       </div>
     ),
-    children: <ListaItems type={4} />,
-    type: 4,
+    children: <ListaItems type={2} />,
+    type: 2,
   },
   {
     key: "5",
@@ -66,6 +66,7 @@ const items = [
     children: <ListaItems type={5} />,
     type: 5,
   },
+  
 ];
 
 export default function ListaCategorias() {

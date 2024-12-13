@@ -4,8 +4,6 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
-import { AdminContext } from "@/context/adminContext";
 
 const Admin = () => {
   const router = useRouter();
@@ -81,7 +79,7 @@ const Admin = () => {
 
         <div className="hidden md:flex w-3/4 h-[100vh] overflow-hidden">
           <img
-            src="https://www.dronestagr.am/wp-content/uploads/2017/08/DJI_0029-4-scaled.jpg"
+            src="https://res.cloudinary.com/dvzf7szuo/image/upload/v1734121540/IMG_0849_iyheqs.webp"
             className="w-full h-full object-cover"
           />
         </div>
