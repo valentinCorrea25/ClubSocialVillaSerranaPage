@@ -10,7 +10,7 @@ const CrearNuevoUsuario = ({
   mostrarCargarToast,
   mostrarExitoToast,
   mostrarFalloToast,
-  setModalIsOpenForButtonFloat,
+  setModalIsOpenForButtonFloat
 }) => {
   const { eliminarUsuario } = useContext(AdminContext);
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
@@ -21,9 +21,10 @@ const CrearNuevoUsuario = ({
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const key = `/api/usuarios/lista`;
+  
   const { data, error, isLoading } = useSWR(key, fetcher, {
-    revalidateOnMount: true, // Revalida siempre al montar
-    revalidateOnFocus: true, // Revalida al volver a la pestaña
+    revalidateOnMount: true,
+    revalidateOnFocus: true,
   });
 
   function updateData() {
@@ -54,19 +55,6 @@ const CrearNuevoUsuario = ({
       width: "10%",
       render: (text, item) => {
         const items = [
-          // {
-          //   label: (
-          //     <div
-          //       className="w-full"
-          //       onClick={() => {
-          //         handleEdit();
-          //       }}
-          //     >
-          //       Editar
-          //     </div>
-          //   ),
-          //   key: "2",
-          // },
           {
             label: (
               <div
@@ -122,8 +110,7 @@ const CrearNuevoUsuario = ({
             onClick={handleCreate}
             className="bg-[--verde] text-white sm:block right-0"
           >
-            {" "}
-            Crear Usuario{" "}
+            Crear Usuario
           </Button>
         </div>
         <Table

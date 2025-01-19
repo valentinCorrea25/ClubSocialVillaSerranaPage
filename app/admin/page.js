@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { signIn } from "next-auth/react";
@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 
 const Admin = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const onFinish = async (values) => {
-    console.log("Received values of form: ", values);
+    setLoading(true);
     const resp = await signIn("username-login", {
       userName: values.username,
       password: values.password,
@@ -19,6 +20,7 @@ const Admin = () => {
     } else {
       router.push("/admin/paneldecontrol");
     }
+    setLoading(false);
   };
 
   return (
@@ -36,13 +38,15 @@ const Admin = () => {
           className="mx-auto px-10 mt-10"
         >
           <div className="md:flex w-2/3 overflow-hidden m-auto py-10">
-          <img
-            src="https://mvulbmjlvpjujjfvffph.supabase.co/storage/v1/object/public/posts/public/logo-csdvs-1.png"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <h1 className="text-center text-3xl font-semibold mb-2">Inicio de Sesión</h1>
-        <h2 className="text-center text-2xl mb-6">Panel de Control</h2>
+            <img
+              src="https://mvulbmjlvpjujjfvffph.supabase.co/storage/v1/object/public/posts/public/logo-csdvs-1.png"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <h1 className="text-center text-3xl font-semibold mb-2">
+            Inicio de Sesión
+          </h1>
+          <h2 className="text-center text-2xl mb-6">Panel de Control</h2>
           <Form.Item
             name="username"
             rules={[
@@ -71,7 +75,13 @@ const Admin = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button block type="primary" htmlType="submit">
+            <Button
+              loading={loading}
+              disabled={loading}
+              block
+              type="primary"
+              htmlType="submit"
+            >
               Entrar
             </Button>
           </Form.Item>
