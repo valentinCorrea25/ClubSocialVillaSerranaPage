@@ -11,7 +11,8 @@ export async function GET() {
     });
 
     return NextResponse.json({
-        usuarios
+        usuarios,
+        date: new Date().toString()
       });
   } catch (error) {
     return NextResponse.json({
