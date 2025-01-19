@@ -16,6 +16,19 @@ const nextConfig = {
     });
     return config;
   },
+  async headers() {
+    return [
+      {
+        source: '/api/usuarios',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, no-cache, must-revalidate'
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
