@@ -16,13 +16,12 @@ const CrearNuevoUsuario = ({
   const [isModalOpenEliminar, setIsModalOpenElimininar] = useState(false);
   const [isModalOpenCrear, setIsModalOpenCrear] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
-  const { mutate } = useSWRConfig();
+  // const { mutate } = useSWRConfig();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const key = `/api/usuarios/lista`;
-  
-  const { data, error, isLoading } = useSWR(key, fetcher, {
+  const { data, error, isLoading, mutate } = useSWR(key, fetcher, {
     revalidateOnMount: true,
     revalidateOnFocus: true,
   });
